@@ -35,6 +35,18 @@ function ustaw_status() {
 }
 
 client.on("voiceStateUpdate", (oldMem, newMem) => {
+    var vChann = oldMem.voiceChannel;
+    if (oldMem.guild.voiceConnection) {
+        if (vChann == oldMem.guild.voiceConnection.channel) {
+            if (vChann.members.size == 1) {
+                setTimeout(() => {
+                    if (oldMem.guild.voiceConnection.channel.members.size == 1) {
+                        oldMem.guild.voiceConnection.channel.leave();
+                    }
+                }, 300000); //300000 ms = 5 min
+            }
+        }
+    }
     var vChannel = newMem.voiceChannel;
     if(vChannel == null) return;
     var zn = false;
@@ -66,28 +78,100 @@ client.on("message", message => {
         embed.setAuthor(`${client.user.username} - Prefix: ${prefix}`, client.user.avatarURL);
         embed.setColor("#0099FF");
         embed.setTitle(`${prefix}help`);
-        embed.setDescription("Lista komend bota");
-        embed.addField(`${prefix}user [wzmianka/nazwa]`, `Informacje o użytkowniku`);
-        embed.addField(`${prefix}ban <wzmianka>`, `Banuje wzmienioną osobę`);
-        embed.addField(`${prefix}kick <wzmianka>`, `Kickuje wzmienioną osobę`);
-        embed.addField(`${prefix}resetall`, `Resetuje wszystkim pseudonimy`);
-        embed.addField(`${prefix}renameall <pseudonim>`, `Zmienia wszystkim pseudonimy na wpisany przez ciebie`);
-        embed.addField(`${prefix}rename <wzmianka/nazwa> <pseudnim>`, `Zmienia pseudonim`);
-        embed.addField(`${prefix}voicekick <wzmianka/osoba>`, `Kickuje z kanału głosowego wybraną osobę`);
-        embed.addField(`${prefix}voiceban <wzmianka/osoba>`, `Blokuje możliwość wejścia na kanały głosowe wskazanej osobie na zawsze`);
-        embed.addField(`${prefix}voiceunban <wzmianka>`, `Odblokuje możliwość wejścia na kanały głosowe osobie która dostała bana`);
+        embed.setDescription("Lista komend bota: \n`user, ban, kick, resetall, renameall, rename, voicekick, voiceban, voiceunban`");
+        embed.addField("FUNKCJE BETA: \nBot muzyczny:", "`play, search, q, clearqueue, leave, join`");
+        embed.addField("Komendy działające tylko jak bot gra:", "`pause, resume, skip, vol, np`");
         embed.addBlankField();
-        embed.addField("FUNKCJE BETA:", "Bot muzyczny:");
-        embed.addField(`${prefix}play <link/wyszukiwanie>`, "Odtwarza/Dodaje do kolejki podany link/wyszukanie");
-        embed.addField(`${prefix}search <wyszukiwanie>`, "Wyszukuje podaną frazę oraz wyświetla wybór 10 wyników");
-        embed.addField(`${prefix}q`, "Pokazuje kolejkę dla serwera");
-        embed.addField(`${prefix}leave`, "Bot wychodzi z kanału głosowego");
-        embed.addField(`.`, "Komendy działające tylko gdy bot odtwarza:");
-        embed.addField(`${prefix}pause`, "Zatrzymuje odtwarzacz");
-        embed.addField(`${prefix}resume`, "Wznawia odtwarzacz");
-        embed.addField(`${prefix}skip`, "Pomija utwór");
-        embed.addField(`${prefix}vol <głośność>`, "Zmienia głośność");
-        embed.addField(`${prefix}np`, "Pokazuje co aktualnie jest odtwarzane");
+        embed.addField("Po więcej info o komendach wpisz:", `${prefix}info <komenda>`);
+        message.channel.send(embed);
+    }
+    if(command == "info") {
+        var embed = new Discord.RichEmbed();
+        embed.setColor("#0088FF");
+        embed.setAuthor(`${client.user.username} - Komenda info, czyli informacje o komendach`, client.user.avatarURL);
+        switch (args[0]) {
+            case "user":
+                embed.addField(`${prefix}user [wzmianka/nazwa]`, "Wyświetla informacje o użytkowniku");
+                break;
+            case "ban":
+                embed.addField(`${prefix}ban <wzmianka>`, `Banuje wzmienioną osobę`);
+                embed.setFooter("Wymagane uprawnienia: Banowanie członków");
+                break;
+            case "kick":
+                embed.addField(`${prefix}kick <wzmianka>`, `Kickuje wzmienioną osobę`);
+                embed.setFooter("Wymagane uprawnienia: Wyrzucanie członków");
+                break;
+            case "resetall":
+                embed.addField(`${prefix}resetall`, `Resetuje wszystkim pseudonimy`);
+                embed.setFooter("Wymagane uprawnienia: Zarządzanie pseudonimami");
+                break;
+            case "renameall":
+                embed.addField(`${prefix}renameall <pseudonim>`, `Zmienia wszystkim pseudonimy na wpisany przez ciebie`);
+                embed.setFooter("Wymagane uprawnienia: Zarządzanie pseudonimami");
+                break;
+            case "rename":
+                embed.addField(`${prefix}rename <wzmianka/nazwa> <pseudnim>`, `Zmienia pseudonim`);
+                embed.setFooter("Wymagane uprawnienia: Zarządzanie pseudonimami");
+                break;
+            case "voicekick":
+                embed.addField(`${prefix}voicekick <wzmianka/osoba>`, `Kickuje z kanału głosowego wybraną osobę`);
+                embed.setFooter("Wymagane uprawnienia: Przenieś członków");
+                break;
+            case "voiceban":
+                embed.addField(`${prefix}voiceban <wzmianka/osoba>`, `Blokuje możliwość wejścia na kanały głosowe wskazanej osobie na zawsze`);
+                embed.setFooter("Wymagane uprawnienia: Przenieś członków");
+                break;
+            case "voiceunban":
+                embed.addField(`${prefix}voiceunban <wzmianka>`, `Odblokuje możliwość wejścia na kanały głosowe osobie która dostała bana`);
+                embed.setFooter("Wymagane uprawnienia: Przenieś członków");
+                break;
+            case "play":
+                embed.addField(`${prefix}play <link/wyszukiwanie>`, "Odtwarza/Dodaje do kolejki podany link/wyszukanie");
+                embed.setFooter("Ta komenda działa tylko jeśli bot gra!");
+                break;
+            case "search":
+                embed.addField(`${prefix}search <wyszukiwanie>`, "Wyszukuje podaną frazę oraz wyświetla wybór 10 wyników");
+                break;
+            case "q":
+                embed.addField(`${prefix}q`, "Pokazuje kolejkę dla serwera");
+                break;
+            case "clearqueue":
+                embed.addField(`${prefix}clearqueue`, "Czyści kolejkę dla serwera");
+                break;
+            case "leave":
+                embed.addField(`${prefix}leave`, "Bot wychodzi z kanału głosowego");
+                break;
+            case "join":
+                embed.addField(`${prefix}join`, "Bot dołącza na twój kanał głosowy");
+                break;
+            case "pause":
+                embed.addField(`${prefix}pause`, "Zatrzymuje odtwarzacz");
+                embed.setFooter("Ta komenda działa tylko jeśli bot gra!");
+                break;
+            case "resume":
+                embed.addField(`${prefix}resume`, "Wznawia odtwarzacz");
+                embed.setFooter("Ta komenda działa tylko jeśli bot gra!");
+                break;
+            case "skip":
+                embed.addField(`${prefix}skip`, "Pomija utwór");
+                embed.setFooter("Ta komenda działa tylko jeśli bot gra!");
+                break;
+            case "vol":
+                embed.addField(`${prefix}vol <głośność>`, "Zmienia głośność");
+                embed.setFooter("Ta komenda działa tylko jeśli bot gra!");
+                break;
+            case "np":
+                embed.addField(`${prefix}np`, "Pokazuje co aktualnie jest odtwarzane");
+                embed.setFooter("Ta komenda działa tylko jeśli bot gra!");
+                break;
+            case "info":
+                embed.setDescription("Naprawdę chcesz wyświetlić info o komendzie info? Eh.. no dobra");
+                embed.addField(`${prefix}info <komenda>`, "Pokazuje informacje o komendzie, którą wpiszesz.");
+                break;
+            default:
+                embed.setTitle("Nie znam takiej komendy, polecam sprawdzić `" + prefix + "help`");
+        }
+        if(args[0] == null) embed.setTitle("Może byś dał jakąś komendę bo chyba nie chcesz info o komendzie info?");
         message.channel.send(embed);
     }
 
@@ -282,13 +366,50 @@ client.on("message", message => {
 
     if(command == "off") {
         if(message.author.id == config.ownerid) {
-            message.channel.send("Zamykanie...");
-            client.user.setStatus('invisible');
+            message.delete();
+            message.channel.send("*Zamykanie w ciągu 30 sek*").then(mes => {
+                client.user.setActivity("Zamykanie w ciągu 30 sek!");
+                setTimeout(() => {
+                    mes.edit("*Zamykanie w ciągu 20 sek*");
+                    client.user.setActivity("Zamykanie w ciągu 20 sek!");
+                    setTimeout(() => {
+                        mes.edit("*Zamykanie w ciągu 10 sek*");
+                        client.user.setActivity("Zamykanie w ciągu 10 sek!");
+                        setTimeout(() => {
+                            mes.edit("*Zamykanie w ciągu 5 sek*");
+                            client.user.setActivity("Zamykanie!");
+                            var c = 5;
+                            var eh = setInterval(() => {
+                                c -= 1
+                                if(c == 0) {
+                                    client.user.setStatus('invisible');
+                                    clearInterval(eh);
+                                    setTimeout(() => {
+                                        client.destroy();
+                                        setTimeout(() => {
+                                            process.exit(1);
+                                        }, 100)
+                                    }, 100);
+                                } else if (c == 1) {mes.delete(); message.channel.send("Zamykanie...");} else {
+                                    mes.edit(`*Zamykanie w ciągu ${c} sek*`);
+                                }
+                            }, 1000);
+                        }, 5000);
+                    }, 10000);
+                }, 10000);
+            });
+        }
+    }
+    if(command == "forceoff") {
+        if(message.author.id != config.ownerid) return;
+        message.channel.send("Zamykanie...");
+        client.user.setStatus('invisible');
+        setTimeout(() => {
             client.destroy();
             setTimeout(() => {
                 process.exit(1);
-            }, 100);
-        }
+            }, 100)
+        }, 100);
     }
 
     if(command == "resetall") {
@@ -328,6 +449,7 @@ client.on("message", message => {
     }
 
     if(command == "rename") {
+        if(!message.member.hasPermission("MANAGE_NICKNAMES")) {message.reply("Brak uprawnień!"); message.react("❌"); return;}
         if(message.mentions.users.first() == null) {
             var zn2 = false;
             message.guild.members.forEach(function(memb) {
@@ -440,6 +562,17 @@ client.on("message", message => {
         }
         bot.voiceChannel.leave();
         message.react("✅");
+    }
+    if(command == "join") {
+        var vChannel = message.member.voiceChannel;
+        if(vChannel == null) {
+            message.reply("najpierw wejdź na kanał głosowy!");
+            return;
+        } else {
+            if (message.guild.member(client.user).voiceChannel != vChannel) {
+                vChannel.join().then(() => message.react("✅")).catch(err => console.log(err));
+            }
+        }
     }
     if(command == "play") {
         var vChannel = message.member.voiceChannel;
