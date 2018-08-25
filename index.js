@@ -550,6 +550,21 @@ client.on("message", message => {
             }
         }
     }
+    if(command == "uptime") {
+        var totalSec = client.uptime / 1000;
+        var hours = Math.floor(totalSec / 3600);
+        totalSec %= 3600;
+        var mins = Math.floor(totalSec / 60);
+        var secs = Math.floor(totalSec % 60);
+        message.channel.send(`Jestem aktywny od: *${hours} godzin, ${mins} minut i ${secs} sekund*`);
+    }
+    if(command == "github") {
+        var embed = new Discord.RichEmbed();
+        embed.setColor("#ffd700");
+        embed.setTitle("Oto kod tego *świetnego bota*:");
+        embed.setDescription("https://github.com/juby210-PL/bot.js");
+        message.channel.send(embed);
+    }
 
     // Music bot: //
     if(command == "leave") {
@@ -720,7 +735,7 @@ function play_song(msg, song) {
             embed.setAuthor("Odtwarzanie: ", client.user.avatarURL);
             embed.setTitle(song.title);
             embed.setDescription("`" + `${Math.floor(dispatcher.time / 60000)}:${Math.floor((dispatcher.time % 60000)/1000) <10 ? '0'+Math.floor((dispatcher.time % 60000)/1000) : Math.floor((dispatcher.time % 60000)/1000)} / ${song.duration}` + "`");
-            embed.setThumbnail(`https://i.ytimg.com/vi/${song.id}/maxresdefault.jpg`);
+            embed.setThumbnail(`https://i.ytimg.com/vi/${song.id}/hqdefault.jpg`);
             embed.setFooter("Dodano przez: " + song.requester);
             m.channel.send(embed);
         }
