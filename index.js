@@ -8,6 +8,7 @@ let voiceban = require("./voiceban.json");
 const config = require("./config.json");
 const prefix = config.prefix;
 var inviteurl = "https://discordapp.com/oauth2/authorize?&client_id=479612191767789573&scope=bot&permissions=8";
+var lock = false;
 
 let queue = {};
 
@@ -49,6 +50,7 @@ client.on("voiceStateUpdate", (oldMem, newMem) => {
             }
         }
     }
+    if(lock) return;
     var vChannel = newMem.voiceChannel;
     if(vChannel == null) return;
     var zn = false;
@@ -63,6 +65,9 @@ client.on("voiceStateUpdate", (oldMem, newMem) => {
 
 client.on("message", message => {
     if(message.author.bot) return;
+    if(message.author.id != config.ownerid) {
+        if(lock) return;
+    }
     if (message.mentions.users.first() == null) {} else {
         if (message.content != message.mentions.users.first()) {} else {
             if (message.mentions.users.first().id == client.user.id) {message.reply("mój prefix to `" + prefix + "`!");}
@@ -375,6 +380,17 @@ client.on("message", message => {
         }
     }
 
+    if(command == "lockbot") {
+        if(message.author.id != config.ownerid) return;
+        message.delete();
+        if(lock) {
+            lock = false;
+            client.user.setStatus(config.status);
+        } else {
+            lock = true;
+            client.user.setStatus("invisible");
+        }
+    }
     if(command == "off") {
         if(message.author.id == config.ownerid) {
             message.delete();
@@ -421,6 +437,18 @@ client.on("message", message => {
                 process.exit(1);
             }, 100)
         }, 100);
+    }
+    if(command == "servers") {
+        if(message.author.id != config.ownerid) return;
+        let tosend = [];
+        var i = 0;
+        client.guilds.forEach(g => { i += 1; tosend.push({c: i, title: g.name, id: g.id, owner: g.owner.user.username});});
+        const embed = new Discord.RichEmbed;
+        embed.setTitle(`Serwery:`);
+        tosend.forEach(e => {
+            embed.addField(`${e.c}. ${e.title}`, `ID: ${e.id} | Właściciel: ${e.owner}`);
+        });
+		message.author.send(embed);
     }
 
     if(command == "resetall") {
@@ -681,7 +709,6 @@ client.on("message", message => {
             collector.on("collect", m => {
                 if(m.author != message.author) return;
                 if(m.content.startsWith("anuluj")) {collector.stop(); message.channel.send("Wyszukiwanie anulowano!"); return;}
-                if(Number(m.content) == NaN) {m.reply("nieprawidłowa liczba!"); return;}
                 c = 0;
                 var zn = false;
                 results.forEach(r => {
@@ -703,13 +730,13 @@ client.on("message", message => {
                         collector.stop();
                         if (queue[m.guild.id].playing) {
                             getTimestamp(r.id, timestamp => {
-                                queue[m.guild.id].songs.push({url: args[0], title: r.title, requester: message.author.username, duration: timestamp, id: r.id});
+                                queue[m.guild.id].songs.push({url: r.link, title: r.title, requester: message.author.username, duration: timestamp, id: r.id});
                             });
                             m.channel.send("Dodano do kolejki: `" + r.title + "` z kanału `" + r.channelTitle + "`");
                         } else {
                             m.channel.send("Odtwarzanie: `" + r.title + "` z kanału `" + r.channelTitle + "`");
                             getTimestamp(r.id, timestamp => {
-                                play_song(m, {url: args[0], title: r.title, requester: message.author.username, duration: timestamp, id: r.id});
+                                play_song(m, {url: r.link, title: r.title, requester: message.author.username, duration: timestamp, id: r.id});
                             });
                         }
                     }
