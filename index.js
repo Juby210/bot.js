@@ -31,9 +31,9 @@ client.on('guildCreate', guild => {
 
 function ustaw_status() {
     if (client.guilds.size == 1) {
-        client.user.setActivity(`testowanie na 1 serwerze`, { type: 'WATCHING' });
+        client.user.setActivity(`testowanie na 1 serwerze | Prefix: ${prefix}`, { type: 'WATCHING' });
     } else {
-        client.user.setActivity(`testowanie na ${client.guilds.size} serwerach`, { type: 'WATCHING' });
+        client.user.setActivity(`testowanie na ${client.guilds.size} serwerach | ${client.users.size - 1} użytkowników | Prefix: ${prefix}`, { type: 'WATCHING' });
     }
 }
 
@@ -85,7 +85,7 @@ client.on("message", message => {
         embed.setAuthor(`${client.user.username} - Prefix: ${prefix}`, client.user.avatarURL);
         embed.setColor("#0099FF");
         embed.setTitle(`${prefix}help`);
-        embed.setDescription("Lista komend bota: \n`user, ban, kick, resetall, renameall, rename, voicekick, voiceban, voiceunban, uptime, github, invite`");
+        embed.setDescription("Lista komend bota: \n`user, ban, kick, resetall, renameall, rename, voicekick, voiceban, voiceunban, uptime, github, invite, botinfo`");
         embed.addField("FUNKCJE BETA: \nBot muzyczny:", "`play, search, q, clearqueue, leave, join`");
         embed.addField("Komendy działające tylko jak bot gra:", "`pause, resume, skip, vol, np`");
         embed.addBlankField();
@@ -140,6 +140,9 @@ client.on("message", message => {
                 break;
             case "invite":
                 embed.addField(`${prefix}invite`, "Link do zaproszenia bota");
+                break;
+            case "botinfo":
+                embed.addField(`${prefix}botinfo`, "Informacje o użyciu zasobów przez bota oraz liczba serwerów/kanałów/użytkowników");
                 break;
             case "play":
                 embed.addField(`${prefix}play <link/wyszukiwanie>`, "Odtwarza/Dodaje do kolejki podany link/wyszukanie");
@@ -611,6 +614,24 @@ client.on("message", message => {
         embed.setDescription(inviteurl);
         embed.setFooter(`${client.user.username} - Autor: Juby210#5831`, client.user.avatarURL);
         message.channel.send(embed);
+    }
+    if(command == "botinfo") {
+        var usage = require('pidusage');
+        var embed = new Discord.RichEmbed();
+        embed.setColor("#00ff00");
+        embed.setTitle("Bot Info:");
+        embed.addField("Ping", client.ping, true);
+        usage(process.pid, (err, res) => {
+            if(err) {anticrash(message.channel, err); return;}
+            var ram = Math.floor(res.memory / 1024 / 1024);
+            embed.addField("RAM: (MB)", ram, true);
+            embed.addField("CPU:", Math.floor(res.cpu) + "%", true);
+            embed.addField("Użytkownicy:", client.users.size - 1, true);
+            embed.addField("Kanały:", client.channels.size, true);
+            embed.addField("Serwery:", client.guilds.size, true);
+            embed.setFooter(`${client.user.username} - Autor: Juby210#5831`, client.user.avatarURL);
+            message.channel.send(embed);
+        });
     }
 
     // Music bot: //

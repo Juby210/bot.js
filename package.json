@@ -13,6 +13,7 @@
     "ffmpeg-binaries": "^4.0.0",
     "forever": "^0.15.3",
     "opusscript": "0.0.6",
+    "pidusage": "^2.0.16",
     "youtube-api": "^2.0.9",
     "youtube-search": "^1.1.1",
     "ytdl-core": "^0.24.0"
