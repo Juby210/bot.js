@@ -633,6 +633,18 @@ client.on("message", message => {
             message.channel.send(embed);
         });
     }
+    if(command == "eval") {
+        if(message.author.id != config.ownerid) return;
+        var evalv = null;
+        try {evalv = eval(text)} catch(err) {anticrash(message.channel, err, false); return;}
+        var embed = new Discord.RichEmbed();
+        embed.setColor("#0FF49A");
+        embed.setAuthor("Eval Command");
+        embed.setTitle("Input:");
+        embed.setDescription("```js\n" + text + "\n```");
+        embed.addField("Output:", "```js\n" + evalv + "\n```");
+        message.channel.send(embed);
+    }
 
     // Music bot: //
     if(command == "leave") {
@@ -905,7 +917,7 @@ function getTimestamp(id, callback) {
     });
 }
 
-function anticrash(chan, err) {
+function anticrash(chan, err, sendToOwner = true) {
     console.log("AntiCrash:");
     console.log(err);
     var embed = new Discord.RichEmbed();
@@ -914,6 +926,7 @@ function anticrash(chan, err) {
     embed.setFooter(`Jeśli chcesz uniknąć tego błędu w przyszłości zgłoś go do: Juby210#5831`);
     embed.setColor("#FF0000");
     if(chan != null) chan.send(embed);
+    if(!sendToOwner) return;
     var owner = client.users.find("id", config.ownerid);
     if(owner == undefined) {return;}
     embed.addField(err.path, err.method);
