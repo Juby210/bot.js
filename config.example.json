@@ -3,5 +3,10 @@
 	"ytapikey":"twój klucz do api yt",
     "ownerid":"twoje id z discorda",
     "status":"online",
-	"prefix":"^"
+    "prefix":"^",
+    "dbl":{
+        "usedbl": false, 
+        "token": "token z discordbots.org",
+        "requireVote":{"voicekick":true, "voiceban":true, "voiceunban":true}
+    }
 }

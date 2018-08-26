@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <title>bot.js - Polski bot muzyczny opensource</title>
+        <meta charset="utf-8">
+        <meta name="og:site_name" content="Jakieś projekty Jubego">
+        <meta property="og:title" content="bot.js" />
+        <meta property="og:description" content="Polski bot muzyczny opensource w bibliotece discord.js">
+        <meta property="og:image" content="https://cdn.discordapp.com/avatars/479612191767789573/b361d0925c958076c3c3e84523a066d0.png?size=512" />
+        <link rel="shortcut icon" href="favicon.ico" />
+        <style>
+            body {
+                background-color: #2C2F33;
+                font-family: 'Open Sans', sans-serif;
+            }
+            #content {
+                text-align: center;
+                color: #ffffff;
+            }
+            .button {
+                background-color: #7289DA;
+                border: none;
+                border-radius: 6px;
+                color: white;
+                padding: 8px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin-bottom: 5px;
+                cursor: pointer;
+            }
+            .button:hover {
+                background-color: #8089DA;
+            }
+            @keyframes animacja {
+                0%   {left:2000px;}
+                100% {left:0px;}
+            }
+        </style>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    </head>
+    <body>
+        <div id="content">
+            <img src="https://cdn.discordapp.com/avatars/479612191767789573/b361d0925c958076c3c3e84523a066d0.png?size=128" style="border-radius: 50%;" />
+            <h1>bot.js - Polski bot muzyczny opensource</h1>
+            <img src="https://discordbots.org/api/widget/status/479612191767789573.svg?noavatar=true" alt="status" />
+            <img src="https://discordbots.org/api/widget/servers/479612191767789573.svg?noavatar=true" alt="servers" />
+            <img src="https://discordbots.org/api/widget/upvotes/479612191767789573.svg?noavatar=true" alt="upvotes" />
+            <img src="https://discordbots.org/api/widget/lib/479612191767789573.svg?noavatar=true" alt="lib: discord.js" />
+            <br><a href="https://github.com/juby210-PL/bot.js" target="_blank"><button class="button">Kod źródłowy (Github)</button></a>
+            <a href="https://discordbots.org/bot/479612191767789573" target="_blank"><button class="button">Discord Bot List (discordbots.org)</button></a>
+            <a href="https://discordbots.org/bot/479612191767789573/vote" target="_blank"><button class="button">Zagłosuj na bota (discordbots.org)</button></a>
+            <br><a href="https://discord.gg/KVEW5ww" target="_blank"><button class="button">Support Server</button></a>
+            <a href="https://discordapp.com/oauth2/authorize?client_id=479612191767789573&scope=bot&permissions=493937759" target="_blank"><button class="button">Invite</button></a>
+            <a href="#"><button id="cmdBtn" class="button" onclick="cmdClick()">Lista komend</button></a>
+            <br><div id="cmd" style="visibility: hidden;">
+                <h3>Lista komend:</h3>
+                <p>Tutaj na razie nie ma listy komend, wpisz ^help na serwerze z botem, aby zobaczyć komendy</p>
+            </div>
+        </div>
+        <script>
+            var cmdBtn = document.getElementById("cmdBtn");
+            var cmd = document.getElementById("cmd");
+            var pokazane = false;
+
+            function cmdClick() {
+                if(!pokazane) {
+                    cmdBtn.innerHTML = "Ukryj listę komend";
+                    cmd.style.visibility = "visible";
+                    pokazane = true;
+                } else {
+                    cmdBtn.innerHTML = "Lista komend";
+                    cmd.style.visibility = "hidden";
+                    pokazane = false;
+                }
+            }
+        </script>
+    </body>
+</html>

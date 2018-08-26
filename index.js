@@ -9,6 +9,9 @@ const config = require("./config.json");
 const prefix = config.prefix;
 var inviteurl = "https://discordapp.com/oauth2/authorize?&client_id=479612191767789573&scope=bot&permissions=8";
 var lock = false;
+const DBL = require("dblapi.js");
+const dbl = new DBL(config.dbl.token, client);
+let reqV = config.dbl.requireVote;
 
 let queue = {};
 
@@ -16,7 +19,7 @@ client.on('ready', () => {
     console.log(`${client.user.tag} działa no`);
     inviteurl = `https://discordapp.com/oauth2/authorize?&client_id=${client.user.id}&scope=bot&permissions=8`;
     client.user.setStatus(config.status);
-    ustaw_status();
+    //ustaw_status();
     client.guilds.forEach(g => {
         if (!queue.hasOwnProperty(g.id)) queue[g.id] = {}, queue[g.id].playing = false, queue[g.id].songs = [];
         if (!voiceban.hasOwnProperty(g.id)) voiceban[g.id] = {}, voiceban[g.id].banned = [];
@@ -26,7 +29,11 @@ client.on('ready', () => {
 client.on('guildCreate', guild => {
     if (!queue.hasOwnProperty(guild.id)) queue[guild.id] = {}, queue[guild.id].playing = false, queue[guild.id].songs = [];
     if (!voiceban.hasOwnProperty(g.id)) voiceban[g.id] = {}, voiceban[g.id].banned = [];
-    ustaw_status();
+    //ustaw_status();
+});
+
+client.on('guildDelete', guild => {
+    //ustaw_status();
 });
 
 function ustaw_status() {
@@ -80,12 +87,32 @@ client.on("message", message => {
     var text = args.slice(0).join(" ");
     var text2 = args.slice(1).join(" ");
 
+    if(config.dbl.usedbl) {
+        if (!reqV.hasOwnProperty(command)) {cmd(message, command, text, text2, args);} else {
+            if(reqV[command] == true) {
+                dbl.hasVoted(message.author.id).then(v => {
+                    if(!v) {
+                        var embed = new Discord.RichEmbed();
+                        embed.setColor("#A61818");
+                        embed.setTitle("Ta komenda jest niedostępna dla ciebie");
+                        embed.setDescription(`Aby mieć dostęp do tej komendy zagłosuj na tego bota na [discordbots.org](https://discordbots.org/bot/${client.user.id}/vote)`);
+                        embed.setFooter("Jeśli już zagłosowałeś poczekaj ok. 2 min");
+                        message.channel.send(embed);
+                        return;
+                    } else {cmd(message, command, text, text2, args);}
+                }).catch(err => anticrash(message.channel, err));
+            } else {cmd(message, command, text, text2, args);}
+        }
+    } else {cmd(message, command, text, text2, args);}
+});
+
+function cmd(message = new Discord.Message(), command, text, text2, args) {
     if(command == "help") {
         var embed = new Discord.RichEmbed;
         embed.setAuthor(`${client.user.username} - Prefix: ${prefix}`, client.user.avatarURL);
         embed.setColor("#0099FF");
         embed.setTitle(`${prefix}help`);
-        embed.setDescription("Lista komend bota: \n`user, ban, kick, resetall, renameall, rename, voicekick, voiceban, voiceunban, uptime, github, invite, botinfo`");
+        embed.setDescription("Lista komend bota: \n`user, ban, kick, resetall, renameall, rename, voicekick, voiceban, voiceunban, uptime, github, invite, botinfo, dbl`");
         embed.addField("FUNKCJE BETA: \nBot muzyczny:", "`play, search, q, clearqueue, leave, join`");
         embed.addField("Komendy działające tylko jak bot gra:", "`pause, resume, skip, vol, np`");
         embed.addBlankField();
@@ -143,6 +170,9 @@ client.on("message", message => {
                 break;
             case "botinfo":
                 embed.addField(`${prefix}botinfo`, "Informacje o użyciu zasobów przez bota oraz liczba serwerów/kanałów/użytkowników");
+                break;
+            case "dbl":
+                embed.addField(`${prefix}dbl <user/bot> <wzmianka>`, "Pokazuje informacje o użytkowniku/bocie z discordbots.org");
                 break;
             case "play":
                 embed.addField(`${prefix}play <link/wyszukiwanie>`, "Odtwarza/Dodaje do kolejki podany link/wyszukanie");
@@ -512,6 +542,7 @@ client.on("message", message => {
     }
     if (command == "voicekick") {
         if(!message.member.hasPermission("MOVE_MEMBERS")) {message.channel.send("Ta komenda wymaga uprawnienia `Przenieś członków`"); message.react("❌"); return;}
+        if(args[0] == null) {message.channel.send("Podaj kogo chcesz wyrzucić"); return;}
         if(message.mentions.users.first() == null) {
             var zn2 = false;
             message.guild.members.forEach(function(memb) {
@@ -538,6 +569,7 @@ client.on("message", message => {
     }
     if(command == "voiceban") {
         if(!message.member.hasPermission("MOVE_MEMBERS")) {message.channel.send("Ta komenda wymaga uprawnienia `Przenieś członków`"); message.react("❌"); return;}
+        if(args[0] == null) {message.channel.send("Podaj kogo chcesz zbanować"); return;}
         if(message.mentions.users.first() == null) {
             var zn2 = false;
             message.guild.members.forEach(function(memb) {
@@ -636,14 +668,73 @@ client.on("message", message => {
     if(command == "eval") {
         if(message.author.id != config.ownerid) return;
         var evalv = null;
-        try {evalv = eval(text)} catch(err) {anticrash(message.channel, err, false); return;}
+        try {evalv = eval(text);} catch(err) {anticrash(message.channel, err, false); return;}
         var embed = new Discord.RichEmbed();
         embed.setColor("#0FF49A");
         embed.setAuthor("Eval Command");
         embed.setTitle("Input:");
         embed.setDescription("```js\n" + text + "\n```");
+        try{evalv = evalv.replace(config.token, "RaCzEjNiErAcZeJnIeRaCzEjNiE").replace(config.dbl.token, "RaCzEjNiErAcZeJnIeRaCzEjNiE").replace(config.ytapikey, "RaCzEjNiErAcZeJnIeRaCzEjNiE");} catch(err) {}
         embed.addField("Output:", "```js\n" + evalv + "\n```");
         message.channel.send(embed);
+    }
+    if(command == "dbl") {
+        if(args[1] == null) {message.channel.send(`Nieprawidłowa ilość argumentów. Sprawdź poprawne użycie: ${prefix}info ${command}`); return;}
+        if(args[0] == "user") {
+            if(message.mentions.users.first() == null) {
+                message.channel.send("Wzmiankuj użytkownika którego chcesz sprawdzić");
+            } else {
+                dbl.getUser(message.mentions.users.first().id).then(user => {
+                    var embed = new Discord.RichEmbed();
+                    var color = "#283593";
+                    var kolor = false;
+                    if(user.color != undefined) {color = user.color; kolor = true;}
+                    embed.setColor(color);
+                    if(!kolor) color = "Nie ustawiono koloru.";
+                    var bio = "Nie dodano bio.";
+                    var gh = "Nie dodano profilu.";
+                    var yt = "Nie dodano profilu.";
+                    var rd = "Nie dodano profilu.";
+                    var tw = "Nie dodano profilu.";
+                    var ig = "Nie dodano profilu.";
+                    if(user.bio != undefined) bio = user.bio;
+                    if(user.social) {
+                        try {
+                            if(user.social.github != "") gh = user.social.github;
+                            if(user.social.youtube != "") yt = user.social.youtube;
+                            if(user.social.reddit != "") rd = user.social.reddit;
+                            if(user.social.twitter != "") tw = user.social.twitter;
+                            if(user.social.instagram != "") ig = user.social.instagram;
+                        } catch(err) {}
+                    }
+                    embed.setDescription(`Użytkownik: ${user.username}#${user.discriminator}\nID: ${user.id}\nAdmin/Mod/Mod strony: ${user.admin}/${user.mod}/${user.webMod}\nBio: ${bio}\nKolor: ${color}\nGithub: ${gh}\nYoutube: ${yt}\nReddit: ${rd}\nTwitter: ${tw}\nInstagram: ${ig}`);
+                    embed.setThumbnail(message.mentions.users.first().avatarURL);
+                    message.channel.send(embed);
+                }).catch(err => anticrash(message.channel, err, false));
+            }
+        } else if (args[0] == "bot") {
+            if(message.mentions.users.first() == null) {
+                message.channel.send("Wzmiankuj bota, którego chcesz wyszukać");                
+            } else {
+                dbl.getBot(message.mentions.users.first().id).then(fbot => {
+                    var embed = new Discord.RichEmbed();
+                    embed.setColor("#283593");
+                    var desc = fbot.longdesc;
+                    if(desc == "" || desc == undefined) desc = fbot.shortdesc;
+                    var owners = "";
+                    fbot.owners.forEach(oid => {
+                        try{
+                            if(owners == "") {owners = client.users.find("id", oid).tag;} else {
+                                owners = owners + ", " + client.users.find("id", oid).tag;
+                            }
+                        } catch(err) {}
+                    });
+                    embed.setDescription(`Nazwa: ${fbot.username}#${fbot.discriminator}\nID: ${fbot.id}\nOpis:\n${desc}\n[Invite](${fbot.invite})\nStrona bota: ${fbot.website}\nKod: ${fbot.github}\nPrefix: ${fbot.prefix}\nBiblioteka: ${fbot.lib}\nTwórca: ${owners}\nTagi: ${fbot.tags + ""}\nGłosy: ${fbot.points}\n[Pokaż na discordbots.org](https://discordbots.org/bot/${fbot.id})`);
+                    embed.setThumbnail(message.mentions.users.first().avatarURL);
+                    message.channel.send(embed);
+                }).catch(err => anticrash(message.channel, err, false));
+            }
+        }
     }
 
     // Music bot: //
@@ -780,7 +871,7 @@ client.on("message", message => {
             });
         });
     }
-});
+}
 
 function play_song(msg, song) {
     let dispatcher;
