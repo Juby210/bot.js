@@ -19,7 +19,7 @@ client.on('ready', () => {
     console.log(`${client.user.tag} działa no`);
     inviteurl = `https://discordapp.com/oauth2/authorize?&client_id=${client.user.id}&scope=bot&permissions=8`;
     client.user.setStatus(config.status);
-    //ustaw_status();
+    ustaw_status();
     client.guilds.forEach(g => {
         if (!queue.hasOwnProperty(g.id)) queue[g.id] = {}, queue[g.id].playing = false, queue[g.id].songs = [];
         if (!voiceban.hasOwnProperty(g.id)) voiceban[g.id] = {}, voiceban[g.id].banned = [];
@@ -29,11 +29,11 @@ client.on('ready', () => {
 client.on('guildCreate', guild => {
     if (!queue.hasOwnProperty(guild.id)) queue[guild.id] = {}, queue[guild.id].playing = false, queue[guild.id].songs = [];
     if (!voiceban.hasOwnProperty(g.id)) voiceban[g.id] = {}, voiceban[g.id].banned = [];
-    //ustaw_status();
+    ustaw_status();
 });
 
 client.on('guildDelete', guild => {
-    //ustaw_status();
+    ustaw_status();
 });
 
 function ustaw_status() {
