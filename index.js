@@ -29,6 +29,21 @@ fs.readdir("./commands/", (err, files) => {
       client.commands.set(props.help.name, props);
     });
   });
+  fs.readdir("./commands/dev/", (err, files) => {
+    if(err) console.log(err);
+    let jsfile = files.filter(f => f.split(".").pop() === "js");
+    if(jsfile.length <= 0){
+      console.log("Nie znaleziono komend");
+      return;
+    }
+  
+    jsfile.forEach((f, i) =>{
+      let props = require(`./commands/dev/${f}`);
+      console.log(`${f} zostalo zaladowane!`);
+      client.commands.set(props.help.name, props);
+    });
+  });
+
 
 let queue = {};
 
