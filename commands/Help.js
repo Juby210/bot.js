@@ -8,7 +8,7 @@ module.exports.run = async (client, message, args) => {
     embed.setAuthor(`${client.user.username} - Prefix: ${prefix}`, client.user.avatarURL);
     embed.setColor("#0099FF");
     embed.setTitle(`${prefix}help`);
-    embed.setDescription("Lista komend bota: \n`user, ban, kick, resetall, renameall, rename, voicekick, voiceban, voiceunban, uptime, github, invite, botinfo, dbl, shorten, urls`");
+    embed.setDescription("Lista komend bota: \n`userinfo, ban, kick, resetall, renameall, rename, voicekick, voiceban, voiceunban, uptime, github, invite, botinfo, dbl, shorten, urls`");
     embed.addField("FUNKCJE BETA: \nBot muzyczny:", "`play, search, q, clearqueue, leave, join`");
     embed.addField("Komendy działające tylko jak bot gra:", "`pause, resume, skip, vol, np`");
     embed.addBlankField();

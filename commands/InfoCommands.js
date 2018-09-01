@@ -9,7 +9,7 @@ module.exports.run = async (client, message, args) => {
     embed.setAuthor(`${client.user.username} - Komenda info, czyli informacje o komendach`, client.user.avatarURL);
     switch (args[0]) {
         case "user":
-            embed.addField(`${prefix}user [wzmianka/nazwa]`, "Wyświetla informacje o użytkowniku");
+            embed.addField(`${prefix}userinfo [wzmianka/nazwa]`, "Wyświetla informacje o użytkowniku");
             break;
         case "ban":
             embed.addField(`${prefix}ban <wzmianka>`, `Banuje wzmienioną osobę`);
