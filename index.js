@@ -723,6 +723,10 @@ function getTimestamp(id, callback) {
     });
 }
 
+module.exports.anticrash = async (chan, err, sendToOwner = true) => {
+    anticrash(chan, err, sendToOwner);
+}
+
 function anticrash(chan, err, sendToOwner = true) {
     console.log("AntiCrash:");
     console.log(err);
