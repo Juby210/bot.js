@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+client.commands = new Discord.Collection();
 const yt = require('ytdl-core');
 var youtubeSearch = require('youtube-search');
 var youtube = require("youtube-api");
@@ -14,6 +15,20 @@ const dbl = new DBL(config.dbl.token, client);
 let reqV = config.dbl.requireVote;
 const request = require('request');
 let urls = require("./urls.json");
+fs.readdir("./commands/", (err, files) => {
+    if(err) console.log(err);
+    let jsfile = files.filter(f => f.split(".").pop() === "js");
+    if(jsfile.length <= 0){
+      console.log("Nie znaleziono komend");
+      return;
+    }
+  
+    jsfile.forEach((f, i) =>{
+      let props = require(`./commands/${f}`);
+      console.log(`${f} zostalo zaladowane!`);
+      client.commands.set(props.help.name, props);
+    });
+  });
 
 let queue = {};
 
@@ -84,10 +99,15 @@ client.on("message", message => {
     }
     if (!message.content.startsWith(prefix)) return;
 
+    let messageArray = message.content.split(" ");
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
     var text = args.slice(0).join(" ");
     var text2 = args.slice(1).join(" ");
+    let cmod = messageArray[0];
+    let commandfile = client.commands.get(cmod.slice(prefix.length));
+    if(commandfile) commandfile.run(client,message,args);
+  
 
     if(config.dbl.usedbl) {
         if (!reqV.hasOwnProperty(command)) {cmd(message, command, text, text2, args);} else {
@@ -109,245 +129,6 @@ client.on("message", message => {
 });
 
 function cmd(message = new Discord.Message(), command, text, text2, args) {
-    if(command == "help") {
-        var embed = new Discord.RichEmbed;
-        embed.setAuthor(`${client.user.username} - Prefix: ${prefix}`, client.user.avatarURL);
-        embed.setColor("#0099FF");
-        embed.setTitle(`${prefix}help`);
-        embed.setDescription("Lista komend bota: \n`user, ban, kick, resetall, renameall, rename, voicekick, voiceban, voiceunban, uptime, github, invite, botinfo, dbl, shorten, urls`");
-        embed.addField("FUNKCJE BETA: \nBot muzyczny:", "`play, search, q, clearqueue, leave, join`");
-        embed.addField("Komendy działające tylko jak bot gra:", "`pause, resume, skip, vol, np`");
-        embed.addBlankField();
-        embed.addField("Po więcej info o komendach wpisz:", `${prefix}info <komenda>`);
-        message.channel.send(embed);
-    }
-    if(command == "info") {
-        var embed = new Discord.RichEmbed();
-        embed.setColor("#0088FF");
-        embed.setAuthor(`${client.user.username} - Komenda info, czyli informacje o komendach`, client.user.avatarURL);
-        switch (args[0]) {
-            case "user":
-                embed.addField(`${prefix}user [wzmianka/nazwa]`, "Wyświetla informacje o użytkowniku");
-                break;
-            case "ban":
-                embed.addField(`${prefix}ban <wzmianka>`, `Banuje wzmienioną osobę`);
-                embed.setFooter("Wymagane uprawnienia: Banowanie członków");
-                break;
-            case "kick":
-                embed.addField(`${prefix}kick <wzmianka>`, `Kickuje wzmienioną osobę`);
-                embed.setFooter("Wymagane uprawnienia: Wyrzucanie członków");
-                break;
-            case "resetall":
-                embed.addField(`${prefix}resetall`, `Resetuje wszystkim pseudonimy`);
-                embed.setFooter("Wymagane uprawnienia: Zarządzanie pseudonimami");
-                break;
-            case "renameall":
-                embed.addField(`${prefix}renameall <pseudonim>`, `Zmienia wszystkim pseudonimy na wpisany przez ciebie`);
-                embed.setFooter("Wymagane uprawnienia: Zarządzanie pseudonimami");
-                break;
-            case "rename":
-                embed.addField(`${prefix}rename <wzmianka/nazwa> <pseudnim>`, `Zmienia pseudonim`);
-                embed.setFooter("Wymagane uprawnienia: Zarządzanie pseudonimami");
-                break;
-            case "voicekick":
-                embed.addField(`${prefix}voicekick <wzmianka/osoba>`, `Kickuje z kanału głosowego wybraną osobę`);
-                embed.setFooter("Wymagane uprawnienia: Przenieś członków");
-                break;
-            case "voiceban":
-                embed.addField(`${prefix}voiceban <wzmianka/osoba>`, `Blokuje możliwość wejścia na kanały głosowe wskazanej osobie na zawsze`);
-                embed.setFooter("Wymagane uprawnienia: Przenieś członków");
-                break;
-            case "voiceunban":
-                embed.addField(`${prefix}voiceunban <wzmianka>`, `Odblokuje możliwość wejścia na kanały głosowe osobie która dostała bana`);
-                embed.setFooter("Wymagane uprawnienia: Przenieś członków");
-                break;
-            case "uptime":
-                embed.addField(`${prefix}uptime`, "Pokazuje ile bot jest aktywny od ostatniego restartu");
-                break;
-            case "github":
-                embed.addField(`${prefix}github`, "Link do kodu bota na githubie");
-                break;
-            case "invite":
-                embed.addField(`${prefix}invite`, "Link do zaproszenia bota");
-                break;
-            case "botinfo":
-                embed.addField(`${prefix}botinfo`, "Informacje o użyciu zasobów przez bota oraz liczba serwerów/kanałów/użytkowników");
-                break;
-            case "dbl":
-                embed.addField(`${prefix}dbl <user/bot> <wzmianka>`, "Pokazuje informacje o użytkowniku/bocie z discordbots.org");
-                break;
-			case "shorten":
-                embed.addField(`${prefix}shorten <link> [własny skrót]`, "Skraca link");
-                break;
-			case "urls":
-                embed.addField(`${prefix}urls`, "Pokazuje twoje skrócone linki");
-                break;
-            case "play":
-                embed.addField(`${prefix}play <link/wyszukiwanie>`, "Odtwarza/Dodaje do kolejki podany link/wyszukanie");
-                embed.setFooter("Ta komenda działa tylko jeśli bot gra!");
-                break;
-            case "search":
-                embed.addField(`${prefix}search <wyszukiwanie>`, "Wyszukuje podaną frazę oraz wyświetla wybór 10 wyników");
-                break;
-            case "q":
-                embed.addField(`${prefix}q`, "Pokazuje kolejkę dla serwera");
-                break;
-            case "clearqueue":
-                embed.addField(`${prefix}clearqueue`, "Czyści kolejkę dla serwera");
-                break;
-            case "leave":
-                embed.addField(`${prefix}leave`, "Bot wychodzi z kanału głosowego");
-                break;
-            case "join":
-                embed.addField(`${prefix}join`, "Bot dołącza na twój kanał głosowy");
-                break;
-            case "pause":
-                embed.addField(`${prefix}pause`, "Zatrzymuje odtwarzacz");
-                embed.setFooter("Ta komenda działa tylko jeśli bot gra!");
-                break;
-            case "resume":
-                embed.addField(`${prefix}resume`, "Wznawia odtwarzacz");
-                embed.setFooter("Ta komenda działa tylko jeśli bot gra!");
-                break;
-            case "skip":
-                embed.addField(`${prefix}skip`, "Pomija utwór");
-                embed.setFooter("Ta komenda działa tylko jeśli bot gra!");
-                break;
-            case "vol":
-                embed.addField(`${prefix}vol <głośność>`, "Zmienia głośność");
-                embed.setFooter("Ta komenda działa tylko jeśli bot gra!");
-                break;
-            case "np":
-                embed.addField(`${prefix}np`, "Pokazuje co aktualnie jest odtwarzane");
-                embed.setFooter("Ta komenda działa tylko jeśli bot gra!");
-                break;
-            case "info":
-                embed.setDescription("Naprawdę chcesz wyświetlić info o komendzie info? Eh.. no dobra");
-                embed.addField(`${prefix}info <komenda>`, "Pokazuje informacje o komendzie, którą wpiszesz.");
-                break;
-            default:
-                embed.setTitle("Nie znam takiej komendy, polecam sprawdzić `" + prefix + "help`");
-        }
-        if(args[0] == null) embed.setTitle("Może byś dał jakąś komendę bo chyba nie chcesz info o komendzie info?");
-        message.channel.send(embed);
-    }
-
-    if (command == "user") {
-        var gra = "Użytkownik w nic nie gra."
-        var stream = false;
-        var member = null;
-        var member2 = null;
-        if(args[0] == null) {
-            member = message.author;
-            member2 = message.member;
-        } else {
-            if(message.mentions.users.first() == null) {
-                var zn2 = false;
-                message.guild.members.forEach(function(memb) {
-                    if(memb.user.username.toLowerCase() == args[0].toLowerCase()) {
-                        member = memb.user;
-                        member2 = memb;
-                        zn2 = true;
-                    }
-                });
-                if (zn2 == false) {
-                    message.reply("nie znaleziono takiego użytkownika!");
-                    return;
-                }
-            } else {
-                member = message.guild.members.find('id', message.mentions.users.first().id).user;
-                member2 = message.guild.members.find('id', message.mentions.users.first().id);
-            }
-        }
-        try{
-            var gra = member.presence.game.name;
-            stream = member.presence.game.streaming;
-        } catch(err) {}
-        var role = "";
-        member2.roles.forEach(r => {
-            if (role == "") {
-                role += r.name;
-            } else {
-                role += ", " + r.name;
-            }
-        });
-        var pseudo = member2.nickname;
-        if(pseudo == null) {pseudo = member.username;}
-        message.channel.send({embed: {
-            color: 0xf1c40f,
-            author: {
-                name: member.tag,
-                icon_url: member.avatarURL
-            },
-            fields: [{
-                name: "Nick:",
-                value: member.username,
-                inline: true
-            }, {
-                name: "Tag:",
-                value: member.discriminator,
-                inline: true
-            }, {
-                name: "Pseudonim:",
-                value: pseudo,
-                inline: true
-            }, {
-                name: "Gra:",
-                value: gra
-            }, {
-                name:"Stream:",
-                value: stream,
-                inline: true
-            }, {
-                name:"ID:",
-                value: member.id,
-                inline: true
-            }, {
-                name:"Status:",
-                value: member.presence.status,
-                inline: true
-            }, {
-                name: "Konto stworzone:",
-                value: member.createdAt,
-                inline: true
-            }, {
-                name: "Dołączono na serwer:",
-                value: member2.joinedAt,
-                inline: true
-            }, {
-                name:"Role [" + member2.roles.size + "]:",
-                value: role,
-                inline: true
-            }],
-            thumbnail: {
-                url: member.avatarURL
-            }
-        }});
-    }
-
-    if(command == "status") {
-        switch (args[0]) {
-            case "online":
-                client.user.setStatus("online");
-                message.channel.send("Status ustawiony na Online!");
-                break;
-            case "idle":
-                client.user.setStatus("idle");
-                message.channel.send("Status ustawiony na Zaraz Wracam (idle)!");
-                break;
-            case "dnd":
-                client.user.setStatus("dnd");
-                message.channel.send("Status ustawiony na Nie przeszkadzać (dnd)!");
-                break;
-            case "invisible":
-                client.user.setStatus("invisible");
-                message.channel.send("Status ustawiony na Niewidzialny!");
-                break;
-            default:
-                message.channel.send("`online | idle | dnd | invisible`");
-        }
-    }
-
     if(command == "ban") {
         if(message.member.hasPermission("BAN_MEMBERS") == true) {
             if(args[0] == null) {
