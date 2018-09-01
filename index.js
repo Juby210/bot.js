@@ -12,6 +12,8 @@ var lock = false;
 const DBL = require("dblapi.js");
 const dbl = new DBL(config.dbl.token, client);
 let reqV = config.dbl.requireVote;
+const request = require('request');
+let urls = require("./urls.json");
 
 let queue = {};
 
@@ -112,7 +114,7 @@ function cmd(message = new Discord.Message(), command, text, text2, args) {
         embed.setAuthor(`${client.user.username} - Prefix: ${prefix}`, client.user.avatarURL);
         embed.setColor("#0099FF");
         embed.setTitle(`${prefix}help`);
-        embed.setDescription("Lista komend bota: \n`user, ban, kick, resetall, renameall, rename, voicekick, voiceban, voiceunban, uptime, github, invite, botinfo, dbl`");
+        embed.setDescription("Lista komend bota: \n`user, ban, kick, resetall, renameall, rename, voicekick, voiceban, voiceunban, uptime, github, invite, botinfo, dbl, shorten, urls`");
         embed.addField("FUNKCJE BETA: \nBot muzyczny:", "`play, search, q, clearqueue, leave, join`");
         embed.addField("Komendy działające tylko jak bot gra:", "`pause, resume, skip, vol, np`");
         embed.addBlankField();
@@ -173,6 +175,12 @@ function cmd(message = new Discord.Message(), command, text, text2, args) {
                 break;
             case "dbl":
                 embed.addField(`${prefix}dbl <user/bot> <wzmianka>`, "Pokazuje informacje o użytkowniku/bocie z discordbots.org");
+                break;
+			case "shorten":
+                embed.addField(`${prefix}shorten <link> [własny skrót]`, "Skraca link");
+                break;
+			case "urls":
+                embed.addField(`${prefix}urls`, "Pokazuje twoje skrócone linki");
                 break;
             case "play":
                 embed.addField(`${prefix}play <link/wyszukiwanie>`, "Odtwarza/Dodaje do kolejki podany link/wyszukanie");
@@ -735,6 +743,66 @@ function cmd(message = new Discord.Message(), command, text, text2, args) {
                 }).catch(err => anticrash(message.channel, err, false));
             }
         }
+    }
+    if(command == "shorten") {
+        if(!config.yourls.useyourls) {message.channel.send("Właściciel bota nie skonfigurował skracacza linków."); return;}
+        if(args[0] == null) {message.channel.send(`Nieprawidłowa ilość argumentów. Sprawdź poprawne użycie: ${prefix}info ${command}`); return;}
+        var cust = false;
+        if(args[1] != null) cust = true;
+        if(cust) {
+            request({
+                method: "POST",
+                url: `${config.yourls.apiurl}?signature=${config.yourls.signature}&format=json&action=shorturl&url=${args[0]}&keyword=${args[1]}`
+            }, (error, response, body) => {
+                if (error) return;
+                if (response.statusCode == 200) {
+                    var result = JSON.parse(body);
+                    message.channel.send("Oto twój krótki url: " + result.shorturl);
+                    try{
+                        urls[message.author.id].urls.push({short: result.shorturl, full: args[0]});
+                    } catch(e) {
+                        urls[message.author.id] = {};
+                        urls[message.author.id].urls = [];
+                        urls[message.author.id].urls.push({short: result.shorturl, full: args[0]});
+                    }
+                    fs.writeFile("urls.json", JSON.stringify(urls), function(err) {
+                        if (err) console.log(err);
+                    });
+                }
+            });
+        } else {
+            request({
+                method: "POST",
+                url: `${config.yourls.apiurl}?signature=${config.yourls.signature}&format=json&action=shorturl&url=${args[0]}`
+            }, (error, response, body) => {
+                if (error) return;
+                if (response.statusCode == 200) {
+                    var result = JSON.parse(body);
+                    message.channel.send("Oto twój krótki url: " + result.shorturl);
+                    try{
+                        urls[message.author.id].urls.push({short: result.shorturl, full: args[0]});
+                    } catch(e) {
+                        urls[message.author.id] = {};
+                        urls[message.author.id].urls = [];
+                        urls[message.author.id].urls.push({short: result.shorturl, full: args[0]});
+                    }
+                    fs.writeFile("urls.json", JSON.stringify(urls), function(err) {
+                        if (err) console.log(err);
+                    });
+                }
+            });
+        }
+    }
+    if(command == "urls") {
+        if(!config.yourls.useyourls) {message.channel.send("Właściciel bota nie skonfigurował skracacza linków."); return;}
+        var embed = new Discord.RichEmbed();
+        embed.setTitle("Twoje krótkie linki: ");
+        var tosend = [];
+        urls[message.author.id].urls.forEach((url, i) => {tosend.push({c: i+1, short: url.short, full: url.full});});
+        tosend.forEach(e => {
+            embed.addField(`${e.c}. ${e.short}`, `Pełny link: ${e.full}`);
+        });
+		message.channel.send(embed);
     }
 
     // Music bot: //

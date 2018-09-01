@@ -8,5 +8,10 @@
         "usedbl": false, 
         "token": "token z discordbots.org",
         "requireVote":{"voicekick":true, "voiceban":true, "voiceunban":true}
-    }
+    },
+	"yourls":{
+		"useyourls": false,
+		"apiurl":"url do api yourls",
+		"signature": "klucz do api"
+	}
 }
