@@ -1,4 +1,4 @@
-const { createLogger, transports } = require('winston');
+const {createLogger, transports} = require('winston');
 const { format } = require('logform');
 
 const alignedWithColorsAndTime = format.combine(

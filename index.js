@@ -16,6 +16,8 @@ let reqV = config.dbl.requireVote;
 const request = require('request');
 let urls = require("./urls.json");
 var clc = require("cli-colors");
+const logger = require('./events/logger.js');
+
 
 fs.readdir("./commands/", (err, files) => {
     if(err) console.log(err);
@@ -65,6 +67,7 @@ let queue = {};
 
 client.on('ready', () => {
     console.log(clc.cyan(`${client.user.tag} działa`));
+    logger.info("test ok");
     inviteurl = `https://discordapp.com/oauth2/authorize?&client_id=${client.user.id}&scope=bot&permissions=8`;
     client.user.setStatus(config.status);
     ustaw_status();
