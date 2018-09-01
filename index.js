@@ -57,7 +57,7 @@ function ustaw_status() {
     if (client.guilds.size == 1) {
         client.user.setActivity(`testowanie na 1 serwerze | Prefix: ${prefix}`, { type: 'WATCHING' });
     } else {
-        client.user.setActivity(`testowanie na ${client.guilds.size} serwerach | ${client.users.size - 1} użytkowników | Prefix: ${prefix}`, { type: 'WATCHING' });
+        client.user.setActivity(`testowanie na ${client.guilds.size} serwerach | Prefix: ${prefix}`, { type: 'WATCHING' });
     }
 }
 
@@ -576,6 +576,7 @@ function cmd(message = new Discord.Message(), command, text, text2, args) {
     }
     if(command == "urls") {
         if(!config.yourls.useyourls) {message.channel.send("Właściciel bota nie skonfigurował skracacza linków."); return;}
+        if(!urls.hasOwnProperty(message.author.id)) {message.channel.send("Nie masz swoich krótkich linków"); return;}
         var embed = new Discord.RichEmbed();
         embed.setTitle("Twoje krótkie linki: ");
         var tosend = [];
