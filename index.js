@@ -15,17 +15,33 @@ const dbl = new DBL(config.dbl.token, client);
 let reqV = config.dbl.requireVote;
 const request = require('request');
 let urls = require("./urls.json");
+var clc = require("cli-colors");
+
 fs.readdir("./commands/", (err, files) => {
     if(err) console.log(err);
     let jsfile = files.filter(f => f.split(".").pop() === "js");
     if(jsfile.length <= 0){
-      console.log("Nie znaleziono komend");
+      console.log(clc.red("Nie znaleziono komend w /commands/"));
       return;
     }
   
     jsfile.forEach((f, i) =>{
       let props = require(`./commands/${f}`);
-      console.log(`${f} zostalo zaladowane!`);
+      console.log(clc.green(`${f} zostalo zaladowane!`));
+      client.commands.set(props.help.name, props);
+    });
+  });
+fs.readdir("./commands/dev/", (err, files) => {
+    if(err) console.log(err);
+    let jsfile = files.filter(f => f.split(".").pop() === "js");
+    if(jsfile.length <= 0){
+      console.log(clc.red("Nie znaleziono komend w /commands/dev/"));
+      return;
+    }
+  
+    jsfile.forEach((f, i) =>{
+      let props = require(`./commands/dev/${f}`);
+      console.log(clc.green(`${f} zostalo zaladowane!`));
       client.commands.set(props.help.name, props);
     });
   });
@@ -33,7 +49,7 @@ fs.readdir("./commands/", (err, files) => {
 let queue = {};
 
 client.on('ready', () => {
-    console.log(`${client.user.tag} działa no`);
+    console.log(clc.cyan(`${client.user.tag} działa`));
     inviteurl = `https://discordapp.com/oauth2/authorize?&client_id=${client.user.id}&scope=bot&permissions=8`;
     client.user.setStatus(config.status);
     ustaw_status();
@@ -108,7 +124,7 @@ client.on("message", message => {
     let commandfile = client.commands.get(cmod.slice(prefix.length));
 
     if(config.dbl.usedbl) {
-        if (!reqV.hasOwnProperty(command)) {cmd(message, command, text, text2, args);} else {
+        if (!reqV.hasOwnProperty(command)) {if(commandfile) commandfile.run(client,message,args); cmd(message, command, text, text2, args);} else {
             if(reqV[command] == true) {
                 dbl.hasVoted(message.author.id).then(v => {
                     if(!v) {
