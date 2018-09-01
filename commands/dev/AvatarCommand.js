@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
-const config = require("../config.json");
+const config = require("../../config.json");
 const prefix = config.prefix;
-const index = require("../index.js");
+const index = require("../../index.js");
 
 module.exports.run = async (client, message, args) => {
     if(message.author.id != config.ownerid) return;
