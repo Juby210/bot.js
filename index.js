@@ -106,8 +106,6 @@ client.on("message", message => {
     var text2 = args.slice(1).join(" ");
     let cmod = messageArray[0];
     let commandfile = client.commands.get(cmod.slice(prefix.length));
-    if(commandfile) commandfile.run(client,message,args);
-  
 
     if(config.dbl.usedbl) {
         if (!reqV.hasOwnProperty(command)) {cmd(message, command, text, text2, args);} else {
@@ -121,43 +119,23 @@ client.on("message", message => {
                         embed.setFooter("Jeśli już zagłosowałeś poczekaj ok. 2 min");
                         message.channel.send(embed);
                         return;
-                    } else {cmd(message, command, text, text2, args);}
+                    } else {
+                        if(commandfile) commandfile.run(client,message,args);
+                        cmd(message, command, text, text2, args);
+                    }
                 }).catch(err => anticrash(message.channel, err));
-            } else {cmd(message, command, text, text2, args);}
+            } else {
+                if(commandfile) commandfile.run(client,message,args);
+                cmd(message, command, text, text2, args);
+            }
         }
-    } else {cmd(message, command, text, text2, args);}
+    } else {
+        if(commandfile) commandfile.run(client,message,args);
+        cmd(message, command, text, text2, args);
+    }
 });
 
 function cmd(message = new Discord.Message(), command, text, text2, args) {        
-    if(command == "nick") {
-        if(message.author.id == config.ownerid) {
-            client.user.setUsername(text).then(message.react("✅"));
-        } else {
-            message.react("❌");
-        }
-    }
-
-    if(command == "avatar") {
-        if(message.author.id == config.ownerid) {
-            if(args[0] == null) {
-                if(Array.from(message.attachments)[0] == null) {
-                    message.reply("Podaj link do avatara!");
-                    message.react("❌");
-                } else {
-                    message.attachments.forEach(function(a) {
-                        client.user.setAvatar(a.url)
-                        .then(user => message.react("✅"))
-                        .catch(err => anticrash(message.channel, err));
-                    });
-                }
-            } else {
-                client.user.setAvatar(args[0])
-                .then(user => message.react("✅"))
-                .catch(err => anticrash(message.channel, err));
-            }
-        }
-    }
-
     if(command == "lockbot") {
         if(message.author.id != config.ownerid) return;
         message.delete();
@@ -168,53 +146,6 @@ function cmd(message = new Discord.Message(), command, text, text2, args) {
             lock = true;
             client.user.setStatus("invisible");
         }
-    }
-    if(command == "off") {
-        if(message.author.id == config.ownerid) {
-            message.delete();
-            message.channel.send("*Zamykanie w ciągu 30 sek*").then(mes => {
-                client.user.setActivity("Zamykanie w ciągu 30 sek!");
-                setTimeout(() => {
-                    mes.edit("*Zamykanie w ciągu 20 sek*");
-                    client.user.setActivity("Zamykanie w ciągu 20 sek!");
-                    setTimeout(() => {
-                        mes.edit("*Zamykanie w ciągu 10 sek*");
-                        client.user.setActivity("Zamykanie w ciągu 10 sek!");
-                        setTimeout(() => {
-                            mes.edit("*Zamykanie w ciągu 5 sek*");
-                            client.user.setActivity("Zamykanie!");
-                            var c = 5;
-                            var eh = setInterval(() => {
-                                c -= 1
-                                if(c == 0) {
-                                    client.user.setStatus('invisible');
-                                    clearInterval(eh);
-                                    setTimeout(() => {
-                                        client.destroy();
-                                        setTimeout(() => {
-                                            process.exit(1);
-                                        }, 100)
-                                    }, 100);
-                                } else if (c == 1) {mes.delete(); message.channel.send("Zamykanie...");} else {
-                                    mes.edit(`*Zamykanie w ciągu ${c} sek*`);
-                                }
-                            }, 1000);
-                        }, 5000);
-                    }, 10000);
-                }, 10000);
-            });
-        }
-    }
-    if(command == "forceoff") {
-        if(message.author.id != config.ownerid) return;
-        message.channel.send("Zamykanie...");
-        client.user.setStatus('invisible');
-        setTimeout(() => {
-            client.destroy();
-            setTimeout(() => {
-                process.exit(1);
-            }, 100)
-        }, 100);
     }
     if(command == "servers") {
         if(message.author.id != config.ownerid) return;
@@ -229,62 +160,6 @@ function cmd(message = new Discord.Message(), command, text, text2, args) {
 		message.author.send(embed);
     }
 
-    if(command == "resetall") {
-        if(message.member.hasPermission("MANAGE_NICKNAMES") == true) {
-            if(message.guild.member(client.user).hasPermission("MANAGE_NICKNAMES") == true) {
-                message.reply("rozpoczęto resetowanie!");
-                message.guild.members.forEach(mem => {
-                mem.setNickname("");
-                });
-                message.react("✅");
-            } else {
-                message.channel.send("Bot nie ma uprawnień do zarządzania pseudonimami");
-                message.react("❌");
-            }
-        } else {
-            message.reply("Brak uprawnień!");
-            message.react("❌");
-        }
-    }
-
-    if(command == "renameall") {
-        if(message.member.hasPermission("MANAGE_NICKNAMES") == true) {
-            if(message.guild.member(client.user).hasPermission("MANAGE_NICKNAMES") == true) {
-                message.reply("rozpoczęto zmienianie!");
-                message.guild.members.forEach(mem => {
-                    mem.setNickname(text);
-                });
-                message.react("✅");
-            } else {
-                message.channel.send("Bot nie ma uprawnień do zarządzania pseudonimami");
-                message.react("❌");
-            }
-        } else {
-            message.reply("Brak uprawnień!");
-            message.react("❌");
-        }
-    }
-
-    if(command == "rename") {
-        if(!message.member.hasPermission("MANAGE_NICKNAMES")) {message.reply("Brak uprawnień!"); message.react("❌"); return;}
-        if(message.mentions.users.first() == null) {
-            var zn2 = false;
-            message.guild.members.forEach(function(memb) {
-                if(memb.user.username.toLowerCase() == args[0].toLowerCase()) {
-                    memb.setNickname(text2);
-                    message.react("✅");
-                    zn2 = true;
-                }
-            });
-            if (zn2 == false) {
-                message.reply("nie znaleziono takiego użytkownika!");
-                return;
-            }
-        } else {
-            message.guild.members.find('id', message.mentions.users.first().id).setNickname(text2);
-            message.react("✅");
-        }
-    }
     if (command == "voicekick") {
         if(!message.member.hasPermission("MOVE_MEMBERS")) {message.channel.send("Ta komenda wymaga uprawnienia `Przenieś członków`"); message.react("❌"); return;}
         if(args[0] == null) {message.channel.send("Podaj kogo chcesz wyrzucić"); return;}
