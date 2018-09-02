@@ -1,5 +1,5 @@
 # bot.js
-Mój pierwszy testowy bot muzyczny do discorda. Używa biblioteki discord.js.
+Mój pierwszy testowy bot muzyczny do discorda. Używa biblioteki discord.js. 
 
 [Strona bota](https://botjs.juby.cf)
 
