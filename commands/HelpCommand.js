@@ -12,7 +12,7 @@ module.exports.run = async (client, message, args) => {
     embed.addField("Komendy działające tylko jak bot gra:", "`pause, resume, skip, vol, np`");
     embed.addBlankField();
     embed.addField("Po więcej info o komendach wpisz:", `${prefix}info <komenda>`);
-    embed.setFooter(client.user.avatarURL, "© Juby210");
+    embed.setFooter("© Juby210", client.user.avatarURL);
     embed.setTimestamp()
     message.channel.send(embed);
 }
