@@ -45,20 +45,6 @@ fs.readdir("./commands/dev/", (err, files) => {
       client.commands.set(props.help.name, props);
     });
   });
-  fs.readdir("./commands/dev/", (err, files) => {
-    if(err) console.log(err);
-    let jsfile = files.filter(f => f.split(".").pop() === "js");
-    if(jsfile.length <= 0){
-      console.log("Nie znaleziono komend");
-      return;
-    }
-  
-    jsfile.forEach((f, i) =>{
-      let props = require(`./commands/dev/${f}`);
-      console.log(`${f} zostalo zaladowane!`);
-      client.commands.set(props.help.name, props);
-    });
-  });
 
 
 let queue = {};
@@ -167,30 +153,6 @@ client.on("message", message => {
 });
 
 function cmd(message = new Discord.Message(), command, text, text2, args) {        
-    if(command == "lockbot") {
-        if(message.author.id != config.ownerid) return;
-        message.delete();
-        if(lock) {
-            lock = false;
-            client.user.setStatus(config.status);
-        } else {
-            lock = true;
-            client.user.setStatus("invisible");
-        }
-    }
-    if(command == "servers") {
-        if(message.author.id != config.ownerid) return;
-        let tosend = [];
-        var i = 0;
-        client.guilds.forEach(g => { i += 1; tosend.push({c: i, title: g.name, id: g.id, owner: g.owner.user.username});});
-        const embed = new Discord.RichEmbed;
-        embed.setTitle(`Serwery:`);
-        tosend.forEach(e => {
-            embed.addField(`${e.c}. ${e.title}`, `ID: ${e.id} | Właściciel: ${e.owner}`);
-        });
-		message.author.send(embed);
-    }
-
     if (command == "voicekick") {
         if(!message.member.hasPermission("MOVE_MEMBERS")) {message.channel.send("Ta komenda wymaga uprawnienia `Przenieś członków`"); message.react("❌"); return;}
         if(args[0] == null) {message.channel.send("Podaj kogo chcesz wyrzucić"); return;}
