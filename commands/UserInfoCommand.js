@@ -43,56 +43,23 @@ module.exports.run = async (client, message, args) => {
     });
     var pseudo = member2.nickname;
     if(pseudo == null) {pseudo = member.username;}
-    message.channel.send({embed: {
-        color: 0xf1c40f,
-        author: {
-            name: member.tag,
-            icon_url: member.avatarURL
-        },
-        fields: [{
-            name: "Nick:",
-            value: member.username,
-            inline: true
-        }, {
-            name: "Tag:",
-            value: member.discriminator,
-            inline: true
-        }, {
-            name: "Pseudonim:",
-            value: pseudo,
-            inline: true
-        }, {
-            name: "Gra:",
-            value: gra
-        }, {
-            name:"Stream:",
-            value: stream,
-            inline: true
-        }, {
-            name:"ID:",
-            value: member.id,
-            inline: true
-        }, {
-            name:"Status:",
-            value: member.presence.status,
-            inline: true
-        }, {
-            name: "Konto stworzone:",
-            value: member.createdAt,
-            inline: true
-        }, {
-            name: "Dołączono na serwer:",
-            value: member2.joinedAt,
-            inline: true
-        }, {
-            name:"Role [" + member2.roles.size + "]:",
-            value: role,
-            inline: true
-        }],
-        thumbnail: {
-            url: member.avatarURL
-        }
-    }});
+    var embed = new Discord.RichEmbed;
+    embed.setColor("0xf1c40f")
+    embed.setAuthor(member.tag, member.avatarURL);
+    embed.addField("Nick:", member.username, true);
+    embed.addField("Tag:", "#" + member.discriminator, true);
+    embed.addField("Pseudonim:", pseudo, true);
+    embed.addField("Gra:", gra);
+    embed.addField("Stream:", stream, true);
+    embed.addField("ID:", member.id, true);
+    embed.addField("Status:", member.presence.status, true);
+    embed.addField("Konto stworzone:", member.createdAt, true);
+    embed.addField("Dołączono na serwer:", member2.joinedAt, true);
+    embed.addField("Role [" + member2.roles.size + "]:", role, true);
+    embed.setThumbnail(member.avatarURL);
+    embed.setFooter("© Juby210", client.user.avatarURL);
+    embed.setTimestamp()
+    message.channel.send(embed);
 }
 
 module.exports.help = {
