@@ -274,7 +274,7 @@ function cmd(message = new Discord.Message(), command, text, text2, args) {
             embed.addField("Użytkownicy:", client.users.size - 1, true);
             embed.addField("Kanały:", client.channels.size, true);
             embed.addField("Serwery:", client.guilds.size, true);
-            embed.setFooter(`${client.user.username} - Autor: Juby210#5831`, client.user.avatarURL);
+            embed.setFooter(`${client.user.username} - Autor: Juby210#5831 & hamster#0001`, client.user.avatarURL);
             message.channel.send(embed);
         });
     }
