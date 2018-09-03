@@ -7,10 +7,32 @@ require('format4js');
 
 module.exports.run = async (client, message, args, member) => {
     var embed = new Discord.RichEmbed;
-    let target = message.mentions.users.first() || message.author;
-    embed.addField(String.format("Avatar użytkownika:", target.name + "#" + target.descriminator), String.format("[%s](%s)", "Bezpośedni link", target.getEffectiveAvatarUrl), false);
-    embed.setImage(target.avatarURL + "?size=1024");
-    embed.setFooter("© Juby210", client.user.avatarURL);
+    if(args[0] == null) {
+        member = message.author;
+        member2 = message.member;
+    } else {
+        if(message.mentions.users.first() == null) {
+            var zn2 = false;
+            message.guild.members.forEach(function(memb) {
+                if(memb.user.username.toLowerCase() == args[0].toLowerCase()) {
+                    member = memb.user;
+                    member2 = memb;
+                    zn2 = true;
+                }
+            });
+            if (zn2 == false) {
+                message.reply("Nie znaleziono takiego użytkownika!");
+                return;
+            }
+        } else {
+            member = message.guild.members.find('id', message.mentions.users.first().id).user;
+            member2 = message.guild.members.find('id', message.mentions.users.first().id);
+        }
+    }    
+    embed.setTitle("Avatar użytkownika:");
+    embed.setDescription("**" + member.tag + "**" + "\n" + "[[Bezpośredni link]]" + "(" + member.avatarURL + ")");
+    embed.setImage(member.avatarURL + "?size=1024");
+    embed.setFooter("© Juby210 & hamster", client.user.avatarURL);
     embed.setTimestamp()
     message.channel.send(embed);
     }

@@ -21,7 +21,7 @@ module.exports.run = async (client, message, args) => {
                 }
             });
             if (zn2 == false) {
-                message.reply("nie znaleziono takiego użytkownika!");
+                message.reply("Nie znaleziono takiego użytkownika!");
                 return;
             }
         } else {
@@ -57,7 +57,7 @@ module.exports.run = async (client, message, args) => {
     embed.addField("Dołączono na serwer:", member2.joinedAt, true);
     embed.addField("Role [" + member2.roles.size + "]:", role, true);
     embed.setThumbnail(member.avatarURL);
-    embed.setFooter("© Juby210", client.user.avatarURL);
+    embed.setFooter("© Juby210 & hamster", client.user.avatarURL);
     embed.setTimestamp()
     message.channel.send(embed);
 }
