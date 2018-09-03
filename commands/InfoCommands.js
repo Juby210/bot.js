@@ -7,6 +7,9 @@ module.exports.run = async (client, message, args) => {
     embed.setColor("#0088FF");
     embed.setAuthor(`${client.user.username} - Komenda info, czyli informacje o komendach`, client.user.avatarURL);
     switch (args[0]) {
+		case "avatar":
+			embed.addField(`${prefix}avatar [wzmianka/nazwa]`, "Wyświetla oraz daje link do avatara wybranej osoby/twojego");
+			break;
         case "userinfo":
             embed.addField(`${prefix}userinfo [wzmianka/nazwa]`, "Wyświetla informacje o użytkowniku");
             break;

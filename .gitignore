@@ -1,6 +1,7 @@
 config.json
-
 node_modules/
+*.bat
+
 
 # ----------------------------------- #
 # ----- Language Gitignore ----- #
@@ -21,3 +22,4 @@ node_modules/
 *.zip
 *.tar.gz
 *.rar
+*.7z
