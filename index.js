@@ -258,7 +258,7 @@ function cmd(message = new Discord.Message(), command, text, text2, args) {
         embed.setColor("#00ff00");
         embed.setTitle("Link do zaproszenia bota:");
         embed.setDescription(inviteurl);
-        embed.setFooter(`${client.user.username} - Autor: Juby210#5831`, client.user.avatarURL);
+        embed.setFooter(`${client.user.username} - Autor: Juby210#5831 & hamster#0001`, client.user.avatarURL);
         message.channel.send(embed);
     }
     if(command == "botinfo") {
@@ -285,11 +285,11 @@ function cmd(message = new Discord.Message(), command, text, text2, args) {
         try {evalv = eval(text);} catch(err) {anticrash(message.channel, err, false); return;}
         var embed = new Discord.RichEmbed();
         embed.setColor("#0FF49A");
-        embed.setAuthor("Eval Command");
-        embed.setTitle("Input:");
+        embed.setAuthor("EVAL - JS");
+        embed.setTitle("KOMENDA:");
         embed.setDescription("```js\n" + text + "\n```");
         try{evalv = evalv.replace(config.token, "RaCzEjNiErAcZeJnIeRaCzEjNiE").replace(config.dbl.token, "RaCzEjNiErAcZeJnIeRaCzEjNiE").replace(config.ytapikey, "RaCzEjNiErAcZeJnIeRaCzEjNiE");} catch(err) {}
-        embed.addField("Output:", "```js\n" + evalv + "\n```");
+        embed.addField("ODPOWIEDŹ:", "```js\n" + evalv + "\n```");
         message.channel.send(embed);
     }
     if(command == "dbl") {
