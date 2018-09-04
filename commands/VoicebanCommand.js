@@ -42,5 +42,6 @@ module.exports.run = async (client, message, args) => {
 
 module.exports.help = {
     name: "voiceban",
+    category:"MODERACJA",
     aliases: "banvoice"
 }

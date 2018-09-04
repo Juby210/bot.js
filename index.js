@@ -16,7 +16,7 @@ let reqV = config.dbl.requireVote;
 const request = require('request');
 let urls = require("./urls.json");
 var clc = require("cli-colors");
-process.env["commands"] = [];
+var commands = [];
 
 fs.readdir("./commands/", (err, files) => {
     if(err) console.log(err);
@@ -29,10 +29,11 @@ fs.readdir("./commands/", (err, files) => {
     jsfile.forEach((f, i) =>{
       let props = require(`./commands/${f}`);
       console.log(clc.green(`${f} zostalo zaladowane!`));
-      process.env["commands"].push({name:props.help.name, category:props.help.category});
+      commands.push({name:props.help.name, category:props.help.category});
       client.commands.set(props.help.name, props);
       client.commands.set(props.help.aliases, props);
     });
+    process.env["commands"] = commands;
   });
 fs.readdir("./commands/dev/", (err, files) => {
     if(err) console.log(err);
