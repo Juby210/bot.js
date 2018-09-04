@@ -29,7 +29,7 @@ module.exports.run = async (client, message, args) => {
 }
        
 
-    module.exports.help = {
-        name: "prune",
-        aliases: "clear"
-    }
+module.exports.help = {
+    name: "prune",
+    aliases: "clear"
+}
