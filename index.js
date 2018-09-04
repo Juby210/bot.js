@@ -155,9 +155,10 @@ client.on("message", message => {
 
 function cmd(message = new Discord.Message(), command, text, text2, args) {
     if(command == "eval") {
-        if(message.author.id != config.ownerid) return;
+        if(message.author.id != config.ownerid && message.author.id != config.devid) return;
         var evalv = null;
-        try {evalv = eval(text);} catch(err) {anticrash(message.channel, err, false); return;}
+        var text = args.slice(0).join(" ");
+        try {evalv = eval(text);} catch(err) {index.anticrash(message.channel, err, false); return;}
         var embed = new Discord.RichEmbed();
         embed.setColor("#0FF49A");
         embed.setAuthor("EVAL - JS");

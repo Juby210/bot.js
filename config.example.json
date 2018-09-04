@@ -2,6 +2,7 @@
     "token":"twój token",
 	"ytapikey":"twój klucz do api yt",
     "ownerid":"twoje id z discorda",
+    "devid": "id developera",
     "status":"online",
     "prefix":"^",
     "dbl":{
