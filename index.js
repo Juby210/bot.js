@@ -162,7 +162,7 @@ function cmd(message = new Discord.Message(), command, text, text2, args) {
         if(message.author.id != config.ownerid && message.author.id != config.devid) return;
         var evalv = null;
         var text = args.slice(0).join(" ");
-        try {evalv = eval(text);} catch(err) {index.anticrash(message.channel, err, false); return;}
+        try {evalv = eval(text);} catch(err) {anticrash(message.channel, err, false); return;}
         var embed = new Discord.RichEmbed();
         embed.setColor("#0FF49A");
         embed.setAuthor("EVAL - JS");
