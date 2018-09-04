@@ -50,17 +50,11 @@ module.exports.run = async (client, message, args) => {
             embed.addField(`${prefix}voiceunban <wzmianka>`, `Odblokuje możliwość wejścia na kanały głosowe osobie która dostała bana`);
             embed.setFooter("Wymagane uprawnienia: Przenieś członków");
             break;
-        case "uptime":
-            embed.addField(`${prefix}uptime`, "Pokazuje ile bot jest aktywny od ostatniego restartu");
-            break;
         case "github":
             embed.addField(`${prefix}github`, "Link do kodu bota na githubie");
             break;
-        case "invite":
-            embed.addField(`${prefix}invite`, "Link do zaproszenia bota");
-            break;
-        case "botinfo":
-            embed.addField(`${prefix}botinfo`, "Informacje o użyciu zasobów przez bota oraz liczba serwerów/kanałów/użytkowników");
+        case "bot":
+            embed.addField(`${prefix}bot <info/invite/uptime>`, "Komenda o bocie\nbot info: Informacje o użyciu zasobów przez bota oraz liczba serwerów/kanałów/użytkowników\nbot invite: Link do zaproszenia bota\nbot uptime: Pokazuje ile bot jest aktywny od ostatniego restartu");
             break;
         case "dbl":
             embed.addField(`${prefix}dbl <user/bot> <wzmianka>`, "Pokazuje informacje o użytkowniku/bocie z discordbots.org");

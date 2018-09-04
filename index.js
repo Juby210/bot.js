@@ -8,7 +8,6 @@ var fs = require("fs");
 let voiceban = require("./voiceban.json");
 const config = require("./config.json");
 const prefix = config.prefix;
-var inviteurl = "https://discordapp.com/oauth2/authorize?&client_id=479612191767789573&scope=bot&permissions=8";
 var lock = false;
 const DBL = require("dblapi.js");
 const dbl = new DBL(config.dbl.token, client);
@@ -48,14 +47,12 @@ fs.readdir("./commands/dev/", (err, files) => {
       console.log(clc.green(`${f} zostalo zaladowane!`));
       client.commands.set(props.help.name, props);
     });
-  });
-
+});
 
 let queue = {};
 
 client.on('ready', () => {
     console.log(clc.cyan(`${client.user.tag} działa`));
-    inviteurl = `https://discordapp.com/oauth2/authorize?&client_id=${client.user.id}&scope=bot&permissions=8`;
     client.user.setStatus(config.status);
     ustaw_status();
     client.guilds.forEach(g => {
@@ -156,40 +153,7 @@ client.on("message", message => {
     }
 });
 
-function cmd(message = new Discord.Message(), command, text, text2, args) {        
-    if(command == "github") {
-        var embed = new Discord.RichEmbed();
-        embed.setColor("#ffd700");
-        embed.setTitle("Oto kod tego *świetnego bota*:");
-        embed.setDescription("https://github.com/juby210-PL/bot.js");
-        message.channel.send(embed);
-    }
-    if (command == "invite") {
-        var embed = new Discord.RichEmbed();
-        embed.setColor("#00ff00");
-        embed.setTitle("Link do zaproszenia bota:");
-        embed.setDescription(inviteurl);
-        embed.setFooter(`${client.user.username} - Autor: Juby210#5831 & hamster#0001`, client.user.avatarURL);
-        message.channel.send(embed);
-    }
-    if(command == "botinfo") {
-        var usage = require('pidusage');
-        var embed = new Discord.RichEmbed();
-        embed.setColor("#00ff00");
-        embed.setTitle("Bot Info:");
-        embed.addField("Ping", client.ping, true);
-        usage(process.pid, (err, res) => {
-            if(err) {anticrash(message.channel, err); return;}
-            var ram = Math.floor(res.memory / 1024 / 1024);
-            embed.addField("RAM: (MB)", ram, true);
-            embed.addField("CPU:", Math.floor(res.cpu) + "%%", true);
-            embed.addField("Użytkownicy:", client.users.size - 1, true);
-            embed.addField("Kanały:", client.channels.size, true);
-            embed.addField("Serwery:", client.guilds.size, true);
-            embed.setFooter(`${client.user.username} - Autor: Juby210#5831 & hamster#0001`, client.user.avatarURL);
-            message.channel.send(embed);
-        });
-    }
+function cmd(message = new Discord.Message(), command, text, text2, args) {
     if(command == "eval") {
         if(message.author.id != config.ownerid) return;
         var evalv = null;
@@ -495,7 +459,7 @@ function play_song(msg, song) {
             embed.setFooter("Dodano przez: " + song.requester);
             m.channel.send(embed).then(mes => {
                 mes.react("⏸").then(() => mes.react("▶").then(() => mes.react("⏩")));
-                var col = mes.createReactionCollector((rea, user) => user.bot == false);
+                var col = mes.createReactionCollector((rea, user) => user.id == m.author.id);
                 col.on("collect", (rea, user) => {
                     switch (rea.emoji.name) {
                         case "⏸":
