@@ -31,9 +31,8 @@ module.exports.run = async (client, message, args) => {
     message.react("❌");
     }
 }
-       
-
 module.exports.help = {
     name: "prune",
+    category:"MODERACJA",
     aliases: "clear"
 }

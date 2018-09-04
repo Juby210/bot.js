@@ -38,5 +38,6 @@ module.exports.run = async (client, message, args, member) => {
     }
 
 module.exports.help = {
-    name:"avatar"
+    name:"avatar",
+    category:"BASIC"
 }

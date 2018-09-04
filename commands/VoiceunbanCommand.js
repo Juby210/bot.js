@@ -25,5 +25,6 @@ if(message.mentions.users.first() == null) {message.reply("wzmiankuj kogo chcesz
 
 module.exports.help = {
     name: "voiceunban",
+    category:"MODERACJA",
     aliases: "unbanvoice"
 }
