@@ -9,7 +9,7 @@ module.exports.run = async (client, message, args) => {
     embed.setAuthor(`Cześć! Jestem ${client.user.username} - Prefix: ${prefix}`, client.user.avatarURL);
     embed.setColor("#0099FF");
     embed.addField("BASIC (4)", "``avatar, help, userinfo, info``", true);
-    embed.addField("MODERACJA (9)", "``ban, kick, nick, renameall, rename, resetall, voicekick, voiceunban, voiceban``", true);
+    embed.addField("MODERACJA (10)", "``prune, ban, kick, nick, renameall, rename, resetall, voicekick, voiceunban, voiceban``", true);
     embed.addField("WEB (3)", "``dbl, shorten, urls``", true);
     embed.addField("MISC (3)", "``uptime, github, invite``", true);
     embed.addField("MUZYKA (11)", "``play, pause, skip, join, leave, resume, vol, np, clearqueue, search, q``", true);

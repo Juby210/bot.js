@@ -9,7 +9,11 @@ module.exports.run = async (client, message, args) => {
     switch (args[0]) {
 		case "avatar":
 			embed.addField(`${prefix}avatar [wzmianka/nazwa]`, "Wyświetla oraz daje link do avatara wybranej osoby/twojego");
-			break;
+            break;
+        case "prune":
+            embed.addField(`{prefix}prune [ilość wiadomości]`, "Kasuje daną ilość wiadomości z kanału. Maksymalna wartość: 100");
+            embed.addField("Aliasy: clear");
+            embed.setFooter("Wymagane uprawnienia: Zarządzanie wiadomościami");
         case "userinfo":
             embed.addField(`${prefix}userinfo [wzmianka/nazwa]`, "Wyświetla informacje o użytkowniku");
             break;

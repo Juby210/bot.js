@@ -29,6 +29,7 @@ fs.readdir("./commands/", (err, files) => {
       let props = require(`./commands/${f}`);
       console.log(clc.green(`${f} zostalo zaladowane!`));
       client.commands.set(props.help.name, props);
+      client.commands.set(props.help.aliases, props);
     });
   });
 fs.readdir("./commands/dev/", (err, files) => {
