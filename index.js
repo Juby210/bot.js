@@ -1,5 +1,9 @@
 const Discord = require('discord.js');
-const client = new Discord.Client();
+const client = new Discord.Client({
+    clientOptions: {
+        fetchAllMembers: true,
+    }
+});
 client.commands = new Discord.Collection();
 const yt = require('ytdl-core');
 var youtubeSearch = require('youtube-search');
