@@ -47,7 +47,7 @@ module.exports.run = async (client, message, args) => {
       embed.addField(`BASIC (${basicn})`, "`" + basic + "`", true);
       embed.addField(`MODERACJA (${moderacjan})`, "`" + moderacja + "`", true);
       embed.addField(`WEB (${webn+3})`, "`dbl, shorten, urls`", true);
-      embed.addField(`MISC (${miscn+3})`, "`uptime, github, invite`", true);
+      embed.addField(`MISC (${miscn})`, "`" + misc + "`", true);
       embed.addField(`MUZYKA (${muzykan+11})`, "`play, pause, skip, join, leave, resume, vol, np, clearqueue, search, q`", true);
       embed.addField("INFORMACJA O KOMENDZIE", "`" + `${prefix}info <komenda>` + "`");
       embed.addBlankField();
