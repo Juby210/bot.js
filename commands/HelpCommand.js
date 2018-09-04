@@ -13,8 +13,8 @@ module.exports.run = async (client, message, args) => {
     embed.addField("WEB (3)", "``dbl, shorten, urls``", true);
     embed.addField("MISC (3)", "``uptime, github, invite``", true);
     embed.addField("MUZYKA (11)", "``play, pause, skip, join, leave, resume, vol, np, clearqueue, search, q``", true);
-    embed.addField("Po więcej info o komendach wpisz:", `${prefix}info <komenda>`);
-    embed.addField("Przydatne linki:\n", "[[WWW]](" + strona + ")" + "\n" + "[[GitHub]](" + github + ")", true);
+    embed.addField("Informacje o komendzie:", `${prefix}info <komenda>`);
+    embed.addField("🔗 Przydatne linki:\n", "[[WWW]](" + strona + ")" + "\n" + "[[GitHub]](" + github + ")", true);
     embed.setFooter("© Juby210 & hamster", client.user.avatarURL);
     embed.setTimestamp()
     message.channel.send(embed);
