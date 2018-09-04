@@ -29,8 +29,15 @@ module.exports.run = async (client, message, args) => {
 }
        
 
+<<<<<<< HEAD
     module.exports.help = {
         name: "prune",
         category:"MODERACJA",
         aliases: "clear"
     }
+=======
+module.exports.help = {
+    name: "prune",
+    aliases: "clear"
+}
+>>>>>>> 770ee54862a639e01c9f24ecb5883276336daf88
