@@ -6,7 +6,7 @@ let github = ("https://github.com/Juby210-PL/bot.js");
 
 module.exports.run = async (client, message, args) => {
     var embed = new Discord.RichEmbed;
-    embed.setAuthor(`${client.user.username} - Prefix: ${prefix}`, client.user.avatarURL);
+    embed.setAuthor(`Cześć! Jestem ${client.user.username} - Prefix: ${prefix}`, client.user.avatarURL);
     embed.setColor("#0099FF");
     embed.addField("BASIC (4)", "``avatar, help, userinfo, info``", true);
     embed.addField("MODERACJA (9)", "``ban, kick, nick, renameall, rename, resetall, voicekick, voiceunban, voiceban``", true);
