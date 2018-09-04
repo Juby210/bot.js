@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const config = require("../config.json");
 const client = new Discord.Client();
 const prefix = config.prefix;
+var TimeUnit = require('time-util');
 
 module.exports.run = async (client, message, args) => {
     if(message.member.hasPermission("MANAGE_MESSAGES") == true) {
@@ -18,14 +19,17 @@ module.exports.run = async (client, message, args) => {
             message.channel.fetchMessages({limit: wartosc})
             .then(messages => {
             message.channel.bulkDelete(wartosc);
-            message.reply("Usunięto " + wartosc + " wiadomosci"); 
+            message.reply("Usunięto " + wartosc + " wiadomosci")
+            .then(message => {
+                message.delete(5000);
             });
+        });
     }
 }
-        } else {
-        message.reply("Brak uprawnień!");
-        message.react("❌");
-        }
+    } else {
+    message.reply("Brak uprawnień!");
+    message.react("❌");
+    }
 }
        
 
