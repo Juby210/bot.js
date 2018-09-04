@@ -3,6 +3,8 @@ const config = require("../config.json");
 const prefix = config.prefix;
 
 module.exports.run = async (client, message, args) => {
+    if(args[0] == null) {message.channel.send("Nie prawidłowa ilość argumentów!"); message.react("❌"); return;}
+    var text = args.slice(0).join(" ");
     if(message.member.hasPermission("MANAGE_NICKNAMES") == true) {
         if(message.guild.member(client.user).hasPermission("MANAGE_NICKNAMES") == true) {
             message.reply("rozpoczęto zmienianie!");
