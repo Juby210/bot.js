@@ -14,6 +14,7 @@ module.exports.run = async (client, message, args) => {
     embed.addField("MISC (3)", "``uptime, github, invite``", true);
     embed.addField("MUZYKA (11)", "``play, pause, skip, join, leave, resume, vol, np, clearqueue, search, q``", true);
     embed.addField("Informacje o komendzie:", `${prefix}info <komenda>`);
+    embed.addBlankField();
     embed.addField("🔗 Przydatne linki:\n", "[[WWW]](" + strona + ")" + "\n" + "[[GitHub]](" + github + ")", true);
     embed.setFooter("© Juby210 & hamster", client.user.avatarURL);
     embed.setTimestamp()
