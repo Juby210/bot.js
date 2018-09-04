@@ -270,7 +270,7 @@ function cmd(message = new Discord.Message(), command, text, text2, args) {
             if(err) {anticrash(message.channel, err); return;}
             var ram = Math.floor(res.memory / 1024 / 1024);
             embed.addField("RAM: (MB)", ram, true);
-            embed.addField("CPU:", Math.floor(res.cpu) + "%", true);
+            embed.addField("CPU:", Math.floor(res.cpu) + "%%", true);
             embed.addField("Użytkownicy:", client.users.size - 1, true);
             embed.addField("Kanały:", client.channels.size, true);
             embed.addField("Serwery:", client.guilds.size, true);
