@@ -12,7 +12,7 @@ module.exports.run = async (client, message, args) => {
             break;
         case "prune":
             embed.addField(`${prefix}prune [ilość wiadomości]`, "Kasuje daną ilość wiadomości z kanału. Maksymalna wartość: 100");
-            embed.addField("Aliasy: clear");
+            embed.addField(`Aliasy:`, "clear");
             embed.setFooter("Wymagane uprawnienia: Zarządzanie wiadomościami");
             break;
         case "userinfo":
