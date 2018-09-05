@@ -10,8 +10,10 @@ module.exports.run = async (client, message, args) => {
         } else {
             var member = message.guild.members.find('id', message.mentions.users.first().id);
             if(member.bannable == true) {
-                member.ban("Zbanowano przez użytkownika: " + message.author.tag);
-                message.channel.send("Zbanowano użytkownika: " + member.user.username);
+                let reason = args.slice(1).join(' ');
+                if(!reason) reason = "brak";
+                member.ban("Zbanowano przez użytkownika: " + message.author.tag + " " + `z powodem: ${reason}`);
+                message.channel.send("Zbanowano użytkownika: " + member.user.username + " " + `z powodem: ${reason}`);
                 message.react("✅");
             } else {
                 message.channel.send("Bot nie ma uprawnień do zbanowania tego użytkownika!");
