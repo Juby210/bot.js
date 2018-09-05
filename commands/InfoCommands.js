@@ -72,11 +72,13 @@ module.exports.run = async (client, message, args) => {
         case "search":
             embed.addField(`${prefix}search <wyszukiwanie>`, "Wyszukuje podaną frazę oraz wyświetla wybór 10 wyników");
             break;
-        case "q":
-            embed.addField(`${prefix}q`, "Pokazuje kolejkę dla serwera");
+        case "queue":
+            embed.addField(`${prefix}queue`, "Pokazuje kolejkę dla serwera");
+            embed.addField(`Aliasy:`, "q");
             break;
         case "clearqueue":
             embed.addField(`${prefix}clearqueue`, "Czyści kolejkę dla serwera");
+            embed.addField(`Aliasy:`, "cq");
             break;
         case "leave":
             embed.addField(`${prefix}leave`, "Bot wychodzi z kanału głosowego");
@@ -96,12 +98,14 @@ module.exports.run = async (client, message, args) => {
             embed.addField(`${prefix}skip`, "Pomija utwór");
             embed.setFooter("Ta komenda działa tylko jeśli bot gra!");
             break;
-        case "vol":
-            embed.addField(`${prefix}vol <głośność>`, "Zmienia głośność");
+        case "volume":
+            embed.addField(`${prefix}volume <głośność>`, "Zmienia głośność");
+            embed.addField(`Aliasy:`, "vol");
             embed.setFooter("Ta komenda działa tylko jeśli bot gra!");
             break;
         case "np":
             embed.addField(`${prefix}np`, "Pokazuje co aktualnie jest odtwarzane");
+            embed.addField(`Aliasy:`, "nowplaying");
             embed.setFooter("Ta komenda działa tylko jeśli bot gra!");
             break;
         case "info":
