@@ -48,7 +48,7 @@ module.exports.run = async (client, message, args) => {
       embed.addField(`MODERACJA (${moderacjan})`, "`" + moderacja + "`", true);
       embed.addField(`WEB (${webn})`, "`" + web + "`", true);
       embed.addField(`MISC (${miscn})`, "`" + misc + "`", true);
-      embed.addField(`MUZYKA (${muzykan+11})`, "`play, pause, skip, join, leave, resume, vol, np, clearqueue, search, q`", true);
+      embed.addField(`MUZYKA (${muzykan})`, "`" + muzyka + "`", true);
       embed.addField("INFORMACJA O KOMENDZIE", "`" + `${prefix}info <komenda>` + "`");
       embed.addBlankField();
       embed.addField("🔗 Przydatne linki:\n", "[[WWW]](" + strona + ")" + "\n" + "[[GitHub]](" + github + ")", true);
@@ -64,14 +64,24 @@ module.exports.help = {
 }
 
 function loadcommands(callback) {
+  var commands = [];
   fs.readdir("./commands/", (err, files) => {
     if(err) console.log(err);
     let jsfile = files.filter(f => f.split(".").pop() === "js");
     if(jsfile.length <= 0) {callback("err"); return;}
-    var commands = [];
   
     jsfile.forEach((f, i) =>{
       let props = require(`./${f}`);
+      commands.push({name:props.help.name, category:props.help.category});
+    });
+  });
+  fs.readdir("./commands/music/", (err, files) => {
+    if(err) console.log(err);
+    let jsfile = files.filter(f => f.split(".").pop() === "js");
+    if(jsfile.length <= 0) {callback("err"); return;}
+  
+    jsfile.forEach((f, i) =>{
+      let props = require(`./music/${f}`);
       commands.push({name:props.help.name, category:props.help.category});
     });
     callback(commands);
