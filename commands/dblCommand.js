@@ -35,7 +35,7 @@ module.exports.run = async (client, message) => {
                     if(user.social.instagram != "") ig = user.social.instagram;
                 } catch(err) {}
             }
-            embed.setDescription(`Użytkownik: ${user.username}#${user.discriminator}\nID: ${user.id}\nAdmin/Mod/Mod strony: ${user.admin}/${user.mod}/${user.webMod}\nBio: ${bio}\nKolor: ${color}\nGithub: ${gh}\nYoutube: ${yt}\nReddit: ${rd}\nTwitter: ${tw}\nInstagram: ${ig}`);
+            embed.setDescription(`Użytkownik: ${user.username}#${user.discriminator}\nID: ${user.id}\nAdmin/Mod/Mod strony: ${user.admin}`.replace("false", "nie").replace("true", "tak") + `/${user.mod}`.replace("false", "nie").replace("true", "tak") + `/${user.webMod}`.replace("false", "nie").replace("true", "tak") + `\nBio: ${bio}\nKolor: ${color}\nGithub: ${gh}\nYoutube: ${yt}\nReddit: ${rd}\nTwitter: ${tw}\nInstagram: ${ig}`);
             embed.setThumbnail(message.mentions.users.first().avatarURL);
             message.channel.send(embed);
         }).catch(err => index.anticrash(message.channel, err, false));
