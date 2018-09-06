@@ -73,6 +73,7 @@ module.exports.setvolume = async (msg, vol) => {
     try{
         dispatchers[msg.guild.id].d.setVolume(parseInt(vol, 10) / 100);
         queuefile.setvolume(msg.guild.id, vol);
+        msg.channel.send(":sound: | Głośność została zmieniona na: **" + vol + "%**")
         msg.react("✅");
     } catch(err) {}
 }
