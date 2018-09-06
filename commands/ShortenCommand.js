@@ -2,6 +2,8 @@ const Discord = require("discord.js");
 const config = require("../config.json");
 const prefix = config.prefix;
 let urls = require("../urls.json");
+const request = require("request");
+var fs = require("fs");
 
 module.exports.run = async (client, message, args) => {
     if(!config.yourls.useyourls) {message.channel.send("Właściciel bota nie skonfigurował skracacza linków."); return;}
