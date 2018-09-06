@@ -31,7 +31,7 @@ module.exports.run = async (client, message, args, member) => {
     }    
     embed.setTitle("Avatar użytkownika:");
     embed.setDescription("**" + member.tag + "**" + "\n" + "[[Bezpośredni link]]" + "(" + member.avatarURL + ")");
-    embed.setImage(member.avatarURL + "?size=1024");
+    embed.setImage(member.avatarURL);
     embed.setFooter("© Juby210 & hamster", client.user.avatarURL);
     embed.setTimestamp()
     message.channel.send(embed);
