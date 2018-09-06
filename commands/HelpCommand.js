@@ -44,17 +44,27 @@ module.exports.run = async (client, message, args) => {
             break;
         }
       });
-      embed.addField(`BASIC (${basicn})`, "`" + basic + "`", true);
-      embed.addField(`MODERACJA (${moderacjan})`, "`" + moderacja + "`", true);
-      embed.addField(`WEB (${webn})`, "`" + web + "`", true);
-      embed.addField(`MISC (${miscn})`, "`" + misc + "`", true);
-      embed.addField(`MUZYKA (${muzykan})`, "`" + muzyka + "`", true);
-      embed.addField("INFORMACJA O KOMENDZIE", "`" + `${prefix}info <komenda>` + "`");
-      embed.addBlankField();
-      embed.addField("🔗 Przydatne linki:\n", "[[WWW]](" + strona + ")" + "\n" + "[[GitHub]](" + github + ")", true);
-      embed.setFooter("© Juby210 & hamster", client.user.avatarURL);
-      embed.setTimestamp()
-      message.channel.send(embed);
+      loadmusiccmd(co2 => {
+        co2.forEach(c2 => {
+          switch(c2.category) {
+            case "MUZYKA":
+              if(muzyka == "") {muzyka = c2.name;} else {muzyka = `${muzyka}, ${c2.name}`}
+              muzykan += 1;
+              break;
+          }
+        });
+        embed.addField(`BASIC (${basicn})`, "`" + basic + "`", true);
+        embed.addField(`MODERACJA (${moderacjan})`, "`" + moderacja + "`", true);
+        embed.addField(`WEB (${webn})`, "`" + web + "`", true);
+        embed.addField(`MISC (${miscn})`, "`" + misc + "`", true);
+        embed.addField(`MUZYKA (${muzykan})`, "`" + muzyka + "`", true);
+        embed.addField("INFORMACJA O KOMENDZIE", "`" + `${prefix}info <komenda>` + "`");
+        embed.addBlankField();
+        embed.addField("🔗 Przydatne linki:\n", "[[WWW]](" + strona + ")" + "\n" + "[[GitHub]](" + github + ")", true);
+        embed.setFooter("© Juby210 & hamster", client.user.avatarURL);
+        embed.setTimestamp()
+        message.channel.send(embed);
+      });
     });
 }
 
@@ -74,7 +84,11 @@ function loadcommands(callback) {
       let props = require(`./${f}`);
       commands.push({name:props.help.name, category:props.help.category});
     });
+    callback(commands);
   });
+}
+function loadmusiccmd(callback) {
+  var commands2 = [];
   fs.readdir("./commands/music/", (err, files) => {
     if(err) console.log(err);
     let jsfile = files.filter(f => f.split(".").pop() === "js");
@@ -82,8 +96,8 @@ function loadcommands(callback) {
   
     jsfile.forEach((f, i) =>{
       let props = require(`./music/${f}`);
-      commands.push({name:props.help.name, category:props.help.category});
+      commands2.push({name:props.help.name, category:props.help.category});
     });
-    callback(commands);
+    callback(commands2);
   });
 }

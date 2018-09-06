@@ -1,9 +1,5 @@
 const Discord = require('discord.js');
-const client = new Discord.Client({
-    clientOptions: {
-        fetchAllMembers: true
-    }
-});
+const client = new Discord.Client({clientOptions: { fetchAllMembers: true }});
 client.commands = new Discord.Collection();
 const yt = require('ytdl-core');
 var youtubeSearch = require('youtube-search');
@@ -31,7 +27,7 @@ fs.readdir("./commands/", (err, files) => {
   
     jsfile.forEach((f, i) =>{
       let props = require(`./commands/${f}`);
-      console.log(clc.green(`${f} zostalo zaladowane!`));
+      console.log(clc.yellow("[/commands/] ") + clc.green(`${f} zostalo zaladowane!`));
       client.commands.set(props.help.name, props);
       client.commands.set(props.help.aliases, props);
     });
@@ -46,7 +42,7 @@ fs.readdir("./commands/dev/", (err, files) => {
   
     jsfile.forEach((f, i) =>{
       let props = require(`./commands/dev/${f}`);
-      console.log(clc.green(`${f} zostalo zaladowane!`));
+      console.log(clc.yellow("[/commands/dev/] ") + clc.green(`${f} zostalo zaladowane!`));
       client.commands.set(props.help.name, props);
     });
 });
@@ -60,7 +56,7 @@ fs.readdir("./commands/music/", (err, files) => {
   
     jsfile.forEach((f, i) =>{
       let props = require(`./commands/music/${f}`);
-      console.log(clc.green(`${f} zostalo zaladowane!`));
+      console.log(clc.yellow("[/commands/music/] ") + clc.green(`${f} zostalo zaladowane!`));
       client.commands.set(props.help.name, props);
       client.commands.set(props.help.aliases, props);
     });
