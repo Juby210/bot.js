@@ -11,7 +11,7 @@ module.exports.run = async (client, message, args) => {
         embed.setTitle("Lista stacji radiowych:");
         var desc = "";
         config.radiolist.forEach(r => desc += `${r.id}. ${r.name}\n`);
-        embed.setDescription(desc + `\n${prefix}radio <numer> - odtwórz radio`);
+        embed.setDescription(desc + `\n${prefix}radio <numer> - odtwórz radio\nUWAGA! Eska i Vox mogą czasem nie działać!`);
         embed.setFooter(`Brakuje stacji radiowych? Napisz do Juby210#5831`);
         message.channel.send(embed);
     } else {

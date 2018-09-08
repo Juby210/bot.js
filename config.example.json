@@ -24,6 +24,14 @@
 		{"id": 5, "name":"OpenFM PrzemsoN", "url":"http://gr-relay-lb.gaduradio.pl/197"},
 		{"id": 6, "name":"Radio Grodno", "url":"http://178.124.203.233:8000/ogg"},
 		{"id": 7, "name":"RMFFM", "url":"http://31.192.216.10:8000/rmf_fm"},
-		{"id": 8, "name":"RMFMaxxx", "url":"http://217.74.72.4:8000/rmf_maxxx"}
+		{"id": 8, "name":"RMFMaxxx", "url":"http://217.74.72.4:8000/rmf_maxxx"},
+		{"id": 9, "name":"Vox FM", "url":"https://juby210.com.pl/radio.php?n=vox-fm"},
+		{"id": 10, "name":"Vox Best Lista", "url":"https://juby210.com.pl/radio.php?n=vox-bestlista"},
+		{"id": 11, "name":"Vox Impreza", "url":"https://juby210.com.pl/radio.php?n=vox-impreza-w-rytmie-hitow"},
+		{"id": 12, "name":"Vox Lata 90", "url":"https://juby210.com.pl/radio.php?n=vox-90"},
+		{"id": 13, "name":"ESKA", "url":"https://juby210.com.pl/radio.php?n=eska-warszawa"},
+		{"id": 14, "name":"ESKA Lublin", "url":"https://juby210.com.pl/radio.php?n=eska-lublin"},
+		{"id": 15, "name":"ESKA Bełchatów", "url":"https://juby210.com.pl/radio.php?n=eska-belchatow"},
+		{"id": 16, "name":"Radio Plus (ESKA)", "url":"https://juby210.com.pl/radio.php?n=radio-plus"}
 	]
 }
