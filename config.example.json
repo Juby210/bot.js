@@ -32,6 +32,12 @@
 		{"id": 13, "name":"ESKA", "url":"https://juby210.com.pl/radio.php?n=eska-warszawa"},
 		{"id": 14, "name":"ESKA Lublin", "url":"https://juby210.com.pl/radio.php?n=eska-lublin"},
 		{"id": 15, "name":"ESKA Bełchatów", "url":"https://juby210.com.pl/radio.php?n=eska-belchatow"},
-		{"id": 16, "name":"Radio Plus (ESKA)", "url":"https://juby210.com.pl/radio.php?n=radio-plus"}
+		{"id": 16, "name":"ESKA Białystok", "url":"https://juby210.com.pl/radio.php?n=eska-bialystok"},
+		{"id": 17, "name":"Radio Plus (ESKA)", "url":"https://juby210.com.pl/radio.php?n=radio-plus"},
+		{"id": 18, "name":"Radio ZET", "url":"http://zetpl1-01.cdn.eurozet.pl:8446/"},
+		{"id": 19, "name":"ZET Party", "url":"http://zetpar-02.cdn.eurozet.pl:8444/"},
+		{"id": 20, "name":"ZET Hits", "url":"http://zethit-01.cdn.eurozet.pl:8428/"},
+		{"id": 21, "name":"ZET Hot", "url":"http://zet.cdn.eurozet.pl/ZETHOT.mp3"},
+		{"id": 22, "name":"ZET Gold", "url":"http://zgl.cdn.eurozet.pl/ZGLHIT.mp3"}
 	]
 }
