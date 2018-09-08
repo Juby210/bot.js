@@ -66,7 +66,7 @@ module.exports.run = async (client, message, args) => {
             embed.addField(`${prefix}urls`, "Pokazuje twoje skrócone linki");
             break;
         case "play":
-            embed.addField(`${prefix}play <link/wyszukiwanie>`, "Odtwarza/Dodaje do kolejki podany link/wyszukanie");
+            embed.addField(`${prefix}play <link/wyszukiwanie>`, "Odtwarza/Dodaje do kolejki podany link/wyszukanie\nMoże to być również link do radia");
             embed.setFooter("Ta komenda działa tylko jeśli bot gra!");
             break;
         case "search":

@@ -34,9 +34,31 @@ module.exports.play = async (msg, song) => {
         if(next == null) {
             queue[msg.guild.id].playing = false;
         } else {
-            require("./player.js").play(msg, next);
+            if(next.id == "radio") {
+                require("./player.js").playr(next.url, msg);
+            } else {
+                require("./player.js").play(msg, next);
+            }
         }
         queuefile.update(queue);
+        return;
+    });
+}
+module.exports.playr = async (text, msg) => {
+    let dispatcher;
+    let queue = queuefile.getqueue;
+    queue[msg.guild.id].playing = true;
+    try {
+        dispatcher = msg.guild.voiceConnection.playStream(text, {passes: 1, bitrate: 256000});
+        dispatcher.setVolume(queue[msg.guild.id].volume / 100);
+    } catch(err) {try{dispatcher.end()} catch(err) {} queue[msg.guild.id].playing = false; /*search(text, msg);*/ index.anticrash(msg.channel, err, false); return;}
+    if(!dispatchers.hasOwnProperty(msg.guild.id)) dispatchers[msg.guild.id] = {};
+    dispatchers[msg.guild.id].d = dispatcher;
+    dispatchers[msg.guild.id].song = {url: text, title: `Radio ${text}`, requester: msg.author.username, duration: "LIVE", id: "radio"};
+    queuefile.update(queue);
+
+    dispatcher.on('error', (err) => {
+        require("./player.js").playr(text, msg);
         return;
     });
 }
@@ -63,10 +85,24 @@ module.exports.resume = async msg => {
         msg.channel.send("Bot aktualinie nie gra.");
     }
 }
-module.exports.skip = async msg => {
+module.exports.skip = async (msg, r = true) => {
     try{
         dispatchers[msg.guild.id].d.end();
-        msg.react("⏩");
+        if(dispatchers[msg.guild.id].song.id == "radio") {
+            queue = queuefile.getqueue;
+            var next = queue[msg.guild.id].songs.shift();
+            if(next == null) {
+                queue[msg.guild.id].playing = false;
+            } else {
+                if(next.id == "radio") {
+                    require("./player.js").playr(next.url, msg);
+                } else {
+                    require("./player.js").play(msg, next);
+                }
+            }
+            queuefile.update(queue);
+        }
+        if(r) msg.react("⏩");
     } catch(err) {}
 }
 module.exports.setvolume = async (msg, vol) => {
@@ -104,6 +140,20 @@ module.exports.np = async (msg, client) => {
                     case "⏩":
                         if(!queue[mes.guild.id].playing) return;
                         dispatcher.end();
+                        if(dispatchers[msg.guild.id].song.id == "radio") {
+                            queue = queuefile.getqueue;
+                            var next = queue[msg.guild.id].songs.shift();
+                            if(next == null) {
+                                queue[msg.guild.id].playing = false;
+                            } else {
+                                if(next.id == "radio") {
+                                    require("./player.js").playr(next.url, msg);
+                                } else {
+                                    require("./player.js").play(msg, next);
+                                }
+                            }
+                            queuefile.update(queue);
+                        }
                         break;
                     }
                 });
