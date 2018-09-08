@@ -70,6 +70,7 @@ module.exports.run = async (client, message, args) => {
             break;
         case "radio":
             embed.addField(`${prefix}radio [numer]`, `Bez numeru wyświetla listę stacji radiowych, z numerem odtwarza numer z listy`);
+			break;
         case "search":
             embed.addField(`${prefix}search <wyszukiwanie>`, "Wyszukuje podaną frazę oraz wyświetla wybór 10 wyników");
             break;
