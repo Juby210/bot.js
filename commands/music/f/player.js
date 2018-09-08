@@ -44,7 +44,7 @@ module.exports.play = async (msg, song) => {
         return;
     });
 }
-module.exports.playr = async (text, msg) => {
+module.exports.playr = async (text, msg, title = null) => {
     let dispatcher;
     let queue = queuefile.getqueue;
     queue[msg.guild.id].playing = true;
@@ -54,11 +54,12 @@ module.exports.playr = async (text, msg) => {
     } catch(err) {try{dispatcher.end()} catch(err) {} queue[msg.guild.id].playing = false; /*search(text, msg);*/ index.anticrash(msg.channel, err, false); return;}
     if(!dispatchers.hasOwnProperty(msg.guild.id)) dispatchers[msg.guild.id] = {};
     dispatchers[msg.guild.id].d = dispatcher;
-    dispatchers[msg.guild.id].song = {url: text, title: `Radio ${text}`, requester: msg.author.username, duration: "LIVE", id: "radio"};
+    if(title == null) title = text;
+    dispatchers[msg.guild.id].song = {url: text, title: `Radio - ${title}`, requester: msg.author.username, duration: "LIVE", id: "radio"};
     queuefile.update(queue);
 
     dispatcher.on('error', (err) => {
-        require("./player.js").playr(text, msg);
+        require("./player.js").playr(text, msg, title);
         return;
     });
 }

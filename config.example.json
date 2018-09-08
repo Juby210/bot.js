@@ -14,5 +14,16 @@
 		"useyourls": false,
 		"apiurl":"url do api yourls",
 		"signature": "klucz do api"
-	}
+	},
+	"radiolist":
+	[
+		{"id": 1, "name":"OpenFM Impreza", "url":"http://gr-relay-lb.gaduradio.pl/2"},
+		{"id": 2, "name":"OpenFM 4FUN", "url":"http://gr-relay-lb.gaduradio.pl/173"},
+		{"id": 3, "name":"OpenFM Fun!", "url":"http://gr-relay-lb.gaduradio.pl/51"},
+		{"id": 4, "name":"OpenFM Top20 PL", "url":"http://gr-relay-lb.gaduradio.pl/97"},
+		{"id": 5, "name":"OpenFM PrzemsoN", "url":"http://gr-relay-lb.gaduradio.pl/197"},
+		{"id": 6, "name":"Radio Grodno", "url":"http://178.124.203.233:8000/ogg"},
+		{"id": 7, "name":"RMFFM", "url":"http://31.192.216.10:8000/rmf_fm"},
+		{"id": 8, "name":"RMFMaxxx", "url":"http://217.74.72.4:8000/rmf_maxxx"}
+	]
 }
