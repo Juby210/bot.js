@@ -14,5 +14,30 @@
 		"useyourls": false,
 		"apiurl":"url do api yourls",
 		"signature": "klucz do api"
-	}
+	},
+	"radiolist":
+	[
+		{"id": 1, "name":"OpenFM Impreza", "url":"http://gr-relay-lb.gaduradio.pl/2"},
+		{"id": 2, "name":"OpenFM 4FUN", "url":"http://gr-relay-lb.gaduradio.pl/173"},
+		{"id": 3, "name":"OpenFM Fun!", "url":"http://gr-relay-lb.gaduradio.pl/51"},
+		{"id": 4, "name":"OpenFM Top20 PL", "url":"http://gr-relay-lb.gaduradio.pl/97"},
+		{"id": 5, "name":"OpenFM PrzemsoN", "url":"http://gr-relay-lb.gaduradio.pl/197"},
+		{"id": 6, "name":"Radio Grodno", "url":"http://178.124.203.233:8000/ogg"},
+		{"id": 7, "name":"RMFFM", "url":"http://31.192.216.10:8000/rmf_fm"},
+		{"id": 8, "name":"RMFMaxxx", "url":"http://217.74.72.4:8000/rmf_maxxx"},
+		{"id": 9, "name":"Vox FM", "url":"https://juby210.com.pl/radio.php?n=vox-fm"},
+		{"id": 10, "name":"Vox Best Lista", "url":"https://juby210.com.pl/radio.php?n=vox-bestlista"},
+		{"id": 11, "name":"Vox Impreza", "url":"https://juby210.com.pl/radio.php?n=vox-impreza-w-rytmie-hitow"},
+		{"id": 12, "name":"Vox Lata 90", "url":"https://juby210.com.pl/radio.php?n=vox-90"},
+		{"id": 13, "name":"ESKA", "url":"https://juby210.com.pl/radio.php?n=eska-warszawa"},
+		{"id": 14, "name":"ESKA Lublin", "url":"https://juby210.com.pl/radio.php?n=eska-lublin"},
+		{"id": 15, "name":"ESKA Bełchatów", "url":"https://juby210.com.pl/radio.php?n=eska-belchatow"},
+		{"id": 16, "name":"ESKA Białystok", "url":"https://juby210.com.pl/radio.php?n=eska-bialystok"},
+		{"id": 17, "name":"Radio Plus (ESKA)", "url":"https://juby210.com.pl/radio.php?n=radio-plus"},
+		{"id": 18, "name":"Radio ZET", "url":"http://zetpl1-01.cdn.eurozet.pl:8446/"},
+		{"id": 19, "name":"ZET Party", "url":"http://zetpar-02.cdn.eurozet.pl:8444/"},
+		{"id": 20, "name":"ZET Hits", "url":"http://zethit-01.cdn.eurozet.pl:8428/"},
+		{"id": 21, "name":"ZET Hot", "url":"http://zet.cdn.eurozet.pl/ZETHOT.mp3"},
+		{"id": 22, "name":"ZET Gold", "url":"http://zgl.cdn.eurozet.pl/ZGLHIT.mp3"}
+	]
 }

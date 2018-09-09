@@ -19,7 +19,23 @@ module.exports.run = async (client, message, args) => {
     if(args[0] == null) {message.reply("jakiś linczek by się przydał"); return;}
     yt.getInfo(args[0], (err, info) => {
         var text = args.slice(0).join(" ");
-        if(err) {player.search(text, message); return;}
+        if(err) {
+            if(text.startsWith("http://") || text.startsWith("https://")) {
+                let queue = queuefile.getqueue;
+                if (queue[message.guild.id].playing) {
+                    /*message.channel.send(`Dodano do kolejki: ${text} - radio`);
+                    queuefile.addsong(message.guild.id, text, `Radio ${text}`, message.author.username, "LIVE", "radio");*/
+                    queue[message.guild.id].songs = [];
+                    player.skip(message, false);
+                    message.channel.send(`Odtwarzanie: ${text} - radio`);
+                    player.playr(text, message);
+                } else {
+                    message.channel.send(`Odtwarzanie: ${text} - radio`);
+                    player.playr(text, message);
+                }
+            } else {player.search(text, message); return;}
+            player.playr(text, message); return;
+        }
         let queue = queuefile.getqueue;
         if (queue[message.guild.id].playing) {
             message.channel.send("Dodano do kolejki: `" + info.title + "` z kanału `" + info.author.name + "`");
