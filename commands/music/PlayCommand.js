@@ -27,10 +27,10 @@ module.exports.run = async (client, message, args) => {
                     queuefile.addsong(message.guild.id, text, `Radio ${text}`, message.author.username, "LIVE", "radio");*/
                     queue[message.guild.id].songs = [];
                     player.skip(message, false);
-                    message.channel.send(`Odtwarzanie: ${text} - radio`);
+                    message.channel.send(`<:mplay:488399581470785557> Odtwarzanie: ${text} - radio`);
                     player.playr(text, message);
                 } else {
-                    message.channel.send(`Odtwarzanie: ${text} - radio`);
+                    message.channel.send(`<:mplay:488399581470785557> Odtwarzanie: ${text} - radio`);
                     player.playr(text, message);
                 }
             } else {player.search(text, message); return;}
@@ -38,12 +38,12 @@ module.exports.run = async (client, message, args) => {
         }
         let queue = queuefile.getqueue;
         if (queue[message.guild.id].playing) {
-            message.channel.send("Dodano do kolejki: `" + info.title + "` z kanału `" + info.author.name + "`");
+            message.channel.send("<:mplus:488416560445390878> Dodano do kolejki: `" + info.title + "` z kanału `" + info.author.name + "`");
             player.getTimestamp(info.video_id, timestamp => {
                 queuefile.addsong(message.guild.id, args[0], info.title, message.author.username, timestamp, info.video_id);
             });
         } else {
-            message.channel.send("Odtwarzanie: `" + info.title + "` z kanału `" + info.author.name + "`");
+            message.channel.send("<:mplay:488399581470785557> Odtwarzanie: `" + info.title + "` z kanału `" + info.author.name + "`");
             player.getTimestamp(info.video_id, timestamp => {
                 player.play(message, {url: args[0], title: info.title, requester: message.author.username, duration: timestamp, id: info.video_id});
             });

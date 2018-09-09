@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const config = require("../../config.json");
 const prefix = config.prefix;
 var queuefile = require("./f/queue.js");
+var index = require("../../index.js");
 
 module.exports.run = async (client, message, args) => {
     let queue = queuefile.getqueue;
@@ -13,7 +14,7 @@ module.exports.run = async (client, message, args) => {
         return;
     }
     bot.voiceChannel.leave();
-    message.react("✅");
+    message.react(index.emojiguild.emojis.get("488416404538785809"));
 }
 
 module.exports.help = {

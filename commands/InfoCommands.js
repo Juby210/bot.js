@@ -65,6 +65,8 @@ module.exports.run = async (client, message, args) => {
         case "urls":
             embed.addField(`${prefix}urls`, "Pokazuje twoje skrócone linki");
             break;
+        case "tag":
+            embed.addField(`${prefix}tag [tag]`, "Sprawdź kto ma tag taki sam jak ty!");
         case "play":
             embed.addField(`${prefix}play <link/wyszukiwanie>`, "Odtwarza/Dodaje do kolejki podany link/wyszukanie\nMoże to być również link do radia");
             break;

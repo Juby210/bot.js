@@ -39,7 +39,7 @@ module.exports.run = async (client, message, args) => {
         let queue = queuefile.getqueue;
         queue[message.guild.id].songs = [];
         player.skip(message, false);
-        message.channel.send("Odtwarzanie: `" + radio.name + "`");
+        message.channel.send("<:mplay:488399581470785557> Odtwarzanie: `" + radio.name + "`");
         player.playr(radio.url, message, radio.name);
     }
 }

@@ -7,6 +7,7 @@ let dispatchers = {};
 const yt = require('ytdl-core');
 var youtubeSearch = require('youtube-search');
 var youtube = require("youtube-api");
+var client = index.client;
 
 module.exports.play = async (msg, song) => {
     let dispatcher;
@@ -70,7 +71,7 @@ module.exports.pause = async msg => {
             msg.channel.send("Odtwarzacz aktualinie nie jest zatrzymany.");
         } else {
             dispatchers[msg.guild.id].d.pause();
-            msg.react("⏸");
+            msg.react(index.emojiguild.emojis.get("488399581957324800"));
         }
     } catch(err) {msg.channel.send("Bot aktualinie nie gra.");}
 }
@@ -78,7 +79,7 @@ module.exports.resume = async msg => {
     try{
         if(dispatchers[msg.guild.id].d.paused) {
             dispatchers[msg.guild.id].d.resume();
-            msg.react("▶");
+            msg.react(index.emojiguild.emojis.get("488399581470785557"));
         } else {
             msg.channel.sned("Odtwarzacz aktualnie nie jest zatrzymany.");
         }
@@ -103,7 +104,7 @@ module.exports.skip = async (msg, r = true) => {
             }
             queuefile.update(queue);
         }
-        if(r) msg.react("⏩");
+        if(r) msg.react(index.emojiguild.emojis.get("488399581965451265"));
     } catch(err) {}
 }
 module.exports.setvolume = async (msg, vol) => {
@@ -111,7 +112,7 @@ module.exports.setvolume = async (msg, vol) => {
         dispatchers[msg.guild.id].d.setVolume(parseInt(vol, 10) / 100);
         queuefile.setvolume(msg.guild.id, vol);
         msg.channel.send(":sound: | Głośność została zmieniona na: **" + vol + "%**")
-        msg.react("✅");
+        msg.react(index.emojiguild.emojis.get("488416404538785809"));
     } catch(err) {}
 }
 module.exports.np = async (msg, client) => {
@@ -173,7 +174,7 @@ module.exports.search = async (text, msg) => {
             if(r.title == r.channelTitle) return;
             let queue = queuefile.getqueue;
             if (queue[msg.guild.id].playing) {
-                msg.channel.send("Dodano do kolejki: `" + r.title + "` z kanału `" + r.channelTitle + "`");
+                msg.channel.send("<:mplus:488416560445390878> Dodano do kolejki: `" + r.title + "` z kanału `" + r.channelTitle + "`");
                 getTimestamp(r.id, timestamp => {
                     queuefile.addsong(msg.guild.id, r.link, r.title, msg.author.username, timestamp, r.id);
                 });
@@ -181,7 +182,7 @@ module.exports.search = async (text, msg) => {
                 getTimestamp(r.id, timestamp => {
                     require("./player.js").play(msg, {url: r.link, title: r.title, requester: msg.author.username, duration: timestamp, id: r.id});
                 });
-                msg.channel.send("Odtwarzanie: `" + r.title + "` z kanału `" + r.channelTitle + "`");
+                msg.channel.send("<:mplay:488399581470785557> Odtwarzanie: `" + r.title + "` z kanału `" + r.channelTitle + "`");
             }
             ok = true;
         });

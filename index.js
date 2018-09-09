@@ -17,6 +17,8 @@ let urls = require("./urls.json");
 var clc = require("cli-colors");
 var queuefile = require('./commands/music/f/queue.js');
 
+module.exports.client = client;
+
 fs.readdir("./commands/", (err, files) => {
     if(err) console.log(err);
     let jsfile = files.filter(f => f.split(".").pop() === "js");
@@ -68,6 +70,7 @@ client.on('ready', () => {
     console.log(clc.cyan(`${client.user.tag} działa`));
     client.user.setStatus(config.status);
     ustaw_status();
+    module.exports.emojiguild = client.guilds.find("id", "488293188247879680");
     client.guilds.forEach(g => {
         if (!queue.hasOwnProperty(g.id)) queue[g.id] = {}, queue[g.id].playing = false, queue[g.id].songs = [], queue[g.id].volume = 100;
         queuefile.update(queue);
@@ -77,7 +80,7 @@ client.on('ready', () => {
 
 client.on('guildCreate', guild => {
     queue = queuefile.getqueue;
-    if (!queue.hasOwnProperty(guild.id)) queue[guild.id] = {}, queue[guild.id].playing = false, queue[guild.id].songs = [], queue[g.id].volume = 100;
+    if (!queue.hasOwnProperty(guild.id)) queue[guild.id] = {}, queue[guild.id].playing = false, queue[guild.id].songs = [], queue[guild.id].volume = 100;
     queuefile.update(queue);
     if (!voiceban.hasOwnProperty(guild.id)) voiceban[guild.id] = {}, voiceban[guild.id].banned = [];
     ustaw_status();
