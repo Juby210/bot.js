@@ -60,7 +60,7 @@ module.exports.run = async (client, message, args) => {
         embed.addField(`MUZYKA (${muzykan})`, "`" + muzyka + "`", true);
         embed.addField("INFORMACJA O KOMENDZIE", "`" + `${prefix}info <komenda>` + "`");
         embed.addBlankField();
-        embed.addField("🔗 Przydatne linki:\n", "[[WWW]](" + strona + ")" + "\n" + "[[GitHub]](" + github + ")", true);
+        embed.addField("🔗 Przydatne linki:\n", "[[WWW]](" + strona + ") - Strona bota." + "\n" + "[[GitHub]](" + github + ") - Kod opensource bota.", true);
         embed.setFooter("© Juby210 & hamster", client.user.avatarURL);
         embed.setTimestamp()
         message.channel.send(embed);
