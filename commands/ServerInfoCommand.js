@@ -23,7 +23,8 @@ module.exports.run = async (client, message, guild) => {
     embed.addField("Region:", guild.region);
     embed.addField("Właściciel:", guild.owner);
     embed.addField("Stworzony:", guild.createdAt);
-    embed.setFooter("ID: " + guild.id)
+    embed.setFooter("© Juby210 & hamster" + " | " +"ID: " + guild.id, client.user.avatarURL);
+    embed.setTimestamp();
 
     message.channel.send(embed);
 }
