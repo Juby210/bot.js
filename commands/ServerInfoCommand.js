@@ -17,7 +17,7 @@ module.exports.run = async (client, message, guild) => {
     embed.setAuthor(`ServerInfo - ${guild.name}`, client.user.avatarURL);
     embed.setThumbnail(icon);
     embed.addField("Użytkowników: [" + guild.memberCount + "]", "Online: " + online + "\nZaraz Wracam (Idle): " + idle + "\nZajęty (Do not Distrub): " + dnd + "\nNiewidoczny (Invisible): " + invisible + "\nBoty: (Bots): " + bots);
-    embed.addField("Kanałów: [" + guild.channels.size + "]", voiceChannels.size + " - Głosowych\n" + textChannels.size + " - Textowych");
+    embed.addField("Kanałów: [" + guild.channels.size + "]", voiceChannels.size + " - Kanałów głosowych\n" + textChannels.size + " - Kanałów textowych");
     embed.addField("Role: [" + guild.roles.size + "]", roleList);
     embed.addField("Weryfikacja:", verificationLevels[message.guild.verificationLevel]);
     embed.addField("Region:", guild.region);
