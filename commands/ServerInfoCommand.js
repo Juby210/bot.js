@@ -10,6 +10,7 @@ module.exports.run = async (client, message, guild) => {
     var dnd = guild.members.filter(m => m.user.presence.status === "dnd").size
     var invisible = guild.members.filter(m => m.user.presence.status === "invisible").size
     var bots = guild.members.filter(m => m.user.bot).size
+    var roleList = guild.roles.sort((a, b) => a.position - b.position).map(role => role.toString()).slice(1).reverse().join(", ")
 
     let icon = guild.iconURL;
     let embed = new Discord.RichEmbed()
@@ -17,7 +18,7 @@ module.exports.run = async (client, message, guild) => {
     embed.setThumbnail(icon);
     embed.addField("Użytkowników: [" + guild.memberCount + "]", "Online: " + online + "\nZaraz Wracam (Idle): " + idle + "\nZajęty (Do not Distrub): " + dnd + "\nNiewidoczny (Invisible): " + invisible + "\nBoty: (Bots): " + bots);
     embed.addField("Kanałów: [" + guild.channels.size + "]", voiceChannels.size + " - Głosowych\n" + textChannels.size + " - Textowych");
-    embed.addField("Role: [" + guild.roles.size + "]", guild.roles.sort((a, b) => a.position - b.position).map(role => role.toString()).slice(1).reverse().join(", "));
+    embed.addField("Role: [" + guild.roles.size + "]", roleList);
     embed.addField("Weryfikacja:", verificationLevels[message.guild.verificationLevel]);
     embed.addField("Region:", guild.region);
     embed.addField("Właściciel:", guild.owner);
