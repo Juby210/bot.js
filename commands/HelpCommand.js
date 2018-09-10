@@ -54,7 +54,7 @@ module.exports.run = async (client, message, args) => {
           }
         });
         var alln = basicn + moderacjan + webn + miscn + muzykan;
-        embed.setTitle(`<:mlist:488406259230310440> Lista komend (${alln})`);
+        embed.setTitle(`<:mlist:488406259230310440> | Lista komend (${alln})`);
         embed.addField(`BASIC (${basicn})`, "`" + basic + "`", true);
         embed.addField(`MODERACJA (${moderacjan})`, "`" + moderacja + "`", true);
         embed.addField(`WEB (${webn})`, "`" + web + "`", true);
