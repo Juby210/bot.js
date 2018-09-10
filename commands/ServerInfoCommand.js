@@ -1,28 +1,28 @@
 const Discord = require("discord.js");
 
 module.exports.run = async (client, message, guild) => {
-    function checkBots(guild) {
-        let botCount = 0;
-        guild.members.forEach(member => {
-          if(member.user.bot) botCount++;
-        });
-        return botCount;
-      }
-
+    var guild = message.guild
     const verificationLevels = ['Brak [None]', 'Niski [Low] (Zweryfikowany Email)', 'Średni [Medium] (Zarejestrowany na discordzie przez 5+ minut)', 'Szalony [Insane] (Zarejestrowany na discordzie przez 10+ minut)', 'Skrajny [Extreme] (Zweryfikowany numer telefonu)'];
+    const textChannels = guild.channels.filter(c => c.type === 'text');
+    const voiceChannels = guild.channels.filter(c => c.type === 'voice');
+    var online = guild.members.filter(m => m.user.presence.status === "online").size
+    var idle = guild.members.filter(m => m.user.presence.status === "idle").size
+    var dnd = guild.members.filter(m => m.user.presence.status === "dnd").size
+    var invisible = guild.members.filter(m => m.user.presence.status === "invisible").size
+    var bots = guild.members.filter(m => m.user.bot).size
 
-    let icon = message.guild.iconURL;
+    let icon = guild.iconURL;
     let embed = new Discord.RichEmbed()
-    embed.setAuthor(`ServerInfo - ${message.guild.name}`, client.user.avatarURL);
+    embed.setAuthor(`ServerInfo - ${guild.name}`, client.user.avatarURL);
     embed.setThumbnail(icon);
-    embed.addField("Użytkowników: ", message.guild.memberCount + " (w tym botów: " + checkBots(message.guild) + ")");
-    embed.addField("Kanałów: [" + message.guild.channels.size + "]", message.guild.channels.filter(m => m.type === 'voice').size + " - Głosowych\n" + message.guild.channels.filter(m => m.type === 'text').size + " - Textowych");
-    embed.addField("Role: [" + message.guild.roles.size + "]", message.guild.roles.sort((a, b) => a.position - b.position).map(role => role.toString()).slice(1).reverse().join(", "));
+    embed.addField("Użytkowników: [" + guild.memberCount + "]", "Online: " + online + "\nZaraz Wracam (Idle): " + idle + "\nZajęty (Do not Distrub): " + dnd + "\nNiewidoczny (Invisible): " + invisible + "\nBoty: (Bots): " + bots);
+    embed.addField("Kanałów: [" + guild.channels.size + "]", voiceChannels.size + " - Głosowych\n" + textChannels.size + " - Textowych");
+    embed.addField("Role: [" + guild.roles.size + "]", guild.roles.sort((a, b) => a.position - b.position).map(role => role.toString()).slice(1).reverse().join(", "));
     embed.addField("Weryfikacja:", verificationLevels[message.guild.verificationLevel]);
-    embed.addField("Region:", message.guild.region);
-    embed.addField("Właściciel:", message.guild.owner);
-    embed.addField("Stworzony:", message.guild.createdAt);
-    embed.setFooter("ID: " + message.guild.id)
+    embed.addField("Region:", guild.region);
+    embed.addField("Właściciel:", guild.owner);
+    embed.addField("Stworzony:", guild.createdAt);
+    embed.setFooter("ID: " + guild.id)
 
     message.channel.send(embed);
 }
