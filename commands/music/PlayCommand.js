@@ -3,52 +3,85 @@ const config = require("../../config.json");
 const prefix = config.prefix;
 var queuefile = require("./f/queue.js");
 var index = require("../../index.js");
-const yt = require('ytdl-core');
-var player = require("./f/player.js");
+const snekfetch = require("snekfetch");
 
 module.exports.run = async (client, message, args) => {
+    if(args[0] == null) {message.reply("jakiś linczek by się przydał"); return;}
+    let [...track] = args;
+    track = track.join(" ");
+    var song;
+    var ok = false;
+    await getSong(track, async s => {
+        if(ok) return;
+        if(s.loadType == "NO_MATCHES") {
+            var zn = false;
+            await getSong(`ytsearch:${track}`, async songs => {
+                songs.tracks.forEach(async e => {
+                    if(zn) return;
+                    song = e;
+                    zn = true;
+                    await play(e, message, client);
+                });
+            });
+            if(!zn) {
+                return message.channel.send("Nie znaleziono.");
+            }
+        } else {
+            s.tracks.forEach(async cos => {
+                song = cos;
+                await play(cos, message, client);
+            });
+        }
+        ok = true;
+    });
+}
+
+async function play(song, message, client) {
     var vChannel = message.member.voiceChannel;
     if(vChannel == null) {
         message.reply("najpierw wejdź na kanał głosowy!");
         return;
-    } else {
-        if (message.guild.member(client.user).voiceChannel != vChannel) {
-            vChannel.join().catch(err => index.anticrash(message.channel, err));
-        }
     }
-    if(args[0] == null) {message.reply("jakiś linczek by się przydał"); return;}
-    yt.getInfo(args[0], (err, info) => {
-        var text = args.slice(0).join(" ");
-        if(err) {
-            if(text.startsWith("http://") || text.startsWith("https://")) {
-                let queue = queuefile.getqueue;
-                if (queue[message.guild.id].playing) {
-                    /*message.channel.send(`Dodano do kolejki: ${text} - radio`);
-                    queuefile.addsong(message.guild.id, text, `Radio ${text}`, message.author.username, "LIVE", "radio");*/
-                    queue[message.guild.id].songs = [];
-                    player.skip(message, false);
-                    message.channel.send(`<:mplay:488399581470785557> Odtwarzanie: ${text} - radio`);
-                    player.playr(text, message);
-                } else {
-                    message.channel.send(`<:mplay:488399581470785557> Odtwarzanie: ${text} - radio`);
-                    player.playr(text, message);
-                }
-            } else {player.search(text, message); return;}
-            player.playr(text, message); return;
-        }
-        let queue = queuefile.getqueue;
-        if (queue[message.guild.id].playing) {
-            message.channel.send("<:mplus:488416560445390878> Dodano do kolejki: `" + info.title + "` z kanału `" + info.author.name + "`");
-            player.getTimestamp(info.video_id, timestamp => {
-                queuefile.addsong(message.guild.id, args[0], info.title, message.author.username, timestamp, info.video_id);
-            });
+    let queue = queuefile.getqueue;
+    const player = await client.player.join({
+        guild: message.guild.id,
+        channel: message.member.voiceChannel.id,
+        host: config.lavalink.host
+    }, { selfdeaf: true });
+    if (!player) throw "No player found...";
+    if(queue[message.guild.id].playing) {
+        queuefile.addsong(message.guild.id, song.track, song.info.uri, song.info.title, song.info.length, song.info.author, message.author.username);
+        message.channel.send("<:mplus:488416560445390878> | Dodano do kolejki: `" + song.info.title + "` z **" + song.info.author + "**");
+    } else {
+        player.play(song.track);
+        queue[message.guild.id].playing = true;
+        queuefile.song(message.guild.id, song.info.title, song.info.author, song.info.length, message.author.username, song.info.uri, song.track, Date.now());
+        message.channel.send("<:mplay:488399581470785557> | Odtwarzanie: `" + song.info.title + "` z **" + song.info.author + "**");
+    }
+    player.once("error", console.error);
+    player.once("end", data => {
+        var next = queue[message.guild.id].songs.shift();
+        if(next == null) {
+            queue[message.guild.id].playing = false;
         } else {
-            message.channel.send("<:mplay:488399581470785557> Odtwarzanie: `" + info.title + "` z kanału `" + info.author.name + "`");
-            player.getTimestamp(info.video_id, timestamp => {
-                player.play(message, {url: args[0], title: info.title, requester: message.author.username, duration: timestamp, id: info.video_id});
-            });
+            setTimeout(() => {
+                player.play(next.track);
+                queuefile.song(message.guild.id, next.title, next.channel, next.length, next.requester, next.uri, song.track, Date.now());
+            }, 400);
         }
+        return;
     });
+}
+
+async function getSong(string, callback) {
+    const res = await snekfetch.get(`http://${config.lavalink.host}:${config.lavalink.restport}/loadtracks?identifier=${string}`)
+        .set("Authorization", config.lavalink.password)
+        .catch(err => {
+            console.error(err);
+            return null;
+        });
+    if (!res) throw "There was an error, try again";
+    callback(res.body);
 }
 
 module.exports.help = {

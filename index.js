@@ -1,9 +1,26 @@
 const Discord = require('discord.js');
-const client = new Discord.Client({clientOptions: { fetchAllMembers: true }});
+const { PlayerManager } = require("discord.js-lavalink");
+class MusicClient extends Discord.Client {
+
+    constructor(options) {
+        super(options);
+
+        this.player = null;
+
+        this.once("ready", this._ready.bind(this));
+    }
+
+    _ready() {
+        this.player = new PlayerManager(this, [{ host: config.lavalink.host, port: config.lavalink.port, region: "eu-central", password: config.lavalink.password }], {
+            user: this.user.id,
+            shards: 1
+        });
+    }
+
+}
+
+const client = new MusicClient();
 client.commands = new Discord.Collection();
-const yt = require('ytdl-core');
-var youtubeSearch = require('youtube-search');
-var youtube = require("youtube-api");
 var fs = require("fs");
 let voiceban = require("./voiceban.json");
 const config = require("./config.json");
@@ -70,9 +87,9 @@ client.on('ready', () => {
     console.log(clc.cyan(`${client.user.tag} działa`));
     client.user.setStatus(config.status);
     ustaw_status();
-    module.exports.emojiguild = client.guilds.find("id", "488293188247879680");
+    module.exports.emojiguild = client.guilds.get("488293188247879680");
     client.guilds.forEach(g => {
-        if (!queue.hasOwnProperty(g.id)) queue[g.id] = {}, queue[g.id].playing = false, queue[g.id].songs = [], queue[g.id].volume = 100;
+        if (!queue.hasOwnProperty(g.id)) queue[g.id] = {}, queue[g.id].playing = false, queue[g.id].songs = [], queue[g.id].song = {}, queue[g.id].volume = 100;
         queuefile.update(queue);
         if (!voiceban.hasOwnProperty(g.id)) voiceban[g.id] = {}, voiceban[g.id].banned = [];
     });
@@ -80,7 +97,7 @@ client.on('ready', () => {
 
 client.on('guildCreate', guild => {
     queue = queuefile.getqueue;
-    if (!queue.hasOwnProperty(guild.id)) queue[guild.id] = {}, queue[guild.id].playing = false, queue[guild.id].songs = [], queue[guild.id].volume = 100;
+    if (!queue.hasOwnProperty(guild.id)) queue[guild.id] = {}, queue[guild.id].playing = false, queue[guild.id].songs = [], queue[guild.id].song = {}, queue[guild.id].volume = 100;
     queuefile.update(queue);
     if (!voiceban.hasOwnProperty(guild.id)) voiceban[guild.id] = {}, voiceban[guild.id].banned = [];
     ustaw_status();
@@ -196,7 +213,7 @@ function anticrash(chan, err, sendToOwner = true) {
     console.log("AntiCrash:");
     console.log(err);
     var embed = new Discord.RichEmbed();
-    embed.setAuthor(`${client.user.username} - AntiCrash`);
+    embed.setAuthor(`${client.user.username} - <:merror:489081457973919744> AntiCrash`);
     embed.setDescription(err);
     embed.setFooter(`Jeśli chcesz uniknąć tego błędu w przyszłości zgłoś go do: Juby210#5831`);
     embed.setColor("#FF0000");
@@ -214,7 +231,7 @@ client.on("error", err => {
     var owner = client.users.find("id", config.ownerid);
     if(owner == undefined) {return;}
     var embed = new Discord.RichEmbed();
-    embed.setAuthor(`${client.user.username} - AntiCrash`);
+    embed.setAuthor(`${client.user.username} - <:merror:489081457973919744> AntiCrash`);
     embed.setDescription(err);
     embed.setFooter(`Jeśli chcesz uniknąć tego błędu w przyszłości zgłoś go do: Juby210#5831`);
     embed.addField(err.path, err.method);

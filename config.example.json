@@ -4,7 +4,13 @@
     "ownerid":"twoje id z discorda",
     "devid": "id developera",
     "status":"online",
-    "prefix":"^",
+	"prefix":"^",
+	"lavalink":{
+		"host": "localhost",
+		"port": 80,
+		"restport": 2333,
+		"password": "pass"
+	},
     "dbl":{
         "usedbl": false, 
         "token": "token z discordbots.org",

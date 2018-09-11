@@ -2,6 +2,7 @@ let queue = {};
 
 module.exports.getqueue = queue;
 module.exports.getsongs = async (gid, callback) => callback(queue[gid].songs);
-module.exports.addsong = async (gid, url, title, requester, duration, id) => queue[gid].songs.push({url: url, title: title, requester: requester, duration: duration, id: id});
+module.exports.addsong = async (gid, track, url, title, length, channel, requester) => queue[gid].songs.push({track: track, url: url, title: title, length: length, channel: channel, requester: requester});
 module.exports.setvolume = async (gid, vol) => queue[gid].volume = parseInt(vol, 10);
+module.exports.song = async (gid, title, channel, length, requester, url, track, dat) => queue[gid].song = {title: title, channel: channel, length: length, requester: requester, url: url, track: track, date: dat};
 module.exports.update = async newq => queue = newq;

@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const config = require("../../config.json");
 const prefix = config.prefix;
 var queuefile = require("./f/queue.js");
-var player = require("./f/player.js");
+const snekfetch = require("snekfetch");
 
 module.exports.run = async (client, message, args) => {
     if(args[0] == null) {
@@ -31,17 +31,47 @@ module.exports.run = async (client, message, args) => {
         if(vChannel == null) {
             message.reply("najpierw wejdź na kanał głosowy!");
             return;
-        } else {
-            if (message.guild.member(client.user).voiceChannel != vChannel) {
-                vChannel.join().catch(err => index.anticrash(message.channel, err));
-            }
         }
+        const player = await client.player.join({
+            guild: message.guild.id,
+            channel: vChannel.id,
+            host: config.lavalink.host
+        }, { selfdeaf: true });
         let queue = queuefile.getqueue;
         queue[message.guild.id].songs = [];
-        player.skip(message, false);
-        message.channel.send("<:mplay:488399581470785557> Odtwarzanie: `" + radio.name + "`");
-        player.playr(radio.url, message, radio.name);
+        message.channel.send("<:mplay:488399581470785557> | Odtwarzanie: `" + radio.name + "`");
+        await getSong(radio.url, async s => {
+            s.tracks.forEach(cos => {
+                player.play(cos.track);
+                queue[message.guild.id].playing = true;
+                queuefile.song(message.guild.id, `Radio: ${radio.name}`, cos.info.author, cos.info.length, message.author.username, cos.info.uri, cos.track, Date.now());
+            });
+        });
+        player.once("error", console.error);
+        player.once("end", data => {
+            var next = queue[message.guild.id].songs.shift();
+            if(next == null) {
+                queue[message.guild.id].playing = false;
+            } else {
+                setTimeout(() => {
+                    player.play(next.track);
+                    queuefile.song(message.guild.id, next.title, next.channel, next.length, next.requester, next.uri, song.track, Date.now());
+                }, 400);
+            }
+            return;
+        });
     }
+}
+
+async function getSong(string, callback) {
+    const res = await snekfetch.get(`http://${config.lavalink.host}:${config.lavalink.restport}/loadtracks?identifier=${string}`)
+        .set("Authorization", config.lavalink.password)
+        .catch(err => {
+            console.error(err);
+            return null;
+        });
+    if (!res) throw "There was an error, try again";
+    callback(res.body);
 }
 
 module.exports.help = {

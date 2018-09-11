@@ -3,6 +3,7 @@ const config = require("../../config.json");
 const prefix = config.prefix;
 
 module.exports.run = async (client, message, args) => {
+	var text = args.slice(0).join(" ");
     if(message.author.id == config.ownerid) {
         client.user.setUsername(text).then(message.react("✅"));
     } else {

@@ -10,7 +10,12 @@ module.exports.run = async (client, message, args) => {
         return;
     } else {
         if (message.guild.member(client.user).voiceChannel != vChannel) {
-            vChannel.join().then(() => message.react("✅")).catch(err => index.anticrash(message.channel, err));
+            await client.player.join({
+                guild: message.guild.id,
+                channel: vChannel.id,
+                host: config.lavalink.host
+            }, { selfdeaf: true });
+            message.react(index.emojiguild.emojis.get("488416404538785809"));
         }
     }
 }
