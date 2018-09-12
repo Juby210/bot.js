@@ -66,7 +66,7 @@ module.exports.run = async (client, message, args) => {
                         } else {
                             setTimeout(() => {
                                 player.play(next.track);
-                                queuefile.song(message.guild.id, next.title, next.channel, next.length, next.requester, next.uri, song.track, Date.now());
+                                queuefile.song(message.guild.id, next.title, next.channel, next.length, next.requester, next.uri, next.track, Date.now());
                             }, 400);
                         }
                         return;
