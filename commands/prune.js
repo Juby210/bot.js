@@ -18,6 +18,7 @@ module.exports.run = async (client, message, args) => {
             const wartosc = parseInt(args[0], 10);
             message.channel.fetchMessages({limit: wartosc})
             .then(messages => {
+            message.channel.bulkDelete(1);
             message.channel.bulkDelete(wartosc);
             message.reply("Usunięto " + wartosc + " wiadomosci")
             .then(message => {
