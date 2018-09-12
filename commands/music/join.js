@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const config = require("../../config.json");
 const prefix = config.prefix;
-const index = require("../../index.js");
+const index = require("../..");
 
 module.exports.run = async (client, message, args) => {
     var vChannel = message.member.voiceChannel;
