@@ -32,9 +32,10 @@ module.exports.run = async (client, message, args) => {
             message.reply("najpierw wejdź na kanał głosowy!");
             return;
         }
-        const player = await client.player.join({
+        var player = await client.player.get(message.guild.id);
+        if (!player) player = await client.player.join({
             guild: message.guild.id,
-            channel: vChannel.id,
+            channel: message.member.voiceChannel.id,
             host: config.lavalink.host
         }, { selfdeaf: true });
         let queue = queuefile.getqueue;
@@ -47,7 +48,7 @@ module.exports.run = async (client, message, args) => {
                 queuefile.song(message.guild.id, `Radio: ${radio.name}`, cos.info.author, cos.info.length, message.author.username, cos.info.uri, cos.track, Date.now());
             });
         });
-        player.once("error", console.error);
+        player.once("error", err => message.channel.send(err.error));
         player.once("end", data => {
             var next = queue[message.guild.id].songs.shift();
             if(next == null) {

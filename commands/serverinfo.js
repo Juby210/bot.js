@@ -17,7 +17,7 @@ module.exports.run = async (client, message, guild) => {
     let embed = new Discord.RichEmbed()
     embed.setAuthor(`ServerInfo - ${guild.name}`, client.user.avatarURL);
     embed.setThumbnail(icon);
-    embed.addField("Użytkowników [" + guild.memberCount + "]:", "Online: " + online + "\nZaraz Wracających (Idle): " + idle + "\nZajętych (Do not Distrub): " + dnd + "\nNiewidocznych (Invisible): " + invisible + "\nNiedostępnych (Offline): " + offline + "\nBoty: " + bots);
+    embed.addField("Użytkowników [" + guild.memberCount + "]:", "Online: " + online + "\nZaraz Wracających (Idle): " + idle + "\nZajętych (Do not Distrub): " + dnd + "\nNiedostępnych (Offline): " + offline + "\nBoty: " + bots);
     embed.addField("Kanałów [" + guild.channels.size + "]:", voiceChannels.size + " - Kanałów głosowych\n" + textChannels.size + " - Kanałów textowych");
     embed.addField("Role [" + guild.roles.size + "]:", roleList);
     embed.addField("Weryfikacja:", verificationLevels[guild.verificationLevel]);

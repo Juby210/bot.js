@@ -40,7 +40,8 @@ module.exports.run = async (client, message, args) => {
                         message.reply("najpierw wejdź na kanał głosowy!");
                         return;
                     }
-                    const player = await client.player.join({
+                    var player = await client.player.get(message.guild.id);
+                    if (!player) player = await client.player.join({
                         guild: message.guild.id,
                         channel: message.member.voiceChannel.id,
                         host: config.lavalink.host
@@ -48,7 +49,7 @@ module.exports.run = async (client, message, args) => {
                     zn = true;
                     collector.stop();
                     let queue = queuefile.getqueue;
-                    if (queue[m.guild.id].playing) {
+                    if (player.playing) {
                         queuefile.addsong(message.guild.id, song.track, song.info.uri, song.info.title, song.info.length, song.info.author, message.author.username);
                         message.channel.send("<:mplus:488416560445390878> | Dodano do kolejki: `" + song.info.title + "` z **" + song.info.author + "**");
                     } else {
@@ -57,7 +58,7 @@ module.exports.run = async (client, message, args) => {
                         queuefile.song(message.guild.id, song.info.title, song.info.author, song.info.length, message.author.username, song.info.uri, song.track, Date.now());
                         message.channel.send("<:mplay:488399581470785557> | Odtwarzanie: `" + song.info.title + "` z **" + song.info.author + "**");
                     }
-                    player.once("error", console.error);
+                    player.once("error", err => message.channel.send(err.error));
                     player.once("end", data => {
                         var next = queue[message.guild.id].songs.shift();
                         if(next == null) {

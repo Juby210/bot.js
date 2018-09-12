@@ -14,6 +14,7 @@ module.exports.run = async (client, message, args) => {
     const embed = new Discord.RichEmbed;
     embed.setTitle(`Kolejka serwera ${message.guild.name}:`);
     tosend.forEach(e => {
+        if(e.c >= 26) {embed.setFooter("Cała kolejka się nie zmieściła ;d"); return;}
         var length = e.length;
         formatlength(e.length, nlen => length = nlen);
         embed.addField(`${e.c}. ${e.title}`, `Długość: ${length} | Dodano przez: ${e.requester}`);

@@ -11,7 +11,6 @@ module.exports.run = async (client, message, args) => {
     }
     const player = client.player.get(message.guild.id);
     player.volume(args[0]);
-    queuefile.setvolume(args[0]);
     message.channel.send(":sound: | Głośność została zmieniona na: **" + args[0] + "%**");
 }
 

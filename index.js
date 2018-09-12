@@ -116,19 +116,6 @@ function ustaw_status() {
 }
 
 client.on("voiceStateUpdate", (oldMem, newMem) => {
-    var vChann = oldMem.voiceChannel;
-    if (oldMem.guild.voiceConnection) {
-        if (vChann == oldMem.guild.voiceConnection.channel) {
-            if (vChann.members.size == 1) {
-                setTimeout(() => {
-                    if (oldMem.guild.voiceConnection.channel.members.size == 1) {
-                        oldMem.guild.voiceConnection.channel.leave();
-                        queuefile.setvolume(oldMem.guild.id, 100);
-                    }
-                }, 300000); //300000 ms = 5 min
-            }
-        }
-    }
     if(lock) return;
     var vChannel = newMem.voiceChannel;
     if(vChannel == null) return;
