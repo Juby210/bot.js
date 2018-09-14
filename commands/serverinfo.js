@@ -8,7 +8,6 @@ module.exports.run = async (client, message, guild) => {
     var online = guild.members.filter(m => m.user.presence.status === "online").size
     var idle = guild.members.filter(m => m.user.presence.status === "idle").size
     var dnd = guild.members.filter(m => m.user.presence.status === "dnd").size
-    var invisible = guild.members.filter(m => m.user.presence.status === "invisible").size
     var offline = guild.members.filter(m => m.user.presence.status === "offline").size
     var bots = guild.members.filter(m => m.user.bot).size
     var roleList = guild.roles.sort((a, b) => a.position - b.position).map(role => role.toString()).slice(1).reverse().join(", ")
