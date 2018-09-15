@@ -2,6 +2,10 @@ config.json
 node_modules/
 *.bat
 lavalinkserver/
+# ----------------------------------- #
+# ----- DLA DEBUGU W VISUAL STUDIO ----- #
+# ----------------------------------- #
+.vscode/launch.json
 
 
 # ----------------------------------- #
