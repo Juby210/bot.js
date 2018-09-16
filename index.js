@@ -32,68 +32,20 @@ let reqV = config.dbl.requireVote;
 const request = require('request');
 let urls = require("./urls.json");
 var clc = require("cli-colors");
-var queuefile = require('./commands/music/f/queue.js');
+var queuefile = require('./commands/music/m/queue.js');
+require('./events/eventLoader')(client);
 
 module.exports.client = client;
 
-fs.readdir("./commands/", (err, files) => {
-    if(err) console.log(err);
-    let jsfile = files.filter(f => f.split(".").pop() === "js");
-    if(jsfile.length <= 0){
-      console.log(clc.red("Nie znaleziono komend w /commands/"));
-      return;
+fs.readdirSync('./commands/').forEach(category => {
+    const commandFiles = fs.readdirSync(`./commands/${category}`).filter(file => file.endsWith('.js'));
+    for (const file of commandFiles) {
+        const command = require(`./commands/${category}/${file}`);
+        console.log(`#LOADED ./commands/${category}/${file}`);
+        client.commands.set(command.name, command, category);
     }
-  
-    jsfile.forEach((f, i) =>{
-      let props = require(`./commands/${f}`);
-      console.log(clc.yellow("[/commands/] ") + clc.green(`${f} zostalo zaladowane!`));
-      client.commands.set(props.help.name, props);
-      client.commands.set(props.help.aliases, props);
-    });
-  });
-fs.readdir("./commands/dev/", (err, files) => {
-    if(err) console.log(err);
-    let jsfile = files.filter(f => f.split(".").pop() === "js");
-    if(jsfile.length <= 0){
-      console.log(clc.red("Nie znaleziono komend w /commands/dev/"));
-      return;
-    }
-  
-    jsfile.forEach((f, i) =>{
-      let props = require(`./commands/dev/${f}`);
-      console.log(clc.yellow("[/commands/dev/] ") + clc.green(`${f} zostalo zaladowane!`));
-      client.commands.set(props.help.name, props);
-    });
 });
-fs.readdir("./commands/music/", (err, files) => {
-    if(err) console.log(err);
-    let jsfile = files.filter(f => f.split(".").pop() === "js");
-    if(jsfile.length <= 0){
-      console.log(clc.red("Nie znaleziono komend w /commands/music/"));
-      return;
-    }
-  
-    jsfile.forEach((f, i) =>{
-      let props = require(`./commands/music/${f}`);
-      console.log(clc.yellow("[/commands/music/] ") + clc.green(`${f} zostalo zaladowane!`));
-      client.commands.set(props.help.name, props);
-      client.commands.set(props.help.aliases, props);
-    });
-});
-
 let queue = queuefile.getqueue;
-
-client.on('ready', () => {
-    console.log(clc.cyan(`${client.user.tag} działa`));
-    client.user.setStatus(config.status);
-    ustaw_status();
-    module.exports.emojiguild = client.guilds.get("488293188247879680");
-    client.guilds.forEach(g => {
-        if (!queue.hasOwnProperty(g.id)) queue[g.id] = {}, queue[g.id].playing = false, queue[g.id].songs = [], queue[g.id].song = {}, queue[g.id].volume = 100;
-        queuefile.update(queue);
-        if (!voiceban.hasOwnProperty(g.id)) voiceban[g.id] = {}, voiceban[g.id].banned = [];
-    });
-});
 
 client.on('guildCreate', guild => {
     queue = queuefile.getqueue;
