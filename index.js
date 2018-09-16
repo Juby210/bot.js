@@ -36,22 +36,20 @@ var queuefile = require('./commands/music/m/queue.js');
 require('./events/eventLoader')(client);
 
 module.exports.client = client;
-
 fs.readdirSync('./commands/').forEach(category => {
-    const commandFiles = fs.readdirSync(`./commands/${category}`).filter(file => file.endsWith('.js'));
-    for (const file of commandFiles) {
-        const command = require(`./commands/${category}/${file}`);
+    const commandFile = fs.readdirSync(`./commands/${category}`).filter(file => file.endsWith('.js'));
+    for (const file of commandFile) {
+        const props = require(`./commands/${category}/${file}`);
         console.log(`#LOADED ./commands/${category}/${file}`);
-        client.commands.set(command.name, command, category);
+        client.commands.set(props.help.name, props, category);
     }
 });
+
 let queue = queuefile.getqueue;
 
+/// EVENTY ///
+
 client.on('guildCreate', guild => {
-    queue = queuefile.getqueue;
-    if (!queue.hasOwnProperty(guild.id)) queue[guild.id] = {}, queue[guild.id].playing = false, queue[guild.id].songs = [], queue[guild.id].song = {}, queue[guild.id].volume = 100;
-    queuefile.update(queue);
-    if (!voiceban.hasOwnProperty(guild.id)) voiceban[guild.id] = {}, voiceban[guild.id].banned = [];
     ustaw_status();
 });
 
@@ -59,29 +57,20 @@ client.on('guildDelete', guild => {
     ustaw_status();
 });
 
-function ustaw_status() {
-    if (client.guilds.size == 1) {
-        client.user.setActivity(`testowanie na 1 serwerze | Prefix: ${prefix}`, { type: 'WATCHING' });
-    } else {
-        client.user.setActivity(`testowanie na ${client.guilds.size} serwerach | Prefix: ${prefix}`, { type: 'WATCHING' });
-    }
-}
-
-client.on("voiceStateUpdate", (oldMem, newMem) => {
-    if(lock) return;
-    var vChannel = newMem.voiceChannel;
-    if(vChannel == null) return;
-    var zn = false;
-    voiceban[newMem.guild.id].banned.forEach(ban => {
-        if(ban.id == newMem.user.id) zn = true;
-    });
-    if(!zn) return;
-    newMem.guild.createChannel("Kick", "voice").then(vChan => {
-        newMem.setVoiceChannel(vChan).then(mem => vChan.delete());
-    }).catch(err => anticrash(null, err));
+client.on('ready', client => {
+    ustaw_status();
 });
 
-client.on("message", message => {
+///KONIEC EVENTÓW - RESZTA W KATALOGU: /events/ ///
+
+function ustaw_status() {
+    if (client.guilds.size == 1) {
+        client.user.setPresence({ game: {name: `${prefix}help | testowane na 1 serwerze`, type: 'WATCHING' }});
+    } else {
+        client.user.setPresence({ game: {name: `${prefix}help | testowane na ${client.guilds.size} serwerach`, type: 'WATCHING' }});
+    }
+}
+client.on('message', message => {
     if(message.author.bot) return;
     if(message.author.id != config.ownerid) {
         if(lock) return;
@@ -177,5 +166,4 @@ client.on("error", err => {
     embed.setColor("#FF0000");
     owner.send(embed);
 });
-
 client.login(config.token);
