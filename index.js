@@ -32,7 +32,7 @@ let reqV = config.dbl.requireVote;
 const request = require('request');
 let urls = require("./urls.json");
 var clc = require("cli-colors");
-var queuefile = require('./commands/music/m/queue.js');
+var queuefile = require('./commands/muzyka/m/queue.js');
 require('./events/eventLoader')(client);
 
 module.exports.client = client;
@@ -46,31 +46,23 @@ fs.readdirSync('./commands/').forEach(category => {
 });
 
 let queue = queuefile.getqueue;
-
-/// EVENTY ///
-
-client.on('guildCreate', guild => {
-    ustaw_status();
-});
+module.exports.client = client;
 
 client.on('guildDelete', guild => {
-    ustaw_status();
+    ustaw_status(client);
 });
 
-client.on('ready', client => {
-    ustaw_status();
-});
-
-///KONIEC EVENTÓW - RESZTA W KATALOGU: /events/ ///
-
-function ustaw_status() {
-    if (client.guilds.size == 1) {
-        client.user.setPresence({ game: {name: `${prefix}help | testowane na 1 serwerze`, type: 'WATCHING' }});
-    } else {
-        client.user.setPresence({ game: {name: `${prefix}help | testowane na ${client.guilds.size} serwerach`, type: 'WATCHING' }});
-    }
+module.exports.ustaw_status = client => ustaw_status(client);
+function ustaw_status(client = new MusicClient()) {
+    try{
+        if (client.guilds.size == 1) {
+            client.user.setPresence({ game: {name: `${prefix}help | 1 serwer`, type: 'WATCHING' }});
+        } else {
+            client.user.setPresence({ game: {name: `${prefix}help | ${client.guilds.size} serwerów`, type: 'WATCHING' }});
+        }
+    } catch(err) {}
 }
-client.on('message', message => {
+/*client.on('message', message => {
     if(message.author.bot) return;
     if(message.author.id != config.ownerid) {
         if(lock) return;
@@ -111,7 +103,7 @@ client.on('message', message => {
     } else {
         if(commandfile) commandfile.run(client,message,args);
     }
-});
+});*/
 
 client.on("message", message => {
     if (!message.content.startsWith(prefix)) return;

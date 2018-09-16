@@ -1,8 +1,8 @@
 const Discord = require('discord.js');
-const client = new Discord.Client();
 const rqEvent = (event) => require(`./${event}`);
 module.exports = client => {
   client.on('ready', () => rqEvent('ready')(client));
-  client.on('guildCreate', () => rqEvent('guildCreate')(guild));
-  client.on('voiceStateUpdate', () => rqEvent('voiceStateUpdate')(oldMem, newMem));
+  client.on('guildCreate', guild => rqEvent('guildCreate')(guild));
+  client.on('voiceStateUpdate', (oldMem, newMem) => rqEvent('voiceStateUpdate')(oldMem, newMem));
+  client.on('message', message => rqEvent('message')(message, client));
 };

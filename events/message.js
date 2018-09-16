@@ -1,14 +1,12 @@
 const Discord = require('discord.js');
-const client = new Discord.Client();
 const config = require("../config.json");
 const prefix = config.prefix;
 const DBL = require("dblapi.js");
 var index = require("../index.js")
-const dbl = new DBL(config.dbl.token, client);
 let reqV = config.dbl.requireVote;
 var lock = false;
 
-module.exports = message => {
+module.exports = (message, client) => {
     if(message.author.bot) return;
     if(message.author.id != config.ownerid) {
         if(lock) return;
@@ -19,14 +17,16 @@ module.exports = message => {
         }
     }
     if (!message.content.startsWith(prefix)) return;
+    const dbl = new DBL(config.dbl.token, client);
 
     let messageArray = message.content.split(" ");
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
     let cmod = messageArray[0];
+    let commandfile = client.commands.get(cmod.slice(prefix.length));
 
     if(config.dbl.usedbl) {
-        if (!reqV.hasOwnProperty(command)) {if(index.commandfile) index.commandfile.run(client,message,args);} else {
+        if (!reqV.hasOwnProperty(command)) {if(commandfile) commandfile.run(client,message,args);} else {
             if(reqV[command] == true) {
                 dbl.hasVoted(message.author.id).then(v => {
                     if(!v) {
@@ -38,14 +38,15 @@ module.exports = message => {
                         message.channel.send(embed);
                         return;
                     } else {
-                        if(index.commandfile) index.commandfile.run(client,message,args);
+                        if(commandfile) commandfile.run(client,message,args);
                     }
                 }).catch(err => anticrash(message.channel, err));
             } else {
-                if(index.commandfile) index.commandfile.run(client,message,args);
+                if(commandfile) commandfile.run(client,message,args);
             }
         }
     } else {
-        if(index.commandfile) index.commandfile.run(client,message,args);
+        
+        if(commandfile) commandfile.run(client,message,args);
     }
 }

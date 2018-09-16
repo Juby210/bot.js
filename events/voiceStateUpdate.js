@@ -1,5 +1,7 @@
 let voiceban = require("../voiceban.json");
 var lock = false;
+var index = require("../index.js");
+
 module.exports = (oldMem, newMem) => {
     if(lock) return;
     var vChannel = newMem.voiceChannel;
@@ -11,5 +13,5 @@ module.exports = (oldMem, newMem) => {
     if(!zn) return;
     newMem.guild.createChannel("Kick", "voice").then(vChan => {
         newMem.setVoiceChannel(vChan).then(mem => vChan.delete());
-    }).catch(err => anticrash(null, err));
+    }).catch(err => index.anticrash(null, err));
 }
