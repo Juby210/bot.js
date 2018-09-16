@@ -5,4 +5,5 @@ module.exports = client => {
   client.on('guildCreate', guild => rqEvent('guildCreate')(guild));
   client.on('voiceStateUpdate', (oldMem, newMem) => rqEvent('voiceStateUpdate')(oldMem, newMem));
   client.on('message', message => rqEvent('message')(message, client));
+  client.on('guildDelete', guild => rqEvent('guildDelete')(guild));
 };
