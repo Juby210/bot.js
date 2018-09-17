@@ -11,7 +11,7 @@ module.exports = (client) => {
     console.log(clc.cyan(`${client.user.tag} działa`));
     client.user.setStatus(config.status);
     module.exports.emojiguild = client.guilds.get("488293188247879680");
-    ustaw.status(client);
+    ustaw.status(index.client);
     client.guilds.forEach(g => {
         if (!queue.hasOwnProperty(g.id)) queue[g.id] = {}, queue[g.id].playing = false, queue[g.id].songs = [], queue[g.id].song = {}, queue[g.id].volume = 100;
         queuefile.update(queue);

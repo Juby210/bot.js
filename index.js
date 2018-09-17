@@ -32,6 +32,7 @@ fs.readdirSync('./commands/').forEach(category => {
         const props = require(`./commands/${category}/${file}`);
         console.log(`#LOADED ./commands/${category}/${file}`);
         client.commands.set(props.help.name, props, category);
+        client.commands.set(props.help.aliases, props, category);
     }
 });
 

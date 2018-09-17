@@ -67,6 +67,5 @@ module.exports.run = async (client, message) => {
 
 module.exports.help = {
     name: "dbl",
-    category: "WEB",
     aliases: "discordbotlist"
 }
