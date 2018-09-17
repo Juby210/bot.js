@@ -1,22 +1,17 @@
 const Discord = require('discord.js');
 const { PlayerManager } = require("discord.js-lavalink");
 class MusicClient extends Discord.Client {
-
     constructor(options) {
         super(options);
-
         this.player = null;
-
         this.once("ready", this._ready.bind(this));
     }
-
     _ready() {
         this.player = new PlayerManager(this, [{ host: config.lavalink.host, port: config.lavalink.port, region: "eu-central", password: config.lavalink.password }], {
             user: this.user.id,
             shards: 1
         });
     }
-
 }
 
 const client = new MusicClient();
