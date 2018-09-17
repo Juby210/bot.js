@@ -1,0 +1,23 @@
+const Discord = require('discord.js');
+const config = require("../../config.json");
+var anti = require("../../events/anti.js");
+const prefix = config.prefix;
+
+module.exports.run = async (client, message, args) => {
+    if(message.author.id != config.ownerid && message.author.id != config.devid) return;
+    var evalv = null;
+    var text = args.slice(0).join(" ");
+    try {evalv = eval(text);} catch(err) {anti.crash(message.channel, err, false); return;}
+    var embed = new Discord.RichEmbed();
+    embed.setColor("#0FF49A");
+    embed.setAuthor("EVAL - JS");
+    embed.setTitle("KOMENDA:");
+    embed.setDescription("```js\n" + text + "\n```");
+    try{evalv = evalv.replace(config.token, "RaCzEjNiErAcZeJnIeRaCzEjNiE").replace(config.dbl.token, "RaCzEjNiErAcZeJnIeRaCzEjNiE").replace(config.ytapikey, "RaCzEjNiErAcZeJnIeRaCzEjNiE");} catch(err) {}
+    embed.addField("ODPOWIEDŹ:", "```js\n" + evalv + "\n```");
+    message.channel.send(embed);
+}
+
+module.exports.help = {
+    name:"eval"
+}

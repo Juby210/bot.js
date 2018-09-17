@@ -1,5 +1,6 @@
 var index = require('../index.js');
+var ustaw = require("./ustaw.js");
 
 module.exports = (guild) => {
-    index.ustaw_status(index.client);
+    ustaw.status(index.client);
 }
