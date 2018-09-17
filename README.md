@@ -1,4 +1,4 @@
-# bot.js
+# bot.js - rewrite
 - Mój pierwszy testowy bot muzyczny do discorda. 
   - Używa biblioteki discord.js.
   - Do muzyki używa [lavalink'a](https://github.com/Frederikam/Lavalink/).
@@ -32,4 +32,4 @@ Wszystkie informacje na: [yourls.org](http://yourls.org/)
 Na licencji Apache 2.0
 
 ## Autor
-Juby210
+Juby210 & hamster
