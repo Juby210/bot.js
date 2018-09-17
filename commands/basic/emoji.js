@@ -10,10 +10,10 @@ module.exports.run = async (client, message, args) => {
         if (!emojis.size) return message.channel.send('Ten serwer nie posiada żadnych emotek!');
 
         var embed = new Discord.RichEmbed;
-        embed.setAuthor(`Emotki w: ${message.guild.name}! [${emojis.size}]`, icon);
+        embed.setAuthor(`Emotki w: ${message.guild.name} [${emojis.size}]`, icon);
         embed.setDescription(emojis.map(emoji => emoji.toString()).join(' '), { split: { char: ' ' } });
         embed.setColor('#A5A3BB');
-        return message.channel.send(`Tutaj wszystkie twoje emotki ;)`, embed);
+        return message.channel.send(`Tutaj wszystkie emotki tego serwera!`, embed);
 
     } else {
         const args = message.content.split(" ");
@@ -25,7 +25,7 @@ module.exports.run = async (client, message, args) => {
         if (!emoteInfo) return message.channel.send('To nie jest właściwa emotka!');
 
         var embed = new Discord.RichEmbed;
-        embed.setDescription("<:mlist:488406259230310440> | Inforamacje o emotce:\n**Nazwa**: :" + emoteInfo.name + ":\n**ID**: " + emoteInfo.id + "\n" + "[[Bezpośredni link do emotki]]" + "(" + emoteInfo.url + ")");
+        embed.setDescription("<:mlist:488406259230310440> | Informacje o emotce:\n**Nazwa**: :" + emoteInfo.name + ":\n**ID**: " + emoteInfo.id + "\n" + "[[Bezpośredni link do emotki]]" + "(" + emoteInfo.url + ")");
         embed.setThumbnail(emoteInfo.url);
         embed.setColor('#D5BEC6');
         embed.setFooter("© Juby210 & hamster", client.user.avatarURL);
