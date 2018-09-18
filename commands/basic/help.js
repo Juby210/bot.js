@@ -17,6 +17,8 @@ module.exports.run = async (client, message, args) => {
     var webn = 0;
     var misc = "";
     var miscn = 0;
+    var obrazki = "";
+    var obrazkin = 0;
     var muzyka = "";
     var muzykan = 0;
     loadcommands(co => {
@@ -38,6 +40,10 @@ module.exports.run = async (client, message, args) => {
             if(misc == "") {misc = c.name;} else {misc = `${misc}, ${c.name}`}
             miscn += 1;
             break;
+          case "obrazki":
+            if(obrazki == "") {obrazki = c.name;} else {obrazki = `${obrazki}, ${c.name}`}
+            obrazkin += 1;
+            break;
           case "muzyka":
             if(muzyka == "") {muzyka = c.name;} else {muzyka = `${muzyka}, ${c.name}`}
             muzykan += 1;
@@ -51,6 +57,7 @@ module.exports.run = async (client, message, args) => {
       embed.addField(`MODERACJA (${moderacjan})`, "`" + moderacja + "`", true);
       embed.addField(`WEB (${webn})`, "`" + web + "`", true);
       embed.addField(`MISC (${miscn})`, "`" + misc + "`", true);
+      embed.addField(`OBRAZKI (${obrazkin})`, "`" + obrazki + "`", true);
       embed.addField(`MUZYKA (${muzykan})`, "`" + muzyka + "`", true);
       embed.addField("INFORMACJA O KOMENDZIE", "`" + `${prefix}info <komenda>` + "`");
       embed.addBlankField();
