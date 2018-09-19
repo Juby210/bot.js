@@ -4,8 +4,10 @@ const prefix = config.prefix;
 let strona = ("https://botjs.juby.cf/");
 let github = ("https://github.com/Juby210-PL/bot.js");
 var fs = require("fs");
+const db = require('../../util/db.js');
 
 module.exports.run = async (client, message, args) => {
+  const prefix = await db.getPrefix(guildID);
     var embed = new Discord.RichEmbed;
     embed.setAuthor(`Cześć! Jestem ${client.user.username} - Prefix: ${prefix}`, client.user.avatarURL);
     embed.setColor("#0099FF");
