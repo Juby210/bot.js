@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
 const config = require("../../config.json");
-const prefix = config.prefix;
 let strona = ("https://botjs.juby.cf/");
 let github = ("https://github.com/Juby210-PL/bot.js");
 var fs = require("fs");
