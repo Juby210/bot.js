@@ -87,9 +87,6 @@ const updateStats = async function update(g, c, u) {
 const warn = async function warn(user, guildID, pkt, reason) {
     if(user && guildID && pkt && reason) {
         try {
-            if (!pkt) {
-                pkt = 10;
-            }
             if (!reason) {
                 reason = 'Nie podano powodu.';
             }
@@ -104,7 +101,7 @@ const warn = async function warn(user, guildID, pkt, reason) {
                         let warns = us.warns;
                         let warnReasons = us.warnreasons + ' | ' + reason;
 
-                        let warnBlock = false, warnTime = null;
+                        let warnBlock = false;
                         await r.table('guilds').get(guildID).update({
                             users: r.object(user, r.object('warns', 'warnreasons', warnReasons, 'warnblock', warnBlock))
                         }).run(connection);
