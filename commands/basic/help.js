@@ -7,7 +7,13 @@ var fs = require("fs");
 const db = require('../../util/db.js');
 
 module.exports.run = async (client, message, args) => {
-  const prefix = await db.getPrefix(guildID);
+    let guildID;
+    if(!message.guild) {
+        guildID = '0';
+    } else {
+        guildID = message.guild.id;
+    }
+    const prefix = await db.getPrefix(guildID);
     var embed = new Discord.RichEmbed;
     embed.setAuthor(`Cześć! Jestem ${client.user.username} - Prefix: ${prefix}`, client.user.avatarURL);
     embed.setColor("#0099FF");
