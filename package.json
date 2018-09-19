@@ -20,6 +20,7 @@
     "opusscript": "0.0.6",
     "pidusage": "^2.0.16",
     "request": "^2.88.0",
+    "rethinkdb": "^2.3.3",
     "snekfetch": "^4.0.4",
     "time-util": "^2.0.5",
     "unix-timestamp": "^0.2.0",

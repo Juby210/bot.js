@@ -5,8 +5,18 @@ const DBL = require("dblapi.js");
 var index = require("../index.js")
 let reqV = config.dbl.requireVote;
 var lock = false;
+const db = require('../util/db.js');
 
-module.exports = (message, client) => {
+module.exports = async (message, client) => {
+    let guildID;
+    if(!message.guild) {
+        guildID = '0';
+    } else {
+        guildID = message.guild.id;
+    }
+    await db.check(guildID);
+
+    const prefix = await db.getPrefix(guildID);
     if(message.author.bot) return;
     if(message.author.id != config.ownerid) {
         if(lock) return;
@@ -26,7 +36,7 @@ module.exports = (message, client) => {
     let commandfile = client.commands.get(cmod.slice(prefix.length));
 
     if(config.dbl.usedbl) {
-        if (!reqV.hasOwnProperty(command)) {if(commandfile) commandfile.run(client,message,args);} else {
+        if (!reqV.hasOwnProperty(command)) {if(commandfile) commandfile.run(client,message,args,db);} else {
             if(reqV[command] == true) {
                 dbl.hasVoted(message.author.id).then(v => {
                     if(!v) {
@@ -38,15 +48,15 @@ module.exports = (message, client) => {
                         message.channel.send(embed);
                         return;
                     } else {
-                        if(commandfile) commandfile.run(client,message,args);
+                        if(commandfile) commandfile.run(client,message,args,db);
                     }
                 }).catch(err => anticrash(message.channel, err));
             } else {
-                if(commandfile) commandfile.run(client,message,args);
+                if(commandfile) commandfile.run(client,message,args,db);
             }
         }
     } else {
         
-        if(commandfile) commandfile.run(client,message,args);
+        if(commandfile) commandfile.run(client,message,args,db);
     }
 }

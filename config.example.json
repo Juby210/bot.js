@@ -11,6 +11,13 @@
 		"restport": 2333,
 		"password": "pass"
 	},
+	"database": {
+        "host": "localhost",
+        "port": 28015,
+        "db": "botjs",
+        "username": "admin",
+        "password": ""
+    },
     "dbl":{
         "usedbl": false, 
         "token": "token z discordbots.org",
