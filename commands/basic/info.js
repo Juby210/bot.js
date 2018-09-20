@@ -112,10 +112,18 @@ module.exports.run = async (client, message, args) => {
             embed.addField(`Aliasy:`, "nowplaying");
             embed.setFooter("Ta komenda działa tylko jeśli bot gra!");
             break;
+        case "prefix":
+            embed.addField(`${prefix}prefix <nowy prefix>`, `Ustawia nowy prefix dla bota na danym serwerze.`);
+            embed.setFooter("Wymagane uprawnienia: Zarządzanie serwerem");
+            break;
+        case "warn": 
+        embed.addField(`${prefix}warn <użytkownik> <powód>`, `Nadaje ostrzeżenie użytkownikowi z powodem.`);
+        embed.setFooter("Wymagane uprawnienia: Zarządzanie serwerem");
+        break;   
         case "info":
             embed.setDescription("Naprawdę chcesz wyświetlić info o komendzie info? Eh.. no dobra");
             embed.addField(`${prefix}info <komenda>`, "Pokazuje informacje o komendzie, którą wpiszesz.");
-            break;
+            break; 
         default:
             embed.setTitle("Nie znam takiej komendy, polecam sprawdzić `" + prefix + "help`");
     }

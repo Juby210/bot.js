@@ -10,7 +10,7 @@ module.exports.run = async (client, message, guild) => {
     var dnd = guild.members.filter(m => m.user.presence.status === "dnd").size
     var offline = guild.members.filter(m => m.user.presence.status === "offline").size
     var bots = guild.members.filter(m => m.user.bot).size
-    var roleList = guild.roles.sort((a, b) => a.position - b.position).map(role => role.toString()).slice(1).reverse().join(", ")
+    var roleList = guild.roles.sort((a, b) => a.position - b.position).map(role => role.toString()).slice(1).reverse().join(",")
 
     let icon = guild.iconURL;
     let embed = new Discord.RichEmbed()

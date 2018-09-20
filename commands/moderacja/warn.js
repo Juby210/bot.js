@@ -13,13 +13,13 @@ module.exports.run = async (client, message, args) => {
             message.reply("Podaj użytkownika do ostrzeżenia!");
             message.react("❌");
         } else {
-            let msg = message.content.trim().split('|');
-            if (!msg[1]) msg[1] = 'Brak powodu.';
-            await db.warn(message.mentions.users.first().id, guildID, args[2], msg[1]);
+            let msg = args.slice(1).join(' ');
+            if (!msg) msg = 'Brak powodu.';
+            await db.warn(message.mentions.users.first().id, guildID, msg[1]);
 
             let ok = `{user} został ostrzeżony(a) z powodem: {reason}\nNadane przez: **{user1}**`
 
-            ok = ok.replace('{user}', message.mentions.users.first()).replace('{reason}', msg[1]).replace('{user1}', message.author.tag);
+            ok = ok.replace('{user}', message.mentions.users.first()).replace('{reason}', msg).replace('{user1}', message.author.tag);
             
             const embed = new Discord.RichEmbed();
             embed.setAuthor("Ostrzeżenie | Warn");
