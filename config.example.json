@@ -1,9 +1,9 @@
 {
-    "token":"twój token",
+	"token":"twój token",
 	"ytapikey":"twój klucz do api yt",
-    "ownerid":"twoje id z discorda",
-    "devid": "id developera",
-    "status":"online",
+	"ownerid":"twoje id z discorda",
+	"devid": "id developera",
+	"status":"online",
 	"prefix":"^",
 	"lavalink":{
 		"host": "localhost",
@@ -11,11 +11,11 @@
 		"restport": 2333,
 		"password": "pass"
 	},
-    "dbl":{
-        "usedbl": false, 
-        "token": "token z discordbots.org",
-        "requireVote":{"voicekick":true, "voiceban":true, "voiceunban":true}
-    },
+	"dbl":{
+		"usedbl": false, 
+		"token": "token z discordbots.org",
+		"requireVote":{"voicekick":true, "voiceban":true, "voiceunban":true}
+	},
 	"yourls":{
 		"useyourls": false,
 		"apiurl":"url do api yourls",
