@@ -1,9 +1,9 @@
 {
-    "token":"twój token",
+	"token":"twój token",
 	"ytapikey":"twój klucz do api yt",
-    "ownerid":"twoje id z discorda",
-    "devid": "id developera",
-    "status":"online",
+	"ownerid":"twoje id z discorda",
+	"devid": "id developera",
+	"status":"online",
 	"prefix":"^",
 	"lavalink":{
 		"host": "localhost",
@@ -12,17 +12,17 @@
 		"password": "pass"
 	},
 	"database": {
-        "host": "localhost",
-        "port": 28015,
-        "db": "botjs",
-        "username": "admin",
-        "password": ""
-    },
-    "dbl":{
-        "usedbl": false, 
-        "token": "token z discordbots.org",
-        "requireVote":{"voicekick":true, "voiceban":true, "voiceunban":true}
-    },
+		"host": "localhost",
+		"port": 28015,
+		"db": "botjs",
+		"username": "admin",
+		"password": ""
+	},
+	"dbl":{
+	"usedbl": false, 
+	"token": "token z discordbots.org",
+	"requireVote":{"voicekick":true, "voiceban":true, "voiceunban":true}
+	},
 	"yourls":{
 		"useyourls": false,
 		"apiurl":"url do api yourls",
@@ -45,7 +45,7 @@
 		{"id": 13, "name":"ESKA", "url":"https://juby210.com.pl/radio.php?n=eska-warszawa"},
 		{"id": 14, "name":"ESKA Lublin", "url":"https://juby210.com.pl/radio.php?n=eska-lublin"},
 		{"id": 15, "name":"ESKA Bełchatów", "url":"https://juby210.com.pl/radio.php?n=eska-belchatow"},
-		{"id": 16, "name":"ESKA Białystok", "url":"https://juby210.com.pl/radio.php?n=eska-bialystok"},
+		{"id": 16, "name":"ESKA Białystok", "url":"https://juby210.com.pl/radio.php?n=eska-bialystok"},	
 		{"id": 17, "name":"Radio Plus (ESKA)", "url":"https://juby210.com.pl/radio.php?n=radio-plus"},
 		{"id": 18, "name":"Radio ZET", "url":"http://zetpl1-01.cdn.eurozet.pl:8446/"},
 		{"id": 19, "name":"ZET Party", "url":"http://zetpar-02.cdn.eurozet.pl:8444/"},
