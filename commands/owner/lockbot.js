@@ -9,7 +9,7 @@ module.exports.run = async (client, message, args) => {
         message.delete();
     if(lock) {
         lock = false;
-        client.user.setStatus(config.status);
+        client.user.setStatus(config.settings.status);
     } else {
         lock = true;
         client.user.setStatus("invisible");
