@@ -45,24 +45,10 @@ module.exports.run = async (client, message, args) => {
                 if(player.playing) {
                     queuefile.addsong(message.guild.id, song.track, song.info.uri, song.info.title, song.info.length, song.info.author, message.author.username);
                 } else {
-                    player.play(song.track);
-                    queue[message.guild.id].playing = true;
+                    playerf.play(song.track, client, message);
                     queuefile.song(message.guild.id, song.info.title, song.info.author, song.info.length, message.author.username, song.info.uri, song.track, Date.now());
                     message.channel.send("<:mplay:488399581470785557> | Odtwarzanie: `" + song.info.title + "` z **" + song.info.author + "**");
                 }
-                player.once("error", err => message.channel.send(err.error));
-                player.once("end", data => {
-                    var next = queue[message.guild.id].songs.shift();
-                    if(next == null) {
-                        queue[message.guild.id].playing = false;
-                    } else {
-                        setTimeout(() => {
-                            player.play(next.track);
-                            queuefile.song(message.guild.id, next.title, next.channel, next.length, next.requester, next.uri, next.track, Date.now());
-                        }, 400);
-                    }
-                    return;
-                });
             });
             message.channel.send("<:mcheck_mark:488416404706426880> | Załadowano `" + c + "` utworów!");
         } else {
