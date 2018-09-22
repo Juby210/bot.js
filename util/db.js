@@ -1,5 +1,5 @@
 const r = require('rethinkdb');
-
+const config = require("../config.json");
 const { database } = require('../config.json');
 
 let connection;
@@ -29,7 +29,7 @@ const check = async function check(gid) {
         try {
             await r.table("guilds").insert({
                 "id": gid,
-                "prefix": "^",
+                "prefix": config.prefix,
                 "users": []
             }).run(connection);
             return true;

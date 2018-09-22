@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const request = require("request");
 var index = require("../../index.js");
+const config = require("../../config.json");
 
 module.exports.run = async (client, message, args) => {
     if(!args[0]) {message.channel.send("Nie prawidłowa ilość argumentów!"); return;}
