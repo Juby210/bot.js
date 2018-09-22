@@ -6,7 +6,7 @@ module.exports.run = async (client, message) => {
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
     const DBL = require("dblapi.js");
-    const dbl = new DBL(config.dbl.token, client);
+    const dbl = new DBL(config.tokens.dbl, client);
     if(args[1] == null) {message.channel.send(`Nieprawidłowa ilość argumentów. Sprawdź poprawne użycie: ${prefix}info ${command}`); return;}
     if(args[0] == "user") {
         if(message.mentions.users.first() == null) {

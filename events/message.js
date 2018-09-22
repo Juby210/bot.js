@@ -18,7 +18,7 @@ module.exports = async (message, client) => {
 
     const prefix = await db.getPrefix(guildID);
     if(message.author.bot) return;
-    if(message.author.id != config.ownerid) {
+    if(message.author.id != config.settings.ownerid) {
         if(lock) return;
     }
     if (message.mentions.users.first() == null) {} else {
@@ -27,7 +27,7 @@ module.exports = async (message, client) => {
         }
     }
     if (!message.content.startsWith(prefix)) return;
-    const dbl = new DBL(config.dbl.token, client);
+    const dbl = new DBL(config.tokens.dbl, client);
 
     let messageArray = message.content.split(" ");
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
@@ -36,7 +36,7 @@ module.exports = async (message, client) => {
     let commandfile = client.commands.get(cmod.slice(prefix.length));
 
     if(config.dbl.usedbl) {
-        if (!reqV.hasOwnProperty(command)) {if(commandfile) commandfile.run(client,message,args,db);} else {
+        if (!reqV.hasOwnProperty(command)) {if(commandfile) commandfile.run(client,message,args,db,guildID);} else {
             if(reqV[command] == true) {
                 dbl.hasVoted(message.author.id).then(v => {
                     if(!v) {
@@ -48,15 +48,15 @@ module.exports = async (message, client) => {
                         message.channel.send(embed);
                         return;
                     } else {
-                        if(commandfile) commandfile.run(client,message,args,db);
+                        if(commandfile) commandfile.run(client,message,args,db,guildID);
                     }
                 }).catch(err => anticrash(message.channel, err));
             } else {
-                if(commandfile) commandfile.run(client,message,args,db);
+                if(commandfile) commandfile.run(client,message,args,db,guildID);
             }
         }
     } else {
         
-        if(commandfile) commandfile.run(client,message,args,db);
+        if(commandfile) commandfile.run(client,message,args,db,guildID);
     }
 }

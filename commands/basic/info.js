@@ -1,8 +1,13 @@
 const Discord = require("discord.js");
-const config = require("../../config.json");
-const prefix = config.prefix;
 
 module.exports.run = async (client, message, args) => {
+    let guildID;
+    if(!message.guild) {
+        guildID = '0';
+    } else {
+        guildID = message.guild.id;
+    }
+    const prefix = await db.getPrefix(guildID);
     var embed = new Discord.RichEmbed();
     embed.setColor("#0088FF");
     embed.setAuthor(`${client.user.username} - Komenda info, czyli informacje o komendach`, client.user.avatarURL);

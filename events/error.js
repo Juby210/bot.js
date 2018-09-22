@@ -5,7 +5,7 @@ const config = require("../config.json");
 module.exports = (err) => {
     console.log("AntiCrash:");
     console.log(err);
-    var owner = index.client.users.find("id", config.ownerid);
+    var owner = index.client.users.find("id", config.settings.ownerid);
     if(owner == undefined) {return;}
     var embed = new Discord.RichEmbed();
     embed.setAuthor(`${index.client.user.username} - <:merror:489081457973919744> AntiCrash`);

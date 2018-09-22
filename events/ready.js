@@ -10,7 +10,7 @@ let queue = queuefile.getqueue;
 
 module.exports = (client) => {
     console.log(clc.cyan(`${client.user.tag} działa`));
-    client.user.setStatus(config.status);
+    client.user.setStatus(config.settings.status);
     module.exports.emojiguild = client.guilds.get("488293188247879680");
     ustaw.status(index.client);
     db.load();

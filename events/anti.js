@@ -14,7 +14,7 @@ function crash(chan, err, sendToOwner = true) {
     embed.setColor("#FF0000");
     if(chan != null) chan.send(embed);
     if(!sendToOwner) return;
-    var owner = index.client.users.find("id", config.ownerid);
+    var owner = index.client.users.find("id", config.settings.ownerid);
     if(owner == undefined) {return;}
     embed.addField(err.path, err.method);
     owner.send(embed);

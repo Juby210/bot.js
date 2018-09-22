@@ -1,11 +1,16 @@
 {
-    "token":"twój token",
-	"ytapikey":"twój klucz do api yt",
-    "ownerid":"twoje id z discorda",
-    "devid": "id developera",
-    "status":"online",
-	"prefix":"^",
-	"lavalink":{
+	"settings": {
+		"ownerid": "twoje id z discorda",
+		"devid": "id developera",
+		"status": "online",
+		"prefix": "^"
+	},
+	"tokens": {
+		"bot": "twój token bota",
+		"dbl": "token z dicsordbots.org",
+		"yourls": "klucz do api"
+	},
+	"lavalink": {
 		"host": "localhost",
 		"port": 80,
 		"restport": 2333,
@@ -16,17 +21,15 @@
         "port": 28015,
         "db": "botjs",
         "username": "admin",
-        "password": ""
+        "password": "pass"
     },
-    "dbl":{
+    "dbl": {
         "usedbl": false, 
-        "token": "token z discordbots.org",
         "requireVote":{"voicekick":true, "voiceban":true, "voiceunban":true}
     },
-	"yourls":{
+	"yourls": {
 		"useyourls": false,
-		"apiurl":"url do api yourls",
-		"signature": "klucz do api"
+		"apiurl":"url do api yourls"
 	},
 	"radiolist":
 	[

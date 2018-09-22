@@ -29,7 +29,7 @@ const check = async function check(gid) {
         try {
             await r.table("guilds").insert({
                 "id": gid,
-                "prefix": config.prefix,
+                "prefix": config.settings.prefix,
                 "users": []
             }).run(connection);
             return true;

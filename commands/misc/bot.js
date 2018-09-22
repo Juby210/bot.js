@@ -1,9 +1,14 @@
 const Discord = require("discord.js");
-const config = require("../../config.json");
-const prefix = config.prefix;
 var usage = require('pidusage');
 
 module.exports.run = async (client, message, args) => {
+    let guildID;
+    if(!message.guild) {
+        guildID = '0';
+    } else {
+        guildID = message.guild.id;
+    }
+    const prefix = await db.getPrefix(guildID);
     switch(args[0]) {
         case "invite":
             var embed = new Discord.RichEmbed();

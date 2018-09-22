@@ -32,4 +32,4 @@ fs.readdirSync('./commands/').forEach(category => {
     }
 });
 
-client.login(config.token);
+client.login(config.tokens.token);

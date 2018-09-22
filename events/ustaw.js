@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 var index = require("../index.js");
 const config = require("../config.json");
-const prefix = config.prefix;
+const prefix = config.settings.prefix;
 
 module.exports.status = client => status(client);
 function status(client = new Discord.Client()) {

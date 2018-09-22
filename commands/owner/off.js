@@ -3,7 +3,7 @@ const config = require("../../config.json");
 const prefix = config.prefix;
 
 module.exports.run = async (client, message, args) => {
-    if(message.author.id != config.ownerid) return;
+    if(message.author.id != config.settings.ownerid && message.author.id != config.settings.devid) return;
     message.delete();
     message.channel.send("*Zamykanie w ciągu 30 sek*").then(mes => {
         client.user.setActivity("Zamykanie w ciągu 30 sek!");

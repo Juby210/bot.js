@@ -3,7 +3,7 @@ const config = require("../../config.json");
 const prefix = config.prefix;
 
 module.exports.run = async (client, message, args) => {
-    if(message.author.id != config.ownerid) return;
+    if(message.author.id != config.settings.ownerid && message.author.id != config.settings.devid) return;
     message.channel.send("Zamykanie...");
     client.user.setStatus('invisible');
     setTimeout(() => {

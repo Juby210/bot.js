@@ -5,7 +5,7 @@ const index = require("../../index.js");
 var lock = false;
 
 module.exports.run = async (client, message, args) => {
-    if(message.author.id != config.ownerid) return;
+    if(message.author.id != config.settings.ownerid && message.author.id != config.settings.devid) return;
         message.delete();
     if(lock) {
         lock = false;

@@ -4,7 +4,7 @@ const prefix = config.prefix;
 const index = require("../../index.js");
 
 module.exports.run = async (client, message, args) => {
-    if(message.author.id != config.ownerid) return;
+    if(message.author.id != config.settings.ownerid && message.author.id != config.settings.devid) return;
     if(args[0] == null) {
         if(Array.from(message.attachments)[0] == null) {
             message.reply("Podaj link do avatara!");

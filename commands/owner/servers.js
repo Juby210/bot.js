@@ -4,7 +4,7 @@ const prefix = config.prefix;
 const index = require("../../index.js");
 
 module.exports.run = async (client, message, args) => {
-    if(message.author.id != config.ownerid && message.author.id != config.devid) return;
+    if(message.author.id != config.settings.ownerid && message.author.id != config.settings.devid) return;
     let tosend = [];
     var i = 0;
     client.guilds.forEach(g => { i += 1; tosend.push({c: i, title: g.name, id: g.id, owner: g.owner.user.username});});
