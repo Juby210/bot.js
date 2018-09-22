@@ -123,9 +123,53 @@ const warn = async function warn(user, guildID, pkt, reason) {
     }
 }
 
+const getUrls = async function getUrls(userid) {
+    if(userid) {
+        try {
+            var user = await r.table('users').get(userid).toJSON().run(connection);
+            if(user == null) return false;
+            return JSON.parse(user).urls;
+        } catch(e) {
+            console.log(e);
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+const addUrl = async function addUrl(short, full, userid) {
+    if(short && full && userid) {
+        try {
+            var user = await r.table('users').get(userid).run(connection);
+            if(user) {
+                var usr = await r.table('users').get(userid).toJSON().run(connection);
+                var urls = JSON.parse(usr).urls;
+                urls.push({short: short, full: full});
+                await r.table('users').get(userid).update({
+                    urls: urls
+                }).run(connection);
+            } else {
+                await r.table('users').insert({
+                    id: userid,
+                    urls: [{short: short, full: full}]
+                }).run(connection);
+            }
+            return true;
+        } catch(e) {
+            console.log(e);
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
 exports.updateStats = updateStats;
 exports.check = check;
 exports.load = load;
 exports.update = update;
 exports.getPrefix = getPrefix;
 exports.warn = warn;
+exports.getUrls = getUrls;
+exports.addUrl = addUrl;
