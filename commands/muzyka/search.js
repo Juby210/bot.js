@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const config = require("../../config.json");
 const prefix = config.prefix;
 var queuefile = require("./f/queue.js");
-var index = require("../../index.js");
+var playerf = require("./f/player.js");
 const snekfetch = require("snekfetch");
 
 module.exports.run = async (client, message, args) => {
@@ -53,8 +53,7 @@ module.exports.run = async (client, message, args) => {
                         queuefile.addsong(message.guild.id, song.track, song.info.uri, song.info.title, song.info.length, song.info.author, message.author.username);
                         message.channel.send("<:mplus:488416560445390878> | Dodano do kolejki: `" + song.info.title + "` z **" + song.info.author + "**");
                     } else {
-                        player.play(song.track);
-                        queue[message.guild.id].playing = true;
+                        playerf.play(song.track, client, message);
                         queuefile.song(message.guild.id, song.info.title, song.info.author, song.info.length, message.author.username, song.info.uri, song.track, Date.now());
                         message.channel.send("<:mplay:488399581470785557> | Odtwarzanie: `" + song.info.title + "` z **" + song.info.author + "**");
                     }
