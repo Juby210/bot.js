@@ -1,35 +1,35 @@
 {
 	"settings": {
-"ownerid": "twoje id z discorda",
-"devid": "id developera",
-"status": "online",
-"prefix": "^"
+		"ownerid": "twoje id z discorda",
+		"devid": "id developera",
+		"status": "online",
+		"prefix": "^"
 	},
 	"tokens": {
-"token": "twój token bota",
-"dbl": "token z dicsordbots.org",
-"yourls": "klucz do api"
+		"token": "twój token bota",
+		"dbl": "token z dicsordbots.org",
+		"yourls": "klucz do api"
 	},
 	"lavalink": {
-"host": "localhost",
-"port": 80,
-"restport": 2333,
-"password": "pass"
+		"host": "localhost",
+		"port": 80,
+		"restport": 2333,
+		"password": "pass"
 	},
 	"database": {
-"host": "localhost",
-"port": 28015,
-"db": "botjs",
-"username": "admin",
-"password": "pass"
+		"host": "localhost",
+		"port": 28015,
+		"db": "botjs",
+		"username": "admin",
+		"password": "pass"
     },
     "dbl": {
-"usedbl": false, 
-"requireVote":{"voicekick":true, "voiceban":true, "voiceunban":true}
+		"usedbl": false, 
+		"requireVote":{"voicekick":true, "voiceban":true, "voiceunban":true}
     },
 	"yourls": {
-"useyourls": false,
-"apiurl":"url do api yourls"
+		"useyourls": false,
+		"apiurl":"url do api yourls"
 	},
 	"radiolist":
 	[
