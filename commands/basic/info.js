@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const db = require("../../util/db.js");
 
 module.exports.run = async (client, message, args) => {
     let guildID;

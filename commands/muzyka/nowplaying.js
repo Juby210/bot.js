@@ -8,6 +8,7 @@ module.exports.run = async (client, message, args) => {
     var emojiguild = client.guilds.get("488293188247879680");
     const player = client.player.get(message.guild.id);
     if (!player) return message.reply("aktualnie nic nie gram");
+    if (!player.playing) return message.reply("aktualnie nic nie gram");
     let queue = queuefile.getqueue;
     var song = queue[message.guild.id].song;
     var embed = new Discord.RichEmbed;
@@ -15,8 +16,10 @@ module.exports.run = async (client, message, args) => {
     embed.setTitle(song.title);
     var t1 = "00:00";
     var t2 = "00:00";
-    formatlength(Date.now() - song.date, nt1 => t1 = nt1, false);
-    formatlength(song.length, nt2 => t2 = nt2);
+    var t1n = Date.now() - song.date;
+    var t2n = song.length;
+    formatlength(t1n, nt1 => t1 = nt1, false);
+    formatlength(t2n, nt2 => t2 = nt2);
     embed.setDescription("`" + t1 + " / " + t2 + "`\n" + `[Link](${song.url})`);
     if(song.url.startsWith("https://www.youtube.com/")) {
         var id = song.url.replace("https://www.youtube.com/watch?v=", "");
