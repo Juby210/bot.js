@@ -8,7 +8,7 @@ module.exports.run = async (client, message, args) => {
     if(!message.member.hasPermission("MANAGE_CHANNELS")) {message.channel.send("Ta komenda wymaga uprawnienia `Zarządzanie kanałami`"); return;}
     if(isNaN(args[0])) {message.channel.send(`Podaj liczbę, a nie ${args[0]}`); return;}
     if(args[0] >= 121) {message.channel.send("Max. 120 sek"); return;}
-    req("PATCH", `https://discordapp.com/api/channels/${message.channel.id}`, config.token, args[0]).then(body => {
+    req("PATCH", `https://discordapp.com/api/channels/${message.channel.id}`, config.tokens.token, args[0]).then(body => {
         if(args[0] == 0) {
             message.channel.send("Usunięto slowmode!");
         } else {

@@ -10,7 +10,6 @@ module.exports.run = async (client, message, args) => {
         return;
     }
     const player = client.player.get(message.guild.id);
-    //if(!args[0]) return message.channel.send("Aktualna głośność to: **" + player.volume + "**");
     if(isNaN(args[0])) return message.channel.send("Podaj poprawną liczbę!");
     player.volume(args[0]);
     message.channel.send(":sound: | Głośność została zmieniona na: **" + args[0] + "%**");
