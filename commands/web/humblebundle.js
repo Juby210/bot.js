@@ -16,7 +16,7 @@ module.exports.run = async (client, message, args) => {
             embed.setDescription(embed.description + "\nBrak");
         }
         message.channel.send(embed);
-    }).catch(err => index.anticrash(message.channel, err));
+    }).catch(err => require("../../events/anti.js").crash(message.channel, err));
 }
 
 function req(method, url) {

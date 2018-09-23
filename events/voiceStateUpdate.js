@@ -13,5 +13,5 @@ module.exports = (oldMem, newMem) => {
     if(!zn) return;
     newMem.guild.createChannel("Kick", "voice").then(vChan => {
         newMem.setVoiceChannel(vChan).then(mem => vChan.delete());
-    }).catch(err => index.anticrash(null, err));
+    }).catch(err => require("../../events/anti.js").crash(null, err));
 }

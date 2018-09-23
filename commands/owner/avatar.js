@@ -13,13 +13,13 @@ module.exports.run = async (client, message, args) => {
             message.attachments.forEach(function(a) {
                 client.user.setAvatar(a.url)
                 .then(user => message.react("✅"))
-                .catch(err => index.anticrash(message.channel, err));
+                .catch(err => require("../../events/anti.js").crash(message.channel, err));
             });
         }
     } else {
         client.user.setAvatar(args[0])
         .then(user => message.react("✅"))
-        .catch(err => index.anticrash(message.channel, err));
+        .catch(err => require("../../events/anti.js").crash(message.channel, err));
     }
 }
 

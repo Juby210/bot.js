@@ -14,7 +14,7 @@ module.exports.run = async (client, message, args) => {
         } else {
             message.channel.send(`Ustawiono na **${args[0]}sek**!`);
         }
-    }).catch(err => index.anticrash(message.channel, err));
+    }).catch(err => require("../../events/anti.js").crash(message.channel, err));
 }
 
 function req(method, url, token, num) {

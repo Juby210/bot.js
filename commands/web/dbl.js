@@ -1,10 +1,15 @@
 const Discord = require("discord.js");
 const config = require("../../config.json");
-const prefix = config.prefix;
+const db = require("../../util/db.js");
 
-module.exports.run = async (client, message) => {
-    const args = message.content.slice(prefix.length).trim().split(/ +/g);
-    const command = args.shift().toLowerCase();
+module.exports.run = async (client, message, args) => {
+    let guildID;
+    if(!message.guild) {
+        guildID = '0';
+    } else {
+        guildID = message.guild.id;
+    }
+    const prefix = await db.getPrefix(guildID);
     const DBL = require("dblapi.js");
     const dbl = new DBL(config.tokens.dbl, client);
     if(args[1] == null) {message.channel.send(`Nieprawidłowa ilość argumentów. Sprawdź poprawne użycie: ${prefix}info ${command}`); return;}
@@ -38,7 +43,10 @@ module.exports.run = async (client, message) => {
             embed.setDescription(`Użytkownik: **${user.username}#${user.discriminator}**\nID: **${user.id}**\nAdmin/Mod/Mod strony: **${user.admin}**`.replace("false", "nie").replace("true", "tak") + `/**${user.mod}**`.replace("false", "nie").replace("true", "tak") + `/**${user.webMod}**`.replace("false", "nie").replace("true", "tak") + `\nBio: **${bio}**\nKolor: ${color}\nGithub: **${gh}**\nYoutube: **${yt}**\nReddit: **${rd}**\nTwitter: **${tw}**\nInstagram: **${ig}**`);
             embed.setThumbnail(message.mentions.users.first().avatarURL);
             message.channel.send(embed);
-        }).catch(err => index.anticrash(message.channel, err, false));
+        }).catch(err => {
+            if(err.status == 404) return message.channel.send("Nie znaleziono!");
+            require("../../events/anti.js").crash(message.channel, err, false);
+        });
     }
 } else if (args[0] == "bot") {
     if(message.mentions.users.first() == null) {
@@ -60,7 +68,10 @@ module.exports.run = async (client, message) => {
             embed.setDescription(`Nazwa: ${fbot.username}#${fbot.discriminator}\nID: ${fbot.id}\nOpis:\n${desc}\n[Invite](${fbot.invite})\nStrona bota: ${fbot.website}\nKod: ${fbot.github}\nPrefix: ${fbot.prefix}\nBiblioteka: ${fbot.lib}\nTwórca: ${owners}\nTagi: ${fbot.tags + ""}\nGłosy: ${fbot.points}\n[Pokaż na discordbots.org](https://discordbots.org/bot/${fbot.id})`);
             embed.setThumbnail(message.mentions.users.first().avatarURL);
             message.channel.send(embed);
-        }).catch(err => index.anticrash(message.channel, err, false));
+        }).catch(err => {
+            if(err.status == 404) return message.channel.send("Nie znaleziono!");
+            require("../../events/anti.js").crash(message.channel, err, false);
+        });
     }
 }
 }
