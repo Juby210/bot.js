@@ -51,6 +51,7 @@ module.exports.run = async (client, message, args) => {
                     var song = queue[message.guild.id].songs.shift();
                     if(!song) return;
                     playerf.play(song.track, client, message);
+                    queuefile.song(message.guild.id, song.title, song.channel, song.length, song.requester, song.url, song.track, Date.now());
                     message.channel.send("<:mplay:488399581470785557> | Odtwarzanie: `" + song.title + "` z **" + song.channel + "**");
                 }
             }, 300);
