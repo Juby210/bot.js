@@ -4,6 +4,7 @@ const prefix = config.prefix;
 var queuefile = require("./f/queue.js");
 var playerf = require("./f/player.js");
 const snekfetch = require("snekfetch");
+let queue = queuefile.getqueue;
 
 module.exports.run = async (client, message, args) => {
     var vChannel = message.member.voiceChannel;
@@ -35,22 +36,24 @@ module.exports.run = async (client, message, args) => {
             var c = 0;
             s.tracks.forEach(async song => {
                 c++;
-                let queue = queuefile.getqueue;
                 var player = await client.player.get(message.guild.id);
                 if (!player) player = await client.player.join({
                     guild: message.guild.id,
                     channel: message.member.voiceChannel.id,
                     host: config.lavalink.host
                 }, { selfdeaf: true });
-                if(player.playing) {
-                    queuefile.addsong(message.guild.id, song.track, song.info.uri, song.info.title, song.info.length, song.info.author, message.author.username);
-                } else {
-                    playerf.play(song.track, client, message);
-                    queuefile.song(message.guild.id, song.info.title, song.info.author, song.info.length, message.author.username, song.info.uri, song.track, Date.now());
-                    message.channel.send("<:mplay:488399581470785557> | Odtwarzanie: `" + song.info.title + "` z **" + song.info.author + "**");
-                }
+                queuefile.addsong(message.guild.id, song.track, song.info.uri, song.info.title, song.info.length, song.info.author, message.author.username);
             });
             message.channel.send("<:mcheck_mark:488416404706426880> | Załadowano `" + c + "` utworów!");
+            setTimeout(async () => {
+                var player = await client.player.get(message.guild.id);
+                if(player.playing) {} else {
+                    var song = queue[message.guild.id].songs.shift();
+                    if(!song) return;
+                    playerf.play(song.track, client, message);
+                    message.channel.send("<:mplay:488399581470785557> | Odtwarzanie: `" + song.title + "` z **" + song.channel + "**");
+                }
+            }, 300);
         } else {
             s.tracks.forEach(async cos => {
                 song = cos;
@@ -62,7 +65,6 @@ module.exports.run = async (client, message, args) => {
 }
 
 async function play(song, message, client) {
-    let queue = queuefile.getqueue;
     var player = await client.player.get(message.guild.id);
     if (!player) player = await client.player.join({
         guild: message.guild.id,
