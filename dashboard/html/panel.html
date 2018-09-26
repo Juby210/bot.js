@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <script src="panel.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <link href="style.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <title>Bot.js dashboard</title>
+    </head>
+    <body onload="load()">
+        <div id="content2">
+            <h2>Witaj</h2>
+            <img id="user-av" src="defaultav.png">
+            <h1 id="user-nick">ładowanie...</h1>
+
+            <br><button class="button" onclick="window.location = '/api/discord/logout'">Wyloguj</button>
+            <br><button class="button" onclick="window.open('https://github.com/juby210-PL/bot.js', '_blank')">Kod źródłowy (Github)</button>
+            <br><button class="button" onclick="window.open('/invite', '_blank')">Invite</button>
+            <p>TODO: Zarządzanie voicebanami, welcome, autorole</p>
+            <br><br><div id="serwery">
+                <p id="wait">Czekaj...</p>
+            </div><div id="staty">
+                <h3 id="ping">Ping: ...</h3>
+                <h3 id="ram">RAM: ...MB</h3>
+                <h3 id="cpu">CPU: ...%</h3>
+                <h3 id="uptime">Uptime: ...h ...m ...s</h3>
+                <h3 id="guilds">Serwery: ...</h3>
+                <h3 id="channels">Kanały: ...</h3>
+                <h3 id="users">Uzytkownicy: ...</h3>
+                <h3 id="status">Status: ...</h3>
+            </div>
+        </div>
+    </body>
+</html>

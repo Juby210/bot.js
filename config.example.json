@@ -10,6 +10,12 @@
 		"dbl": "token z dicsordbots.org",
 		"yourls": "klucz do api"
 	},
+	"dashboard": {
+		"port": 80,
+		"callback_uri": "http://localhost/api/discord/callback",
+		"client_id": "id bota",
+		"client_secret": "sekret bota"
+	},
 	"lavalink": {
 		"host": "localhost",
 		"port": 80,

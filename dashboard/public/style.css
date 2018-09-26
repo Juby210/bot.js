@@ -1,0 +1,69 @@
+body {
+    background-color: #2C2F33;
+}
+#content {
+    text-align: center;
+    color: #ffffff;
+    font-family: 'Open Sans', sans-serif;
+}
+#content2 {
+    text-align: center;
+    color: #ffffff;
+    font-family: 'Raleway', sans-serif;
+}
+.button {
+    background-color: #7289DA;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    padding: 8px;
+    width: 222px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+.button:hover {
+    background-color: #8089DA;
+}
+#user-av {
+    width: 80px;
+    margin: auto;
+    height: 80px;
+    display: block;
+    border-radius: 40px;
+}
+#serwery {
+    display: block;
+    flex-wrap: wrap;
+    width: 50%;
+    margin-right: 20%;
+    float: left;
+}
+.serwer {
+    background-color: #1F2F33;
+    height: 50px;
+    margin-bottom: 10px;
+}
+.serwer img {
+    width: 50px;
+    margin: auto;
+    height: 50px;
+    display: block;
+    border-radius: 40px;
+    float: left;
+}
+.serwer p {
+    display: inline;
+    margin-right: 40px;
+    font-size: 20px;
+}
+.serwer-za {
+    display: block;
+    font-size: 15px;
+}
+#staty {
+    float: left;
+}

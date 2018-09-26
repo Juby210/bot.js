@@ -56,6 +56,7 @@ const update = async function update(obj, id, k, v) {
 
 const getPrefix = async function getPrefix(id) {
     if(id){
+        if(id == null) return false;
         try {
             const guild = await r.table('guilds').get(id).toJSON().run(connection);
             const prefix = await JSON.parse(guild).prefix;

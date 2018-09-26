@@ -15,6 +15,7 @@ module.exports = (client) => {
     module.exports.emojiguild = client.guilds.get("488293188247879680");
     ustaw.status(index.client);
     db.load();
+    require("../dashboard/server")();
     if(config.dbl.usedbl) {
         const dbl = new DBL(config.tokens.dbl, client);
         dbl.postStats(client.guilds.size);
