@@ -9,20 +9,10 @@ function load() {
                 }
                 $("#user-nick").html(data.user.username);
 
-                $.ajax({
-                    url: "botstats",
-                    context: document.body,
-                    success: function(staty) {
-                        $("#ping").html("Ping: " + staty.ping);
-                        $("#ram").html(`RAM: ${staty.ram}MB`);
-                        $("#cpu").html("CPU: " + staty.cpu);
-                        $("#uptime").html("Uptime: " + staty.uptime);
-                        $("#guilds").html("Serwery: " + staty.guilds);
-                        $("#channels").html("Kanały: " + staty.channels);
-                        $("#users").html("Uzytkownicy: " + staty.users);
-                        $("#status").html("Status: " + staty.status);
-                    }
-                });
+                ladujstaty();
+                setInterval(() => {
+                    ladujstaty();
+                }, 1000);
 
                 $.ajax({
                     url: "api/discord/guilds",
@@ -73,6 +63,23 @@ function load() {
         },
         error: function(err) {
             window.location = '/';
+        }
+    });
+}
+
+function ladujstaty(ms) {
+    $.ajax({
+        url: "botstats",
+        context: document.body,
+        success: function(staty) {
+            $("#ping").html(staty.ping);
+            $("#ram").html(`${staty.ram}MB`);
+            $("#cpu").html(staty.cpu);
+            $("#uptime").html(staty.uptime);
+            $("#guilds").html(staty.guilds);
+            $("#channels").html(staty.channels);
+            $("#users").html(staty.users);
+            $("#status").html(staty.status);
         }
     });
 }

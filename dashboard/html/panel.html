@@ -1,5 +1,7 @@
+<!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
         <script src="panel.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <link href="style.css" rel="stylesheet">
@@ -7,27 +9,56 @@
         <title>Bot.js dashboard</title>
     </head>
     <body onload="load()">
+            <div id="topbar">
+                    <div id="title">
+                            <h3>Bot.js dashboard</h3>
+                    </div>
+                    <div id="menu">
+                        <ul>
+                            <li class="menuitem" onclick="window.open('/invite', '_blank')">Invite</li>
+                            <li class="menuitem" onclick="window.open('https://github.com/juby210-PL/bot.js', '_blank')">Kod źródłowy (GitHub)</li>
+                            <li class="menuitem" onclick="window.location = '/api/discord/logout'">Wyloguj</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cls"></div>
         <div id="content2">
             <h2>Witaj</h2>
             <img id="user-av" src="defaultav.png">
             <h1 id="user-nick">ładowanie...</h1>
-
-            <br><button class="button" onclick="window.location = '/api/discord/logout'">Wyloguj</button>
-            <br><button class="button" onclick="window.open('https://github.com/juby210-PL/bot.js', '_blank')">Kod źródłowy (Github)</button>
-            <br><button class="button" onclick="window.open('/invite', '_blank')">Invite</button>
-            <p>TODO: Zarządzanie voicebanami, welcome, autorole</p>
             <br><br><div id="serwery">
                 <p id="wait">Czekaj...</p>
-            </div><div id="staty">
-                <h3 id="ping">Ping: ...</h3>
-                <h3 id="ram">RAM: ...MB</h3>
-                <h3 id="cpu">CPU: ...%</h3>
-                <h3 id="uptime">Uptime: ...h ...m ...s</h3>
-                <h3 id="guilds">Serwery: ...</h3>
-                <h3 id="channels">Kanały: ...</h3>
-                <h3 id="users">Uzytkownicy: ...</h3>
-                <h3 id="status">Status: ...</h3>
             </div>
+            <table id="staty">
+                <tr>
+                    <th>Ping</th><th id="ping">...</th>
+                </tr>
+                <tr>
+                    <th>RAM</th><th id="ram">...</th>
+                </tr>
+                <tr>
+                    <th>CPU</th><th id="cpu">...</th>
+                </tr>
+                <tr>
+                    <th>Uptime</th><th id="uptime">...h ...m ...s</th>
+                </tr>
+                <tr>
+                    <th>Serwery</th><th id="guilds">...</th>
+                </tr>
+                <tr>
+                    <th>Kanały</th><th id="channels">...</th>
+                </tr>
+                <tr>
+                    <th>Użytkownicy</th><th id="users">...</th>
+                </tr>
+                <tr>
+                    <th>Status</th><th id="status">...</th>
+                </tr>
+            </table>
+            <div class="cls"></div>
+            <footer>
+                TODO: Zarządzanie voicebanami, welcome, autorole
+            </footer>
         </div>
     </body>
 </html>

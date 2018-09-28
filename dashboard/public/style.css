@@ -1,10 +1,10 @@
 body {
     background-color: #2C2F33;
+    color: #ffffff;
+    font-family: 'Open Sans', sans-serif;
 }
 #content {
     text-align: center;
-    color: #ffffff;
-    font-family: 'Open Sans', sans-serif;
 }
 #content2 {
     text-align: center;
@@ -43,7 +43,7 @@ body {
     float: left;
 }
 .serwer {
-    background-color: #1F2F33;
+    background-color: #3d3d3d;
     height: 50px;
     margin-bottom: 10px;
 }
@@ -66,4 +66,38 @@ body {
 }
 #staty {
     float: left;
+}
+.cls {
+    clear: both;
+}
+li {
+    display: inline;
+    padding: 10px 10px 10px 10px;
+}
+#menu {
+    float: right;
+}
+#title {
+    float: left;
+    padding: 10px 10px 10px 10px;
+}
+h3 {
+    margin: 0;
+}
+footer {
+    font-size: 11px;
+}
+.menuitem {
+    cursor: pointer;
+}
+.menuitem:hover {
+    background-color: #7289DA;
+    border-radius: 4px;
+}
+.menuitem:click {
+    background-color: #8089DA;
+}
+th {
+    padding: 5px;
+    border: 1px solid #777777;
 }

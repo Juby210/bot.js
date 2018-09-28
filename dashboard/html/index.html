@@ -1,5 +1,6 @@
+<!DOCTYPE html>
 <html>
-    <head>
+<head>
       <meta charset="utf-8">
       <meta name="og:site_name" content="Bot.js dashboard">
       <meta property="og:title" content="Panel zarządzania bot.js" />
@@ -11,12 +12,21 @@
       <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     </head>
     <body>
+        <div id="topbar">
+            <div id="title">
+                    <h3>Bot.js dashboard</h3>
+            </div>
+            <div id="menu">
+                <ul>
+                    <li class="menuitem" onclick="window.open('/invite', '_blank')">Invite</li>
+                    <li class="menuitem" onclick="window.open('https://github.com/juby210-PL/bot.js', '_blank')">Kod źródłowy (GitHub)</li>
+                </ul>
+            </div>
+        </div>
+            <div class="cls"></div>
         <div id="content">
             <img src="https://cdn.discordapp.com/avatars/479612191767789573/b361d0925c958076c3c3e84523a066d0.png?size=128" style="border-radius: 50%;" />
-            <h1>Bot.js dashboard</h1>
-            <button class="button" onclick="window.open('https://github.com/juby210-PL/bot.js', '_blank')">Kod źródłowy (Github)</button>
             <br><button class="button" onclick="window.location = '/api/discord/login'">Zaloguj się do panelu</button>
-            <br><button class="button" onclick="window.open('/invite', '_blank')">Invite</button>
             <br><br><footer>Ta strona używa cookies do poprawnego funkcjonowania<br>&copy; Juby210 & hamster 2018</footer>
         </div>
     </body>

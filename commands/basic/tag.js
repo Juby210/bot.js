@@ -13,6 +13,7 @@ module.exports.run = async (client, message, args) => {
         mem = mem + "```";
         message.channel.send(mem);
     } else {
+        if(args[0].includes("`")) return message.channel.send("```Nie znaleziono użytkowników z tym tagiem```");
         var mem = "```";
         client.guilds.forEach(g => {
             g.members.forEach(m => {
@@ -29,5 +30,5 @@ module.exports.run = async (client, message, args) => {
 }
 
 module.exports.help = {
-    name:"tag",
+    name:"tag"
 }
