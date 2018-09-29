@@ -8,6 +8,7 @@ module.exports = async (oldMem, newMem) => {
     if(vChannel == null) return;
     var zn = false;
     await db.getVoiceBans(newMem.guild.id).then(async bany => {
+        if(bany == undefined) return;
         bany.forEach(id => {
             if(id == newMem.user.id) zn = true;
         });
