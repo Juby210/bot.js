@@ -28,9 +28,10 @@ const check = async function check(gid) {
     } else {
         try {
             await r.table("guilds").insert({
-                "id": gid,
-                "prefix": config.settings.prefix,
-                "users": []
+                id: gid,
+                prefix: config.settings.prefix,
+                users: [],
+                voiceBans: []
             }).run(connection);
             return true;
         } catch (e) {
@@ -166,6 +167,21 @@ const addUrl = async function addUrl(short, full, userid) {
     }
 }
 
+const getVoiceBans = async function getVoiceBans(gid) {
+    if(gid) {
+        try {
+            var guild = await r.table('guilds').get(gid).toJSON().run(connection);
+            if(guild == null) return false;
+            return JSON.parse(guild).voiceBans;
+        } catch(e) {
+            console.log(e);
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
 exports.updateStats = updateStats;
 exports.check = check;
 exports.load = load;
@@ -174,3 +190,4 @@ exports.getPrefix = getPrefix;
 exports.warn = warn;
 exports.getUrls = getUrls;
 exports.addUrl = addUrl;
+exports.getVoiceBans = getVoiceBans;

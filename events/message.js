@@ -50,13 +50,14 @@ module.exports = async (message, client) => {
                     } else {
                         if(commandfile) commandfile.run(client,message,args,db,guildID);
                     }
-                }).catch(err => anticrash(message.channel, err));
+                }).catch(err => {
+                    if(commandfile) commandfile.run(client,message,args,db,guildID);
+                });
             } else {
                 if(commandfile) commandfile.run(client,message,args,db,guildID);
             }
         }
     } else {
-        
         if(commandfile) commandfile.run(client,message,args,db,guildID);
     }
 }
