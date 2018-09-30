@@ -40,5 +40,5 @@ function formatlength(ms, callback) {
 module.exports.help = {
     name:"queue",
     category:"MUZYKA",
-    aliases:"q"
+    aliases: ["list", "q"]
 }

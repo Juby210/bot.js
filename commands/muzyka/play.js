@@ -96,5 +96,5 @@ async function getSong(string, callback) {
 module.exports.help = {
     name:"play",
     category: "MUZYKA",
-    aliases: ">"
+    aliases: [">", "p"]
 }
