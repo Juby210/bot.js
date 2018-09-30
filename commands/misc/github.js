@@ -10,5 +10,5 @@ module.exports.run = async (client, message, args) => {
 
 module.exports.help = {
     name: "github",
-    aliases: "kod"
+    aliases: ["kod"]
 }

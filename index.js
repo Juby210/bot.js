@@ -28,7 +28,9 @@ fs.readdirSync('./commands/').forEach(category => {
         const props = require(`./commands/${category}/${file}`);
         console.log(clc.yellow(`[${category}] `) + clc.green(`./commands/${category}/${file}`));
         client.commands.set(props.help.name, props, category);
-        client.commands.set(props.help.aliases, props, category);
+        if(props.help.aliases != undefined) {
+            try{props.help.aliases.forEach(alias => client.commands.set(alias, props, category));} catch(e) {}
+        }
     }
 });
 
