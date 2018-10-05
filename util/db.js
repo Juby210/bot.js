@@ -31,7 +31,9 @@ const check = async function check(gid) {
                 id: gid,
                 prefix: config.settings.prefix,
                 users: [],
-                voiceBans: []
+                voiceBans: [],
+                welcome: {enabled: false, channel: "", msg: ""},
+                autorole: {enabled: false, role: ""}
             }).run(connection);
             return true;
         } catch (e) {
@@ -182,6 +184,36 @@ const getVoiceBans = async function getVoiceBans(gid) {
     }
 }
 
+const getWelcome = async function getWelcome(gid) {
+    if(gid) {
+        try {
+            var guild = await r.table('guilds').get(gid).toJSON().run(connection);
+            if(guild == null) return false;
+            return JSON.parse(guild).welcome;
+        } catch(e) {
+            console.log(e);
+            return false; 
+        }
+    } else {
+        return false;
+    }
+}
+
+const getAutorole = async function getAutorole(gid) {
+    if(gid) {
+        try {
+            var guild = await r.table('guilds').get(gid).toJSON().run(connection);
+            if(guild == null) return false;
+            return JSON.parse(guild).autorole;
+        } catch(e) {
+            console.log(e);
+            return false; 
+        }
+    } else {
+        return false;
+    }
+}
+
 exports.updateStats = updateStats;
 exports.check = check;
 exports.load = load;
@@ -191,3 +223,5 @@ exports.warn = warn;
 exports.getUrls = getUrls;
 exports.addUrl = addUrl;
 exports.getVoiceBans = getVoiceBans;
+exports.getWelcome = getWelcome;
+exports.getAutorole = getAutorole;

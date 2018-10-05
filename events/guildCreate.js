@@ -2,7 +2,7 @@ var index = require('../index.js');
 var ustaw = require("./ustaw.js");
 const db = require('../util/db.js');
 
-module.exports = (guild) => {
+module.exports = async (guild) => {
     ustaw.status(index.client);
     queue = queuefile.getqueue;
     if (!queue.hasOwnProperty(guild.id)) queue[guild.id] = {}, queue[guild.id].playing = false, queue[guild.id].songs = [], queue[guild.id].song = {}, queue[guild.id].volume = 100;

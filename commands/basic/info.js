@@ -13,6 +13,12 @@ module.exports.run = async (client, message, args) => {
     embed.setColor("#0088FF");
     embed.setAuthor(`${client.user.username} - Komenda info, czyli informacje o komendach`, client.user.avatarURL);
     switch (args[0]) {
+        case "welcome":
+            embed.addField(`${prefix}welcome <typ> [argument]`, "Typy: channel, msg, enable, disable\nDo wiadomości można dodać:\n#USER# - zamieniane jest na nazwę użytkownika\n#MENTION# - zamieniane jest na wzmiankę użytkownika\n#GUILD# - zamieniane jest na nazwę serwera");
+            embed.setFooter("Wymagane uprawnienia: Zarządzanie serwerem");
+            break;
+        case "autorole":
+            embed.addField(`${prefix}autorole <argument>`, "Argumenty: id/wzmianka roli, disable");
 		case "avatar":
 			embed.addField(`${prefix}avatar [wzmianka/nazwa]`, "Wyświetla oraz daje link do avatara wybranej osoby/twojego");
             break;
@@ -123,9 +129,9 @@ module.exports.run = async (client, message, args) => {
             embed.setFooter("Wymagane uprawnienia: Zarządzanie serwerem");
             break;
         case "warn": 
-        embed.addField(`${prefix}warn <użytkownik> <powód>`, `Nadaje ostrzeżenie użytkownikowi z powodem.`);
-        embed.setFooter("Wymagane uprawnienia: Zarządzanie serwerem");
-        break;   
+            embed.addField(`${prefix}warn <użytkownik> <powód>`, `Nadaje ostrzeżenie użytkownikowi z powodem.`);
+            embed.setFooter("Wymagane uprawnienia: Zarządzanie serwerem");
+            break;   
         case "info":
             embed.setDescription("Naprawdę chcesz wyświetlić info o komendzie info? Eh.. no dobra");
             embed.addField(`${prefix}info <komenda>`, "Pokazuje informacje o komendzie, którą wpiszesz.");

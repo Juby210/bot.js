@@ -7,4 +7,5 @@ module.exports = client => {
   client.on('message', message => rqEvent('message')(message, client));
   client.on('guildDelete', guild => rqEvent('guildDelete')(guild));
   client.on('error', err => rqEvent('error')(err));
+  client.on('guildMemberAdd', member => rqEvent('guildMemberAdd')(member))
 };
