@@ -75,7 +75,9 @@ module.exports.run = async (client, message, args) => {
 }
 
 module.exports.help = {
-  name:"help"
+  name:"help",
+  name2:"help",
+  desc:"No poprostu lista komend bota..."
 }
 
 function loadcommands(callback) {

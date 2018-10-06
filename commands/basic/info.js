@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const db = require("../../util/db.js");
+const fs = require("fs");
 
 module.exports.run = async (client, message, args) => {
     let guildID;
@@ -17,26 +18,10 @@ module.exports.run = async (client, message, args) => {
             embed.addField(`${prefix}welcome <typ> [argument]`, "Typy: channel, msg, enable, disable\nDo wiadomości można dodać:\n#USER# - zamieniane jest na nazwę użytkownika\n#MENTION# - zamieniane jest na wzmiankę użytkownika\n#GUILD# - zamieniane jest na nazwę serwera");
             embed.setFooter("Wymagane uprawnienia: Zarządzanie serwerem");
             break;
-        case "autorole":
-            embed.addField(`${prefix}autorole <argument>`, "Argumenty: id/wzmianka roli, disable");
-		case "avatar":
-			embed.addField(`${prefix}avatar [wzmianka/nazwa]`, "Wyświetla oraz daje link do avatara wybranej osoby/twojego");
-            break;
         case "prune":
             embed.addField(`${prefix}prune [ilość wiadomości]`, "Kasuje daną ilość wiadomości z kanału. Maksymalna wartość: 100");
             embed.addField(`Aliasy:`, "clear");
             embed.setFooter("Wymagane uprawnienia: Zarządzanie wiadomościami");
-            break;
-        case "userinfo":
-            embed.addField(`${prefix}userinfo [wzmianka/nazwa]`, "Wyświetla informacje o użytkowniku");
-            break;
-        case "ban":
-            embed.addField(`${prefix}ban <wzmianka>`, `Banuje wzmienioną osobę`);
-            embed.setFooter("Wymagane uprawnienia: Banowanie członków");
-            break;
-        case "kick":
-            embed.addField(`${prefix}kick <wzmianka>`, `Kickuje wzmienioną osobę`);
-            embed.setFooter("Wymagane uprawnienia: Wyrzucanie członków");
             break;
         case "resetall":
             embed.addField(`${prefix}resetall`, `Resetuje wszystkim pseudonimy`);
@@ -62,12 +47,6 @@ module.exports.run = async (client, message, args) => {
             embed.addField(`${prefix}voiceunban <wzmianka>`, `Odblokuje możliwość wejścia na kanały głosowe osobie która dostała bana`);
             embed.setFooter("Wymagane uprawnienia: Przenieś członków");
             break;
-        case "github":
-            embed.addField(`${prefix}github`, "Link do kodu bota na githubie");
-            break;
-        case "bot":
-            embed.addField(`${prefix}bot <info/invite/uptime>`, "Komenda o bocie\nbot info: Informacje o użyciu zasobów przez bota oraz liczba serwerów/kanałów/użytkowników\nbot invite: Link do zaproszenia bota\nbot uptime: Pokazuje ile bot jest aktywny od ostatniego restartu");
-            break;
         case "dbl":
             embed.addField(`${prefix}dbl <user/bot> <wzmianka>`, "Pokazuje informacje o użytkowniku/bocie z discordbots.org");
             break;
@@ -77,8 +56,6 @@ module.exports.run = async (client, message, args) => {
         case "urls":
             embed.addField(`${prefix}urls`, "Pokazuje twoje skrócone linki");
             break;
-        case "tag":
-            embed.addField(`${prefix}tag [tag]`, "Sprawdź kto ma tag taki sam jak ty!");
         case "play":
             embed.addField(`${prefix}play <link/wyszukiwanie>`, "Odtwarza/Dodaje do kolejki podany link/wyszukanie\nMoże to być również link do radia");
             break;
@@ -137,12 +114,39 @@ module.exports.run = async (client, message, args) => {
             embed.addField(`${prefix}info <komenda>`, "Pokazuje informacje o komendzie, którą wpiszesz.");
             break; 
         default:
-            embed.setTitle("Nie znam takiej komendy, polecam sprawdzić `" + prefix + "help`");
+            var zn = false;
+            loadcommands(co => {
+                co.forEach(c => {
+                    if(args[0] == c.help.name) {
+                        zn = true;
+                        embed.addField(prefix + c.help.name2, c.help.desc);
+                        if(c.help.aliases) {
+                            embed.addField("Aliasy:", c.help.aliases.join(", "));
+                        }
+                        if(c.help.perms) embed.setFooter("Wymagane uprawnienia: " + c.help.perms);
+                    }
+                });
+                if(!zn) {
+                    embed.setTitle("Nie znam takiej komendy, polecam sprawdzić `" + prefix + "help`");
+                }
+            });
     }
     if(args[0] == null) embed.setTitle("Może byś dał jakąś komendę bo chyba nie chcesz info o komendzie info?");
     message.channel.send(embed);
 }
 
 module.exports.help = {
-    name:"info",
-  }
+    name:"info"
+}
+
+function loadcommands(callback) {
+    var commands = [];
+    fs.readdirSync('./commands/').forEach(category => {
+      const commandFile = fs.readdirSync(`./commands/${category}`).filter(file => file.endsWith('.js'));
+      for (const file of commandFile) {
+          const props = require(`../${category}/${file}`);
+          commands.push({category: category, help: props.help});
+      }
+    });
+    callback(commands);
+}
