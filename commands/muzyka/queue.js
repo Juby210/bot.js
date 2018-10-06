@@ -39,6 +39,7 @@ function formatlength(ms, callback) {
 
 module.exports.help = {
     name:"queue",
-    category:"MUZYKA",
-    aliases: ["list", "q"]
+    aliases: ["list", "q"],
+    name2:"queue",
+    desc:"Pokazuje kolejkę dla serwera"
 }

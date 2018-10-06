@@ -92,5 +92,6 @@ async function getSong(string, callback) {
 
 module.exports.help = {
     name:"search",
-    category:"MUZYKA"
+    name2: "search <wyszukiwanie>",
+    desc: "Wyszukuje podaną frazę oraz wyświetla wybór 10 wyników"
 }

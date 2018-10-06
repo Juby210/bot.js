@@ -27,5 +27,7 @@ function req(method, url) {
 }
 
 module.exports.help = {
-    name:"pizza"
+    name:"pizza",
+    name2:"pizza",
+    desc:"Komenda obrazkowa"
 }

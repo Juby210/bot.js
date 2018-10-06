@@ -65,6 +65,7 @@ function formatlength(ms, callback, replace = true) {
 
 module.exports.help = {
     name:"np",
-    category:"MUZYKA",
-    aliases:"nowplaying"
+    aliases:["nowplaying"],
+    name2:"np",
+    desc:"Pokazuje co aktualnie jest odtwarzane"
 }

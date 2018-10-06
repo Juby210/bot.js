@@ -17,5 +17,7 @@ module.exports.run = async (client, message, args) => {
 }
 
 module.exports.help = {
-    name: "urls"
+    name: "urls",
+    name2: "urls",
+    desc: "Pokazuje twoje skrócone linki"
 }

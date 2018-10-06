@@ -23,5 +23,6 @@ module.exports.run = async (client, message, args) => {
 
 module.exports.help = {
     name: "join",
-    category: "MUZYKA"
+    name2: "join",
+    desc: "Bot dołącza na twój kanał głosowy"
 }

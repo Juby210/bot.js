@@ -20,4 +20,7 @@ module.exports.run = async (client, message, args) => {
 
 module.exports.help = {
     name:"resetall",
+    name2:"resetall",
+    desc:"Resetuje wszystkim pseudonimy",
+    perms:"Zarządzanie pseudonimami"
 }

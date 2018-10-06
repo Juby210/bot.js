@@ -37,4 +37,7 @@ module.exports.run = async (client, message, args) => {
 
 module.exports.help = {
     name:"warn",
+    name2:"warn <użytkownik> <powód>",
+    desc:"Nadaje ostrzeżenie użytkownikowi z powodem.",
+    perms:"Zarządzanie serwerem"
 }

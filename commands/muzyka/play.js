@@ -95,6 +95,7 @@ async function getSong(string, callback) {
 
 module.exports.help = {
     name:"play",
-    category: "MUZYKA",
-    aliases: [">"]
+    aliases: [">", "pl"],
+    name2:"play <link/wyszukiwanie>",
+    desc:"Odtwarza/Dodaje do kolejki podany link/wyszukanie\nMoże to być również link do radia"
 }

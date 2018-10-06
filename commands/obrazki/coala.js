@@ -27,5 +27,7 @@ function req(method, url) {
 }
 
 module.exports.help = {
-    name:"coala"
+    name:"coala",
+    name2:"coala",
+    desc:"Komenda obrazkowa"
 }

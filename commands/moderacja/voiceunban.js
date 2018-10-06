@@ -25,5 +25,8 @@ module.exports.run = async (client, message, args) => {
 
 module.exports.help = {
     name: "voiceunban",
-    aliases: ["unbanvoice"]
+    aliases: ["unbanvoice"],
+    name2:"voiceunban <wzmianka>",
+    desc:"Odblokuje możliwość wejścia na kanały głosowe osobie która dostała bana",
+    perms:"Przenieś członków"
 }

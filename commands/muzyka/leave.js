@@ -19,6 +19,7 @@ module.exports.run = async (client, message, args) => {
 
 module.exports.help = {
     name: "leave",
-    category: "MUZYKA",
-    aliases: ["disconnect"]
+    aliases: ["disconnect"],
+    name2: "leave",
+    desc: "Bot wychodzi z kanału głosowego"
 }

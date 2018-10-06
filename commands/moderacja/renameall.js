@@ -22,4 +22,7 @@ module.exports.run = async (client, message, args) => {
 
 module.exports.help = {
     name:"renameall",
+    name2:"renameall <pseudonim>",
+    desc:"Zmienia wszystkim pseudonimy na wpisany przez ciebie",
+    perms:"Zarządzanie pseudonimami"
 }

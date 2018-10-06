@@ -36,4 +36,7 @@ function req(method, url, token, num) {
 
 module.exports.help = {
     name:"slowmode",
+    name2:"slowmode <sekundy>",
+    desc:"Ustawia slowmode na kanał, 0 resetuje",
+    perms:"Zarządzanie kanałami"
 }
