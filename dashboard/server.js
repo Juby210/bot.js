@@ -29,7 +29,7 @@ module.exports = () => {
 
   app.get('/invite', (req, res) => res.redirect('https://discordapp.com/oauth2/authorize?client_id=' + bot.client.user.id + '&scope=bot&permissions=493937759'));
 
-  app.use('/api/discord', require('./api/discord'));
+  app.use('/api/dashboard', require('./api/dashboard'));
   
   app.listen(config.dashboard.port, () => {
     console.log(require("cli-colors").green('Dashboard uruchomiony na porcie ' + config.dashboard.port));

@@ -64,6 +64,21 @@ body {
     display: block;
     font-size: 15px;
 }
+.serwer2 {
+    background-color: #3d3a3d;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.serwer2 p {
+    display: block;
+    margin: 0px;
+    font-size: 18px;
+}
+.edytuj {
+    text-decoration: none; 
+    color: lightgreen; 
+    font-size: 15px;
+}
 #staty {
     float: left;
 }

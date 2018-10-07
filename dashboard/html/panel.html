@@ -9,19 +9,19 @@
         <title>Bot.js dashboard</title>
     </head>
     <body onload="load()">
-            <div id="topbar">
-                    <div id="title">
-                            <h3>Bot.js dashboard</h3>
-                    </div>
-                    <div id="menu">
-                        <ul>
-                            <li class="menuitem" onclick="window.open('/invite', '_blank')">Invite</li>
-                            <li class="menuitem" onclick="window.open('https://github.com/juby210-PL/bot.js', '_blank')">Kod źródłowy (GitHub)</li>
-                            <li class="menuitem" onclick="window.location = '/api/discord/logout'">Wyloguj</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="cls"></div>
+        <div id="topbar">
+            <div id="title">
+                    <h3>Bot.js dashboard</h3>
+            </div>
+            <div id="menu">
+                <ul>
+                    <li class="menuitem" onclick="window.open('/invite', '_blank')">Invite</li>
+                    <li class="menuitem" onclick="window.open('https://github.com/juby210-PL/bot.js', '_blank')">Kod źródłowy (GitHub)</li>
+                    <li class="menuitem" onclick="window.location = '/api/dashboard/logout'">Wyloguj</li>
+                </ul>
+            </div>
+        </div>
+        <div class="cls"></div>
         <div id="content2">
             <h2>Witaj</h2>
             <img id="user-av" src="defaultav.png">
@@ -56,9 +56,6 @@
                 </tr>
             </table>
             <div class="cls"></div>
-            <footer>
-                TODO: Zarządzanie voicebanami, welcome, autorole
-            </footer>
         </div>
     </body>
 </html>

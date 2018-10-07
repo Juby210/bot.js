@@ -18,6 +18,7 @@
     "express": "^4.16.3",
     "forever": "^0.15.3",
     "format4js": "^0.1.1",
+    "json-stringify-safe": "^5.0.1",
     "logform": "^1.9.1",
     "opusscript": "0.0.6",
     "pidusage": "^2.0.16",
