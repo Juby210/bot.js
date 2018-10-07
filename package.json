@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "btoa": "^1.2.1",
+    "cheerio": "^1.0.0-rc.2",
     "cli-colors": "0.0.2",
     "cookie-parser": "^1.4.3",
     "dblapi.js": "^2.2.0",
