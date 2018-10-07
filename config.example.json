@@ -12,7 +12,7 @@
 	},
 	"dashboard": {
 		"port": 80,
-		"callback_uri": "http://localhost/api/discord/callback",
+		"callback_uri": "http://localhost/api/dashboard/callback",
 		"client_id": "id bota",
 		"client_secret": "sekret bota"
 	},
