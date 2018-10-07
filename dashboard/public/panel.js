@@ -46,14 +46,20 @@ function load() {
                             var prefix = document.createElement("p");
                             prefix.className = "serwer-prefix";
                             prefix.innerText = `Prefix: ` + g.prefix;
-                            if(g.guild.owner) {
+                            if(g.perms) {
                                 prefix.innerHTML = prefix.innerText + ` <a href="#" id="${g.guild.id}z" onclick="zarzadzaj('${g.guild.id}')" style="text-decoration: none; color: lightgreen; font-size: 15px; margin-left: 15px;">Zarządzaj serwerem</a>`
                             }
                             serwer.appendChild(prefix);
 
                             var za = document.createElement("span");
                             za.className = "serwer-za";
-                            if(g.guild.owner) {za.innerText = "Tym serwerem możesz zarządzać"} else {za.innerText = "Tym serwerem nie możesz zarządzać"}
+                            if(g.guild.owner) {
+                                za.innerText = "Jesteś właścicielem, Możesz zarządzać tym serwerem";
+                            } else if (g.perms && !g.guild.owner) {
+                                za.innerText = "Masz uprawnienia do zarządzania tym serwerem";
+                            } else {
+                                za.innerText = "Nie możesz zarządzać tym serwerem";
+                            }
                             serwer.appendChild(za);
                             serwerd.appendChild(serwer);
                             serwery.appendChild(serwerd);
@@ -77,6 +83,7 @@ function zarzadzaj(gid) {
     var serwer = document.getElementById(`${gid}div`);
     if(document.getElementById(gid + "z").innerHTML == "Ukryj szczegóły") {
         serwer.removeChild(document.getElementById(gid + "s2"));
+        serwer.style.height = '50px';
         $(`#${gid}z`).html("Zarządzaj serwerem");
         return;
     }

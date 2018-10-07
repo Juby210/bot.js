@@ -29,6 +29,14 @@ function getuser(token) {
     });
 }
 
+function getperms(gid, userid) {
+    if(bot.client.guilds.get(gid).member(userid).hasPermission("ADMINISTRATOR") || bot.client.guilds.get(gid).member(userid).hasPermission("MANAGE_GUILD")) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 router.get('/callback', async (req, res) => {
     if (!req.query.code) throw new Error('NoCodeProvided');
     const code = req.query.code;
@@ -58,16 +66,21 @@ router.get('/guilds', async (req, res) => {
             },
             json: true
         }).then(async resp => {
+            var zr = 0;
             let objg = [];
             resp.forEach(async (srvv) => {
                 if(bot.client.guilds.get(srvv.id)){
                     await db.getPrefix(srvv.id).then(prefix => {
-                        if(prefix == false) prefix = config.settings.prefix;
-                        objg.push({prefix: prefix, guild: srvv});
+                        getuser(req.cookies.token).then(user => {
+                            if(prefix == false) prefix = config.settings.prefix;
+                            zr += 1;
+                            objg.push({prefix: prefix, perms: getperms(srvv.id, user.id), guild: srvv});
+                            if(zr == resp.length) res.send(objg);
+                        });
                     });
-                }
-            })
-            setTimeout(() => res.send(objg), 10);
+                } else zr += 1;
+                if(zr == resp.length) setTimeout(() => res.send(objg), 20);
+            });
         }).catch(err => {
             throw new Error(err.message);
         });
@@ -136,8 +149,8 @@ router.get('/prefix', async (req, res) => {
             if(req.query.prefix == undefined) {
                 res.status(404).send({status:"ERROR", message:"Prefix"})
             } else {
-                getuser(req.cookies.token).then(async resp => {
-                    if(bot.client.guilds.get(req.query.id).ownerID != resp.id) {
+                getuser(req.cookies.token).then(async user => {
+                    if(!getperms(req.query.id, user.id)) {
                         res.send({status:"ERROR", message:"Nie masz uprawnien"});
                     } else {
                         await db.update('guilds', req.query.id, 'prefix', req.query.prefix);
@@ -155,8 +168,8 @@ router.get('/prefix', async (req, res) => {
 router.get('/welcome', async (req, res) => {
     if(!util.isUndefined(req.cookies)) {
         if(util.isUndefined(req.cookies.token)) return notlogged(res);
-        getuser(req.cookies.token).then(async resp => {
-            if(bot.client.guilds.get(req.query.id).ownerID != resp.id) {
+        getuser(req.cookies.token).then(async user => {
+            if(!getperms(req.query.id, user.id)) {
                 res.send({status:"ERROR", message:"Nie masz uprawnien"});
             } else {
                 await db.update('guilds', req.query.id, 'welcome', {enabled: strToBool(req.query.enabled), channel: req.query.channel, msg: req.query.msg.replace(new RegExp("3ee3", "g"), "#")});
@@ -170,8 +183,8 @@ router.get('/welcome', async (req, res) => {
 router.get('/welcomechannel', async (req, res) => {
     if(!util.isUndefined(req.cookies)) {
         if(util.isUndefined(req.cookies.token)) return notlogged(res);
-        getuser(req.cookies.token).then(async resp => {
-            if(bot.client.guilds.get(req.query.id).ownerID != resp.id) {
+        getuser(req.cookies.token).then(async user => {
+            if(!getperms(req.query.id, user.id)) {
                 res.send({status:"ERROR", message:"Nie masz uprawnien"});
             } else {
                 var zn = false;
@@ -199,8 +212,8 @@ router.get('/welcomechannel', async (req, res) => {
 router.get('/autorole', async (req, res) => {
     if(!util.isUndefined(req.cookies)) {
         if(util.isUndefined(req.cookies.token)) return notlogged(res);
-        getuser(req.cookies.token).then(async resp => {
-            if(bot.client.guilds.get(req.query.id).ownerID != resp.id) {
+        getuser(req.cookies.token).then(async user => {
+            if(!getperms(req.query.id, user.id)) {
                 res.send({status:"ERROR", message:"Nie masz uprawnien"});
             } else {
                 if(strToBool(req.query.enabled)) {

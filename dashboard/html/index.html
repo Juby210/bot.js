@@ -29,5 +29,17 @@
             <br><button class="button" onclick="window.location = '/api/dashboard/login'">Zaloguj się do panelu</button>
             <br><br><footer>Ta strona używa cookies do poprawnego funkcjonowania<br>&copy; Juby210 & hamster 2018</footer>
         </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            $.ajax({
+                url: `api/dashboard/user`,
+                context: document.body,
+                success: function(data) {
+                    if(data.status == "OK") {
+                        window.location = '/panel';
+                    }
+                }
+            });
+        </script>
     </body>
 </html>
