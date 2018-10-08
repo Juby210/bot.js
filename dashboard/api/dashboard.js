@@ -108,16 +108,19 @@ router.get('/guild', async (req, res) => {
                     if(welcome == undefined || welcome == false) welcome = {enabled: false, channel: "", msg: ""};
                     await db.getAutorole(req.query.id).then(async autorole => {
                         if(autorole == undefined || autorole == false) autorole = {enabled: false, role: ""};
-                        await db.getVoiceBans(req.query.id).then(voiceban => {
+                        await db.getVoiceBans(req.query.id).then(async voiceban => {
                             if(voiceban == undefined || voiceban == false) voiceban = [];
-                            rp("https://discordapp.com/api/guilds/" + req.query.id, {
-                                method: 'GET',
-                                headers: {
-                                    Authorization: `Bot ${bot.client.token}`,
-                                },
-                                json: true
-                            }).then(resp => {
-                                res.send({prefix: prefix, welcome: welcome, autorole: autorole, voicebans: voiceban, guild: resp});
+                            await db.getGoodbye(req.query.id).then(goodbye => {
+                                if(goodbye == undefined || goodbye == false) goodbye = {enabled: false, channel: "", msg: ""};
+                                rp("https://discordapp.com/api/guilds/" + req.query.id, {
+                                    method: 'GET',
+                                    headers: {
+                                        Authorization: `Bot ${bot.client.token}`,
+                                    },
+                                    json: true
+                                }).then(resp => {
+                                    res.send({prefix: prefix, welcome: welcome, goodbye: goodbye, autorole: autorole, voicebans: voiceban, guild: resp});
+                                });
                             });
                         });
                     });
@@ -196,6 +199,50 @@ router.get('/welcomechannel', async (req, res) => {
                             if(welcome == undefined || welcome == false) welcome = {enabled: false, channel: "", msg: ""};
                             welcome.channel = ch.id;
                             await db.update('guilds', req.query.id, 'welcome', welcome);
+                        });
+                        res.send({status: "OK", channel: ch.id, name: ch.name});
+                    }
+                });
+                setTimeout(() => {
+                    if(!zn) res.send({status:"ERROR", message:"Nie znaleziono takiego kanału"});
+                }, 10);
+            }
+        }).catch(() => notlogged(res));
+    } else {
+        notlogged(res);
+    }
+})
+router.get('/goodbye', async (req, res) => {
+    if(!util.isUndefined(req.cookies)) {
+        if(util.isUndefined(req.cookies.token)) return notlogged(res);
+        getuser(req.cookies.token).then(async user => {
+            if(!getperms(req.query.id, user.id)) {
+                res.send({status:"ERROR", message:"Nie masz uprawnien"});
+            } else {
+                await db.update('guilds', req.query.id, 'goodbye', {enabled: strToBool(req.query.enabled), channel: req.query.channel, msg: req.query.msg.replace(new RegExp("3ee3", "g"), "#")});
+                res.send({status:"OK"});
+            }
+        }).catch(() => notlogged(res));
+    } else {
+        notlogged(res);
+    }
+})
+router.get('/goodbyechannel', async (req, res) => {
+    if(!util.isUndefined(req.cookies)) {
+        if(util.isUndefined(req.cookies.token)) return notlogged(res);
+        getuser(req.cookies.token).then(async user => {
+            if(!getperms(req.query.id, user.id)) {
+                res.send({status:"ERROR", message:"Nie masz uprawnien"});
+            } else {
+                var zn = false;
+                bot.client.guilds.get(req.query.id).channels.forEach(async ch => {
+                    if(zn) return;
+                    if(ch.name.toLowerCase().includes(req.query.channel.toLowerCase())) {
+                        zn = true;
+                        await db.getGoodbye(req.query.id).then(async goodbye => {
+                            if(goodbye == undefined || goodbye == false) goodbye = {enabled: false, channel: "", msg: ""};
+                            goodbye.channel = ch.id;
+                            await db.update('guilds', req.query.id, 'goodbye', goodbye);
                         });
                         res.send({status: "OK", channel: ch.id, name: ch.name});
                     }

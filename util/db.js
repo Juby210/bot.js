@@ -184,6 +184,21 @@ const getWelcome = async function getWelcome(gid) {
     }
 }
 
+const getGoodbye = async function getGoodbye(gid) {
+    if(gid) {
+        try {
+            var guild = await r.table('guilds').get(gid).toJSON().run(connection);
+            if(guild == null) return false;
+            return JSON.parse(guild).goodbye;
+        } catch(e) {
+            console.log(e);
+            return false; 
+        }
+    } else {
+        return false;
+    }
+}
+
 const getAutorole = async function getAutorole(gid) {
     if(gid) {
         try {
@@ -199,7 +214,6 @@ const getAutorole = async function getAutorole(gid) {
     }
 }
 
-exports.updateStats = updateStats;
 exports.check = check;
 exports.load = load;
 exports.update = update;
@@ -209,4 +223,5 @@ exports.getUrls = getUrls;
 exports.addUrl = addUrl;
 exports.getVoiceBans = getVoiceBans;
 exports.getWelcome = getWelcome;
+exports.getGoodbye = getGoodbye;
 exports.getAutorole = getAutorole;
