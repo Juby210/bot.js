@@ -9,8 +9,7 @@ const load = async function load() {
         console.log('Tworzenie tabeli.');
         await Promise.all([
             r.tableCreate("users").run(connection),
-            r.tableCreate("guilds").run(connection),
-            r.tableCreate("bot").run(connection)
+            r.tableCreate("guilds").run(connection)
         ]);
         console.log('Tabele zostaly stworzone.');
     } catch(error) {
@@ -65,20 +64,6 @@ const getPrefix = async function getPrefix(id) {
             const prefix = await JSON.parse(guild).prefix;
 
             return prefix;
-        } catch (e) {
-            console.error(e);
-            return false;
-        }
-    } else {
-        return false;
-    }
-};
-
-const updateStats = async function update(g, c, u) {
-    if(g && c && u){
-        try {
-            await r.table('bot').get(1).update({guilds: g, channels: c, users: u}).run(connection);
-            return true;
         } catch (e) {
             console.error(e);
             return false;
