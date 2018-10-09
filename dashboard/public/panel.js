@@ -139,7 +139,7 @@ function zarzadzaj(gid) {
             // Goodbye: //
 
             var goodbye = document.createElement('p');
-            goodbye.innerHTML = "<br>goodbye:";
+            goodbye.innerHTML = "<br>Goodbye:";
             goodbye.style.fontSize = '20px';
             goodbye.style.fontWeight = 'bold';
             serwer2.appendChild(goodbye);
@@ -230,7 +230,7 @@ function edytujwelcome(gid, enabled, channel, msg) {
         } else return;
     }
     if(msg == '' && enabled == 'true') {
-        var msg2 = prompt("Edytuj wiadomość: \n#USER# - zamieniane jest na nazwę użytkownika\n#MENTION# - zamieniane jest na wzmiankę użytkownika\n#GUILD# - zamieniane jest na nazwę serwera", oldmsg);
+        var msg2 = prompt("Edytuj wiadomość: \n#USER# - zamieniane jest na nazwę użytkownika\n#MENTION# - zamieniane jest na wzmiankę użytkownika\n#TAG# - zamieniane jest na tag użytkownika np. #1234\n#GUILD# - zamieniane jest na nazwę serwera");
         if(msg2 != null) {
             if(msg2 == "") {
                 alert("Wiadomość nie może być pusta");
@@ -321,7 +321,7 @@ function edytujgoodbye(gid, enabled, channel, msg) {
         } else return;
     }
     if(msg == '' && enabled == 'true') {
-        var msg2 = prompt("Edytuj wiadomość: \n#USER# - zamieniane jest na nazwę użytkownika\n#MENTION# - zamieniane jest na wzmiankę użytkownika\n#GUILD# - zamieniane jest na nazwę serwera", oldmsg);
+        var msg2 = prompt("Edytuj wiadomość: \n#USER# - zamieniane jest na nazwę użytkownika\n#MENTION# - zamieniane jest na wzmiankę użytkownika\n#TAG# - zamieniane jest na tag użytkownika np. #1234\n#GUILD# - zamieniane jest na nazwę serwera");
         if(msg2 != null) {
             if(msg2 == "") {
                 alert("Wiadomość nie może być pusta");
