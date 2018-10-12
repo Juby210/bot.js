@@ -19,7 +19,7 @@ module.exports.run = async (client, message, args) => {
             if(welcome.enabled) {
                 we.setDescription("Welcome na tym serwerze jest włączone:\nKanał: <#" + welcome.channel + ">\nWiadomość: `" + welcome.msg + "`\nInformacje o tej komendzie: `" + prefix + "info welcome`");
             } else {
-                we.setDescription("Welcome na tym serwerze jest wyłączone, aby włączyć sprawdź `" + prefix + "info welcome`");
+                we.setDescription("Welcome na tym serwerze jest wyłączone, aby włączyć sprawdź `" + prefix + "info welcome`\nLub włącz w [dashboardzie bota](https://botjs.juby.cf)");
             }
             we.setFooter("© Juby210", client.user.avatarURL);
             we.setTimestamp()

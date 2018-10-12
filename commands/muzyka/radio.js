@@ -1,10 +1,18 @@
 const Discord = require("discord.js");
 const config = require("../../config.json");
-const prefix = config.prefix;
+var playerf = require("./f/player.js");
 var queuefile = require("./f/queue.js");
 const snekfetch = require("snekfetch");
 
 module.exports.run = async (client, message, args) => {
+    let guildID;
+    if(!message.guild) {
+        guildID = '0';
+    } else {
+        guildID = message.guild.id;
+    }
+    const prefix = await db.getPrefix(guildID);
+
     if(args[0] == null) {
         var embed = new Discord.RichEmbed();
         embed.setColor("#ffd700");
@@ -32,34 +40,15 @@ module.exports.run = async (client, message, args) => {
             message.reply("najpierw wejdź na kanał głosowy!");
             return;
         }
-        var player = await client.player.get(message.guild.id);
-        if (!player) player = await client.player.join({
-            guild: message.guild.id,
-            channel: message.member.voiceChannel.id,
-            host: config.lavalink.host
-        }, { selfdeaf: true });
         let queue = queuefile.getqueue;
         queue[message.guild.id].songs = [];
         message.channel.send("<:mplay:488399581470785557> | Odtwarzanie: `" + radio.name + "`");
         await getSong(radio.url, async s => {
             s.tracks.forEach(cos => {
-                player.play(cos.track);
+                playerf.play(cos.track, client, message);
                 queue[message.guild.id].playing = true;
                 queuefile.song(message.guild.id, `Radio: ${radio.name}`, cos.info.author, cos.info.length, message.author.username, cos.info.uri, cos.track, Date.now());
             });
-        });
-        player.once("error", err => message.channel.send(err.error));
-        player.once("end", data => {
-            var next = queue[message.guild.id].songs.shift();
-            if(next == null) {
-                queue[message.guild.id].playing = false;
-            } else {
-                setTimeout(() => {
-                    player.play(next.track);
-                    queuefile.song(message.guild.id, next.title, next.channel, next.length, next.requester, next.uri, next.track, Date.now());
-                }, 400);
-            }
-            return;
         });
     }
 }

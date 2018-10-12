@@ -13,7 +13,6 @@ async function play(track, client, message) {
     player.play(track);
     queue[message.guild.id].playing = true;
 
-    player.once("error", err => message.channel.send(err.error));
     player.once("end", data => {
         var next = queue[message.guild.id].songs.shift();
         if(next == null) {
