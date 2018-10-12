@@ -3,6 +3,7 @@ const config = require("../../config.json");
 var playerf = require("./f/player.js");
 var queuefile = require("./f/queue.js");
 const snekfetch = require("snekfetch");
+var db = require("../../util/db");
 
 module.exports.run = async (client, message, args) => {
     let guildID;
