@@ -1,7 +1,10 @@
 const Discord = require("discord.js");
+const Jimp = require("jimp");
+const fs = require("fs");
+const dateFormat = require('dateformat');
 
 module.exports.run = async (client, message, args) => {
-    var gra = "Użytkownik w nic nie gra."
+    var gra = "brak"
     var stream = false;
     var member = null;
     var member2 = null;
@@ -31,33 +34,63 @@ module.exports.run = async (client, message, args) => {
         var gra = member.presence.game.name;
         stream = member.presence.game.streaming;
     } catch(err) {}
-    var role = "";
-    member2.roles.forEach(r => {
-        if (role == "") {
-            role += r.name;
-        } else {
-            role += ", " + r.name;
-        }
-    });
     var pseudo = member2.nickname;
     if(pseudo == null) {pseudo = member.username;}
-    var embed = new Discord.RichEmbed;
-    embed.setColor("0xf1c40f")
-    embed.setAuthor(member.tag, member.avatarURL);
-    embed.addField("Nick:", member.username, true);
-    embed.addField("Tag:", "#" + member.discriminator, true);
-    embed.addField("Pseudonim:", pseudo, true);
-    embed.addField("Gra:", gra);
-    embed.addField("Stream:", stream, true);
-    embed.addField("ID:", member.id, true);
-    embed.addField("Status:", member.presence.status, true);
-    embed.addField("Konto stworzone:", member.createdAt, true);
-    embed.addField("Dołączono na serwer:", member2.joinedAt, true);
-    embed.addField("Role [" + member2.roles.size + "]:", role, true);
-    embed.setThumbnail(member.avatarURL);
-    embed.setFooter("© Juby210 & hamster", client.user.avatarURL);
-    embed.setTimestamp()
-    message.channel.send(embed);
+    Jimp.read("img/userinfo.png").then(img => {
+        Jimp.read(member.avatarURL).then(imgg => {
+            imgg.resize(156, 156);
+            img.composite(imgg, 15, 15);
+            Jimp.loadFont(Jimp.FONT_SANS_32_WHITE).then(font32 => {
+                Jimp.loadFont(Jimp.FONT_SANS_16_WHITE).then(font16 => {
+                    Jimp.loadFont("img/sans.fnt").then(font20 => {
+                        Jimp.loadFont("img/sansbold.fnt").then(font20B => {
+                            img.print(font32, 190, 20, member.tag);
+                            if(pseudo != member.username) img.print(font16, 190, 7, `(${pseudo})`);
+                            var wgr = "W grze";
+                            if(stream) wgr = "Streamuje";
+                            if(gra == "Spotify") wgr = "Slucha";
+                            img.print(font20, 190, 54, wgr);
+                            var ee = Jimp.measureText(font20, wgr) + 195;
+                            img.print(font20B, ee, 54, gra);
+                            img.print(font20, 190, 150, member.presence.status);
+                            img.print(font20, 10, 180, `ID: ${member.id}`);
+                            img.print(font20B, 10, 215, "Konto stworzone:");
+                            img.print(font20, 10, 238, dateFormat(member.createdAt, "yyyy-mm-dd HH:mm:ss"));
+                            img.print(font20B, 10, 261, "Na serwerze od:");
+                            img.print(font20, 10, 284, dateFormat(member2.joinedAt, "yyyy-mm-dd HH:mm:ss"));
+
+                            img.print(font20B, 10, 319, "Role [" + (member2.roles.size - 1) + "]:");
+                            var role = 10;
+                            var y = 342;
+                            member2.roles.forEach(r => {
+                                if(r.name == "@everyone") return;
+                                if (role == 10) {
+                                    img.print(font20, role, y, r.name);
+                                    role += Jimp.measureText(font20, r.name);
+                                } else {
+                                    if(role + Jimp.measureText(font20, ", " + r.name) >= 510) {
+                                        y += 23;
+                                        role = 10;
+                                        img.print(font20, role, y, r.name);
+                                        role += Jimp.measureText(font20, r.name);
+                                    } else {
+                                        img.print(font20, role, y, ", " + r.name);
+                                        role += Jimp.measureText(font20, ", " + r.name);
+                                    }
+                                }
+                            });
+
+                            img.write("img/userinfo2.png");
+                            message.channel.send({files: [{
+                                attachment: "img/userinfo2.png",
+                                name: "userinfo.png"
+                            }]}).then(() => {try{fs.unlink("img/userinfo2.png")} catch(e) {}}).catch(err => require("../../index.js").anticrash(message.channel, err));
+                        });
+                    });
+                });
+            });
+        });
+    });
 }
 
 module.exports.help = {
