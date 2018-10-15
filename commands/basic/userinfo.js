@@ -3,7 +3,7 @@ const Jimp = require("jimp");
 const fs = require("fs");
 const dateFormat = require('dateformat');
 
-module.exports.run = async (client, message, args) => {
+module.exports.run = (client, message, args) => {
     var gra = "brak"
     var stream = false;
     var member = null;
@@ -22,7 +22,7 @@ module.exports.run = async (client, message, args) => {
                 }
             });
             if (zn2 == false) {
-                message.reply("Nie znaleziono takiego użytkownika!");
+                message.reply("nie znaleziono takiego użytkownika!");
                 return;
             }
         } else {
@@ -80,11 +80,12 @@ module.exports.run = async (client, message, args) => {
                                 }
                             });
 
-                            img.write("img/userinfo2.png");
+                            let r = Math.random().toString(36).substring(7) + ".png";
+                            img.write(`img/${r}`);
                             message.channel.send({files: [{
-                                attachment: "img/userinfo2.png",
+                                attachment: `img/${r}`,
                                 name: "userinfo.png"
-                            }]}).then(() => {try{fs.unlink("img/userinfo2.png")} catch(e) {}}).catch(err => require("../../index.js").anticrash(message.channel, err));
+                            }]}).then(() => {try{fs.unlink(`img/${r}`)} catch(e) {}}).catch(err => require("../../index.js").anticrash(message.channel, err));
                         });
                     });
                 });
