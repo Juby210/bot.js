@@ -30,7 +30,7 @@ module.exports.run = async (client, message, args) => {
         var res = JSON.parse(body);
         var embed = new Discord.RichEmbed();
         var icon_url = "https://nekos.life/static/icons/favicon-194x194.png"
-        embed.setDescription(member + " pogłaskał " + member2);
+        embed.setDescription(message.author + " pogłaskał " + member2);
         embed.setImage(res.url);
         embed.setColor("#E9A716");
         embed.setFooter("napędzane przez nekos.life", icon_url);
