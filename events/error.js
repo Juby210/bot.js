@@ -10,7 +10,6 @@ module.exports = (err) => {
     var embed = new Discord.RichEmbed();
     embed.setAuthor(`${index.client.user.username} - <:merror:489081457973919744> AntiCrash`);
     embed.setDescription(err);
-    embed.setFooter(`Jeśli chcesz uniknąć tego błędu w przyszłości zgłoś go do: Juby210#5831`);
     embed.addField(err.path, err.method);
     embed.setColor("#FF0000");
     owner.send(embed);

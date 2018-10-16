@@ -10,9 +10,8 @@ function crash(chan, err, sendToOwner = true) {
     var embed = new Discord.RichEmbed();
     embed.setAuthor(`${index.client.user.username} - <:merror:489081457973919744> AntiCrash`);
     embed.setDescription(err);
-    embed.setFooter(`Jeśli chcesz uniknąć tego błędu w przyszłości zgłoś go do: Juby210#5831`);
     embed.setColor("#FF0000");
-    if(chan != null) chan.send(embed);
+    if(chan != null) chan.send("<:merror:489081457973919744> | Poinformuj nas o tym błędzie: https://discord.gg/t3xWk4X lub zgłoś to do Juby210#5831, hamster#0001 ``" + err + "``");
     if(!sendToOwner) return;
     var owner = index.client.users.find("id", config.settings.ownerid);
     if(owner == undefined) {return;}

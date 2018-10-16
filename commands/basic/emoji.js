@@ -25,7 +25,7 @@ module.exports.run = async (client, message, args) => {
         if (!emoteInfo) return message.channel.send('To nie jest właściwa emotka!');
 
         var embed = new Discord.RichEmbed;
-        embed.setDescription("<:mlist:488406259230310440> | Informacje o emotce:\n**Nazwa**: :" + emoteInfo.name + ":\n**ID**: " + emoteInfo.id + "\n" + "[[Bezpośredni link do emotki]]" + "(" + emoteInfo.url + ")");
+        embed.setDescription("<:mlist:488406259230310440> | Informacje o emotce:\n**Nazwa**: :" + emoteInfo.name + ":\n**ID**: " + emoteInfo.id + "\n**Serwer**:" + emoteInfo.guild + "\n" + "[[Bezpośredni link do emotki]]" + "(" + emoteInfo.url + ")");
         embed.setThumbnail(emoteInfo.url);
         embed.setColor('#D5BEC6');
         embed.setFooter("© Juby210 & hamster", client.user.avatarURL);
