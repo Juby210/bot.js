@@ -1,8 +1,8 @@
 # bot.js - rewrite
-- Mój pierwszy testowy bot muzyczny do discorda. 
-  - Używa biblioteki discord.js.
-  - Do muzyki używa [lavalink'a](https://github.com/Frederikam/Lavalink/).
-  - Wymagany [RethinkDB](https://rethinkdb.com)
+- Wielofunkcyjny polski bot opensource pisany w js.
+  - Biblioteka: **discord.js**.
+  - Muzyka: **[lavalink'a](https://github.com/Frederikam/Lavalink/)**.
+  - Baza danych: **[RethinkDB](https://rethinkdb.com)**.
 
 [Strona bota](https://botjs.juby.cf)
 
