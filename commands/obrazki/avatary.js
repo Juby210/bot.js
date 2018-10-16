@@ -2,11 +2,12 @@ const Discord = require("discord.js");
 const request = require("request");
 
 module.exports.run = async (client, message, args) => {
-    req("GET", "http://badosz.com/api/img/coala").then(body => {
+    req("GET", "https://nekos.life/api/v2/img/avatar").then(body => {
         var res = JSON.parse(body);
         var embed = new Discord.RichEmbed();
-        embed.setImage(res.fulllink);
+        embed.setImage(res.url);
         embed.setColor("#E9A716");
+        embed.setFooter("napędzane przez nekos.life", icon_url);
         message.channel.send(embed);
     });
 }
@@ -25,7 +26,7 @@ function req(method, url) {
 }
 
 module.exports.help = {
-    name:"coala",
-    name2:"coala",
+    name:"avatary",
+    name2:"avatary",
     desc:"Komenda obrazkowa"
 }
