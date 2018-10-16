@@ -26,7 +26,7 @@ module.exports.run = async (client, message, args) => {
             member2 = message.guild.members.find('id', message.mentions.users.first().id);
         }
     }
-        req("GET", "https://nekos.life/api/v2/img/pat").then(body => {
+        req("GET", "https://nekos.life/api/v2/img/hug").then(body => {
         var res = JSON.parse(body);
         var embed = new Discord.RichEmbed();
         embed.setDescription(message.author + " przytulił " + member2);
