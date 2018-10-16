@@ -2,6 +2,8 @@ const Discord = require("discord.js");
 const request = require("request");
 
 module.exports.run = async (client, message, args) => {
+    var member = null;
+    var member2 = null;
     if(args[0] == null) {
         message.reply("Podaj użytkownika!");
         message.react("❌");
