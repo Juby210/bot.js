@@ -48,7 +48,6 @@ module.exports.run = async (client, message, args) => {
     embed.addField("Tag:", "#" + member.discriminator, true);
     embed.addField("Pseudonim:", pseudo, true);
     embed.addField("Gra:", gra);
-    embed.addField("Stream:", stream, true);
     embed.addField("ID:", member.id, true);
     embed.addField("Status:", member.presence.status, true);
     embed.addField("Konto stworzone:", member.createdAt, true);
