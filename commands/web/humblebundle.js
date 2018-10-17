@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
 const request = require("request");
-var index = require("../../index.js");
 
 module.exports.run = async (client, message, args) => {
     req("GET", `https://www.humblebundle.com/androidapp/v2/service_check`).then(body => {
@@ -16,7 +15,7 @@ module.exports.run = async (client, message, args) => {
             embed.setDescription(embed.description + "\nBrak");
         }
         message.channel.send(embed);
-    }).catch(err => require("../../events/anti.js").crash(message.channel, err));
+    }).catch(err => require("../../util/util").crash(message.channel, err));
 }
 
 function req(method, url) {

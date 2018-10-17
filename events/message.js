@@ -4,7 +4,6 @@ const prefix = config.prefix;
 const DBL = require("dblapi.js");
 var index = require("../index.js")
 let reqV = config.dbl.requireVote;
-var lock = false;
 const db = require('../util/db.js');
 
 module.exports = async (message, client) => {
@@ -18,9 +17,6 @@ module.exports = async (message, client) => {
 
     const prefix = await db.getPrefix(guildID);
     if(message.author.bot) return;
-    if(message.author.id != config.settings.ownerid) {
-        if(lock) return;
-    }
     if (message.mentions.users.first() == null) {} else {
         if (message.content != message.mentions.users.first()) {} else {
             if (message.mentions.users.first().id == client.user.id) {message.reply("mój prefix to `" + prefix + "`!");}

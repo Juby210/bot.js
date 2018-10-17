@@ -1,8 +1,6 @@
 const Discord = require("discord.js");
 const config = require("../../config.json");
-const prefix = config.prefix;
 var queuefile = require("./f/queue.js");
-var index = require("../../index.js");
 
 module.exports.run = async (client, message, args) => {
     var emojiguild = client.guilds.get("488293188247879680");

@@ -21,7 +21,6 @@ var clc = require("cli-colors");
 require('./events/eventLoader')(client);
 
 module.exports.client = client;
-module.exports.anticrash = async (chan, err, sendToOwner = true) => require("./events/anti.js").crash(chan, err, sendToOwner);
 fs.readdirSync('./commands/').forEach(category => {
     const commandFile = fs.readdirSync(`./commands/${category}`).filter(file => file.endsWith('.js'));
     for (const file of commandFile) {

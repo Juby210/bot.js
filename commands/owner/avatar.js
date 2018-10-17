@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
 const config = require("../../config.json");
-const prefix = config.prefix;
-const index = require("../../index.js");
+const util = require("../../util/util");
 
 module.exports.run = async (client, message, args) => {
     if(message.author.id != config.settings.ownerid && message.author.id != config.settings.devid) return;
@@ -13,13 +12,13 @@ module.exports.run = async (client, message, args) => {
             message.attachments.forEach(function(a) {
                 client.user.setAvatar(a.url)
                 .then(user => message.react("✅"))
-                .catch(err => require("../../events/anti.js").crash(message.channel, err));
+                .catch(err => util.crash(message.channel, err));
             });
         }
     } else {
         client.user.setAvatar(args[0])
         .then(user => message.react("✅"))
-        .catch(err => require("../../events/anti.js").crash(message.channel, err));
+        .catch(err => util.crash(message.channel, err));
     }
 }
 

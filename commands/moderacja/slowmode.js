@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
 const request = require("request");
-var index = require("../../index.js");
 const config = require("../../config.json");
 
 module.exports.run = async (client, message, args) => {
@@ -14,7 +13,7 @@ module.exports.run = async (client, message, args) => {
         } else {
             message.channel.send(`Ustawiono na **${args[0]}sek**!`);
         }
-    }).catch(err => require("../../events/anti.js").crash(message.channel, err));
+    }).catch(err => require("../../util/util").crash(message.channel, err));
 }
 
 function req(method, url, token, num) {

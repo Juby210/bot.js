@@ -10,10 +10,20 @@ module.exports.run = async (client, message, args) => {
     loadcommands(commands => {
         commands.forEach(c => {
             if(c.help.name == args[0]) {
+                if(client.commands.get(args[0]).help.aliases != undefined) {
+                    client.commands.get(args[0]).help.aliases.forEach(alias => {
+                        client.commands.delete(alias);
+                    });
+                }
                 delete require.cache[require.resolve(`../${c.category}/${c.file}`)];
                 client.commands.delete(args[0]);
                 const props = require(`../${c.category}/${c.file}`);
                 client.commands.set(props.help.name, props);
+                if(client.commands.get(args[0]).aliases != undefined) {
+                    props.help.aliases.forEach(alias => {
+                        client.commands.set(alias, props);
+                    });
+                }
                 message.reply(`komenda **${props.help.name}** została załadowana z **./commands/${c.category}/${c.file}**!`);
             }
         });

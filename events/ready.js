@@ -3,7 +3,7 @@ var clc = require("cli-colors");
 var queuefile = require('../commands/muzyka/f/queue.js');
 const config = require("../config.json");
 var index = require('../index.js');
-var ustaw = require("./ustaw.js");
+var util = require("../util/util");
 const db = require('../util/db.js');
 let queue = queuefile.getqueue;
 const DBL = require("dblapi.js");
@@ -12,7 +12,7 @@ module.exports = (client) => {
     console.log(clc.cyan(`${client.user.tag} działa`));
     client.user.setStatus(config.settings.status);
     module.exports.emojiguild = client.guilds.get("488293188247879680");
-    ustaw.status(index.client);
+    util.ustawstatus(index.client);
     db.load();
     require("../dashboard/server")();
     if(config.dbl.usedbl) {

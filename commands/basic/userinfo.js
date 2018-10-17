@@ -48,12 +48,14 @@ module.exports.run = (client, message, args) => {
                             if(pseudo != member.username) img.print(font16, 190, 7, `(${pseudo})`);
                             var wgr = "W grze";
                             if(stream) wgr = "Streamuje";
-                            if(gra == "Spotify") wgr = "Slucha";
+                            if(gra == "Spotify") wgr = "Słucha";
                             img.print(font20, 190, 54, wgr);
                             var ee = Jimp.measureText(font20, wgr) + 195;
                             img.print(font20B, ee, 54, gra);
                             img.print(font20, 190, 150, member.presence.status);
-                            img.print(font20, 10, 180, `ID: ${member.id}`);
+                            img.print(font20B, 10, 180, `ID:`);
+                            var eee = Jimp.measureText(font20B, "ID:") + 15;
+                            img.print(font20, eee, 180, member.id);
                             img.print(font20B, 10, 215, "Konto stworzone:");
                             img.print(font20, 10, 238, dateFormat(member.createdAt, "yyyy-mm-dd HH:mm:ss"));
                             img.print(font20B, 10, 261, "Na serwerze od:");
@@ -85,7 +87,7 @@ module.exports.run = (client, message, args) => {
                             message.channel.send({files: [{
                                 attachment: `img/${r}`,
                                 name: "userinfo.png"
-                            }]}).then(() => {try{fs.unlink(`img/${r}`)} catch(e) {}}).catch(err => require("../../index.js").anticrash(message.channel, err));
+                            }]}).then(() => {try{fs.unlink(`img/${r}`)} catch(e) {}}).catch(err => require("../../util/util").crash(message.channel, err));
                         });
                     });
                 });

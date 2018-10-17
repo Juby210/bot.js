@@ -1,13 +1,12 @@
 const Discord = require('discord.js');
 const config = require("../../config.json");
-var anti = require("../../events/anti.js");
-const prefix = config.prefix;
+var util = require("../../util/util");
 
 module.exports.run = async (client, message, args) => {
     if(message.author.id != config.settings.ownerid && message.author.id != config.settings.devid) return;
     var evalv = null;
     var text = args.slice(0).join(" ");
-    try {evalv = eval(text);} catch(err) {anti.crash(message.channel, err, false); return;}
+    try {evalv = eval(text);} catch(err) {util.crash(message.channel, err, false); return;}
     var embed = new Discord.RichEmbed();
     embed.setColor("#0FF49A");
     embed.setAuthor("EVAL - JS");

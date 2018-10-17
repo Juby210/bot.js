@@ -1,9 +1,6 @@
 const db = require("../util/db.js");
-var lock = false;
-var index = require("../index.js");
 
 module.exports = async (oldMem, newMem) => {
-    if(lock) return;
     var vChannel = newMem.voiceChannel;
     if(vChannel == null) return;
     var zn = false;
@@ -15,6 +12,6 @@ module.exports = async (oldMem, newMem) => {
         if(!zn) return;
         newMem.guild.createChannel("Kick", "voice").then(vChan => {
             newMem.setVoiceChannel(vChan).then(mem => vChan.delete());
-        }).catch(err => require("./anti.js").crash(null, err));
+        }).catch(err => require("../util/util").crash(null, err));
     });
 }

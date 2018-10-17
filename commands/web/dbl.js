@@ -3,6 +3,7 @@ const config = require("../../config.json");
 const db = require("../../util/db.js");
 var rp = require("request-promise");
 var cheerio = require('cheerio');
+const util = require("../../util/util");
 
 module.exports.run = async (client, message, args) => {
     let guildID;
@@ -39,7 +40,7 @@ module.exports.run = async (client, message, args) => {
             message.channel.send(embed);
         }).catch(err => {
             if(err.status == 404) return message.channel.send("Nie znaleziono!");
-            require("../../events/anti.js").crash(message.channel, err, false);
+            util.crash(message.channel, err, false);
         });
     } else {
         dbl.getUser(useri).then(user => {
@@ -78,11 +79,11 @@ module.exports.run = async (client, message, args) => {
                 }
                 message.channel.send(embed);
             }).catch(err => {
-                require("../../events/anti.js").crash(message.channel, err, false);
+                util.crash(message.channel, err, false);
             });
         }).catch(err => {
             if(err.status == 404) return message.channel.send("Nie znaleziono!");
-            require("../../events/anti.js").crash(message.channel, err, false);
+            util.crash(message.channel, err, false);
         });
     }
 }
