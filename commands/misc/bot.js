@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 var usage = require('pidusage');
 const db = require("../../util/db.js");
+const util = require("../../util/util");
 
 module.exports.run = async (client, message, args) => {
     let guildID;
@@ -32,8 +33,12 @@ module.exports.run = async (client, message, args) => {
                 embed.addField("Użytkownicy:", client.users.size - 1, true);
                 embed.addField("Kanały:", client.channels.size, true);
                 embed.addField("Serwery:", client.guilds.size, true);
-                embed.setFooter(`${client.user.username} - Autor: Juby210#5831 & hamster#0001`, client.user.avatarURL);
-                message.channel.send(embed);
+                util.getUsername("324622488644616195").then(juby => {
+                    util.getUsername("321665259842830336").then(hamster => {
+                        embed.setFooter(`${client.user.username} - Autorzy: ${juby} & ${hamster}`, client.user.avatarURL);
+                        message.channel.send(embed);
+                    });
+                });
             });
             break;
         case "uptime":
