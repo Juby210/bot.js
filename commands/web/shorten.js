@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const config = require("../../config.json");
-const prefix = config.prefix;
+const util = require("../../util/util");
 const request = require("request");
 const db = require("../../util/db.js");
 
@@ -13,7 +13,7 @@ module.exports.run = async (client, message, args) => {
     }
     const prefix = await db.getPrefix(guildID);
     if(!config.yourls.useyourls) {message.channel.send(`Właściciel bota nie skonfigurował skracacza linków.`); return;}
-    if(args[0] == null) {message.channel.send(`Nieprawidłowa ilość argumentów. Sprawdź poprawne użycie: ${prefix}info ${command}`); return;}
+    if(args[0] == null) {message.channel.send(`Nieprawidłowa ilość argumentów. Sprawdź poprawne użycie: ${prefix}info shorten`); return;}
     var cust = false;
     if(args[1] != null) cust = true;
     if(cust) {
@@ -24,8 +24,16 @@ module.exports.run = async (client, message, args) => {
             if (error) return;
             if (response.statusCode == 200) {
                 var result = JSON.parse(body);
-                message.channel.send("Oto twój krótki url: " + result.shorturl);
-                await db.addUrl(result.shorturl, args[0], message.author.id);
+                if(result.status == "fail") {
+                    if(result.code == "error:keyword") {
+                        message.channel.send("Ten skrót jest już zajęty, użyj innego.");
+                    } else {
+                        util.crash(message.channel, err);
+                    }
+                } else {
+                    message.channel.send("Oto twój krótki url: " + result.shorturl);
+                    await db.addUrl(result.shorturl, args[0], message.author.id);    
+                }
             }
         });
     } else {
@@ -36,8 +44,12 @@ module.exports.run = async (client, message, args) => {
             if (error) return;
             if (response.statusCode == 200) {
                 var result = JSON.parse(body);
-                message.channel.send("Oto twój krótki url: " + result.shorturl);
-                await db.addUrl(result.shorturl, args[0], message.author.id);
+                if(result.status == "fail") {
+                    util.crash(message.channel, err);
+                } else {
+                    message.channel.send("Oto twój krótki url: " + result.shorturl);
+                    await db.addUrl(result.shorturl, args[0], message.author.id);
+                }
             }
         });
     }
