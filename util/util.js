@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const config = require("../config.json");
 var index = require("../index.js");
 const prefix = config.settings.prefix;
+const request = require("request");
 
 const crash = function AntiCrash(chan, err, sendToOwner = true) {
     console.log("AntiCrash:");
@@ -26,7 +27,20 @@ const ustawstatus = function ustawstatus(client = new Discord.Client()) {
             client.user.setPresence({ game: {name: `${prefix}help | ${client.guilds.size} serwerów`, type: 'LISTENING' }});
         }
     } catch(err) {}
-} 
+}
+
+const req = function req(method, url) {
+    return new Promise((resolve, reject) => {
+        request({
+            method: method,
+            url: url
+        }, (error, response, body) => {
+            if (error) return reject(error);
+            resolve(body);
+        });
+    }).catch(err => console.log(err));
+}
 
 module.exports.crash = crash;
 module.exports.ustawstatus = ustawstatus;
+module.exports.req = req;
