@@ -42,7 +42,7 @@ module.exports.run = async (client, message, args) => {
                     channel: message.member.voiceChannel.id,
                     host: config.lavalink.host
                 }, { selfdeaf: true });
-                queuefile.addsong(message.guild.id, song.track, song.info.uri, song.info.title, song.info.length, song.info.author, message.author.username);
+                queuefile.addsong(message.guild.id, song.track, song.info.uri, song.info.title.replace(/`/g, "'"), song.info.length, song.info.author, message.author.username);
             });
             message.channel.send("<:mcheck_mark:488416404706426880> | Załadowano `" + c + "` utworów!");
             setTimeout(async () => {
@@ -51,8 +51,8 @@ module.exports.run = async (client, message, args) => {
                     var song = queue[message.guild.id].songs.shift();
                     if(!song) return;
                     playerf.play(song.track, client, message);
-                    queuefile.song(message.guild.id, song.title, song.channel, song.length, song.requester, song.url, song.track, Date.now());
-                    message.channel.send("<:mplay:488399581470785557> | Odtwarzanie: `" + song.title + "` z **" + song.channel + "**");
+                    queuefile.song(message.guild.id, song.title.replace(/`/g, "'"), song.channel, song.length, song.requester, song.url, song.track, Date.now());
+                    message.channel.send("<:mplay:488399581470785557> | Odtwarzanie: `" + song.title.replace(/`/g, "'") + "` z **" + song.channel + "**");
                 }
             }, 300);
         } else {
@@ -73,12 +73,12 @@ async function play(song, message, client) {
         host: config.lavalink.host
     }, { selfdeaf: true });
     if(player.playing) {
-        queuefile.addsong(message.guild.id, song.track, song.info.uri, song.info.title, song.info.length, song.info.author, message.author.username);
-        message.channel.send("<:mplus:488416560445390878> | Dodano do kolejki: `" + song.info.title + "` z **" + song.info.author + "**");
+        queuefile.addsong(message.guild.id, song.track, song.info.uri, song.info.title.replace(/`/g, "'"), song.info.length, song.info.author, message.author.username);
+        message.channel.send("<:mplus:488416560445390878> | Dodano do kolejki: `" + song.info.title.replace(/`/g, "'") + "` z **" + song.info.author + "**");
     } else {
         playerf.play(song.track, client, message);
-        queuefile.song(message.guild.id, song.info.title, song.info.author, song.info.length, message.author.username, song.info.uri, song.track, Date.now());
-        message.channel.send("<:mplay:488399581470785557> | Odtwarzanie: `" + song.info.title + "` z **" + song.info.author + "**");
+        queuefile.song(message.guild.id, song.info.title.replace(/`/g, "'"), song.info.author, song.info.length, message.author.username, song.info.uri, song.track, Date.now());
+        message.channel.send("<:mplay:488399581470785557> | Odtwarzanie: `" + song.info.title.replace(/`/g, "'") + "` z **" + song.info.author + "**");
     }
 }
 

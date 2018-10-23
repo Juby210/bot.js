@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const config = require("../../config.json");
+const util = require("../../util/util");
 var queuefile = require("./f/queue.js");
 
 module.exports.run = async (client, message, args) => {
@@ -12,12 +12,8 @@ module.exports.run = async (client, message, args) => {
     var embed = new Discord.RichEmbed;
     embed.setAuthor("Odtwarzanie: ", client.user.avatarURL);
     embed.setTitle(song.title);
-    var t1 = "00:00";
-    var t2 = "00:00";
-    var t1n = Date.now() - song.date;
-    var t2n = song.length;
-    formatlength(t1n, nt1 => t1 = nt1, false);
-    formatlength(t2n, nt2 => t2 = nt2);
+    var t1 = util.formatLength(Date.now() - song.date, false);
+    var t2 = util.formatLength(song.length);
     embed.setDescription("`" + t1 + " / " + t2 + "`\n" + `[Link](${song.url})`);
     if(song.url.startsWith("https://www.youtube.com/")) {
         var id = song.url.replace("https://www.youtube.com/watch?v=", "");
@@ -42,23 +38,6 @@ module.exports.run = async (client, message, args) => {
             }
         });
     });
-}
-
-function formatlength(ms, callback, replace = true) {
-    var h = Math.floor(ms / 1000 / 60 / 60);
-    var min = Math.floor(ms / 1000 / 60 - h * 60);
-    var sec = Math.floor(ms / 1000 - min * 60);
-    
-    var uh = false;
-    if (!h == 0) {uh = true; if(h <= 9) {h = "0" + h;}}
-    if (min <= 9) min = "0" + min;
-    if (sec <= 9) sec = "0" + sec;
-    var time = "";
-    if(uh) {if(h >= 200) {time = "LIVE";} else {time = `${h}:${min}:${sec}`;}} else {time = `${min}:${sec}`;}
-    if(replace) {
-        if(time == "00:00") {callback("LIVE"); return;}
-    }
-    callback(time);
 }
 
 module.exports.help = {
