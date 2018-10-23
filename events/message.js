@@ -1,15 +1,13 @@
 const Discord = require('discord.js');
 const config = require("../config.json");
-const prefix = config.prefix;
 const DBL = require("dblapi.js");
-var index = require("../index.js")
 let reqV = config.dbl.requireVote;
 const db = require('../util/db.js');
 
 module.exports = async (message, client) => {
     let guildID;
     if(!message.guild) {
-        guildID = '0';
+        return;
     } else {
         guildID = message.guild.id;
     }
@@ -23,7 +21,6 @@ module.exports = async (message, client) => {
         }
     }
     if (!message.content.startsWith(prefix)) return;
-    const dbl = new DBL(config.tokens.dbl, client);
 
     let messageArray = message.content.split(" ");
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
@@ -31,29 +28,29 @@ module.exports = async (message, client) => {
     let cmod = messageArray[0];
     let commandfile = client.commands.get(cmod.slice(prefix.length));
 
-    if(config.dbl.usedbl) {
-        if (!reqV.hasOwnProperty(command)) {if(commandfile) commandfile.run(client,message,args,db,guildID);} else {
-            if(reqV[command] == true) {
-                dbl.hasVoted(message.author.id).then(v => {
-                    if(!v) {
-                        var embed = new Discord.RichEmbed();
-                        embed.setColor("#A61818");
-                        embed.setTitle("Ta komenda jest niedostępna dla ciebie");
-                        embed.setDescription(`Aby mieć dostęp do tej komendy zagłosuj na tego bota na [discordbots.org](https://discordbots.org/bot/${client.user.id}/vote)`);
-                        embed.setFooter("Jeśli już zagłosowałeś poczekaj ok. 2 min");
-                        message.channel.send(embed);
-                        return;
-                    } else {
-                        if(commandfile) commandfile.run(client,message,args,db,guildID);
-                    }
-                }).catch(err => {
-                    if(commandfile) commandfile.run(client,message,args,db,guildID);
-                });
+    runcmd(command, commandfile, args, message, client, guildID);
+}
+
+function runcmd(command, commandfile, args, message, client, guildID) {
+    const dbl = new DBL(config.tokens.dbl, client);
+
+    if(config.dbl.usedbl && reqV[command] && message.author.id != config.settings.ownerid) {
+        dbl.hasVoted(message.author.id).then(v => {
+            if(!v) {
+                var embed = new Discord.RichEmbed();
+                embed.setColor("#A61818");
+                embed.setTitle("Ta komenda jest niedostępna dla ciebie");
+                embed.setDescription(`Aby mieć dostęp do tej komendy zagłosuj na tego bota na [discordbots.org](https://discordbots.org/bot/${client.user.id}/vote)`);
+                embed.setFooter("Jeśli już zagłosowałeś poczekaj ok. 2 min");
+                message.channel.send(embed);
+                return;
             } else {
-                if(commandfile) commandfile.run(client,message,args,db,guildID);
+                if(commandfile) commandfile.run(client, message, args, db, guildID);
             }
-        }
+        }).catch(err => {
+            if(commandfile) commandfile.run(client, message, args, db, guildID);
+        });
     } else {
-        if(commandfile) commandfile.run(client,message,args,db,guildID);
+        if(commandfile) commandfile.run(client, message, args, db, guildID);
     }
 }
