@@ -28,8 +28,8 @@ module.exports.run = async (client, message, args) => {
         embed.setDescription("<:mlist:488406259230310440> | Informacje o emotce:\n**Nazwa**: :" + emoteInfo.name + ":\n**ID**: " + emoteInfo.id + "\n**Serwer**:" + emoteInfo.guild + "\n" + "[[Bezpośredni link do emotki]]" + "(" + emoteInfo.url + ")");
         embed.setThumbnail(emoteInfo.url);
         embed.setColor('#D5BEC6');
-        embed.setFooter("© Juby210 & hamster", client.user.avatarURL);
-        embed.setTimestamp()        
+        embed.setFooter("Wykonane przez: " + message.author.tag + " (" + message.author.id + ")", client.user.avatarURL);
+        embed.setTimestamp()   
         return message.channel.send(embed);
     }
 }

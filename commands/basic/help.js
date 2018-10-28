@@ -69,7 +69,7 @@ module.exports.run = async (client, message, args) => {
       embed.addField("INFORMACJA O KOMENDZIE", "`" + `${prefix}info <komenda>` + "`");
       embed.addBlankField();
       embed.addField("🔗 Przydatne linki:\n", "[[Dashboard]](" + strona + ") - Strona bota." + "\n" + "[[GitHub]](" + github + ") - Kod opensource bota.", true);
-      embed.setFooter("© Juby210 & hamster", client.user.avatarURL);
+      embed.setFooter("Wykonane przez: " + message.author.tag + " (" + message.author.id + ")", client.user.avatarURL);
       embed.setTimestamp()
       message.channel.send(embed);
 }

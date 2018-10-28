@@ -77,6 +77,8 @@ module.exports.run = async (client, message, args) => {
                 if(boty.length != 0) {
                     embed.addField("Boty:", boty.join(", "));
                 }
+                embed.setFooter("Wykonane przez: " + message.author.tag + " (" + message.author.id + ")", client.user.avatarURL);
+                embed.setTimestamp()
                 message.channel.send(embed);
             }).catch(err => {
                 util.crash(message.channel, err, false);
