@@ -18,10 +18,10 @@ module.exports.run = async (client, message, args) => {
                 delete require.cache[require.resolve(`../${c.category}/${c.file}`)];
                 client.commands.delete(args[0]);
                 const props = require(`../${c.category}/${c.file}`);
-                client.commands.set(props.help.name, props);
+                client.commands.set(props.help.name, {category: c.category, run: props.run, help: props.help});
                 if(client.commands.get(args[0]).aliases != undefined) {
                     props.help.aliases.forEach(alias => {
-                        client.commands.set(alias, props);
+                        client.commands.set(alias, {category: c.category, run: props.run, help: props.help});
                     });
                 }
                 message.reply(`komenda **${props.help.name}** została załadowana z **./commands/${c.category}/${c.file}**!`);

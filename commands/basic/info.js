@@ -20,21 +20,16 @@ module.exports.run = async (client, message, args) => {
             break; 
         default:
             var zn = false;
-            loadcommands(co => {
-                co.forEach(c => {
-                    if(args[0] == c.help.name) {
-                        zn = true;
-                        embed.addField(prefix + c.help.name2, c.help.desc);
-                        if(c.help.aliases) {
-                            embed.addField("Aliasy:", c.help.aliases.join(", "));
-                        }
-                        if(c.help.perms) embed.setFooter("Wymagane uprawnienia: " + c.help.perms);
-                    }
-                });
-                if(!zn) {
-                    embed.setTitle("Nie znam takiej komendy, polecam sprawdzić `" + prefix + "help`");
+            var c = client.commands.get(args[0]);
+            if(!c) {
+                embed.setTitle("Nie znam takiej komendy, polecam sprawdzić `" + prefix + "help`");
+            } else {
+                embed.addField(prefix + c.help.name2, c.help.desc);
+                if(c.help.aliases) {
+                    embed.addField("Aliasy:", c.help.aliases.join(", "));
                 }
-            });
+                if(c.help.perms) embed.setFooter("Wymagane uprawnienia: " + c.help.perms);
+            }
     }
     if(args[0] == null) embed.setTitle("Może byś dał jakąś komendę bo chyba nie chcesz info o komendzie info?");
     message.channel.send(embed);
@@ -42,16 +37,4 @@ module.exports.run = async (client, message, args) => {
 
 module.exports.help = {
     name:"info"
-}
-
-function loadcommands(callback) {
-    var commands = [];
-    fs.readdirSync('./commands/').forEach(category => {
-      const commandFile = fs.readdirSync(`./commands/${category}`).filter(file => file.endsWith('.js'));
-      for (const file of commandFile) {
-          const props = require(`../${category}/${file}`);
-          commands.push({category: category, help: props.help});
-      }
-    });
-    callback(commands);
 }

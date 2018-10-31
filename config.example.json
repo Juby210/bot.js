@@ -8,7 +8,8 @@
 	"tokens": {
 		"token": "twój token bota",
 		"dbl": "token z dicsordbots.org",
-		"yourls": "klucz do api"
+		"yourls": "klucz do api",
+		"badosz": "token z api.badosz.com"
 	},
 	"dashboard": {
 		"port": 80,

@@ -76,6 +76,7 @@ module.exports.run = async (client, message, args) => {
 
 module.exports.help = {
   name:"help",
+  aliases: ["?", "pomoc", "h"],
   name2:"help",
   desc:"No poprostu lista komend bota..."
 }

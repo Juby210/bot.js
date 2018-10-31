@@ -78,8 +78,31 @@ const formatLength = function formatLength(ms, replace = true) {
     return time;
 }
 
+const searchUser = function searchUser(message, string, returnAuthor = true) {
+    return new Promise((resolve, reject) => {
+        if(message.mentions.users.first() == null) {
+            if(string == null) return resolve(message.author);
+            var zn = false;
+            message.guild.members.forEach(member => {
+                if(zn) return;
+                if(member.user.username.toLowerCase().includes(string)) {
+                    zn = true;
+                    return resolve(member.user);
+                }
+            });
+            if(!zn) resolve(message.author);
+        } else resolve(message.mentions.users.first());
+    }).catch(err => console.log(err));
+}
+
+const polskieliterytoblad = function polskieliterytoblad(string) {
+    return string.replace(/ą/g, "a").replace(/ę/g, "e").replace(/ć/g, "c").replace(/ń/g, "n").replace(/ł/g, "l").replace(/ó/g, "o").replace(/ś/g, "s").replace(/ź/g, "z").replace(/ż/g, "z").replace(/Ą/g, "A").replace(/Ę/g, "E").replace(/Ć/g, "C").replace(/Ń/g, "N").replace(/Ł/g, "L").replace(/Ó/g, "O").replace(/Ś/g, "S").replace(/Ź/g, "Z").replace(/Ż/g, "Z");
+}
+
 module.exports.crash = crash;
 module.exports.ustawstatus = ustawstatus;
 module.exports.req = req;
 module.exports.getUsername = getUsername;
 module.exports.formatLength = formatLength;
+module.exports.searchUser = searchUser;
+module.exports.polskieliterytoblad = polskieliterytoblad;
