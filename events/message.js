@@ -3,6 +3,7 @@ const config = require("../config.json");
 const DBL = require("dblapi.js");
 let reqV = config.dbl.requireVote;
 const db = require('../util/db.js');
+var logger = require("../util/logger.js");
 
 module.exports = async (message, client) => {
     let guildID;
@@ -29,6 +30,7 @@ module.exports = async (message, client) => {
     let commandfile = client.commands.get(cmod.slice(prefix.length));
 
     runcmd(command, commandfile, args, message, client, guildID);
+    if(config.logs.enabled) if(commandfile) logger.log(commandfile.help.name, args, message);
 }
 
 function runcmd(command, commandfile, args, message, client, guildID) {

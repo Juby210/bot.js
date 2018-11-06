@@ -5,6 +5,12 @@
 		"status": "online",
 		"prefix": "^"
 	},
+	"logs":{
+		"enabled":false,
+		"webhookid":"id webhooka",
+		"webhooktoken":"token webhooka",
+		"commands":["avatar", "olduserinfo", "userinfo", "changemymind", "trump", "wanted", "wasted"]
+	},
 	"tokens": {
 		"token": "twój token bota",
 		"dbl": "token z dicsordbots.org",
