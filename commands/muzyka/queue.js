@@ -4,6 +4,7 @@ var queuefile = require("./f/queue.js");
 
 module.exports.run = async (client, message, args) => {
     let queue = queuefile.getqueue;
+    var song = queue[message.guild.id].song;
     let tosend = [];
     queue[message.guild.id].songs.forEach((song, i) => { tosend.push({c: i+1, title: song.title, requester: song.requester, length: song.length});});
     if(tosend == []) {
@@ -12,6 +13,7 @@ module.exports.run = async (client, message, args) => {
     }
     const embed = new Discord.RichEmbed;
     embed.setTitle(`Kolejka serwera ${message.guild.name}:`);
+    embed.setDescription('Teraz gram: **' + song.title + "**")
     tosend.forEach(e => {
         if(e.c >= 26) {embed.setFooter("Cała kolejka się nie zmieściła ;d"); return;}
         var length = util.formatLength(e.length);
