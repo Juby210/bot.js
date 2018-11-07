@@ -12,10 +12,15 @@ module.exports.run = async (client, message, args) => {
         message.channel.send("Kolejka tego serwera jest pusta!");
         return;
     }
+
+    if (!player) {
+        message.channel.send('Kolejka jest pusta, dołącz do kanału z botem i dodaj piosenki.');
+        return;
+    }
     const embed = new Discord.RichEmbed;
     embed.setTitle(`Kolejka serwera ${message.guild.name}:`);
     embed.setDescription('Teraz gram: **' + song.title + "**")
-    if (!player.playing) embed.setDescription('Teraz gram: **Brak**');
+    if (!player.playing) embed.setDescription('Teraz gram: **Brak**')
     tosend.forEach(e => {
         if(e.c >= 26) {embed.setFooter("Cała kolejka się nie zmieściła ;d"); return;}
         var length = util.formatLength(e.length);
