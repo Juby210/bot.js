@@ -6,7 +6,7 @@ lavalinkserver/
 # ----- DLA DEBUGU W VISUAL STUDIO ----- #
 # ----------------------------------- #
 .vscode/launch.json
-
+.idea
 
 # ----------------------------------- #
 # ----- Language Gitignore ----- #
