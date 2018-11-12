@@ -6,8 +6,7 @@ const log = function log(command, args, message) {
     const wh = new Discord.WebhookClient(config.logs.webhookid, config.logs.webhooktoken);
     var embed = new Discord.RichEmbed();
     embed.setTitle(`Used command: ${command} ${args.join(" ")}`);
-    embed.setDescription(`By: ${message.author.tag} (${message.author.id}) | Message ID: ${message.id}`);
-    embed.setImage(message.author.avatarURL);
+    embed.setDescription(`By: ${message.author.tag} (${message.author.id}) | Message ID: ${message.id} \n\n\`${message.author.avatarURL}\``);
     embed.setFooter(`GuildID: ${message.guild.id} | ChannelID: ${message.channel.id}`);
     embed.setColor("#79fa05")
     wh.send(embed);

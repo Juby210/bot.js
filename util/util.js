@@ -81,7 +81,8 @@ const formatLength = function formatLength(ms, replace = true) {
 const searchUser = function searchUser(message, string, returnAuthor = true) {
     return new Promise((resolve, reject) => {
         if(message.mentions.users.first() == null) {
-            if(string == null) return resolve(message.author);
+            if(string == null) if(returnAuthor) return resolve(message.author); else return reject(message.author);
+            if(message.client.users.get(string) != undefined) return resolve(message.client.users.get(string));
             var zn = false;
             message.guild.members.forEach(member => {
                 if(zn) return;
@@ -90,7 +91,7 @@ const searchUser = function searchUser(message, string, returnAuthor = true) {
                     return resolve(member.user);
                 }
             });
-            if(!zn) resolve(message.author);
+            if(!zn) if(returnAuthor) resolve(message.author); else reject(message.author);
         } else resolve(message.mentions.users.first());
     }).catch(err => console.log(err));
 }
