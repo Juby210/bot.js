@@ -20,6 +20,6 @@ module.exports = (client) => {
         dbl.postStats(client.guilds.size);
     }
     client.guilds.forEach(g => {
-        if (!queue.hasOwnProperty(g.id)) queue[g.id] = {}, queue[g.id].playing = false, queue[g.id].songs = [], queue[g.id].song = {}, queue[g.id].volume = 100;
+        if (!queue.hasOwnProperty(g.id)) queue[g.id] = {}, queue[g.id].playing = false, queue[g.id].songs = [], queue[g.id].song = {}, queue[g.id].volume = 100, queue[g.id].loop = false;
     });
 }

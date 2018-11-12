@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const config = require("../../config.json");
+const queuefile = require("./f/queue.js");
 
 module.exports.run = async (client, message, args) => {
     var emojiguild = client.guilds.get("488293188247879680");
@@ -11,6 +11,7 @@ module.exports.run = async (client, message, args) => {
     const player = client.player.get(message.guild.id);
     if (!player) return message.reply("aktualnie nic nie gram");
     await player.pause(false);
+    queuefile.pause(message.guild.id, false);
     message.react(emojiguild.emojis.get("488399581470785557"));
 }
 

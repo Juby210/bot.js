@@ -83,7 +83,7 @@ async function play(song, message, client) {
 }
 
 async function getSong(string, callback) {
-    const res = await snekfetch.get(`http://${config.lavalink.host}:${config.lavalink.restport}/loadtracks?identifier=${string}`)
+    const res = await snekfetch.get(`http://${config.lavalink.host}:${config.lavalink.restport}/loadtracks?identifier=${encodeURIComponent(string)}`)
         .set("Authorization", config.lavalink.password)
         .catch(err => {
             console.error(err);
