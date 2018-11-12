@@ -25,6 +25,7 @@ module.exports.run = async (client, message, args) => {
         });
         if(mem == "```") mem = mem + `Nie znaleziono użytkowników z tagiem #${args[0]}`;
         mem = mem + "```";
+		if(args[0] == "0000") mem = "```Clyde#0000\nDeleted User#0000```";
         message.channel.send(mem);
     }
 }
