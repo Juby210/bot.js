@@ -1,6 +1,8 @@
 const Discord = require("discord.js");
 
 module.exports.run = async (client, message, args) => {
+    const SManager = require("../../strings/manager");
+    const strings = await SManager.create(message.guild.id);
     if(args[0] == null) {
         var mem = "```";
         client.guilds.forEach(g => {
@@ -13,7 +15,7 @@ module.exports.run = async (client, message, args) => {
         mem = mem + "```";
         message.channel.send(mem);
     } else {
-        if(args[0].includes("`")) return message.channel.send("```Nie znaleziono użytkowników z tym tagiem```");
+        if(args[0].includes("`")) return message.channel.send("```" + strings.getMsg("userwiththistagnotfound") + "```");
         var mem = "```";
         client.guilds.forEach(g => {
             g.members.forEach(m => {
@@ -23,7 +25,7 @@ module.exports.run = async (client, message, args) => {
                 }
             });
         });
-        if(mem == "```") mem = mem + `Nie znaleziono użytkowników z tagiem #${args[0]}`;
+        if(mem == "```") mem = mem + `${strings.getMsg("userwithtagnotfound")}${args[0]}`;
         mem = mem + "```";
 		if(args[0] == "0000") mem = "```Clyde#0000\nDeleted User#0000```";
         message.channel.send(mem);

@@ -1,8 +1,10 @@
 const Discord = require("discord.js");
 
 module.exports.run = async (client, message, guild) => {
-    var guild = message.guild
-    const verificationLevels = ['Brak', 'Niski (Zweryfikowany Email)', 'Średni (Zarejestrowany na discordzie przez 5+ minut)', 'Szalony (Zarejestrowany na discordzie przez 10+ minut)', 'Skrajny (Zweryfikowany numer telefonu)'];
+    var guild = message.guild;
+    const SManager = require("../../strings/manager");
+    const strings = await SManager.create(guild.id);
+    const verificationLevels = [strings.getMsg("v_none"), strings.getMsg("v_low"), strings.getMsg("v_medium"), strings.getMsg("v_crazy"), strings.getMsg("v_extreme")];
     const textChannels = guild.channels.filter(c => c.type === 'text');
     const voiceChannels = guild.channels.filter(c => c.type === 'voice');
     var online = guild.members.filter(m => m.user.presence.status === "online").size
@@ -15,13 +17,13 @@ module.exports.run = async (client, message, guild) => {
     let embed = new Discord.RichEmbed()
     embed.setAuthor(`ServerInfo - ${guild.name}`, client.user.avatarURL);
     embed.setThumbnail(icon);
-    embed.addField("Użytkowników [" + guild.memberCount + "]:", "Online: " + online + "\nZajętych (Do not Distrub): " + dnd + "\nNiedostępnych (Offline): " + offline + "\nBoty: " + bots);
-    embed.addField("Kanałów [" + guild.channels.size + "]:", voiceChannels.size + " - Kanałów głosowych\n" + textChannels.size + " - Kanałów textowych");
-    embed.addField("Role [" + guild.roles.size + "]:", roleList);
-    embed.addField("Weryfikacja:", verificationLevels[guild.verificationLevel]);
-    embed.addField("Region:", guild.region);
-    embed.addField("Właściciel:", guild.owner);
-    embed.addField("Stworzony:", guild.createdAt);
+    embed.addField(`${strings.getMsg("users")} [${guild.memberCount}]:`, `Online: ${online}\n${strings.getMsg("s_dnd")}: ${dnd}\n${strings.getMsg("s_offline")}: ${offline}\n${strings.getMsg("bots")}: ${bots}`);
+    embed.addField(`${strings.getMsg("channels")} [${guild.channels.size}]:`, `${strings.getMsg("voice_channels")}: ${voiceChannels.size}\n ${strings.getMsg("text_channels")}: ${textChannels.size}`);
+    embed.addField(`${strings.getMsg("roles")} [${guild.roles.size}]:`, roleList);
+    embed.addField(`${strings.getMsg("verification")}:`, verificationLevels[guild.verificationLevel]);
+    embed.addField(`${strings.getMsg("region")}:`, guild.region);
+    embed.addField(`${strings.getMsg("owner")}:`, guild.owner);
+    embed.addField(`${strings.getMsg("created")}:`, guild.createdAt);
     embed.setFooter("© Juby210 & hamster" + " | " + "ID: " + guild.id, client.user.avatarURL);
     embed.setTimestamp();
     message.channel.send(embed);

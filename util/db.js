@@ -32,7 +32,8 @@ const check = async function check(gid) {
                 users: [],
                 voiceBans: [],
                 welcome: {enabled: false, channel: "", msg: ""},
-                autorole: {enabled: false, role: ""}
+                autorole: {enabled: false, role: ""},
+                lang: config.settings.lang
             }).run(connection);
             return true;
         } catch (e) {
@@ -214,6 +215,21 @@ const getAutorole = async function getAutorole(gid) {
     }
 }
 
+const getLang = async function getLang(gid) {
+    if(gid) {
+        try {
+            var guild = await r.table('guilds').get(gid).toJSON().run(connection);
+            if(guild == null) return false;
+            return JSON.parse(guild).lang;
+        } catch(e) {
+            console.log(e);
+            return false; 
+        }
+    } else {
+        return false;
+    }
+}
+
 exports.check = check;
 exports.load = load;
 exports.update = update;
@@ -225,3 +241,4 @@ exports.getVoiceBans = getVoiceBans;
 exports.getWelcome = getWelcome;
 exports.getGoodbye = getGoodbye;
 exports.getAutorole = getAutorole;
+exports.getLang = getLang;

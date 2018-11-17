@@ -1,0 +1,89 @@
+{
+    "bot":{
+        "usernotfound": "Nie znaleziono użytkownika",
+        "useravatar": "Avatar użytkownika:",
+        "useravatar_embed": "**#TAG#** (#ID#)\n[[Bezpośredni link]](#URL#)",
+        "noemojis": "Ten serwer nie posiada żadnych emotek!",
+        "emotesin": "Emotki w:",
+        "notcorrectemoji": "To nie jest prawidłowa emotka!",
+        "requestedby": "Wykonane przez:",
+        "emoteinfo": "Informacje o emotce:",
+        "name": "Nazwa",
+        "server": "Serwer",
+        "emote_directlink": "Bezpośredni link do emotki",
+        "v_none": "Brak",
+        "v_low": "Niski (Zweryfikowany Email)",
+        "v_medium": "Średni (Zarejestrowany na discordzie przez 5+ minut)",
+        "v_crazy": "Szalony (Zarejestrowany na discordzie przez 10+ minut)",
+        "v_extreme": "Skrajny (Zweryfikowany numer telefonu)",
+        "users": "Użytkowników",
+        "s_dnd": "Zajętych (dnd)",
+        "s_offline": "Niedostępnych",
+        "bots": "Boty",
+        "channels": "Kanałów",
+        "voice_channels": "Kanały głosowe",
+        "text_channels": "Kanały textowe",
+        "roles": "Role",
+        "verification": "Weryfikacja",
+        "region": "Region",
+        "owner": "Właściciel",
+        "created": "Stworzony",
+        "playing": "W grze",
+        "streaming": "Streamuje",
+        "listening": "Słucha",
+        "acc_created": "Konto stworzone:",
+        "joined": "Na serwerze od:",
+        "hi": "Cześć! Jestem",
+        "links": "Przydatne linki",
+        "commandlist": "Lista komend",
+        "commandinfo": "Informacje o komendzie",
+        "command": "komenda",
+        "userwiththistagnotfound": "Nie znaleziono użytkowników z tym tagiem",
+        "userwithtagnotfound": "Nie znaleziono użytkowników z tagiem #",
+        "mostpopulartags": "Najpopularniejsze tagi"
+    },
+    "dashboard":{
+
+    },
+    "dashboard_web": {
+
+    },
+    "commands":{
+        "avatar":{
+            "usage": "avatar [wzmianka/nazwa]",
+            "desc": "Wyświetla oraz daje link do avatara wybranej osoby/twojego"
+        },
+        "emoji":{
+            "usage": "emoji [:emotka:]",
+            "desc": "Wyświetla wszystkie emoji z serwera lub informacje o podanej emotce"
+        },
+        "serverinfo":{
+            "usage": "serverinfo",
+            "desc":"Wyświetla informacje o serwerze"
+        },
+        "userinfo":{
+            "usage":"userinfo [wzmianka/nazwa]",
+            "desc": "Wyświetla informacje o użytkowniku"
+        },
+        "help":{
+            "usage":"help",
+            "desc":"No poprostu lista komend bota..."
+        },
+        "tag":{
+            "usage": "tag [tag]",
+            "desc":"Sprawdź kto ma tag taki sam jak ty!"
+        },
+        "tags":{
+            "usage":"tags",
+            "desc":"Najpopularniejsze tagi"
+        }
+    },
+    "categories":{
+        "basic": "Basic",
+        "misc": "Misc",
+        "moderacja": "Moderacja",
+        "muzyka": "Muzyka",
+        "obrazki": "Obrazki",
+        "web": "Web"
+    }
+}

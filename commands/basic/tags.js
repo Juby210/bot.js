@@ -1,6 +1,8 @@
 const Discord = require("discord.js");
 
 module.exports.run = async (client, message, args) => {
+    const SManager = require("../../strings/manager");
+    const strings = await SManager.create(message.guild.id);
     var t0 = 0, t1 = 0, t2 = 0, t3 = 0, t4 = 0, t5 = 0, t6 = 0, t7 = 0, t8 = 0, t9 = 0; 
     client.guilds.forEach(g => {
         g.members.forEach(m => {
@@ -19,7 +21,7 @@ module.exports.run = async (client, message, args) => {
     });
     var embed = new Discord.RichEmbed();
     embed.setColor("#00AAAA");
-    embed.setTitle("Najpopularniejsze tagi:");
+    embed.setTitle(`${strings.getMsg("mostpopulartags")}:`);
     embed.setDescription(`#0xxx: ${t0}\n#1xxx: ${t1}\n#2xxx: ${t2}\n#3xxx: ${t3}\n#4xxx: ${t4}\n#5xxx: ${t5}\n#6xxx: ${t6}\n#7xxx: ${t7}\n#8xxx: ${t8}\n#9xxx: ${t9}`);
     message.channel.send(embed);
 }
@@ -27,5 +29,5 @@ module.exports.run = async (client, message, args) => {
 module.exports.help = {
     name: "tags",
     name2:"tags",
-    desc:"Liczba tagów"
+    desc:"Najpopularniejsze tagi"
 }
