@@ -10,8 +10,8 @@ module.exports.run = async (client, message, args) => {
   let embed = new Discord.RichEmbed;
   embed.setAuthor(`${strings.getMsg("hi")} ${client.user.username} - Prefix: ${prefix}`, client.user.avatarURL);
   embed.setColor("#0099FF");
-  embed.setDescription(`<:mlist:488406259230310440> | ${strings.getMsg("commandlist")} [${client.commands.filter(c =>  c.category != "owner").size}]`);
   let cp = [];
+  let allc = 0;
   client.commands.forEach(c => {
     if(cp.includes(c)) return;
     if(c.category == "owner") return;
@@ -19,15 +19,17 @@ module.exports.run = async (client, message, args) => {
     let ci = 0;
     client.commands.filter(cc => cc.category == c.category).forEach(cm => {
       cp.push(cm);
-      if(co.includes(cm.help.name)) return;
+      if(co.includes(`\`${cm.help.name}\``)) return;
       ci++;
       if(co == "") co = `\`${cm.help.name}\``; else co = co + `, \`${cm.help.name}\``;
     });
-    embed.addField(`${strings.getCategory(c.category)} [${ci}]`, co)
+    embed.addField(`${strings.getCategory(c.category)} [${ci}]`, co);
+    allc += ci;
   });
   embed.addField(strings.getMsg("commandinfo"), `\`${prefix}info <${strings.getMsg("command")}>\``);
   embed.addBlankField();
   embed.addField(`🔗 ${strings.getMsg("links")}:`, `[[Dashboard]](${strona}) | [[Github]](${github})`);
+  embed.setDescription(`<:mlist:488406259230310440> | ${strings.getMsg("commandlist")} [${allc}]`);
   message.channel.send(embed);
 }
 
