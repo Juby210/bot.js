@@ -28,7 +28,7 @@ module.exports.run = async (client, message, args) => {
             message.channel.send(embed);
         }
     } else {
-        message.reply("Brak uprawnień!");
+        message.reply(`${strings.getMsg("noperm")}`);
         message.react("❌");
     }
 }
