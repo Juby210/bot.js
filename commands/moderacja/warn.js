@@ -8,22 +8,20 @@ module.exports.run = async (client, message, args) => {
     } else {
         guildID = message.guild.id;
     }
+    const SManager = require("../../strings/manager");
+    const strings = await SManager.create(message.guild.id);
     if(message.member.hasPermission("BAN_MEMBERS") == true) {
         if(args[0] == null) {
-            message.reply("Podaj użytkownika do ostrzeżenia!");
+            message.reply(`${strings.getMsg("user_null")}`);
             message.react("❌");
         } else {
             let msg = args.slice(1).join(' ');
-            if (!msg) msg = 'Brak powodu.';
+            if (!msg) msg = `${strings.getMsg("nullreason")}`;
             await db.warn(message.mentions.users.first().id, guildID, msg[1]);
-
-            let ok = `{user} został ostrzeżony(a) z powodem: {reason}\nNadane przez: **{user1}**`
-
-            ok = ok.replace('{user}', message.mentions.users.first()).replace('{reason}', msg).replace('{user1}', message.author.tag);
             
             const embed = new Discord.RichEmbed();
-            embed.setAuthor("Ostrzeżenie | Warn");
-            embed.setDescription(ok);
+            embed.setAuthor(`${strings.getMsg("warn_title")}`);
+            embed.setDescription(`${strings.getMsg("warn_msg").replace('#user#', message.mentions.users.first()).replace('#reason#', msg)}` + `\n${strings.getMsg("warn_msg_user").replace('#user1#', message.author.tag)}`);
             embed.setColor('#D5BEC6');
             embed.setFooter("© Juby210 & hamster", client.user.avatarURL);
             embed.setTimestamp()

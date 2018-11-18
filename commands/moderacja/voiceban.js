@@ -2,13 +2,15 @@ const Discord = require("discord.js");
 const db = require("../../util/db.js");
 
 module.exports.run = async (client, message, args) => {
-    if(!message.member.hasPermission("MOVE_MEMBERS")) {message.channel.send("Ta komenda wymaga uprawnienia `Przenieś członków`"); message.react("❌"); return;}
-    if(!args[0]) {message.channel.send("Podaj kogo chcesz zbanować"); return;}
+    const SManager = require("../../strings/manager");
+    const strings = await SManager.create(message.guild.id);
+    if(!message.member.hasPermission("MOVE_MEMBERS")) {message.channel.send(`${strings.getMsg("reqperms")} \`${strings.getMsg("movemembers")}\``); message.react("❌"); return;}
+    if(!args[0]) {message.channel.send(`${strings.getMsg("user_null")}`); return;}
     if(message.mentions.users.first() == null) {
         var zn2 = false;
         message.guild.members.forEach(async memb => {
             if(memb.user.username.toLowerCase() == args[0].toLowerCase()) {
-                if(memb.user.id == client.user.id) {message.reply("mnie się nie banuje!"); return;}
+                if(memb.user.id == client.user.id) {message.reply(`${strings.getMsg("botisntuser")}`); return;}
                 zn2 = true;
                 message.guild.createChannel("Kick", "voice").then(vChan => {
                     memb.setVoiceChannel(vChan).then(mem => vChan.delete());
@@ -22,12 +24,12 @@ module.exports.run = async (client, message, args) => {
             }
         });
         if (zn2 == false) {
-            message.reply("nie znaleziono takiego użytkownika!");
+            message.reply(`${strings.getMsg("usernotfound")}`);
             return;
         }
     } else {
         var memb = message.guild.member(message.mentions.users.first());
-        if(memb.user.id == client.user.id) {message.reply("mnie się nie banuje!"); return;}
+        if(memb.user.id == client.user.id) {message.reply(`${strings.getMsg("botisntuser")}`); return;}
         message.guild.createChannel("Kick", "voice").then(vChan => {
             memb.setVoiceChannel(vChan).then(mem => vChan.delete());
         }).catch(err => anticrash(message.channel, err));

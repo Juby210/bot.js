@@ -1,8 +1,10 @@
 const Discord = require("discord.js");
 
 module.exports.run = async (client, message, args) => {
-    if(!message.member.hasPermission("MOVE_MEMBERS")) {message.channel.send("Ta komenda wymaga uprawnienia `Przenieś członków`"); message.react("❌"); return;}
-        if(args[0] == null) {message.channel.send("Podaj kogo chcesz wyrzucić"); return;}
+    const SManager = require("../../strings/manager");
+    const strings = await SManager.create(message.guild.id);
+    if(!message.member.hasPermission("MOVE_MEMBERS")) {message.channel.send(`${strings.getMsg("reqperms")} \`${strings.getMsg("movemembers")}\``); message.react("❌"); return;}
+    if(!args[0]) {message.channel.send(`${strings.getMsg("user_null")}`); return;}
     if(message.mentions.users.first() == null) {
     var zn2 = false;
     message.guild.members.forEach(function(memb) {
@@ -15,7 +17,7 @@ module.exports.run = async (client, message, args) => {
         }
     });
     if (zn2 == false) {
-        message.reply("nie znaleziono takiego użytkownika!");
+        message.reply(`${strings.getMsg("usernotfound")}`);
         return;
     }
 } else {

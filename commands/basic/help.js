@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 let strona = ("https://botjs.juby.cf/");
 let github = ("https://github.com/Juby210-PL/bot.js");
+let statuswww = ("https://status.xmcode.pl");
 const db = require('../../util/db.js');
 
 module.exports.run = async (client, message, args) => {
@@ -28,7 +29,7 @@ module.exports.run = async (client, message, args) => {
   });
   embed.addField(strings.getMsg("commandinfo"), `\`${prefix}info <${strings.getMsg("command")}>\``);
   embed.addBlankField();
-  embed.addField(`🔗 ${strings.getMsg("links")}:`, `[[Dashboard]](${strona}) | [[Github]](${github})`);
+  embed.addField(`🔗 ${strings.getMsg("links")}:`, `[[Dashboard]](${strona}) | [[Github]](${github}) | [[Status]](${statuswww})`);
   embed.setDescription(`<:mlist:488406259230310440> | ${strings.getMsg("commandlist")} [${allc}]`);
   message.channel.send(embed);
 }

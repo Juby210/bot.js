@@ -8,17 +8,19 @@ module.exports.run = async (client, message, args) => {
     } else {
         guildID = message.guild.id;
     }
+    const SManager = require("../../strings/manager");
+    const strings = await SManager.create(message.guild.id);
     if(message.member.hasPermission("MANAGE_GUILD") == true) {
         if(args[0] == null) {
-            message.reply("Podaj prefix który ma być używany!");
+            message.reply(`${strings.getMsg("prefix_null")}`);
             message.react("❌");
         } else {
             await db.update('guilds', guildID, 'prefix', args[0]);
-            message.reply("Zaktualizowany prefix serwera to: ``" + args[0] + "``")
+            message.reply(`${strings.getMsg("prefix_done")} ` + "``" + args[0] + "``")
             message.react("✅");
         }
     } else {
-        message.reply("Brak uprawnień!");
+        message.reply(`${strings.getMsg("noperm")} `);
         message.react("❌");
     }
 }    

@@ -3,15 +3,17 @@ const request = require("request");
 const config = require("../../config.json");
 
 module.exports.run = async (client, message, args) => {
-    if(!args[0]) {message.channel.send("Nie prawidłowa ilość argumentów!"); return;}
-    if(!message.member.hasPermission("MANAGE_CHANNELS")) {message.channel.send("Ta komenda wymaga uprawnienia `Zarządzanie kanałami`"); return;}
-    if(isNaN(args[0])) {message.channel.send(`Podaj liczbę, a nie ${args[0]}`); return;}
-    if(args[0] >= 121) {message.channel.send("Max. 120 sek"); return;}
+    const SManager = require("../../strings/manager");
+    const strings = await SManager.create(message.guild.id);
+    if(!args[0]) {message.channel.send(`${strings.getMsg("invalidarg")}`); return;}
+    if(!message.member.hasPermission("MANAGE_CHANNELS")) {message.channel.send(`${strings.getMsg("reqperms")} \`${strings.getMsg("managechannels")}\``); return;}
+    if(isNaN(args[0])) {message.channel.send(`${strings.getMsg("slowmode_error")}  ``${args[0]}```); return;}
+    if(args[0] >= 121) {message.channel.send(`${strings.getMsg("slowmode_errortime")}`); return;}
     req("PATCH", `https://discordapp.com/api/channels/${message.channel.id}`, config.tokens.token, args[0]).then(body => {
         if(args[0] == 0) {
-            message.channel.send("Usunięto slowmode!");
+            message.channel.send(`${strings.getMsg("slowmode_remove")}`);
         } else {
-            message.channel.send(`Ustawiono na **${args[0]}sek**!`);
+            message.channel.send(`${strings.getMsg("slowmode_success")} ` + `**${args[0]}s!**`);
         }
     }).catch(err => require("../../util/util").crash(message.channel, err));
 }

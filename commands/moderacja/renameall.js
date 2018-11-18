@@ -1,21 +1,23 @@
 const Discord = require("discord.js");
 
 module.exports.run = async (client, message, args) => {
-    if(args[0] == null) {message.channel.send("Nie prawidłowa ilość argumentów!"); message.react("❌"); return;}
+    const SManager = require("../../strings/manager");
+    const strings = await SManager.create(message.guild.id);
+    if(args[0] == null) {message.channel.send(`${strings.getMsg("invalidarg")}`); message.react("❌"); return;}
     var text = args.slice(0).join(" ");
     if(message.member.hasPermission("MANAGE_NICKNAMES") == true) {
         if(message.guild.member(client.user).hasPermission("MANAGE_NICKNAMES") == true) {
-            message.reply("rozpoczęto zmienianie!");
+            message.reply(`${strings.getMsg("rename_working")}`);
             message.guild.members.forEach(mem => {
                 mem.setNickname(text);
             });
             message.react("✅");
         } else {
-            message.channel.send("Bot nie ma uprawnień do zarządzania pseudonimami");
+            message.channel.send(`${strings.getMsg("rename_botperm")}`);
             message.react("❌");
         }
     } else {
-        message.reply("Brak uprawnień!");
+        message.reply(`${strings.getMsg("noperm")}`);
         message.react("❌");
     }
 }
