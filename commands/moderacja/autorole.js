@@ -9,20 +9,22 @@ module.exports.run = async (client, message, args) => {
         guildID = message.guild.id;
     }
     const prefix = await db.getPrefix(guildID);
+    const SManager = require("../../strings/manager");
+    const strings = await SManager.create(message.guild.id);
 
-    if(!message.member.hasPermission("MANAGE_GUILD")) {message.channel.send("Ta komenda wymaga uprawnienia `Zarządzanie serwerem.`"); message.react("❌"); return;}
+    if(!message.member.hasPermission("MANAGE_GUILD")) {message.channel.send(`${strings.getMsg("reqperms")} \`${strings.getMsg("manageguild")}\``); message.react("❌"); return;}
     if(args[0] == null) {
         await db.getAutorole(guildID).then(autorole => {
             if(autorole == undefined) autorole = {enabled: false, role: ""};
             var ae = new Discord.RichEmbed();
             ae.setAuthor("Autorole", client.user.avatarURL);
             if(autorole.enabled) {
-                ae.setDescription("Autorole na tym serwerze jest włączone:\nRola: <@&" + autorole.role + ">\nInformacje o tej komendzie: `" + prefix + "info autorole`");
+                ae.setDescription(`${strings.getMsg("autorole_on")}:\n${strings.getMsg("role")}: <@&${autorole.role}>\n${strings.getMsg("commandinfo")}: \`${prefix}info autorole\``);
             } else {
-                ae.setDescription("Autorole na tym serwerze jest wyłączone, aby włączyć sprawdź `" + prefix + "info autorole`\nLub włącz w [dashboardzie bota](https://botjs.juby.cf)");
+                ae.setDescription(`${strings.getMsg("autorole_off")} \`${prefix}info autorole\`\n${strings.getMsg("oronindashboard")}`);
             }
             ae.setFooter("© Juby210", client.user.avatarURL);
-            ae.setTimestamp()
+            ae.setTimestamp();
             message.channel.send(ae);
         });
     }
@@ -33,8 +35,8 @@ module.exports.run = async (client, message, args) => {
             autorole.enabled = false;
             await db.update('guilds', guildID, 'autorole', autorole);
             let de = new Discord.RichEmbed();
-            de.setAuthor(`Wyłączyłeś Autorole`, client.user.avatarURL);
-            de.setDescription(`Poprawnie wyłączyłeś autorole!`);
+            de.setAuthor(`Autorole`, client.user.avatarURL);
+            de.setDescription(`${strings.getMsg("turnedoff_autorole")}!`);
             de.setFooter("© Juby210", client.user.avatarURL);
             de.setTimestamp();
             message.channel.send(de);
@@ -51,7 +53,7 @@ module.exports.run = async (client, message, args) => {
                 rola = message.guild.roles.get(args[0]).id;
             }
         } else if (!rola) {
-            message.channel.send("Ta rola jest nieprawidłowa! Podaj prawidłową rolę przez ID lub wzmiankę!");
+            message.channel.send(strings.getMsg("invalidrole"));
             return;
         }
 
@@ -61,8 +63,8 @@ module.exports.run = async (client, message, args) => {
             autorole.enabled = true;
             await db.update('guilds', guildID, 'autorole', autorole);
             var ae = new Discord.RichEmbed();
-            ae.setAuthor("Właczyłeś Autorole", client.user.avatarURL);
-            ae.setDescription(`Rola <@&${rola}> (${rola}) została poprawnie ustalona jako autorole!\nAby wyłączyć autorole wpisz ` + "`" + prefix + "autorole disable`");
+            ae.setAuthor("Autorole", client.user.avatarURL);
+            ae.setDescription(`${strings.getMsg("role")} <@&${rola}> (${rola}) ${strings.getMsg("turnedon_autorole")} \`${prefix}autorole disable\``);
             ae.setFooter("© Juby210", client.user.avatarURL);
             ae.setTimestamp()
             message.channel.send(ae);
@@ -73,5 +75,6 @@ module.exports.run = async (client, message, args) => {
 module.exports.help = {
     name: "autorole",
     name2: "autorole <argument>",
-    desc: "Argumenty: id/wzmianka roli, disable"
+    desc: "Argumenty: id/wzmianka roli, disable",
+    perms: "Zarządzanie serwerem"
 }

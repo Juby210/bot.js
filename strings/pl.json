@@ -24,6 +24,7 @@
         "voice_channels": "Kanały głosowe",
         "text_channels": "Kanały textowe",
         "roles": "Role",
+        "role": "Rola",
         "verification": "Weryfikacja",
         "region": "Region",
         "owner": "Właściciel",
@@ -40,7 +41,23 @@
         "command": "komenda",
         "userwiththistagnotfound": "Nie znaleziono użytkowników z tym tagiem",
         "userwithtagnotfound": "Nie znaleziono użytkowników z tagiem #",
-        "mostpopulartags": "Najpopularniejsze tagi"
+        "mostpopulartags": "Najpopularniejsze tagi",
+        "authors": "Autorzy",
+        "servers": "Serwerów",
+        "uptime": "Jestem aktywny od",
+        "invalidarg": "Nieprawidłowy argument",
+        "check": "sprawdź",
+        "botinvite": "Link do zaproszenia bota",
+        "botcode": "Oto kod tego *świetnego* bota",
+        "holdon": "Poczekaj",
+        "reqperm": "Ta komenda wymaga uprawnienia",
+        "manageguild": "Zarządzanie serwerem",
+        "autorole_on": "Autorole na tym serwerze jest włączone",
+        "autorole_off": "Autorole na tym serwerze jest wyłączone, aby włączyć sprawdź",
+        "oronindashboard": "Lub włącz w [dashboardzie bota](https://botjs.juby.cf)",
+        "turnedoff_autorole": "Poprawnie wyłączyłeś autorole",
+        "turnedon_autorole": "została poprawnie ustalona jako autorole!\nAby wyłączyć autorole wpisz",
+        "invalidrole": "Ta rola jest nieprawidłowa! Podaj prawidłową rolę przez ID lub wzmiankę!"
     },
     "dashboard":{
 
@@ -76,6 +93,23 @@
         "tags":{
             "usage":"tags",
             "desc":"Najpopularniejsze tagi"
+        },
+        "bot":{
+            "usage": "bot <info/invite/uptime>",
+            "desc": "Komenda o bocie\nbot info: Informacje o użyciu zasobów przez bota oraz liczba serwerów/kanałów/użytkowników\nbot invite: Link do zaproszenia bota\nbot uptime: Pokazuje ile bot jest aktywny od ostatniego restartu"   
+        },
+        "github":{
+            "usage": "github",
+            "desc": "Link do kodu bota na githubie"
+        },
+        "ping":{
+            "usage": "ping",
+            "desc": "Wyświetla ping bota"
+        },
+        "autorole":{
+            "usage": "autorole <argument>",
+            "desc": "Argumenty: id/wzmianka roli, disable",
+            "perms": "Zarządzanie serwerem"
         }
     },
     "categories":{

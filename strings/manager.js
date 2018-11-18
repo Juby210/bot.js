@@ -21,7 +21,7 @@ module.exports = class StringManager {
     }
     getMsgDW(msg) {
         let m = require(`./${this.lang}.json`).dashboard_web[msg];
-        return m ? m : require(`./${config.settings.lang}.json`).dashboard[msg];
+        return m ? m : require(`./${config.settings.lang}.json`).dashboard_web[msg];
     }
     getCommandInfo(command) {
         let m = require(`./${this.lang}.json`).commands[command];
