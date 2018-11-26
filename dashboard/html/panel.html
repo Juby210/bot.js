@@ -19,18 +19,18 @@
             <div id="menu">
                 <ul>
                     <li class="menuitem" onclick="window.open('/invite', '_blank')">Invite</li>
-                    <li class="menuitem" onclick="window.open('https://github.com/juby210-PL/bot.js', '_blank')">Kod źródłowy (GitHub)</li>
-                    <li class="menuitem" onclick="window.location = '/api/dashboard/logout'">Wyloguj</li>
+                    <li class="menuitem lang" onclick="window.open('https://github.com/juby210-PL/bot.js', '_blank')" id="sourcecode">Kod źródłowy (GitHub)</li>
+                    <li class="menuitem lang" onclick="window.location = '/api/dashboard/logout'" id="logout">Wyloguj</li>
                 </ul>
             </div>
         </div>
         <div class="cls"></div>
         <div id="content2">
-            <h2>Witaj</h2>
+            <h2 class="lang" id="hello">Witaj</h2>
             <img id="user-av" src="defaultav.png">
-            <h1 id="user-nick">ładowanie...</h1>
+            <h1 id="user-nick" class="lang">loading...</h1>
             <br><br><div id="serwery">
-                <p id="wait">Czekaj...</p>
+                <p id="wait" class="lang">Wait...</p>
             </div>
             <table id="staty">
                 <tr>
@@ -46,13 +46,13 @@
                     <th>Uptime</th><th id="uptime">...h ...m ...s</th>
                 </tr>
                 <tr>
-                    <th>Serwery</th><th id="guilds">...</th>
+                    <th id="serversl" class="lang">Serwery</th><th id="guilds">...</th>
                 </tr>
                 <tr>
-                    <th>Kanały</th><th id="channels">...</th>
+                    <th id="channelsl" class="lang">Kanały</th><th id="channels">...</th>
                 </tr>
                 <tr>
-                    <th>Użytkownicy</th><th id="users">...</th>
+                    <th id="usersl" class="lang">Użytkownicy</th><th id="users">...</th>
                 </tr>
                 <tr>
                     <th>Status</th><th id="status">...</th>

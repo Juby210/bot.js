@@ -6,16 +6,10 @@ const db = require('../../util/db.js');
 module.exports.run = async (client, message, args) => {
     let queue = queuefile.getqueue;
     const player = client.player.get(message.guild.id);
-    var vChannel = message.member.voiceChannel;
     const prefix = await db.getPrefix(message.guild.id);
-    
-    if(vChannel == null) {
-        message.reply("najpierw wejdź na kanał głosowy!");
-        return;
-    }
 
     if (!player) {
-        message.channel.send('Na kanale nie ma bota, dodaj go przez ${prefix}play');
+        message.channel.send(`Na kanale nie ma bota, dodaj go przez ${prefix}play`);
         return;
     }
 

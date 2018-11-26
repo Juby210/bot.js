@@ -1,4 +1,20 @@
+let stringsToLoad = ["manageguild", "edit", "off", "on", "hidedetails", "ownerperms", "adminperms", "noperms", "role", "channel", "message", "soff", "son", "blankmsg"];
+let strings = new Map();
+
 function load() {
+    Array.from(document.getElementsByClassName("lang")).forEach(el => {
+        dstring(el.id).then(res => {
+            el.innerText = res.msg;
+            //console.log("String loaded: " + el.id);
+        });
+    });
+    stringsToLoad.forEach(s => {
+        dstring(s).then(res => {
+            strings.set(s, res.msg);
+            //console.log("String loaded: " + s);
+        });
+    });
+
     $.ajax({
         url: "api/dashboard/user",
         context: document.body,
@@ -47,18 +63,18 @@ function load() {
                             prefix.className = "serwer-prefix";
                             prefix.innerText = `Prefix: ` + g.prefix;
                             if(g.perms) {
-                                prefix.innerHTML = prefix.innerText + ` <a href="#" id="${g.guild.id}z" onclick="zarzadzaj('${g.guild.id}')" style="text-decoration: none; color: lightgreen; font-size: 15px; margin-left: 15px;">Zarządzaj serwerem</a>`
+                                prefix.innerHTML = prefix.innerText + ` <a href="#" id="${g.guild.id}z" onclick="zarzadzaj('${g.guild.id}')" style="text-decoration: none; color: lightgreen; font-size: 15px; margin-left: 15px;">${strings.get("manageguild")}</a>`
                             }
                             serwer.appendChild(prefix);
 
                             var za = document.createElement("span");
                             za.className = "serwer-za";
                             if(g.guild.owner) {
-                                za.innerText = "Jesteś właścicielem, Możesz zarządzać tym serwerem";
+                                za.innerText = strings.get("ownerperms");
                             } else if (g.perms && !g.guild.owner) {
-                                za.innerText = "Masz uprawnienia do zarządzania tym serwerem";
+                                za.innerText = strings.get("adminperms");
                             } else {
-                                za.innerText = "Nie możesz zarządzać tym serwerem";
+                                za.innerText = strings.get("noperms");
                             }
                             serwer.appendChild(za);
                             serwerd.appendChild(serwer);
@@ -81,10 +97,10 @@ function szczegoly(gid) {
 
 function zarzadzaj(gid) {
     var serwer = document.getElementById(`${gid}div`);
-    if(document.getElementById(gid + "z").innerHTML == "Ukryj szczegóły") {
+    if(document.getElementById(gid + "z").innerHTML == strings.get("hidedetails")) {
         serwer.removeChild(document.getElementById(gid + "s2"));
         serwer.style.height = '50px';
-        $(`#${gid}z`).html("Zarządzaj serwerem");
+        $(`#${gid}z`).html(strings.get("manageguild"));
         return;
     }
     var serwer2 = document.createElement("div");
@@ -97,7 +113,7 @@ function zarzadzaj(gid) {
         success: function(data) {
             var prefix = document.createElement('p');
             prefix.id = data.guild.id;
-            prefix.innerHTML = "Prefix: " + data.prefix + ` <a href="#" onclick="edytujprefix('${data.guild.id}', '${data.prefix}')" style="text-decoration: none; color: lightgreen; font-size: 15px;">Edytuj</a>`;
+            prefix.innerHTML = "Prefix: " + data.prefix + ` <a href="#" onclick="edytujprefix('${data.guild.id}', '${data.prefix}')" style="text-decoration: none; color: lightgreen; font-size: 15px;">${strings.get("edit")}</a>`;
             serwer2.appendChild(prefix);
 
             // Welcome: //
@@ -111,28 +127,28 @@ function zarzadzaj(gid) {
             var wenable = document.createElement('p');
             wenable.innerHTML = "Status: " + data.welcome.enabled.toString();
             if(wenable.innerHTML.includes("false")) {
-                wenable.innerHTML = `Status: Wyłączone <a href="#" onclick="edytujwelcome('${data.guild.id}', 'true', '${data.welcome.channel}', '${data.welcome.msg.replace(new RegExp("#", 'g'), "3ee3")}');" class="edytuj">Włącz</a>`;
+                wenable.innerHTML = `Status: ${strings.get("soff")} <a href="#" onclick="edytujwelcome('${data.guild.id}', 'true', '${data.welcome.channel}', '${data.welcome.msg.replace(new RegExp("#", 'g'), "3ee3")}');" class="edytuj">${strings.get("on")}</a>`;
             } else {
-                wenable.innerHTML = `Status: Włączone <a href="#" onclick="edytujwelcome('${data.guild.id}', 'false', '${data.welcome.channel}', '${data.welcome.msg.replace(new RegExp("#", 'g'), "3ee3")}');" style="color: red;" class="edytuj">Wyłącz</a>`;
+                wenable.innerHTML = `Status: ${strings.get("son")} <a href="#" onclick="edytujwelcome('${data.guild.id}', 'false', '${data.welcome.channel}', '${data.welcome.msg.replace(new RegExp("#", 'g'), "3ee3")}');" style="color: red;" class="edytuj">${strings.get("off")}</a>`;
             }
             serwer2.appendChild(wenable);
             serwer.style.height = 'auto';
-            $(`#${gid}z`).html("Ukryj szczegóły");
+            $(`#${gid}z`).html(strings.get("hidedetails"));
             if(data.welcome.enabled) {
                 var channel = document.createElement('p');
                 $.ajax({
                     url: "api/dashboard/channel?id=" + data.welcome.channel,
                     context: document.body,
                     success: function(channelr) {
-                        channel.innerHTML = `Kanał: #${JSON.parse(channelr).name} <a href="#" onclick="edytujwelcomechannel('${gid}');" class="edytuj">Edytuj</a>`;
+                        channel.innerHTML = `${strings.get("channel")}: #${JSON.parse(channelr).name} <a href="#" onclick="edytujwelcomechannel('${gid}');" class="edytuj">${strings.get("edit")}</a>`;
                     },
                     error: function(err) {
-                        channel.innerHTML = `Kanał: błąd`;
+                        channel.innerHTML = `${strings.get("channel")}: error`;
                     }
                 });
                 serwer2.appendChild(channel);
                 var msg = document.createElement('p');
-                msg.innerHTML = `Wiadomość: ${data.welcome.msg} <a href="#" onclick="edytujwelcomemsg('${data.guild.id}', 'true', '${data.welcome.channel}', '${data.welcome.msg}');" class="edytuj">Edytuj</a>`;
+                msg.innerHTML = `${strings.get("message")}: ${data.welcome.msg} <a href="#" onclick="edytujwelcomemsg('${data.guild.id}', 'true', '${data.welcome.channel}', '${data.welcome.msg}');" class="edytuj">${strings.get("edit")}</a>`;
                 serwer2.appendChild(msg);
             }
 
@@ -147,28 +163,28 @@ function zarzadzaj(gid) {
             var genable = document.createElement('p');
             genable.innerHTML = "Status: " + data.goodbye.enabled.toString();
             if(genable.innerHTML.includes("false")) {
-                genable.innerHTML = `Status: Wyłączone <a href="#" onclick="edytujgoodbye('${data.guild.id}', 'true', '${data.goodbye.channel}', '${data.goodbye.msg.replace(new RegExp("#", 'g'), "3ee3")}');" class="edytuj">Włącz</a>`;
+                genable.innerHTML = `Status: ${strings.get("soff")} <a href="#" onclick="edytujgoodbye('${data.guild.id}', 'true', '${data.goodbye.channel}', '${data.goodbye.msg.replace(new RegExp("#", 'g'), "3ee3")}');" class="edytuj">${strings.get("on")}</a>`;
             } else {
-                genable.innerHTML = `Status: Włączone <a href="#" onclick="edytujgoodbye('${data.guild.id}', 'false', '${data.goodbye.channel}', '${data.goodbye.msg.replace(new RegExp("#", 'g'), "3ee3")}');" style="color: red;" class="edytuj">Wyłącz</a>`;
+                genable.innerHTML = `Status: ${strings.get("son")} <a href="#" onclick="edytujgoodbye('${data.guild.id}', 'false', '${data.goodbye.channel}', '${data.goodbye.msg.replace(new RegExp("#", 'g'), "3ee3")}');" style="color: red;" class="edytuj">${strings.get("off")}</a>`;
             }
             serwer2.appendChild(genable);
             serwer.style.height = 'auto';
-            $(`#${gid}z`).html("Ukryj szczegóły");
+            $(`#${gid}z`).html(strings.get("hidedetails"));
             if(data.goodbye.enabled) {
                 var channel = document.createElement('p');
                 $.ajax({
                     url: "api/dashboard/channel?id=" + data.goodbye.channel,
                     context: document.body,
                     success: function(channelr) {
-                        channel.innerHTML = `Kanał: #${JSON.parse(channelr).name} <a href="#" onclick="edytujgoodbyechannel('${gid}');" class="edytuj">Edytuj</a>`;
+                        channel.innerHTML = `${strings.get("channel")}: #${JSON.parse(channelr).name} <a href="#" onclick="edytujgoodbyechannel('${gid}');" class="edytuj">${strings.get("edit")}</a>`;
                     },
                     error: function(err) {
-                        channel.innerHTML = `Kanał: błąd`;
+                        channel.innerHTML = `${strings.get("channel")}: error`;
                     }
                 });
                 serwer2.appendChild(channel);
                 var msg = document.createElement('p');
-                msg.innerHTML = `Wiadomość: ${data.goodbye.msg} <a href="#" onclick="edytujgoodbyemsg('${data.guild.id}', 'true', '${data.goodbye.channel}', '${data.goodbye.msg}');" class="edytuj">Edytuj</a>`;
+                msg.innerHTML = `${strings.get("message")}: ${data.goodbye.msg} <a href="#" onclick="edytujgoodbyemsg('${data.guild.id}', 'true', '${data.goodbye.channel}', '${data.goodbye.msg}');" class="edytuj">${strings.get("edit")}</a>`;
                 serwer2.appendChild(msg);
             }            
 
@@ -183,9 +199,9 @@ function zarzadzaj(gid) {
             var aenable = document.createElement('p');
             aenable.innerHTML = "Status: " + data.autorole.enabled.toString();
             if(aenable.innerHTML.includes("false")) {
-                aenable.innerHTML = `Status: Wyłączone <a href="#" onclick="edytujautorole('${data.guild.id}', 'true', '');" class="edytuj">Włącz</a>`;
+                aenable.innerHTML = `Status: ${strings.get("soff")} <a href="#" onclick="edytujautorole('${data.guild.id}', 'true', '');" class="edytuj">${strings.get("on")}</a>`;
             } else {
-                aenable.innerHTML = `Status: Włączone <a href="#" onclick="edytujautorole('${data.guild.id}', 'false', '');" style="color: red;" class="edytuj">Wyłącz</a>`;
+                aenable.innerHTML = `Status: ${strings.get("son")} <a href="#" onclick="edytujautorole('${data.guild.id}', 'false', '');" style="color: red;" class="edytuj">${strings.get("off")}</a>`;
             }
             serwer2.appendChild(aenable);
 
@@ -195,7 +211,7 @@ function zarzadzaj(gid) {
                 data.guild.roles.forEach(r => {
                     if(r.id == data.autorole.role) rolap = r.name;
                 });
-                rolat.innerHTML = `Rola: ${rolap} <a href="#" onclick="edytujautorole('${data.guild.id}', 'true', '${rolap}');" class="edytuj">Edytuj</a`;
+                rolat.innerHTML = `${strings.get("role")}: ${rolap} <a href="#" onclick="edytujautorole('${data.guild.id}', 'true', '${rolap}');" class="edytuj">${strings.get("edit")}</a>`;
                 serwer2.appendChild(rolat);
             }
             serwer.appendChild(serwer2);
@@ -233,7 +249,7 @@ function edytujwelcome(gid, enabled, channel, msg) {
         var msg2 = prompt("Edytuj wiadomość: \n#USER# - zamieniane jest na nazwę użytkownika\n#MENTION# - zamieniane jest na wzmiankę użytkownika\n#TAG# - zamieniane jest na tag użytkownika np. #1234\n#GUILD# - zamieniane jest na nazwę serwera");
         if(msg2 != null) {
             if(msg2 == "") {
-                alert("Wiadomość nie może być pusta");
+                alert(strings.get("blankmsg"));
             } else {
                 m = msg2.replace(new RegExp("#", 'g'), "3ee3");
             }
@@ -262,7 +278,7 @@ function edytujwelcomemsg(gid, enabled, channel, oldmsg) {
     var msg = prompt("Edytuj wiadomość: \n#USER# - zamieniane jest na nazwę użytkownika\n#MENTION# - zamieniane jest na wzmiankę użytkownika\n#TAG# - zamieniane jest na tag użytkownika np. #1234\n#GUILD# - zamieniane jest na nazwę serwera", oldmsg);
     if(msg != null) {
         if(msg == "") {
-            alert("Wiadomość nie może być pusta");
+            alert(strings.get("blankmsg"));
         } else {
             edytujwelcome(gid, enabled, channel, msg.replace(new RegExp("#", 'g'), "3ee3"));
         }
@@ -324,7 +340,7 @@ function edytujgoodbye(gid, enabled, channel, msg) {
         var msg2 = prompt("Edytuj wiadomość: \n#USER# - zamieniane jest na nazwę użytkownika\n#MENTION# - zamieniane jest na wzmiankę użytkownika\n#TAG# - zamieniane jest na tag użytkownika np. #1234\n#GUILD# - zamieniane jest na nazwę serwera");
         if(msg2 != null) {
             if(msg2 == "") {
-                alert("Wiadomość nie może być pusta");
+                alert(strings.get("blankmsg"));
             } else {
                 m = msg2.replace(new RegExp("#", 'g'), "3ee3");
             }
@@ -353,7 +369,7 @@ function edytujgoodbyemsg(gid, enabled, channel, oldmsg) {
     var msg = prompt("Edytuj wiadomość: \n#USER# - zamieniane jest na nazwę użytkownika\n#MENTION# - zamieniane jest na wzmiankę użytkownika\n#TAG# - zamieniane jest na tag użytkownika np. #1234\n#GUILD# - zamieniane jest na nazwę serwera", oldmsg);
     if(msg != null) {
         if(msg == "") {
-            alert("Wiadomość nie może być pusta");
+            alert(strings.get("blankmsg"));
         } else {
             edytujgoodbye(gid, enabled, channel, msg.replace(new RegExp("#", 'g'), "3ee3"));
         }
@@ -456,7 +472,7 @@ function edytujprefix(gid, old) {
                 context: document.body,
                 success: function(data) {
                     if(data.status == "OK") {
-                        $(`#${gid}`).html("Prefix: " + prefix + ` <a href="#" onclick="edytujprefix('${gid}', '${prefix}')" style="text-decoration: none; color: lightgreen; font-size: 15px;">Edytuj</a>`);
+                        $(`#${gid}`).html("Prefix: " + prefix + ` <a href="#" onclick="edytujprefix('${gid}', '${prefix}')" style="text-decoration: none; color: lightgreen; font-size: 15px;">${strings.get("edit")}</a>`);
                     } else {
                         alert(data.message);
                     }
@@ -467,4 +483,45 @@ function edytujprefix(gid, old) {
             });
         }
     }
+}
+
+function dstring(msg) {
+    return new Promise((resolve, reject) => {
+        let lang = getcookie("lang");
+        $.ajax({
+            url: `api/strings?msg=${msg}&lang=${lang}`,
+            context: document.body,
+            success: function(data) {
+                resolve(data);
+            },
+            error: function(err) {
+                $.ajax({
+                    url: `api/strings?msg=${msg}`,
+                    context: document.body,
+                    success: function(data) {
+                        resolve(data);
+                    },
+                    error: function(err) {
+                        reject(err);
+                    }
+                });
+            }
+        });
+    });
+}
+
+function getcookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
 }

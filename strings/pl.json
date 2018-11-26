@@ -95,7 +95,28 @@
 
     },
     "dashboard_web": {
-
+        "hello": "Witaj",
+        "sourcecode": "Kod źródłowy (Github)",
+        "logout": "Wyloguj",
+        "serversl": "Serwery",
+        "channelsl": "Kanały",
+        "usersl": "Użytkownicy",
+        "manageguild": "Zarządzaj serwerem",
+        "edit": "Edytuj",
+        "off": "Wyłącz",
+        "on": "Włącz",
+        "hidedetails": "Ukryj szczegóły",
+        "ownerperms": "Jesteś właścicielem, Możesz zarządzać tym serwerem",
+        "adminperms": "Masz uprawnienia do zarządzania tym serwerem",
+        "noperms": "Nie możesz zarządzać tym serwerem",
+        "role": "Rola",
+        "user-nick": "ładowanie...",
+        "wait": "Czekaj...",
+        "channel": "Kanał",
+        "message": "Wiadomość",
+        "soff": "Wyłączone",
+        "son": "Włączone",
+        "blankmsg": "Wiadomość nie może być pusta"
     },
     "commands":{
         "avatar":{
