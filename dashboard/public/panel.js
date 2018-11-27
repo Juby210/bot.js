@@ -1,4 +1,5 @@
-let stringsToLoad = ["manageguild", "edit", "off", "on", "hidedetails", "ownerperms", "adminperms", "noperms", "role", "channel", "message", "soff", "son", "blankmsg"];
+let stringsToLoad = ["manageguild", "edit", "off", "on", "hidedetails", "ownerperms", "adminperms", "noperms", "role", "channel", "message", "soff", "son", "blankmsg", "editmsg", "typechannelname", "blankchannel", 
+    "typerole", "blankrole", "typenewprefix", "blankprefix"];
 let strings = new Map();
 
 function load() {
@@ -223,10 +224,10 @@ function edytujwelcome(gid, enabled, channel, msg) {
     var ch = channel;
     var m = msg;
     if(channel == '' && enabled == 'true') {
-        var channelse = prompt("Wpisz nazwę kanału:");
+        var channelse = prompt(strings.get("typechannelname"));
         if(channelse != null) {
             if(channelse == "") {
-                alert("Nazwa kanału nie może być pusta");
+                alert(strings.get("blankchannel"));
             } else {
                 $.ajax({
                     url:`api/dashboard/welcomechannel?id=${gid}&channel=${channelse.replace("#", "")}`,
@@ -246,7 +247,7 @@ function edytujwelcome(gid, enabled, channel, msg) {
         } else return;
     }
     if(msg == '' && enabled == 'true') {
-        var msg2 = prompt("Edytuj wiadomość: \n#USER# - zamieniane jest na nazwę użytkownika\n#MENTION# - zamieniane jest na wzmiankę użytkownika\n#TAG# - zamieniane jest na tag użytkownika np. #1234\n#GUILD# - zamieniane jest na nazwę serwera");
+        var msg2 = prompt(strings.get("editmsg"));
         if(msg2 != null) {
             if(msg2 == "") {
                 alert(strings.get("blankmsg"));
@@ -275,7 +276,7 @@ function edytujwelcome(gid, enabled, channel, msg) {
 }
 
 function edytujwelcomemsg(gid, enabled, channel, oldmsg) {
-    var msg = prompt("Edytuj wiadomość: \n#USER# - zamieniane jest na nazwę użytkownika\n#MENTION# - zamieniane jest na wzmiankę użytkownika\n#TAG# - zamieniane jest na tag użytkownika np. #1234\n#GUILD# - zamieniane jest na nazwę serwera", oldmsg);
+    var msg = prompt(strings.get("editmsg"), oldmsg);
     if(msg != null) {
         if(msg == "") {
             alert(strings.get("blankmsg"));
@@ -286,10 +287,10 @@ function edytujwelcomemsg(gid, enabled, channel, oldmsg) {
 }
 
 function edytujwelcomechannel(gid) {
-    var channelse = prompt("Wpisz nazwę kanału:");
+    var channelse = prompt(strings.get("typechannelname"));
     if(channelse != null) {
         if(channelse == "") {
-            alert("Nazwa kanału nie może być pusta");
+            alert(strings.get("blankchannel"));
         } else {
             $.ajax({
                 url:`api/dashboard/welcomechannel?id=${gid}&channel=${channelse.replace("#", "")}`,
@@ -314,10 +315,10 @@ function edytujgoodbye(gid, enabled, channel, msg) {
     var ch = channel;
     var m = msg;
     if(channel == '' && enabled == 'true') {
-        var channelse = prompt("Wpisz nazwę kanału:");
+        var channelse = prompt(strings.get("typechannelname"));
         if(channelse != null) {
             if(channelse == "") {
-                alert("Nazwa kanału nie może być pusta");
+                alert(strings.get("blankchannel"));
             } else {
                 $.ajax({
                     url:`api/dashboard/goodbyechannel?id=${gid}&channel=${channelse.replace("#", "")}`,
@@ -337,7 +338,7 @@ function edytujgoodbye(gid, enabled, channel, msg) {
         } else return;
     }
     if(msg == '' && enabled == 'true') {
-        var msg2 = prompt("Edytuj wiadomość: \n#USER# - zamieniane jest na nazwę użytkownika\n#MENTION# - zamieniane jest na wzmiankę użytkownika\n#TAG# - zamieniane jest na tag użytkownika np. #1234\n#GUILD# - zamieniane jest na nazwę serwera");
+        var msg2 = prompt(strings.get("editmsg"));
         if(msg2 != null) {
             if(msg2 == "") {
                 alert(strings.get("blankmsg"));
@@ -366,7 +367,7 @@ function edytujgoodbye(gid, enabled, channel, msg) {
 }
 
 function edytujgoodbyemsg(gid, enabled, channel, oldmsg) {
-    var msg = prompt("Edytuj wiadomość: \n#USER# - zamieniane jest na nazwę użytkownika\n#MENTION# - zamieniane jest na wzmiankę użytkownika\n#TAG# - zamieniane jest na tag użytkownika np. #1234\n#GUILD# - zamieniane jest na nazwę serwera", oldmsg);
+    var msg = prompt(strings.get("editmsg"), oldmsg);
     if(msg != null) {
         if(msg == "") {
             alert(strings.get("blankmsg"));
@@ -377,10 +378,10 @@ function edytujgoodbyemsg(gid, enabled, channel, oldmsg) {
 }
 
 function edytujgoodbyechannel(gid) {
-    var channelse = prompt("Wpisz nazwę kanału:");
+    var channelse = prompt(strings.get("typechannelname"));
     if(channelse != null) {
         if(channelse == "") {
-            alert("Nazwa kanału nie może być pusta");
+            alert(strings.get("blankchannel"));
         } else {
             $.ajax({
                 url:`api/dashboard/goodbyechannel?id=${gid}&channel=${channelse.replace("#", "")}`,
@@ -419,10 +420,10 @@ function edytujautorole(gid, enabled, rola) {
             }
         });
     } else {
-        var nrola = prompt("Wpisz rolę:", rola);
+        var nrola = prompt(strings.get("typerole"), rola);
         if(nrola != null) {
             if(nrola == "") {
-                alert("Rola nie może być pusta");
+                alert(strings.get("blankrole"));
             } else {
                 $.ajax({
                     url:`api/dashboard/autorole?id=${gid}&enabled=true&role=${nrola}`,
@@ -462,10 +463,10 @@ function ladujstaty() {
 }
 
 function edytujprefix(gid, old) {
-    var prefix = prompt("Wpisz nowy prefix:", old);
+    var prefix = prompt(strings.get("typenewprefix"), old);
     if(prefix != null) {
         if(prefix == "") {
-            alert("Prefix nie może być pusty");
+            alert(strings.get("blankprefix"));
         } else {
             $.ajax({
                 url:`api/dashboard/prefix?id=${gid}&prefix=${prefix}`,

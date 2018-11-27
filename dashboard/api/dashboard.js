@@ -154,7 +154,7 @@ router.get('/prefix', async (req, res) => {
             } else {
                 getuser(req.cookies.token).then(async user => {
                     if(!getperms(req.query.id, user.id)) {
-                        res.send({status:"ERROR", message:"Nie masz uprawnien"});
+                        res.send({status:"ERROR", message:getString("noperms", req)});
                     } else {
                         await db.update('guilds', req.query.id, 'prefix', req.query.prefix);
                         res.send({status:"OK"});
@@ -173,7 +173,7 @@ router.get('/welcome', async (req, res) => {
         if(util.isUndefined(req.cookies.token)) return notlogged(res);
         getuser(req.cookies.token).then(async user => {
             if(!getperms(req.query.id, user.id)) {
-                res.send({status:"ERROR", message:"Nie masz uprawnien"});
+                res.send({status:"ERROR", message:getString("noperms", req)});
             } else {
                 await db.update('guilds', req.query.id, 'welcome', {enabled: strToBool(req.query.enabled), channel: req.query.channel, msg: req.query.msg.replace(new RegExp("3ee3", "g"), "#")});
                 res.send({status:"OK"});
@@ -188,7 +188,7 @@ router.get('/welcomechannel', async (req, res) => {
         if(util.isUndefined(req.cookies.token)) return notlogged(res);
         getuser(req.cookies.token).then(async user => {
             if(!getperms(req.query.id, user.id)) {
-                res.send({status:"ERROR", message:"Nie masz uprawnien"});
+                res.send({status:"ERROR", message:getString("noperms", req)});
             } else {
                 var zn = false;
                 bot.client.guilds.get(req.query.id).channels.forEach(async ch => {
@@ -204,7 +204,7 @@ router.get('/welcomechannel', async (req, res) => {
                     }
                 });
                 setTimeout(() => {
-                    if(!zn) res.send({status:"ERROR", message:"Nie znaleziono takiego kanału"});
+                    if(!zn) res.send({status:"ERROR", message:getString("channelnotfound", req)});
                 }, 10);
             }
         }).catch(() => notlogged(res));
@@ -217,7 +217,7 @@ router.get('/goodbye', async (req, res) => {
         if(util.isUndefined(req.cookies.token)) return notlogged(res);
         getuser(req.cookies.token).then(async user => {
             if(!getperms(req.query.id, user.id)) {
-                res.send({status:"ERROR", message:"Nie masz uprawnien"});
+                res.send({status:"ERROR", message:getString("noperms", req)});
             } else {
                 await db.update('guilds', req.query.id, 'goodbye', {enabled: strToBool(req.query.enabled), channel: req.query.channel, msg: req.query.msg.replace(new RegExp("3ee3", "g"), "#")});
                 res.send({status:"OK"});
@@ -232,7 +232,7 @@ router.get('/goodbyechannel', async (req, res) => {
         if(util.isUndefined(req.cookies.token)) return notlogged(res);
         getuser(req.cookies.token).then(async user => {
             if(!getperms(req.query.id, user.id)) {
-                res.send({status:"ERROR", message:"Nie masz uprawnien"});
+                res.send({status:"ERROR", message:getString("noperms", req)});
             } else {
                 var zn = false;
                 bot.client.guilds.get(req.query.id).channels.forEach(async ch => {
@@ -248,7 +248,7 @@ router.get('/goodbyechannel', async (req, res) => {
                     }
                 });
                 setTimeout(() => {
-                    if(!zn) res.send({status:"ERROR", message:"Nie znaleziono takiego kanału"});
+                    if(!zn) res.send({status:"ERROR", message:getString("channelnotfound", req)});
                 }, 10);
             }
         }).catch(() => notlogged(res));
@@ -261,7 +261,7 @@ router.get('/autorole', async (req, res) => {
         if(util.isUndefined(req.cookies.token)) return notlogged(res);
         getuser(req.cookies.token).then(async user => {
             if(!getperms(req.query.id, user.id)) {
-                res.send({status:"ERROR", message:"Nie masz uprawnien"});
+                res.send({status:"ERROR", message:getString("noperms", req)});
             } else {
                 if(strToBool(req.query.enabled)) {
                     var zn = false;
@@ -274,7 +274,7 @@ router.get('/autorole', async (req, res) => {
                         }
                     });
                     setTimeout(() => {
-                        if(!zn) res.send({status:"ERROR", message:"Nie znaleziono takiej roli"});
+                        if(!zn) res.send({status:"ERROR", message:getString("rolenotfound", req)});
                     }, 10);
                 } else {
                     await db.update('guilds', req.query.id, 'autorole', {enabled: false, role: ""});
@@ -295,6 +295,13 @@ router.get('/logout', (req, res) => {
     res.clearCookie('token');
     res.redirect('/');
 })
+
+function getString(msg, req) {
+    let lang = util.isUndefined(req.cookies.lang) ? config.settings.lang : req.cookies.lang;
+    const SManager = require("../../strings/manager");
+    const strings = new SManager(lang);
+    return strings.getMsgD(msg);
+}
 
 function notlogged(res) {
     res.status(401).send({status: "ERROR", message:"Not logged in"});

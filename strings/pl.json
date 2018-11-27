@@ -92,7 +92,9 @@
         "warn_title": "Ostrzeżenie"
     },
     "dashboard":{
-
+        "noperms": "Nie masz uprawnień",
+        "channelnotfound": "Nie znaleziono takiego kanału",
+        "rolenotfound": "Nie znaleziono takiej roli"
     },
     "dashboard_web": {
         "hello": "Witaj",
@@ -116,7 +118,16 @@
         "message": "Wiadomość",
         "soff": "Wyłączone",
         "son": "Włączone",
-        "blankmsg": "Wiadomość nie może być pusta"
+        "blankmsg": "Wiadomość nie może być pusta",
+        "editmsg": "Edytuj wiadomość: \n#USER# - zamieniane jest na nazwę użytkownika\n#MENTION# - zamieniane jest na wzmiankę użytkownika\n#TAG# - zamieniane jest na tag użytkownika np. #1234\n#GUILD# - zamieniane jest na nazwę serwera",
+        "typechannelname": "Wpisz nazwę kanału:",
+        "blankchannel": "Nazwa kanału nie może być pusta",
+        "typerole": "Wpisz rolę:",
+        "blankrole": "Rola nie może być pusta",
+        "typenewprefix": "Wpisz nowy prefix:",
+        "blankprefix": "Prefix nie może być pusty",
+        "login": "Zaloguj się do panelu",
+        "cookies": "Ta strona używa cookies do poprawnego funkcjonowania"
     },
     "commands":{
         "avatar":{
