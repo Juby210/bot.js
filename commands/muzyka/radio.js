@@ -6,6 +6,8 @@ const snekfetch = require("snekfetch");
 var db = require("../../util/db");
 
 module.exports.run = async (client, message, args) => {
+    const SManager = require("../../strings/manager");
+    const strings = await SManager.create(message.guild.id);
     let guildID;
     if(!message.guild) {
         guildID = '0';
@@ -17,11 +19,11 @@ module.exports.run = async (client, message, args) => {
     if(args[0] == null) {
         var embed = new Discord.RichEmbed();
         embed.setColor("#ffd700");
-        embed.setTitle("Lista stacji radiowych:");
+        embed.setTitle(`${strings.getMsg("music_radio_title")}`);
         var desc = "";
         config.radiolist.forEach(r => desc += `${r.id}. ${r.name}\n`);
-        embed.setDescription(desc + `\n${prefix}radio <numer> - odtwórz radio\nUWAGA! Eska i Vox mogą czasem nie działać!`);
-        embed.setFooter(`Brakuje stacji radiowych? Napisz do Juby210#5831`);
+        embed.setDescription(desc + `${strings.getMsg("music_radio_desc").replace("#PREFIX#", prefix)}`);
+        embed.setFooter(`${strings.getMsg("music_radio_footer")}`);
         message.channel.send(embed);
     } else {
         var radio = {};
@@ -33,17 +35,17 @@ module.exports.run = async (client, message, args) => {
             }
         });
         if(!zn) {
-            message.channel.send("Nie znaleziono takiego numeru radia, wpisz `" + prefix + "radio` po listę stacji.");
+            message.channel.send(`${strings.getMsg("music_radio_notfound").replace("#PREFIX#", prefix)}`);
             return;
         }
         var vChannel = message.member.voiceChannel;
         if(vChannel == null) {
-            message.reply("najpierw wejdź na kanał głosowy!");
+            message.reply(`${strings.getMsg("music_join")}`);
             return;
         }
         let queue = queuefile.getqueue;
         queue[message.guild.id].songs = [];
-        message.channel.send("<:mplay:488399581470785557> | Odtwarzanie: `" + radio.name + "`");
+        message.channel.send("<:mplay:488399581470785557> | " + `${strings.getMsg("music_radio_play").replace("#RADIO#", radio.name)}`);
         await getSong(radio.url, async s => {
             s.tracks.forEach(cos => {
                 playerf.play(cos.track, client, message);

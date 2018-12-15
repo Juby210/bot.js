@@ -3,14 +3,16 @@ const util = require("../../util/util");
 var queuefile = require("./f/queue.js");
 
 module.exports.run = async (client, message, args) => {
+    const SManager = require("../../strings/manager");
+    const strings = await SManager.create(message.guild.id);
     let emojiguild = client.guilds.get("488293188247879680");
     const player = client.player.get(message.guild.id);
-    if (!player) return message.reply("aktualnie nic nie gram");
-    if (!player.playing) return message.reply("aktualnie nic nie gram");
+    if (!player) return message.reply(`${strings.getMsg("music_nonp")}`);
+    if (!player.playing) return message.reply(`${strings.getMsg("music_nonp")}`);
     let queue = queuefile.getqueue;
     let song = queue[message.guild.id].song;
     let embed = new Discord.RichEmbed;
-    embed.setAuthor("Odtwarzanie: ", client.user.avatarURL);
+    embed.setAuthor(`${strings.getMsg("music_nptitle")}`, client.user.avatarURL);
     embed.setTitle(song.title);
     let t1 = util.formatLength(Date.now() - song.date, false);
     let t2 = util.formatLength(song.length);

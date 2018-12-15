@@ -5,6 +5,8 @@ const request = require("request");
 const db = require("../../util/db.js");
 
 module.exports.run = async (client, message, args) => {
+    const SManager = require("../../strings/manager");
+    const strings = await SManager.create(message.guild.id);
     let guildID;
     if(!message.guild) {
         guildID = '0';
@@ -12,8 +14,8 @@ module.exports.run = async (client, message, args) => {
         guildID = message.guild.id;
     }
     const prefix = await db.getPrefix(guildID);
-    if(!config.yourls.useyourls) {message.channel.send(`Właściciel bota nie skonfigurował skracacza linków.`); return;}
-    if(args[0] == null) {message.channel.send(`Nieprawidłowa ilość argumentów. Sprawdź poprawne użycie: ${prefix}info shorten`); return;}
+    if(!config.yourls.useyourls) {message.channel.send(`${strings.getMsg("shorten_noconfig")}`); return;}
+    if(args[0] == null) {message.channel.send(`${strings.getMsg("invalidarg")}`); return;}
     var cust = false;
     if(args[1] != null) cust = true;
     if(cust) {
@@ -26,12 +28,12 @@ module.exports.run = async (client, message, args) => {
                 var result = JSON.parse(body);
                 if(result.status == "fail") {
                     if(result.code == "error:keyword") {
-                        message.channel.send("Ten skrót jest już zajęty, użyj innego.");
+                        message.channel.send(`${strings.getMsg("shorten_errorkeyword")}`);
                     } else {
                         util.crash(message.channel, err);
                     }
                 } else {
-                    message.channel.send("Oto twój krótki url: " + result.shorturl);
+                    message.channel.send(`${strings.getMsg("shorten_success")}` + " " + result.shorturl);
                     await db.addUrl(result.shorturl, args[0], message.author.id);    
                 }
             }

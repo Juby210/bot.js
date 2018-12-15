@@ -7,12 +7,14 @@ const snekfetch = require("snekfetch");
 let queue = queuefile.getqueue;
 
 module.exports.run = async (client, message, args) => {
+    const SManager = require("../../strings/manager");
+    const strings = await SManager.create(message.guild.id);
     var vChannel = message.member.voiceChannel;
     if(vChannel == null) {
-        message.reply("najpierw wejdź na kanał głosowy!");
+        message.reply(`${strings.getMsg("music_join")}`);
         return;
     }
-    if(args[0] == null) {message.reply("jakiś linczek by się przydał"); return;}
+    if(args[0] == null) {message.reply(`${strings.getMsg("music_play_link")}`); return;}
     let [...track] = args;
     track = track.join(" ");
     var song;
@@ -30,7 +32,7 @@ module.exports.run = async (client, message, args) => {
                 });
             });
             if(!zn) {
-                return message.channel.send("Nie znaleziono.");
+                return message.channel.send(`${strings.getMsg("music_nofound")}`);
             }
         } else if (s.loadType == "PLAYLIST_LOADED") {
             var c = 0;
@@ -44,7 +46,7 @@ module.exports.run = async (client, message, args) => {
                 }, { selfdeaf: true });
                 queuefile.addsong(message.guild.id, song.track, song.info.uri, song.info.title.replace(/`/g, "'"), song.info.length, song.info.author, message.author.username);
             });
-            message.channel.send("<:mcheck_mark:488416404706426880> | Załadowano `" + c + "` utworów!");
+            message.channel.send("<:mcheck_mark:488416404706426880> | " + `${strings.getMsg("music_loaded").replace("#COUNT#", c)}`);
             setTimeout(async () => {
                 var player = await client.player.get(message.guild.id);
                 if(player.playing) {} else {
@@ -52,7 +54,7 @@ module.exports.run = async (client, message, args) => {
                     if(!song) return;
                     playerf.play(song.track, client, message);
                     queuefile.song(message.guild.id, song.title.replace(/`/g, "'"), song.channel, song.length, song.requester, song.url, song.track, Date.now());
-                    message.channel.send("<:mplay:488399581470785557> | Odtwarzanie: `" + song.title.replace(/`/g, "'") + "` z **" + song.channel + "**");
+                    message.channel.send("<:mplay:488399581470785557> | " + `${strings.getMsg("music_playing").replace("#SONG#", song.title.replace(/`/g, "'")).replace("#CHANNEL#", song.channel)}`);
                 }
             }, 300);
         } else {
@@ -66,6 +68,8 @@ module.exports.run = async (client, message, args) => {
 }
 
 async function play(song, message, client) {
+    const SManager = require("../../strings/manager");
+    const strings = await SManager.create(message.guild.id);
     var player = await client.player.get(message.guild.id);
     if (!player) player = await client.player.join({
         guild: message.guild.id,
@@ -74,11 +78,11 @@ async function play(song, message, client) {
     }, { selfdeaf: true });
     if(player.playing) {
         queuefile.addsong(message.guild.id, song.track, song.info.uri, song.info.title.replace(/`/g, "'"), song.info.length, song.info.author, message.author.username);
-        message.channel.send("<:mplus:488416560445390878> | Dodano do kolejki: `" + song.info.title.replace(/`/g, "'") + "` z **" + song.info.author + "**");
+        message.channel.send("<:mplus:488416560445390878> | " + `${strings.getMsg("music_added").replace("#SONG#", song.info.title.replace(/`/g, "'")).replace("#CHANNEL#", song.info.author)}`);
     } else {
         playerf.play(song.track, client, message);
         queuefile.song(message.guild.id, song.info.title.replace(/`/g, "'"), song.info.author, song.info.length, message.author.username, song.info.uri, song.track, Date.now());
-        message.channel.send("<:mplay:488399581470785557> | Odtwarzanie: `" + song.info.title.replace(/`/g, "'") + "` z **" + song.info.author + "**");
+        message.channel.send("<:mplay:488399581470785557> | " + `${strings.getMsg("music_playing_play").replace("#SONG#", song.info.title.replace(/`/g, "'")).replace("#CHANNEL#", song.info.author)}`);
     }
 }
 
