@@ -1,6 +1,6 @@
-# bot.js - rewrite
+# bot.js - eris.edition
 - Wielofunkcyjny polski bot opensource pisany w js.
-  - Biblioteka: **discord.js**.
+  - Biblioteka: **eris.js**.
   - Muzyka: **[lavalink'a](https://github.com/Frederikam/Lavalink/)**.
   - Baza danych: **[RethinkDB](https://rethinkdb.com)**.
 
