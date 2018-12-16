@@ -1,6 +1,6 @@
 var index = require('../index.js');
 var util = require("../util/util");
-var queuefile = require("../commands/muzyka/f/queue.js");
+var queuefile = require("../commands/music/f/queue.js");
 const DBL = require("dblapi.js");
 const config = require("../config.json");
 

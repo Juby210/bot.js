@@ -130,7 +130,18 @@
         "shorten_success": "Oto twój krótki url:",
         "urls_title": "Twoje krótkie linki:",
         "urls_nothing": "Nie posiadasz krótkich linków",
-        "urls_fulllink": "Pełny link:"
+        "urls_fulllink": "Pełny link:",
+        "invalidargscount": "Nieprawidłowa ilość argumentów. Sprawdź poprawne użycie: `#PREFIX#info #CMD#`",
+        "notfound": "Nie znaleziono",
+        "dbl_name": "Nazwa",
+        "desc": "Opis",
+        "dbl_website": "Strona bota",
+        "lib": "Biblioteka",
+        "dbl_creator": "Twórcy/a",
+        "dbl_tags": "Tagi",
+        "dbl_votes": "Głosy",
+        "dbl_link": "Pokaż na discordbots.org",
+        "user": "Użytkownik"
     },
     "dashboard":{
         "noperms": "Nie masz uprawnień",
@@ -215,14 +226,143 @@
             "usage": "autorole <argument>",
             "desc": "Argumenty: id/wzmianka roli, disable",
             "perms": "Zarządzanie serwerem"
+        },
+        "ban":{
+            "usage":"ban <wzmianka>",
+            "desc":"Banuje wzmienioną osobę",
+            "perms":"Banowanie członków"
+        },
+        "kick":{
+            "usage":"kick <wzmianka>",
+            "desc":"Kickuje wzmienioną osobę",
+            "perms":"Wyrzucanie członków"
+        },
+        "prefix":{
+            "usage":"prefix <nowy prefix>",
+            "desc":"Ustawia nowy prefix dla bota na danym serwerze.",
+            "perms":"Zarządzanie serwerem"
+        },
+        "prune":{
+            "usage": "prune [ilość wiadomości]",
+            "desc":"Kasuje daną ilość wiadomości z kanału. Maksymalna wartość: 100",
+            "perms":"Zarządzanie wiadomościami"
+        },
+        "rename":{
+            "usage":"rename <wzmianka/nazwa> <pseudnim>",
+            "desc":"Zmienia pseudonim",
+            "perms":"Zarządzanie pseudonimami"
+        },
+        "renameall":{
+            "usage":"renameall <pseudonim>",
+            "desc":"Zmienia wszystkim pseudonimy na wpisany przez ciebie",
+            "perms":"Zarządzanie pseudonimami"
+        },
+        "resetall":{
+            "usage":"resetall",
+            "desc":"Resetuje wszystkim pseudonimy",
+            "perms":"Zarządzanie pseudonimami"
+        },
+        "slowmode":{
+            "usage":"slowmode <sekundy>",
+            "desc":"Ustawia slowmode na kanał, 0 resetuje",
+            "perms":"Zarządzanie kanałami"
+        },
+        "voiceban":{
+            "usage":"voiceban <wzmianka/osoba>",
+            "desc":"Blokuje możliwość wejścia na kanały głosowe wskazanej osobie na zawsze",
+            "perms":"Przenieś członków"
+        },
+        "voicekick":{
+            "usage":"voicekick <wzmianka/osoba>",
+            "desc":"Kickuje z kanału głosowego wybraną osobę",
+            "perms":"Przenieś członków"
+        },
+        "voiceunban":{
+            "usage":"voiceunban <wzmianka>",
+            "desc":"Odblokuje możliwość wejścia na kanały głosowe osobie która dostała bana",
+            "perms":"Przenieś członków"
+        },
+        "warn":{
+            "usage":"warn <użytkownik> <powód>",
+            "desc":"Nadaje ostrzeżenie użytkownikowi z powodem.",
+            "perms":"Zarządzanie serwerem"
+        },
+        "clearqueue":{
+            "usage":"clearqueue",
+            "desc":"Czyści kolejkę dla serwera"
+        },
+        "join":{
+            "usage":"join",
+            "desc":"Bot dołącza na twój kanał głosowy"
+        },
+        "leave":{
+            "usage":"leave",
+            "desc":"Bot wychodzi z kanału głosowego"
+        },
+        "loop":{
+            "usage":"loop",
+            "desc":"Zapętla aktualną piosenkę"
+        },
+        "np":{
+            "usage":"np",
+            "desc":"Pokazuje co aktualnie jest odtwarzane"
+        },
+        "pause":{
+            "usage":"pause",
+            "desc":"Zatrzymuje odtwarzacz"
+        },
+        "play":{
+            "usage":"play <link/wyszukiwanie>",
+            "desc":"Odtwarza/Dodaje do kolejki podany link/wyszukanie\nMoże to być również link do radia"
+        },
+        "queue":{
+            "usage":"queue",
+            "desc:":"Pokazuje kolejkę dla serwera"
+        },
+        "radio":{
+            "usage":"radio [id]",
+            "desc":"Bez numeru wyświetla listę stacji radiowych, z numerem odtwarza numer z listy"
+        },
+        "resume":{
+            "usage":"resume",
+            "desc":"Wznawia odtwarzacz"
+        },
+        "search":{
+            "usage":"search <wyszukiwanie>",
+            "desc":"Wyszukuje podaną frazę oraz wyświetla wybór 10 wyników"
+        },
+        "skip":{
+            "usage":"skip",
+            "desc":"No skip poprostu"
+        },
+        "volume":{
+            "usage":"volume <głośność>",
+            "desc":"Zmienia głośność"
+        },
+        "humblebundle":{
+            "usage":"humblebundle",
+            "desc":"Pokazuje dostępne konkursy z humblebundle"
+        },
+        "shorten":{
+            "usage":"shorten <link> [własny skrót]",
+            "desc":"Skraca link"
+        },
+        "dbl":{
+            "usage":"dbl <wzmianka/id>",
+            "desc":"Pokazuje informacje o użytkowniku/bocie z discordbots.org"
+        },
+        "welcome":{
+            "usage":"welcome <typ> [argument]",
+            "desc":"Typy: channel, msg, enable, disable\nDo wiadomości można dodać:\n#USER# - zamieniane jest na nazwę użytkownika\n#MENTION# - zamieniane jest na wzmiankę użytkownika\n#TAG# - zamieniane jest na tag użytkownika np. #1234\n#GUILD# - zamieniane jest na nazwę serwera",
+            "perms":"Zarządzanie serwerem"
         }
     },
     "categories":{
         "basic": "Basic",
         "misc": "Misc",
-        "moderacja": "Moderacja",
-        "muzyka": "Muzyka",
-        "obrazki": "Obrazki",
+        "moderation": "Moderacja",
+        "music": "Muzyka",
+        "images": "Obrazki",
         "web": "Web"
     }
 }

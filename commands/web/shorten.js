@@ -15,7 +15,7 @@ module.exports.run = async (client, message, args) => {
     }
     const prefix = await db.getPrefix(guildID);
     if(!config.yourls.useyourls) {message.channel.send(`${strings.getMsg("shorten_noconfig")}`); return;}
-    if(args[0] == null) {message.channel.send(`${strings.getMsg("invalidarg")}`); return;}
+    if(args[0] == null) {message.channel.send(`${strings.getMsg("invalidargscount").replace("#PREFIX#", prefix).replace("#CMD#", "shorten")}`); return;}
     var cust = false;
     if(args[1] != null) cust = true;
     if(cust) {

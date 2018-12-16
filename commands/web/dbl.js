@@ -6,88 +6,63 @@ var cheerio = require('cheerio');
 const util = require("../../util/util");
 
 module.exports.run = async (client, message, args) => {
-    let guildID;
-    if(!message.guild) {
-        guildID = '0';
-    } else {
-        guildID = message.guild.id;
-    }
-    const prefix = await db.getPrefix(guildID);
+    const SManager = require("../../strings/manager");
+    const strings = await SManager.create(message.guild.id);
+    const prefix = await db.getPrefix(message.guild.id);
     const DBL = require("dblapi.js");
     const dbl = new DBL(config.tokens.dbl, client);
-    if(args[0] == null) {message.channel.send(`Nieprawidłowa ilość argumentów. Sprawdź poprawne użycie: ${prefix}info ${command}`); return;}
-    var useri;
-    if(args[0].includes("<@")) {
-        useri = message.mentions.users.first().id;
-    } else useri = args[0];
-    if(message.guild.members.get(useri) == undefined) return message.channel.send("Nie znaleziono!");
-    if(message.guild.members.get(useri).user.bot) {
-        dbl.getBot(useri).then(fbot => {
-            var embed = new Discord.RichEmbed();
-            embed.setColor("#283593");
-            var desc = fbot.longdesc;
-            if(desc == "" || desc == undefined) desc = fbot.shortdesc;
-            var owners = "";
-            fbot.owners.forEach(oid => {
-                try{
-                    if(owners == "") {owners = client.users.get(oid).tag;} else {
-                        owners = owners + ", " + client.users.get(oid).tag;
-                    }
-                } catch(err) {}
-            });
-            embed.setDescription(`Nazwa: ${fbot.username}#${fbot.discriminator}\nID: ${fbot.id}\nOpis:\n${desc}\n[Invite](${fbot.invite})\nStrona bota: ${fbot.website}\nKod: ${fbot.github}\nPrefix: ${fbot.prefix}\nBiblioteka: ${fbot.lib}\nTwórca: ${owners}\nTagi: ${fbot.tags + ""}\nGłosy: ${fbot.points}\n[Pokaż na discordbots.org](https://discordbots.org/bot/${fbot.id})`);
-            embed.setThumbnail(message.guild.members.get(useri).user.avatarURL);
-            message.channel.send(embed);
-        }).catch(err => {
-            if(err.status == 404) return message.channel.send("Nie znaleziono!");
-            util.crash(message.channel, err, false);
-        });
-    } else {
-        dbl.getUser(useri).then(user => {
-            var embed = new Discord.RichEmbed();
-            var color = "#283593";
-            var kolor = false;
-            if(user.color != undefined) {color = user.color; kolor = true;}
-            embed.setColor(color);
-            if(!kolor) color = "Nie ustawiono koloru.";
-            var bio = "Nie dodano bio.";
-            var gh = "Nie dodano profilu.";
-            var yt = "Nie dodano profilu.";
-            var rd = "Nie dodano profilu.";
-            var tw = "Nie dodano profilu.";
-            var ig = "Nie dodano profilu.";
-            if(user.bio != undefined) bio = user.bio;
-            if(user.social) {
-                try {
-                    if(user.social.github != "" || user.social.github != undefined) gh = user.social.github;
-                    if(user.social.youtube != "" || user.social.youtube != undefined) yt = user.social.youtube;
-                    if(user.social.reddit != "" || !user.social.reddit != undefined) rd = user.social.reddit;
-                    if(user.social.twitter != "" || user.social.twitter != undefined) tw = user.social.twitter;
-                    if(user.social.instagram != "" || user.social.instagram != undefined) ig = user.social.instagram;
-                } catch(err) {}
-            }
-            embed.setThumbnail(message.guild.members.get(useri).user.avatarURL);
-            rp(`https://discordbots.org/user/${useri}`).then(body => {
+    if(args[0] == null) return message.channel.send(strings.getMsg("invalidargscount").replace("#PREFIX#", prefix).replace("#CMD#", "dbl"));
+
+    util.searchUser(message, args[0], false).then(user => {
+        if(user.bot) {
+            rp(`https://discordbots.org/bot/${user.id}`).then(body => {
                 $ = cheerio.load(body);
-                var boty = [];
-                $('.bot-name').each((i, name) => {
-                    boty.push(`${$(name).html()} <@${$(name).attr('id').replace("bot-", "")}>`);
+                let desc = $(".bot-description").text().replace(new RegExp("\n", "g"), "");
+                let invite = $(".votebutton").parent().attr("href");
+                let site = $("#websitelink").attr("href");
+                let github = $("#github").attr("href");
+                let prefix = $("#prefix").first().text();
+                let owners = [];
+                $("#createdby").find("span").each((i, name) => {
+                    owners.push($(name).text());
                 });
-                embed.setDescription(`Użytkownik: **${user.username}#${user.discriminator}**\nID: **${user.id}**\nAdmin/Mod/Mod strony: **${user.admin}**`.replace("false", "nie").replace("true", "tak") + `/**${user.mod}**`.replace("false", "nie").replace("true", "tak") + `/**${user.webMod}**`.replace("false", "nie").replace("true", "tak") + `\nBio: **${bio}**\nKolor: ${color}\nGithub: **${gh}**\nYoutube: **${yt}**\nReddit: **${rd}**\nTwitter: **${tw}**\nInstagram: **${ig}**`);
-                if(boty.length != 0) {
-                    embed.addField("Boty:", boty.join(", "));
-                }
-                embed.setFooter("Wykonane przez: " + message.author.tag + " (" + message.author.id + ")", client.user.avatarURL);
-                embed.setTimestamp()
+                let votes = $("#points").text();
+                let tags = [];
+                $(".atag").each((i, name) => {
+                    tags.push($(name).text().replace(new RegExp("\n", "g"), ""));
+                });
+                let lib = $("#libclick").text();
+
+                let embed = new Discord.RichEmbed();
+                embed.setColor("#283593");
+                embed.setDescription(`${strings.getMsg("dbl_name")}: **${user.tag}**\nID: **${user.id}**\n${strings.getMsg("desc")}: **${desc}**\n[Invite](${invite})\n${strings.getMsg("dbl_website")}: **${site}**\nGithub: **${github}**\nPrefix: **${prefix}**\n${strings.getMsg("lib")}: **${lib}**\n${strings.getMsg("dbl_creator")}: **${owners.join("**, **")}**\n${strings.getMsg("dbl_tags")}: **${tags.join("**, **")}**\n${strings.getMsg("dbl_votes")}: **${votes}**\n[${strings.getMsg("dbl_link")}](https://discordbots.org/bot/${user.id})`);
+                embed.setThumbnail(user.avatarURL);
                 message.channel.send(embed);
-            }).catch(err => {
-                util.crash(message.channel, err, false);
-            });
-        }).catch(err => {
-            if(err.status == 404) return message.channel.send("Nie znaleziono!");
-            util.crash(message.channel, err, false);
-        });
-    }
+            }).catch(() => message.channel.send(strings.getMsg("notfound")));
+        } else {
+            rp(`https://discordbots.org/user/${user.id}`).then(body => {
+                $ = cheerio.load(body);
+                let bio = $(".bio-inner").text();
+                let bots = [];
+                $('.bot-name').each((i, name) => {
+                    bots.push(`${$(name).text()} <@${$(name).attr('id').replace("bot-", "")}>`);
+                });
+                let badges = [];
+                $(".badgecase").find("img").each((i, name) => {
+                    badges.push($(name).attr("title"));
+                });
+
+                let embed = new Discord.RichEmbed();
+                embed.setColor("#283593");
+                embed.setThumbnail($(".profilepic").attr("src"));
+                embed.setDescription(`${strings.getMsg("user")}: **${user.tag}**\nID: **${user.id}**\nBio: ${bio}\n${badges.join(", ")}`);
+                if(bots.length != 0) {
+                    embed.addField(`${strings.getMsg("bots")}:`, bots.join("\n"));
+                }
+                message.channel.send(embed);
+            }).catch(() => message.channel.send(strings.getMsg("notfound")));
+        }
+    }).catch(() => message.channel.send(strings.getMsg("notfound")));
 }
 
 module.exports.help = {

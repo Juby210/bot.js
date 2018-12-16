@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 var clc = require("cli-colors");
-var queuefile = require('../commands/muzyka/f/queue.js');
+var queuefile = require('../commands/music/f/queue.js');
 const config = require("../config.json");
 var index = require('../index.js');
 var util = require("../util/util");

@@ -1,6 +1,6 @@
 const db = require("../util/db.js");
 const index = require("../index.js");
-var queuefile = require("../commands/muzyka/f/queue.js");
+var queuefile = require("../commands/music/f/queue.js");
 
 module.exports = async (oldMem, newMem) => {
     await db.getVoiceBans(newMem.guild.id).then(async bany => {
