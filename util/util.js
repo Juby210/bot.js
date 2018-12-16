@@ -100,6 +100,15 @@ const polskieliterytoblad = function polskieliterytoblad(string) {
     return string.replace(/ą/g, "a").replace(/ę/g, "e").replace(/ć/g, "c").replace(/ń/g, "n").replace(/ł/g, "l").replace(/ó/g, "o").replace(/ś/g, "s").replace(/ź/g, "z").replace(/ż/g, "z").replace(/Ą/g, "A").replace(/Ę/g, "E").replace(/Ć/g, "C").replace(/Ń/g, "N").replace(/Ł/g, "L").replace(/Ó/g, "O").replace(/Ś/g, "S").replace(/Ź/g, "Z").replace(/Ż/g, "Z");
 }
 
+const gban = async function gban(message) {
+    const SManager = require("../strings/manager");
+    const strings = await SManager.create(message.guild.id);
+    let embed = new Discord.RichEmbed();
+    embed.setDescription(`<:merror:489081457973919744> | ${strings.getMsg("gban")}`);
+    embed.setColor("#FF0000");
+    message.channel.send(embed);
+}
+
 module.exports.crash = crash;
 module.exports.ustawstatus = ustawstatus;
 module.exports.req = req;
@@ -107,3 +116,4 @@ module.exports.getUsername = getUsername;
 module.exports.formatLength = formatLength;
 module.exports.searchUser = searchUser;
 module.exports.polskieliterytoblad = polskieliterytoblad;
+module.exports.gban = gban;

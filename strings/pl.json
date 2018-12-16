@@ -69,7 +69,7 @@
         "kick_user": "Wyrzucono użytkownika:",
         "kick_perm": "Bot nie ma uprawnień do wyrzucenia tego użytkownika!",
         "prefix_null": "Podaj prawidłowy prefix który ma być tutaj używany!",
-        "prefix_done": "Zaktualizowano prefix do:",
+        "prefix_done": "Zaktualizowano prefix to:",
         "prune_value": "Podaj ilość wiadomości do usunięcia!",
         "prune_error": "Ta wartość jest ża duża:",
         "prune_success": "Pomyślnie usunięto:",
@@ -91,7 +91,7 @@
         "warn_msg_user": "Nadane przez: **#user1#**",
         "warn_title": "Ostrzeżenie",
         "music_clearqueue": "wyczyszczono kolejke!",
-        "music_join": "Dolacz do kanalu i wlacz bota!",
+        "music_join": "Dolacz do kanalu i włącz bota!",
         "music_leave": "najpierw wejdź na kanał głosowy!",
         "music_nonp": "aktualnie nic nie gram",
         "music_loopon": "Loop włączony!",
@@ -141,7 +141,23 @@
         "dbl_tags": "Tagi",
         "dbl_votes": "Głosy",
         "dbl_link": "Pokaż na discordbots.org",
-        "user": "Użytkownik"
+        "user": "Użytkownik",
+        "gban": "Wygląda na to że zostałeś globalnie zbanowany.",
+        "welcome_on": "Welcome na tym serwerze jest włączone",
+        "welcome_off": "Welcome na tym serwerze jest wyłączone, aby włączyć sprawdź",
+        "channel": "Kanał",
+        "message": "Wiadomość",
+        "invalid_channel": "Ten kanał jest nieprawidłowy! Podaj prawidłowy kanał przez ID lub wzmiankę!",
+        "channelset": "został poprawnie ustalony!",
+        "messageset": "została poprawnie ustalona!",
+        "blankmsg": "Wiadomość nie może być pusta",
+        "welcome_setfirst": "Ustaw najpierw waidomość/kanał!",
+        "turnedon_welcome": "Poprawnie włączyłeś wiadomości welcome!",
+        "turnedoff_welcome": "Poprawnie wyłączyłeś wiadomości welcome!",
+        "turnedon_goodbye": "Poprawnie włączyłeś wiadomości goodbye!",
+        "turnedoff_goodbye": "Poprawnie wyłączyłeś wiadomości goodbye!",
+        "goodbye_on": "Goodbye na tym serwerze jest włączone",
+        "goodbye_off": "Goodbye na tym serwerze jest wyłączone, aby włączyć sprawdź"
     },
     "dashboard":{
         "noperms": "Nie masz uprawnień",
@@ -183,7 +199,7 @@
     },
     "commands":{
         "avatar":{
-            "usage": "avatar [wzmianka/nazwa]",
+            "usage": "avatar [mention/nazwa użytkownika]",
             "desc": "Wyświetla oraz daje link do avatara wybranej osoby/twojego"
         },
         "emoji":{
@@ -195,7 +211,7 @@
             "desc":"Wyświetla informacje o serwerze"
         },
         "userinfo":{
-            "usage":"userinfo [wzmianka/nazwa]",
+            "usage":"userinfo [mention/nazwa użytkownika]",
             "desc": "Wyświetla informacje o użytkowniku"
         },
         "help":{
@@ -224,16 +240,16 @@
         },
         "autorole":{
             "usage": "autorole <argument>",
-            "desc": "Argumenty: id/wzmianka roli, disable",
+            "desc": "Argumenty: id/mention roli, disable",
             "perms": "Zarządzanie serwerem"
         },
         "ban":{
-            "usage":"ban <wzmianka>",
+            "usage":"ban <mention>",
             "desc":"Banuje wzmienioną osobę",
             "perms":"Banowanie członków"
         },
         "kick":{
-            "usage":"kick <wzmianka>",
+            "usage":"kick <mention>",
             "desc":"Kickuje wzmienioną osobę",
             "perms":"Wyrzucanie członków"
         },
@@ -248,7 +264,7 @@
             "perms":"Zarządzanie wiadomościami"
         },
         "rename":{
-            "usage":"rename <wzmianka/nazwa> <pseudnim>",
+            "usage":"rename <mention/nazwa użytkownika> <pseudnim>",
             "desc":"Zmienia pseudonim",
             "perms":"Zarządzanie pseudonimami"
         },
@@ -268,17 +284,17 @@
             "perms":"Zarządzanie kanałami"
         },
         "voiceban":{
-            "usage":"voiceban <wzmianka/osoba>",
+            "usage":"voiceban <mention/nazwa użytkownika>",
             "desc":"Blokuje możliwość wejścia na kanały głosowe wskazanej osobie na zawsze",
             "perms":"Przenieś członków"
         },
         "voicekick":{
-            "usage":"voicekick <wzmianka/osoba>",
+            "usage":"voicekick <mention/nazwa użytkownika>",
             "desc":"Kickuje z kanału głosowego wybraną osobę",
             "perms":"Przenieś członków"
         },
         "voiceunban":{
-            "usage":"voiceunban <wzmianka>",
+            "usage":"voiceunban <mention>",
             "desc":"Odblokuje możliwość wejścia na kanały głosowe osobie która dostała bana",
             "perms":"Przenieś członków"
         },
@@ -355,6 +371,63 @@
             "usage":"welcome <typ> [argument]",
             "desc":"Typy: channel, msg, enable, disable\nDo wiadomości można dodać:\n#USER# - zamieniane jest na nazwę użytkownika\n#MENTION# - zamieniane jest na wzmiankę użytkownika\n#TAG# - zamieniane jest na tag użytkownika np. #1234\n#GUILD# - zamieniane jest na nazwę serwera",
             "perms":"Zarządzanie serwerem"
+        },
+        "goodbye":{
+            "usage":"goodbye <typ> [argument]",
+            "desc":"Typy: channel, msg, enable, disable\nDo wiadomości można dodać:\n#USER# - zamieniane jest na nazwę użytkownika\n#MENTION# - zamieniane jest na wzmiankę użytkownika\n#TAG# - zamieniane jest na tag użytkownika np. #1234\n#GUILD# - zamieniane jest na nazwę serwera",
+            "perms":"Zarządzanie serwerem"
+        },
+        "blurple":{
+            "usage":"blurple [mention/nazwa użytkownika]",
+            "desc":"Komenda obrazkowa"
+        },
+        "cat":{
+            "usage":"cat",
+            "desc":"Komenda obrazkowa"
+        },
+        "changemymind":{
+            "usage":"changemymind [text]",
+            "desc":"Komenda obrazkowa"
+        },
+        "coala":{
+            "usage":"coala",
+            "desc":"Komenda obrazkowa"
+        },
+        "dog":{
+            "usage":"dog",
+            "desc":"Komenda obrazkowa"
+        },
+        "invert":{
+            "usage":"invert [mention/nazwa użytkownika]",
+            "desc":"Komenda obrazkowa"
+        },
+        "note":{
+            "usage":"note [text]",
+            "desc":"Komenda obrazkowa"
+        },
+        "orangly":{
+            "usage":"orangly [mention/nazwa użytkownika]",
+            "desc":"Komenda obrazkowa"
+        },
+        "pizza":{
+            "usage":"pizza",
+            "desc":"Komenda obrazkowa"
+        },
+        "shibe":{
+            "usage":"shibe",
+            "desc":"Komenda obrazkowa"
+        },
+        "trump":{
+            "usage":"note [text]",
+            "desc":"Komenda obrazkowa"
+        },
+        "wanted":{
+            "usage":"wanted [mention/nazwa użytkownika]",
+            "desc":"Komenda obrazkowa"
+        },
+        "wasted":{
+            "usage":"wasted [mention/nazwa użytkownika]",
+            "desc":"Komenda obrazkowa"
         }
     },
     "categories":{

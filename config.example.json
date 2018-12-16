@@ -45,8 +45,7 @@
 		"useyourls": false,
 		"apiurl":"url do api yourls"
 	},
-	"radiolist":
-	[
+	"radiolist": [
 		{"id": 1, "name":"OpenFM Impreza", "url":"http://stream.open.fm/2"},
 		{"id": 2, "name":"OpenFM 4FUN", "url":"http://stream.open.fm/173"},
 		{"id": 3, "name":"OpenFM Fun!", "url":"http://stream.open.fm/51"},
@@ -69,5 +68,6 @@
 		{"id": 20, "name":"ZET Hits", "url":"http://zethit-01.cdn.eurozet.pl:8428/"},
 		{"id": 21, "name":"ZET Hot", "url":"http://zet.cdn.eurozet.pl/ZETHOT.mp3"},
 		{"id": 22, "name":"ZET Gold", "url":"http://zgl.cdn.eurozet.pl/ZGLHIT.mp3"}
-	]
+	],
+	"globalbans":["id"]
 }

@@ -23,6 +23,8 @@ module.exports = async (message, client) => {
     }
     if (!message.content.startsWith(prefix)) return;
 
+    if(config.globalbans) if(config.globalbans.includes(message.author.id)) {await require("../util/util").gban(message); return;}
+
     let messageArray = message.content.split(" ");
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
