@@ -4,8 +4,6 @@ const config = require("../../config.json");
 const snek = require("snekfetch");
 
 module.exports.run = async (client, message, args) => {
-    var text = encodeURIComponent(args.join(' '));
-    if(!text) return message.channel.send("Podaj jakiś text!");
     snek.get(`http://api.badosz.com/dog`).set({Authorization: config.tokens.badosz}).then(response => {
         var embed = new Discord.RichEmbed();
         embed.attachFile({attachment: response.body, name: 'dog.png'});
