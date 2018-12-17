@@ -10,10 +10,10 @@ module.exports.run = async (client, message, args) => {
     var embed = new Discord.RichEmbed();
     embed.setColor("#0FF49A");
     embed.setAuthor("EVAL - JS");
-    embed.setTitle("KOMENDA:");
+    embed.setTitle("INPUT:");
     embed.setDescription("```js\n" + text + "\n```");
     try{evalv = evalv.replace(config.tokens.token, "RaCzEjNiErAcZeJnIeRaCzEjNiE").replace(config.tokens.dbl, "RaCzEjNiErAcZeJnIeRaCzEjNiE").replace(config.ytapikey, "RaCzEjNiErAcZeJnIeRaCzEjNiE");} catch(err) {}
-    embed.addField("ODPOWIEDŹ:", "```js\n" + evalv + "\n```");
+    embed.addField("OUTPUT:", "```js\n" + evalv + "\n```");
     message.channel.send(embed);
 }
 

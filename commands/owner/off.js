@@ -1,21 +1,20 @@
 const Discord = require("discord.js");
 const config = require("../../config.json");
-const prefix = config.prefix;
 
 module.exports.run = async (client, message, args) => {
     if(message.author.id != config.settings.ownerid && message.author.id != config.settings.devid) return;
     message.delete();
-    message.channel.send("*Zamykanie w ciągu 30 sek*").then(mes => {
-        client.user.setActivity("Zamykanie w ciągu 30 sek!");
+    message.channel.send("*Shutting down in 30 s*").then(mes => {
+        client.user.setActivity("Shutting down in 30 s!");
         setTimeout(() => {
-            mes.edit("*Zamykanie w ciągu 20 sek*");
-            client.user.setActivity("Zamykanie w ciągu 20 sek!");
+            mes.edit("*Shutting down in 20 sek*");
+            client.user.setActivity("Shutting down in 20 s!");
             setTimeout(() => {
-                mes.edit("*Zamykanie w ciągu 10 sek*");
-                client.user.setActivity("Zamykanie w ciągu 10 sek!");
+                mes.edit("*Shutting down in 10 s*");
+                client.user.setActivity("Shutting down in 10 s!");
                 setTimeout(() => {
-                    mes.edit("*Zamykanie w ciągu 5 sek*");
-                    client.user.setActivity("Zamykanie!");
+                    mes.edit("*Shutting down in 5 s*");
+                    client.user.setActivity("Shutting down...");
                     var c = 5;
                     var eh = setInterval(() => {
                         c -= 1
@@ -28,8 +27,8 @@ module.exports.run = async (client, message, args) => {
                                     process.exit(1);
                                 }, 100)
                             }, 100);
-                        } else if (c == 1) {mes.delete(); message.channel.send("Zamykanie...");} else {
-                            mes.edit(`*Zamykanie w ciągu ${c} sek*`);
+                        } else if (c == 1) {mes.delete(); message.channel.send("Shutting down...");} else {
+                            mes.edit(`*Shutting down in ${c} s*`);
                         }
                     }, 1000);
                 }, 5000);

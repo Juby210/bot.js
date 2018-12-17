@@ -33,7 +33,7 @@ module.exports.run = async (client, message, args) => {
                         util.crash(message.channel, err);
                     }
                 } else {
-                    message.channel.send(`${strings.getMsg("shorten_success")}` + " " + result.shorturl);
+                    message.channel.send(`${strings.getMsg("shorten_success")} ${result.shorturl}`);
                     await db.addUrl(result.shorturl, args[0], message.author.id);    
                 }
             }
@@ -49,7 +49,7 @@ module.exports.run = async (client, message, args) => {
                 if(result.status == "fail") {
                     util.crash(message.channel, err);
                 } else {
-                    message.channel.send("Oto twój krótki url: " + result.shorturl);
+                    message.channel.send(`${strings.getMsg("shorten_success")} ${result.shorturl}`);
                     await db.addUrl(result.shorturl, args[0], message.author.id);
                 }
             }

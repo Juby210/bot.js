@@ -13,7 +13,7 @@ const crash = function AntiCrash(chan, err, sendToOwner = true) {
     embed.setColor("#FF0000");
     getUsername("324622488644616195").then(juby => {
         getUsername("321665259842830336").then(hamster => {
-            if(chan != null) chan.send(`<:merror:489081457973919744> | Poinformuj nas o tym błędzie: https://discord.gg/t3xWk4X lub zgłoś to do ${juby}, ${hamster}` + "\n``" + err + "``");
+            if(chan != null) chan.send(`<:merror:489081457973919744> | Oops error! Please tell us about this error: https://discord.gg/t3xWk4X or report this to ${juby}, ${hamster}` + "\n``" + err + "``");
         });
     });
     if(!sendToOwner) return;

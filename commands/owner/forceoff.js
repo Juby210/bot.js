@@ -1,10 +1,9 @@
 const Discord = require("discord.js");
 const config = require("../../config.json");
-const prefix = config.prefix;
 
 module.exports.run = async (client, message, args) => {
     if(message.author.id != config.settings.ownerid && message.author.id != config.settings.devid) return;
-    message.channel.send("Zamykanie...");
+    message.channel.send("Shutting down...");
     client.user.setStatus('invisible');
     setTimeout(() => {
         client.destroy();

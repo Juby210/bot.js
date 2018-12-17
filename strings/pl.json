@@ -1,4 +1,8 @@
 {
+    "info":{
+        "lang":"Polski (Polish)",
+        "translators":["Native language"]
+    },
     "bot":{
         "usernotfound": "Nie znaleziono użytkownika",
         "useravatar": "Avatar użytkownika:",
@@ -69,7 +73,7 @@
         "kick_user": "Wyrzucono użytkownika:",
         "kick_perm": "Bot nie ma uprawnień do wyrzucenia tego użytkownika!",
         "prefix_null": "Podaj prawidłowy prefix który ma być tutaj używany!",
-        "prefix_done": "Zaktualizowano prefix to:",
+        "prefix_done": "Zaktualizowany prefix to:",
         "prune_value": "Podaj ilość wiadomości do usunięcia!",
         "prune_error": "Ta wartość jest ża duża:",
         "prune_success": "Pomyślnie usunięto:",
@@ -99,7 +103,7 @@
         "music_nptitle": "Odtwarzanie:",
         "music_play_link": "Podaj link",
         "music_nofound": "Nic nie znaleziono.",
-        "music_loaded": "Załadowano #COUNT# utworów!",
+        "music_loaded": "Załadowano `#COUNT#` utworów!",
         "music_playing": "Odtwarzanie: `#SONG#` z **#CHANNEL#**",
         "music_playing_play": "Odtwarzanie: `#SONG#` z **#CHANNEL#**",
         "music_added": "Dodano do kolejki: `#SONG#` z **#CHANNEL#**",
@@ -157,7 +161,19 @@
         "turnedon_goodbye": "Poprawnie włączyłeś wiadomości goodbye!",
         "turnedoff_goodbye": "Poprawnie wyłączyłeś wiadomości goodbye!",
         "goodbye_on": "Goodbye na tym serwerze jest włączone",
-        "goodbye_off": "Goodbye na tym serwerze jest wyłączone, aby włączyć sprawdź"
+        "goodbye_off": "Goodbye na tym serwerze jest wyłączone, aby włączyć sprawdź",
+        "myprefix": "mój prefix to `#PREFIX#`!",
+        "cmdlocked_title": "Ta komenda jest niedostępna dla ciebie",
+        "cmdlocked_desc": "Aby mieć dostęp do tej komendy zagłosuj na tego bota na [discordbots.org](https://discordbots.org/bot/#ID#/vote)",
+        "cmdlocked_footer": "Jeśli już zagłosowałeś poczekaj ok. 2 min",
+        "profiles": "Profile",
+        "banned": "Zbanowany",
+        "players_online": "Gracze online",
+        "players_ets2": "Gracze ETS2",
+        "players_ats": "Gracze ATS",
+        "registred_players": "Zarejestrowani gracze",
+        "nickname": "Pseudonim",
+        "game": "Gra"
     },
     "dashboard":{
         "noperms": "Nie masz uprawnień",
@@ -428,6 +444,10 @@
         "wasted":{
             "usage":"wasted [mention/nazwa użytkownika]",
             "desc":"Komenda obrazkowa"
+        },
+        "truckersmp":{
+            "usage":"truckersmp <arg>",
+            "desc":"Komenda do truckersmp.com\nArgumenty: stats, playernick, playerid"
         }
     },
     "categories":{
@@ -436,6 +456,7 @@
         "moderation": "Moderacja",
         "music": "Muzyka",
         "images": "Obrazki",
-        "web": "Web"
+        "web": "Web",
+        "games": "Gry"
     }
 }

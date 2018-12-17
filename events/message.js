@@ -13,13 +13,13 @@ module.exports = async (message, client) => {
         guildID = message.guild.id;
     }
     await db.check(guildID);
-
     const prefix = await db.getPrefix(guildID);
+    const SManager = require("../strings/manager");
+    const strings = await SManager.create(message.guild.id);
+
     if(message.author.bot) return;
-    if (message.mentions.users.first() == null) {} else {
-        if (message.content != message.mentions.users.first()) {} else {
-            if (message.mentions.users.first().id == client.user.id) {message.reply("mój prefix to `" + prefix + "`!");}
-        }
+    if (message.content == `<@${client.user.id}>` || message.content == `<@!${client.user.id}>`) {
+        message.reply(strings.getMsg("myprefix").replace("#PREFIX#", prefix));
     }
     if (!message.content.startsWith(prefix)) return;
 
@@ -31,11 +31,11 @@ module.exports = async (message, client) => {
     let cmod = messageArray[0];
     let commandfile = client.commands.get(cmod.slice(prefix.length));
 
-    runcmd(command, commandfile, args, message, client, guildID);
+    runcmd(command, commandfile, args, message, client, guildID, strings);
     if(config.logs.enabled) if(commandfile) logger.log(commandfile.help.name, args, message);
 }
 
-function runcmd(command, commandfile, args, message, client, guildID) {
+function runcmd(command, commandfile, args, message, client, guildID, strings) {
     const dbl = new DBL(config.tokens.dbl, client);
 
     if(config.dbl.usedbl && reqV[command] && message.author.id != config.settings.ownerid) {
@@ -43,9 +43,9 @@ function runcmd(command, commandfile, args, message, client, guildID) {
             if(!v) {
                 var embed = new Discord.RichEmbed();
                 embed.setColor("#A61818");
-                embed.setTitle("Ta komenda jest niedostępna dla ciebie");
-                embed.setDescription(`Aby mieć dostęp do tej komendy zagłosuj na tego bota na [discordbots.org](https://discordbots.org/bot/${client.user.id}/vote)`);
-                embed.setFooter("Jeśli już zagłosowałeś poczekaj ok. 2 min");
+                embed.setTitle(strings.getMsg("cmdlocked_title"));
+                embed.setDescription(strings.getMsg("cmdlocked_desc").replace("#ID#", client.user.id));
+                embed.setFooter(strings.getMsg("cmdlocked_footer"));
                 message.channel.send(embed);
                 return;
             } else {
