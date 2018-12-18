@@ -462,6 +462,10 @@
         "truckersmp": {
             "usage": "truckersmp <arg>",
             "desc": "Command for truckersmp.com\nArguments: stats, playernick, playerid"
+        },
+        "lang":{
+            "usage":"lang [lang]",
+            "desc":"Changes the language of bot on server"
         }
     },
     "categories": {

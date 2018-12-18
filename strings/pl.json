@@ -460,6 +460,10 @@
         "truckersmp":{
             "usage":"truckersmp <arg>",
             "desc":"Komenda do truckersmp.com\nArgumenty: stats, playernick, playerid"
+        },
+        "lang":{
+            "usage":"lang [lang]",
+            "desc":"Zmienia język bota na serwerze"
         }
     },
     "categories":{
