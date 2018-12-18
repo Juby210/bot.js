@@ -17,7 +17,5 @@ module.exports.run = async (client, message, args) => {
 }
 
 module.exports.help = {
-    name:"avatar",
-    name2:"avatar [wzmianka/nazwa]",
-    desc:"Wyświetla oraz daje link do avatara wybranej osoby/twojego"
+    name:"avatar"
 }

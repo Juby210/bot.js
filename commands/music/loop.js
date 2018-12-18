@@ -22,7 +22,5 @@ module.exports.run = async (client, message, args) => {
 }
 
 module.exports.help = {
-    name:"loop",
-    name2:"loop",
-    desc:"Zapętla aktualną piosenkę"
+    name:"loop"
 }

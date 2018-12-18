@@ -9,7 +9,7 @@ let queue = queuefile.getqueue;
 const DBL = require("dblapi.js");
 
 module.exports = (client) => {
-    console.log(clc.cyan(`${client.user.tag} działa`));
+    console.log(clc.cyan(`${client.user.tag} ready`));
     client.user.setStatus(config.settings.status);
     module.exports.emojiguild = client.guilds.get("488293188247879680");
     util.ustawstatus(index.client);

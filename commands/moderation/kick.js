@@ -27,8 +27,5 @@ module.exports.run = async (client, message, args) => {
     }    
 
 module.exports.help = {
-    name:"kick",
-    name2:"kick <wzmianka>",
-    desc:"Kickuje wzmienioną osobę",
-    perms:"Wyrzucanie członków"
+    name:"kick"
 }

@@ -32,8 +32,5 @@ module.exports.run = async (client, message, args) => {
 
 module.exports.help = {
     name: "voicekick",
-    aliases: ["kickvoice"],
-    name2:"voicekick <wzmianka/osoba>",
-    desc:"Kickuje z kanału głosowego wybraną osobę",
-    perms:"Przenieś członków"
+    aliases: ["kickvoice"]
 }

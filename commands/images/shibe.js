@@ -12,7 +12,5 @@ module.exports.run = async (client, message, args) => {
 }
 
 module.exports.help = {
-    name:"shibe",
-    name2:"shibe",
-    desc:"Komenda obrazkowa"
+    name:"shibe"
 }

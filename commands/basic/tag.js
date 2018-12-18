@@ -33,7 +33,5 @@ module.exports.run = async (client, message, args) => {
 }
 
 module.exports.help = {
-    name:"tag",
-    name2: "tag [tag]",
-    desc:"Sprawdź kto ma tag taki sam jak ty!"
+    name:"tag"
 }

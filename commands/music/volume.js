@@ -19,7 +19,5 @@ module.exports.run = async (client, message, args) => {
 
 module.exports.help = {
     name: "volume",
-    aliases: ["vol"],
-    name2: "volume <głośność>",
-    desc: "Zmienia głośność"
+    aliases: ["vol"]
 }

@@ -35,7 +35,5 @@ module.exports.run = async (client, message, args) => {
 }
 
 module.exports.help = {
-    name: "emoji",
-    name2: "emoji [:emotka:]",
-    desc: "Wyświetla wszystkie emoji z serwera lub informacje o podanej emotce"
+    name: "emoji"
 }

@@ -58,7 +58,5 @@ module.exports.run = async (client, message, args) => {
 }
 
 module.exports.help = {
-    name: "shorten",
-    name2: "shorten <link> [własny skrót]",
-    desc: "Skraca link"
+    name: "shorten"
 }

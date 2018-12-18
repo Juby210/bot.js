@@ -62,7 +62,5 @@ module.exports.run = async (client, message, args) => {
 }
 
 module.exports.help = {
-    name: "bot",
-    name2: "bot <info/invite/uptime>",
-    desc: "Komenda o bocie\nbot info: Informacje o użyciu zasobów przez bota oraz liczba serwerów/kanałów/użytkowników\nbot invite: Link do zaproszenia bota\nbot uptime: Pokazuje ile bot jest aktywny od ostatniego restartu"
+    name: "bot"
 }

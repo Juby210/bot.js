@@ -73,8 +73,5 @@ module.exports.run = async (client, message, args) => {
 }
 
 module.exports.help = {
-    name: "autorole",
-    name2: "autorole <argument>",
-    desc: "Argumenty: id/wzmianka roli, disable",
-    perms: "Zarządzanie serwerem"
+    name: "autorole"
 }

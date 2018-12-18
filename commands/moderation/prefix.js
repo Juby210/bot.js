@@ -26,8 +26,5 @@ module.exports.run = async (client, message, args) => {
 }    
 
 module.exports.help = {
-    name:"prefix",
-    name2:"prefix <nowy prefix>",
-    desc:"Ustawia nowy prefix dla bota na danym serwerze.",
-    perms:"Zarządzanie serwerem"
+    name:"prefix"
 }

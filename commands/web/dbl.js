@@ -67,7 +67,5 @@ module.exports.run = async (client, message, args) => {
 
 module.exports.help = {
     name: "dbl",
-    aliases: ["discordbotlist"],
-    name2:"dbl <wzmianka/id>",
-    desc:"Pokazuje informacje o użytkowniku/bocie z discordbots.org"
+    aliases: ["discordbotlist"]
 }

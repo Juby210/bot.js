@@ -30,7 +30,5 @@ module.exports.run = async (client, message, guild) => {
 }
 
 module.exports.help = {
-  name:"serverinfo",
-  name2:"serverinfo",
-  desc:"Wyświetla informacje o serwerze"
+  name:"serverinfo"
 }

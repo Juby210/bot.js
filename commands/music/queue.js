@@ -34,7 +34,5 @@ module.exports.run = async (client, message, args) => {
 
 module.exports.help = {
     name:"queue",
-    aliases: ["list", "q"],
-    name2:"queue",
-    desc:"Pokazuje kolejkę dla serwera"
+    aliases: ["list", "q"]
 }

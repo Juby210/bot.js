@@ -47,7 +47,5 @@ module.exports.run = async (client, message, args) => {
 
 module.exports.help = {
     name:"np",
-    aliases:["nowplaying"],
-    name2:"np",
-    desc:"Pokazuje co aktualnie jest odtwarzane"
+    aliases:["nowplaying"]
 }

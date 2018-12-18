@@ -107,8 +107,5 @@ module.exports.run = async (client, message, args) => {
 }
 
 module.exports.help = {
-    name:"goodbye",
-    name2:"goodbye <typ> [argument]",
-    desc:"Typy: channel, msg, enable, disable\nDo wiadomości można dodać:\n#USER# - zamieniane jest na nazwę użytkownika\n#MENTION# - zamieniane jest na wzmiankę użytkownika\n#TAG# - zamieniane jest na tag użytkownika np. #1234\n#GUILD# - zamieniane jest na nazwę serwera",
-    perms:"Zarządzanie serwerem"
+    name:"goodbye"
 }

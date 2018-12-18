@@ -1,0 +1,476 @@
+{
+    "info": {
+        "lang": "English",
+        "translators": [
+            "MAMAdzwoni#6845", "hamster#0001", "kpvsky#9145"
+        ]
+    },
+    "bot": {
+        "usernotfound": "Did not find the user",
+        "useravatar": "User's avatar",
+        "useravatar_embed": "**#TAG#** (#ID#)\n[[Direct link]](#URL#)",
+        "noemojis": "This server has not got any emojis!",
+        "emotesin": "Emojis in:",
+        "notcorrectemoji": "This is not correct emoji!",
+        "requestedby": "Executed by:",
+        "emoteinfo": "Information about emoji:",
+        "name": "Name",
+        "server": "Server",
+        "emote_directlink": "Direct link to emoji",
+        "v_none": "None",
+        "v_low": "Low (Verified Email)",
+        "v_medium": "Medium (Registered on discord for 5+ minutes)",
+        "v_crazy": "Crazy (Registered on discord for 10+ minutes)",
+        "v_extreme": "Extreme (verified phone number)",
+        "users": "Users",
+        "s_dnd": "Do not disturb:",
+        "s_offline": "Offline",
+        "bots": "Bots",
+        "channels": "Channels",
+        "voice_channels": "Voice channels",
+        "text_channels": "Text channels",
+        "roles": "Roles",
+        "role": "Role",
+        "verification": "Verification",
+        "region": "Region",
+        "owner": "Owner",
+        "created": "Created",
+        "playing": "Playing",
+        "streaming": "Streaming",
+        "listening": "Listening",
+        "acc_created": "Account created:",
+        "joined": "In server:",
+        "hi": "Hi! I'm",
+        "links": "Helpful links",
+        "commandlist": "Command List",
+        "commandinfo": "Information about command",
+        "command": "command",
+        "userwiththistagnotfound": "Can't find user with this tag",
+        "userwithtagnotfound": "Can't find users with tag #",
+        "mostpopulartags": "Popular tags:",
+        "authors": "Authors",
+        "servers": "Servers",
+        "uptime": "My uptime is:",
+        "invalidarg": "Invalid argument",
+        "check": "check",
+        "botinvite": "Link to invite the bot",
+        "botcode": "This is code for this ***very g00d*** bot",
+        "holdon": "Hold on",
+        "reqperm": "This command requires permission",
+        "manageguild": "Manage guild",
+        "autorole_on": "Autorole on this server is on",
+        "autorole_off": "Autorole on this server is off, to turn on check",
+        "oronindashboard": "Or turn on in [bot dashboard](https://botjs.juby.cf)",
+        "turnedoff_autorole": "Correct turned off autorole!",
+        "turnedon_autorole": "is set as as autorole!\nTo turn off autorole, type",
+        "invalidrole": "This role is invalid! Give valid role by id or mention!",
+        "ban_by": "Banned by:",
+        "reason": "with reason:",
+        "ban_user": "Banned user:",
+        "ban_perm": "Bot don't have permission to ban that user!",
+        "user_null": "Give user!",
+        "nullreason": "none",
+        "noperm": "Don't have permissions",
+        "kick_by": "Kicked by:",
+        "kick_user": "Kicked user:",
+        "kick_perm": "Bot don't have permissions to kick that user!",
+        "prefix_null": "Give valid prefix which is supposed to be used here!",
+        "prefix_done": "Updated prefix in:",
+        "prune_value": "Give number of messages to be deleted!",
+        "prune_error": "That value is too big:",
+        "prune_success": "Successful deleted:",
+        "managenicknames": "Manage nicknames",
+        "rename_error": "Error with setting username, probably bot is under user which you want to set username",
+        "rename_botperm": "Bot don't have permissions to manage nicknames!",
+        "rename_working": "Started changing usernames!",
+        "rename_reset": "Started resetting usernames!",
+        "managechannel": "Manage channels",
+        "slowmode_error": "Give valid number, invalid is:",
+        "slowmode_errortime": "Maximum time is 120 seconds",
+        "slowmode_remove": "Deleted slowmode on this channel!",
+        "slowmode_success": "Set slowmode:",
+        "movemembers": "Moving members",
+        "botisntuser": "Give user, not me",
+        "voiceunban_error": "User don't have ban.",
+        "voiceunban_success": "is unbanned by:",
+        "warn_msg": "#user# is warned with reason: #reason#",
+        "warn_msg_user": "Given by: **#user1#**",
+        "warn_title": "Warning",
+        "music_clearqueue": "cleared the queue!",
+        "music_join": "Join the voice channel and turn the bot!",
+        "music_leave": "first go to the voice channel!",
+        "music_nonp": "currently I playing nothing",
+        "music_loopon": "Loop turned on!",
+        "music_loopoff": "Loop turned off!",
+        "music_nptitle": "Playing:",
+        "music_play_link": "Give me the link",
+        "music_nofound": "Nothing found.",
+        "music_loaded": "Loaded `#COUNT#` songs!",
+        "music_playing": "Playing: `#SONG#` from **#CHANNEL#**",
+        "music_playing_play": "Playing: `#SONG#` from **#CHANNEL#**",
+        "music_added": "Added to queue: `#SONG#` from **#CHANNEL#**",
+        "music_volume_number": "Invalid number",
+        "music_volume": "Volume has been changed to: **#VOL#%**",
+        "music_search_null": "give a phrase!",
+        "music_search_notfound": "nothing found!",
+        "music_search_title": "Select the search result by entering `1`-`10` or` cancel` to cancel",
+        "music_search_success": "Search results:",
+        "music_search_channel": "Channel:",
+        "music_search_time": "Time to answer: 30s.",
+        "music_search_cancel": "cancel",
+        "music_search_exit": "Search cancelled!",
+        "music_playernull": "Player not found! Add a bot to the channel!",
+        "music_queue_title": "Queue of #GUILD#:",
+        "music_queue_playing": "I playing: #SONG#",
+        "music_queue_playingnull": "I playing: **nothing**",
+        "music_queue_list": "Length: #TIME# | Requested by: #REQUESTER#",
+        "music_queue_footer": "and #NUM# more...",
+        "music_radio_title": "List of radio stations:",
+        "music_radio_desc": "\n#PREFIX#radio <number> - play radio\nWARNING! Eska and Vox can sometimes not work!",
+        "music_radio_footer": "Radio stations are missing? Write to Juby210#5831",
+        "music_radio_notfound": "No radio number found, enter `# PREFIX#radio` for the station list.",
+        "music_radio_play": "Playing: `#RADIO#`",
+        "hb_desc": "List of competitions:",
+        "shorten_noconfig": "The owner of the bot hasn't configured urls.",
+        "shorten_errorkeyword": "This shortcut is already taken, use a different.",
+        "shorten_success": "Here's your short url:",
+        "urls_title": "Your shorts url's:",
+        "urls_nothing": "You don't have short links",
+        "urls_fulllink": "Full link:",
+        "invalidargscount": "Incorrect number of arguments. Check the correct usage: `#PREFIX#info #CMD#`",
+        "notfound": "Not found",
+        "dbl_name": "Name",
+        "desc": "Description",
+        "dbl_website": "Website of bot",
+        "lib": "Lib",
+        "dbl_creator": "Creators",
+        "dbl_tags": "Tags",
+        "dbl_votes": "Votes",
+        "dbl_link": "Show on discordbots.org",
+        "user": "User",
+        "gban": "It looks like you've been globally banned.",
+        "welcome_on": "Welcome on this server is on",
+        "welcome_off": "Welcome on this server is off, to turn on check",
+        "channel": "Channel",
+        "message": "Message",
+        "invalid_channel": "This channel is invalid! Give valid channel by id or mention!",
+        "channelset": "it was correctly set!",
+        "messageset": "it was correctly set!",
+        "blankmsg": "Message can't be empty",
+        "welcome_setfirst": "First set up the message/channel!",
+        "turnedon_welcome": "You have correctly turned on welcome messages!",
+        "turnedoff_welcome": "You have correctly turned off the welcome message!",
+        "turnedon_goodbye": "You have correctly turned on goodbye messages!",
+        "turnedoff_goodbye": "You have correctly turned off the goodbye message!",
+        "goodbye_on": "Goodbye on this server is on",
+        "goodbye_off": "Goodbye on this server is off, to turn on check",
+        "myprefix": "my prefix is `#PREFIX#`!",
+        "cmdlocked_title": "This command isn't for you",
+        "cmdlocked_desc": "To access this command, vote for this bot on [discordbots.org](https://discordbots.org/bot/#ID#/vote)",
+        "cmdlocked_footer": "If you've already voted, wait about 2 minutes",
+        "profiles": "Profiles",
+        "banned": "Banned",
+        "players_online": "Players online",
+        "players_ets2": "ETS2 players",
+        "players_ats": "ATS players",
+        "registred_players": "Registered players",
+        "nickname": "Nickname",
+        "game": "Game",
+        "infocmd_title": "Info command",
+        "permissions": "Permissions",
+        "cmdnotfound": "Command not found. Check `#PREFIX#help`",
+        "aliases": "Aliases",
+        "lang_title": "Languages",
+        "lang_footer": "To choose a language, type: #PREFIX#lang <lang>",
+        "lang_notfound": "Bot has not been translated into this language. Check the list of languages `#PREFIX#lang`",
+        "lang_done": "Language changed to `#LANG#`"
+    },
+    "dashboard": {
+        "noperms": "You don't have permissions",
+        "channelnotfound": "Can't find channel",
+        "rolenotfound": "Can't find that role"
+    },
+    "dashboard_web": {
+        "hello": "Hello",
+        "sourcecode": "Source code(Github)",
+        "logout": "Logout",
+        "serversl": "Servers",
+        "channelsl": "Channels",
+        "usersl": "Users",
+        "manageguild": "Manage servers",
+        "edit": "Edit",
+        "off": "Turn off",
+        "on": "Turn on",
+        "hidedetails": "Hide details",
+        "ownerperms": "You are owner, you can manage this server",
+        "adminperms": "You don't have permissions to manage this server",
+        "noperms": "You can't manage this server",
+        "role": "Role",
+        "user-nick": "loading...",
+        "wait": "Please wait...",
+        "channel": "Channel",
+        "message": "Message",
+        "soff": "Turned off",
+        "son": "Turned on",
+        "blankmsg": "Message can't be empty",
+        "editmsg": "Edit message: \n#USER# - will be changed to user's name\n#MENTION# - will be changed to user's mention\n#TAG# - will be changed to user's tag (for example #1234)\n#GUILD# - will be changed to server's name",
+        "typechannelname": "Type channel name:",
+        "blankchannel": "Channel name can't be empty",
+        "typerole": "Type role:",
+        "blankrole": "Role can't be empty",
+        "typenewprefix": "Type new prefix:",
+        "blankprefix": "Prefix can't be empty",
+        "login": "Login to panel",
+        "cookies": "This site uses cookies to work correctly"
+    },
+    "commands": {
+        "info":{
+            "usage": "info <command>",
+            "desc": "Shows the information about the command you enter."
+        },
+        "avatar": {
+            "usage": "avatar [mention/name]",
+            "desc": "Displays and gives a link to the avatar of the selected person"
+        },
+        "emoji": {
+            "usage": "emoji [:emoji:]",
+            "desc": "Displays all emoji from the server or information about the given emoji"
+        },
+        "serverinfo": {
+            "usage": "serverinfo",
+            "desc": "Displays server information"
+        },
+        "userinfo": {
+            "usage": "userinfo [mention/name]",
+            "desc": "Displays user information"
+        },
+        "help": {
+            "usage": "help",
+            "desc": "Well, list of bot commands..."
+        },
+        "tag": {
+            "usage": "tag [tag]",
+            "desc": "Check who has the tag the same as you!"
+        },
+        "tags": {
+            "usage": "tags",
+            "desc": "Most popular tags"
+        },
+        "bot": {
+            "usage": "bot <info/invite/uptime>",
+            "desc": "Command about bot\nbot info: Information about resource usage by bot and number of servers/channels /users\nbot invite: Link to the bot invitation\nbot uptime: Shows how much the bot has been active since the last restart"
+        },
+        "github": {
+            "usage": "github",
+            "desc": "Link to the github bot code"
+        },
+        "ping": {
+            "usage": "ping",
+            "desc": "Showing ping of bot"
+        },
+        "autorole": {
+            "usage": "autorole <argument>",
+            "desc": "Arguments: id/role mention, disable",
+            "perms": "Manage guild"
+        },
+        "ban": {
+            "usage": "ban <mention>",
+            "desc": "Ban the named person",
+            "perms": "Ban members"
+        },
+        "kick": {
+            "usage": "kick <mention>",
+            "desc": "Kick the named person",
+            "perms": "Kick members"
+        },
+        "prefix": {
+            "usage": "prefix <new prefix>",
+            "desc": "Sets a new prefix for the bot on the given server.",
+            "perms": "Manage guild"
+        },
+        "prune": {
+            "usage": "prune [number of messages]",
+            "desc": "Deletes the given number of messages from the channel. Maximum value: 100",
+            "perms": "Manage messages"
+        },
+        "rename": {
+            "usage": "rename <mention/username> <alias>",
+            "desc": "Changes the nickname",
+            "perms": "Change nicknames"
+        },
+        "renameall": {
+            "usage": "renameall <text>",
+            "desc": "It changes all nicknames to the one entered by you",
+            "perms": "Change nicknames"
+        },
+        "resetall": {
+            "usage": "resetall",
+            "desc": "Resets all nicknames",
+            "perms": "Change nicknames"
+        },
+        "slowmode": {
+            "usage": "slowmode <seconds>",
+            "desc": "Sets slowmode to channel, 0 resets",
+            "perms": "Manage channels"
+        },
+        "voiceban": {
+            "usage": "voiceban <mention/username>",
+            "desc": "It blocks the possibility of entering the voice channels of the indicated person forever",
+            "perms": "Move members"
+        },
+        "voicekick": {
+            "usage": "voicekick <mention/username>",
+            "desc": "Kicks the selected person from the voice channel",
+            "perms": "Move members"
+        },
+        "voiceunban": {
+            "usage": "voiceunban <mention>",
+            "desc": "Unblocks the possibility of entering the voice channels of the person who got the ban",
+            "perms": "Move members"
+        },
+        "warn": {
+            "usage": "warn <user> <reason>",
+            "desc": "Gives a warning to the user with the reason.",
+            "perms": "Manage guild"
+        },
+        "clearqueue": {
+            "usage": "clearqueue",
+            "desc": "Clears the queue for the server"
+        },
+        "join": {
+            "usage": "join",
+            "desc": "Bot joins to your voice channel"
+        },
+        "leave": {
+            "usage": "leave",
+            "desc": "Bot leaving the voice channel"
+        },
+        "loop": {
+            "usage": "loop",
+            "desc": "Loops the current song"
+        },
+        "np": {
+            "usage": "np",
+            "desc": "It shows what is currently playing"
+        },
+        "pause": {
+            "usage": "pause",
+            "desc": "Stops the player"
+        },
+        "play": {
+            "usage": "play <link/search>",
+            "desc": "Plays/adds the given link/search to the queue\nIt can also be a link to the radio"
+        },
+        "queue": {
+            "usage": "queue",
+            "desc:": "Shows the queue for the server"
+        },
+        "radio": {
+            "usage": "radio [id]",
+            "desc": "Without a number, it displays a list of radio stations, with the number playing the number from the list"
+        },
+        "resume": {
+            "usage": "resume",
+            "desc": "Resume the player"
+        },
+        "search": {
+            "usage": "search <search>",
+            "desc": "Searches for a given phrase and displays a selection of 10 results"
+        },
+        "skip": {
+            "usage": "skip",
+            "desc": "Well, it just skip"
+        },
+        "volume": {
+            "usage": "volume <volume>",
+            "desc": "It changes the volume"
+        },
+        "humblebundle": {
+            "usage": "humblebundle",
+            "desc": "Shows available competitions of humblebundle"
+        },
+        "shorten": {
+            "usage": "shorten <link> [own shortcut]",
+            "desc": "Shortcut a link"
+        },
+        "dbl": {
+            "usage": "dbl <mention/id>",
+            "desc": "Shows information about the user/bot from discordbots.org"
+        },
+        "welcome": {
+            "usage": "welcome <type> [argument]",
+            "desc": "Types: channel, msg, enable, disable\nYou can add to the message:\n#USER# - username\n#MENTION# - mention\n#TAG# - user tag, e. g. #1234\n#GUILD# - guild name",
+            "perms": "Manage guild"
+        },
+        "goodbye": {
+            "usage": "goodbye <type> [argument]",
+            "desc": "Types: channel, msg, enable, disable\nYou can add to the message:\n#USER# - username\n#MENTION# - mention\n#TAG# - user tag, e. g. #1234\n#GUILD# - guild name",
+            "perms": "Manage guild"
+        },
+        "blurple": {
+            "usage": "blurple [mention/name]",
+            "desc": "Picture command"
+        },
+        "cat": {
+            "usage": "cat",
+            "desc": "Picture command"
+        },
+        "changemymind": {
+            "usage": "changemymind [text]",
+            "desc": "Picture command"
+        },
+        "coala": {
+            "usage": "coala",
+            "desc": "Picture command"
+        },
+        "dog": {
+            "usage": "dog",
+            "desc": "Picture command"
+        },
+        "invert": {
+            "usage": "invert [mention/name]",
+            "desc": "Picture command"
+        },
+        "note": {
+            "usage": "note [text]",
+            "desc": "Picture command"
+        },
+        "orangly": {
+            "usage": "orangly [mention/name]",
+            "desc": "Picture command"
+        },
+        "pizza": {
+            "usage": "pizza",
+            "desc": "Picture command"
+        },
+        "shibe": {
+            "usage": "shibe",
+            "desc": "Picture command"
+        },
+        "trump": {
+            "usage": "note [text]",
+            "desc": "Picture command"
+        },
+        "wanted": {
+            "usage": "wanted [mention/name]",
+            "desc": "Picture command"
+        },
+        "wasted": {
+            "usage": "wasted [mention/name]",
+            "desc": "Picture command"
+        },
+        "truckersmp": {
+            "usage": "truckersmp <arg>",
+            "desc": "Command for truckersmp.com\nArguments: stats, playernick, playerid"
+        }
+    },
+    "categories": {
+        "basic": "Basic",
+        "misc": "Misc",
+        "moderation": "Moderation",
+        "music": "Music",
+        "images": "Images",
+        "web": "Web",
+        "games": "Games"
+    }
+}

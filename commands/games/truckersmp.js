@@ -85,7 +85,5 @@ module.exports.run = async (client, message, args) => {
 
 module.exports.help = {
     name: "truckersmp",
-    aliases: ["tmp", "ets2", "ets2mp"],
-    name2:"truckersmp <arg>",
-    desc:"Komenda do truckersmp.com\nArgumenty: stats, playernick, playerid"
+    aliases: ["tmp", "ets2", "ets2mp"]
 }

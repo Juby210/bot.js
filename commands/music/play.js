@@ -99,7 +99,5 @@ async function getSong(string, callback) {
 
 module.exports.help = {
     name:"play",
-    aliases: [">", "p"],
-    name2:"play <link/wyszukiwanie>",
-    desc:"Odtwarza/Dodaje do kolejki podany link/wyszukanie\nMoże to być również link do radia"
+    aliases: [">", "p"]
 }

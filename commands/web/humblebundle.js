@@ -35,7 +35,5 @@ function req(method, url) {
 
 module.exports.help = {
     name:"humblebundle",
-    aliases:["hb"],
-    name2:"humblebundle",
-    desc:"Pokazuje dostępne konkursy z humblebundle"
+    aliases:["hb"]
 }

@@ -68,7 +68,5 @@ async function getSong(string, callback) {
 }
 
 module.exports.help = {
-    name:"radio",
-    name2:"radio [numer]",
-    desc:"Bez numeru wyświetla listę stacji radiowych, z numerem odtwarza numer z listy"
+    name:"radio"
 }

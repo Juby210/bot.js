@@ -18,7 +18,5 @@ module.exports.run = async (client, message, args) => {
 
 module.exports.help = {
     name: "skip",
-    aliases: [">>", "s"],
-    name2: "skip",
-    desc: "No skip poprostu"
+    aliases: [">>", "s"]
 }

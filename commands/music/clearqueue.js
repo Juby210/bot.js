@@ -20,7 +20,5 @@ module.exports.run = async (client, message, args) => {
 
 module.exports.help = {
     name:"clearqueue",
-    aliases:["cq"],
-    name2:"clearqueue",
-    desc:"Czyści kolejkę dla serwera"
+    aliases:["cq"]
 }

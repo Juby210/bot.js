@@ -3,6 +3,7 @@ const config = require("../config.json");
 var index = require("../index.js");
 const prefix = config.settings.prefix;
 const request = require("request");
+const fs = require("fs");
 
 const crash = function AntiCrash(chan, err, sendToOwner = true) {
     console.log("AntiCrash:");
@@ -13,7 +14,7 @@ const crash = function AntiCrash(chan, err, sendToOwner = true) {
     embed.setColor("#FF0000");
     getUsername("324622488644616195").then(juby => {
         getUsername("321665259842830336").then(hamster => {
-            if(chan != null) chan.send(`<:merror:489081457973919744> | Oops error! Please tell us about this error: https://discord.gg/t3xWk4X or report this to ${juby}, ${hamster}` + "\n``" + err + "``");
+            if(chan != null) chan.send(`<:merror:489081457973919744> | Oops error! Please tell us about this error: https://discord.gg/6bfpCCt or report this to ${juby}, ${hamster}` + "\n``" + err + "``");
         });
     });
     if(!sendToOwner) return;
@@ -26,9 +27,9 @@ const crash = function AntiCrash(chan, err, sendToOwner = true) {
 const ustawstatus = function ustawstatus(client = new Discord.Client()) {
     try{
         if (client.guilds.size == 1) {
-            client.user.setPresence({ game: {name: `${prefix}help | 1 serwer`, type: 'LISTENING' }});
+            client.user.setPresence({ game: {name: `${prefix}help | 1 server | ${prefix}lang`, type: 'LISTENING' }});
         } else {
-            client.user.setPresence({ game: {name: `${prefix}help | ${client.guilds.size} serwerów`, type: 'LISTENING' }});
+            client.user.setPresence({ game: {name: `${prefix}help | ${client.guilds.size} servers | ${prefix}lang`, type: 'LISTENING' }});
         }
     } catch(err) {}
 }
@@ -109,6 +110,17 @@ const gban = async function gban(message) {
     message.channel.send(embed);
 }
 
+const getLangs = function getLangs() {
+    return new Promise((resolve, reject) => {
+        let obj = {table: []};
+        fs.readdirSync(`./strings`).filter(file => file.endsWith('.json')).forEach(fn => {
+            obj[fn.replace(".json", "")] = require(`../strings/${fn}`).info;
+            obj.table.push(require(`../strings/${fn}`).info);
+        });
+        resolve(obj);
+    });
+}
+
 module.exports.crash = crash;
 module.exports.ustawstatus = ustawstatus;
 module.exports.req = req;
@@ -117,3 +129,4 @@ module.exports.formatLength = formatLength;
 module.exports.searchUser = searchUser;
 module.exports.polskieliterytoblad = polskieliterytoblad;
 module.exports.gban = gban;
+module.exports.getLangs = getLangs;

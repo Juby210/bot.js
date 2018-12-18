@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
 let strona = ("https://botjs.juby.cf/");
 let github = ("https://github.com/Juby210-PL/bot.js");
-let statuswww = ("https://status.xmcode.pl");
 const db = require('../../util/db.js');
 
 module.exports.run = async (client, message, args) => {
@@ -29,14 +28,12 @@ module.exports.run = async (client, message, args) => {
   });
   embed.addField(strings.getMsg("commandinfo"), `\`${prefix}info <${strings.getMsg("command")}>\``);
   embed.addBlankField();
-  embed.addField(`🔗 ${strings.getMsg("links")}:`, `[[Dashboard]](${strona}) | [[Github]](${github}) | [[Status]](${statuswww})`);
+  embed.addField(`🔗 ${strings.getMsg("links")}:`, `[[Dashboard]](${strona}) | [[Github]](${github}) | [[Support Server]](https://discord.gg/6bfpCCt)\nNote: Dashboard with English will be added to 20.12.2018`);
   embed.setDescription(`<:mlist:488406259230310440> | ${strings.getMsg("commandlist")} [${allc}]`);
   message.channel.send(embed);
 }
 
 module.exports.help = {
   name:"help",
-  aliases: ["?", "pomoc", "h"],
-  name2:"help",
-  desc:"No poprostu lista komend bota..."
+  aliases: ["?", "h"]
 }

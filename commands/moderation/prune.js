@@ -28,8 +28,5 @@ module.exports.run = async (client, message, args) => {
 }
 module.exports.help = {
     name: "prune",
-    aliases: ["clear"],
-    name2: "prune [ilość wiadomości]",
-    desc:"Kasuje daną ilość wiadomości z kanału. Maksymalna wartość: 100",
-    perms:"Zarządzanie wiadomościami"
+    aliases: ["clear"]
 }
