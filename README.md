@@ -1,36 +1,35 @@
 # bot.js - rewrite
-- Wielofunkcyjny polski bot opensource pisany w js.
-  - Biblioteka: **discord.js**.
-  - Muzyka: **[lavalink'a](https://github.com/Frederikam/Lavalink/)**.
-  - Baza danych: **[RethinkDB](https://rethinkdb.com)**.
+- Polish opensource multifunctional bot in discord.js library.
+  - Lib: **discord.js**.
+  - Music: **[lavalink'a](https://github.com/Frederikam/Lavalink/)**.
+  - Database: **[RethinkDB](https://rethinkdb.com)**.
 
-[Strona bota](https://botjs.juby.cf)
+[Website](https://botjs.juby.cf)
 
-## Dodaj bota
-[Dodaj bota na swój serwer!](https://discordapp.com/oauth2/authorize?&client_id=479612191767789573&scope=bot&permissions=8)
+[Add bot to your server!](https://discordapp.com/oauth2/authorize?&client_id=479612191767789573&scope=bot&permissions=8)
 
 [![widget](https://discordbots.org/api/widget/479612191767789573.svg)](https://discordbots.org/bot/479612191767789573)
 
-## Instalacja
-1. Zainstaluj nodejs
-2. Uruchom `npm install` - to zainstaluje wszystkie potrzebne biblioteki
-3. Skonfiguruj bota - plik config.json
-4. Uruchom - zalecam używania forevera ze względu na crashe - `forever index.js`
+## Installation
+1. Install nodejs
+2. Run `npm install` - it installs all the necessary libraries
+3. Configure bot in config.json
+4. Run - I recommend using forever because crashs - `forever index.js`
 
-### Poradnik do dbl:
-Do dbl musisz dodać bota na stronie discordbots.org!
+### Guide to dbl:
+You need to add a bot to dbl at discordbots.org!
 
-usedbl - używanie komend za upvoty
+usedbl - using commands for upvot's
 
-token - token z discordbots.org/bot/(id)/edit
+token - token from discordbots.org/bot/(id)/edit
 
-requireVote - ustawianie komend które mają wymagać dbl (upvoty), np. ``{"help":true, "vol":true}``
+requireVote - setting commands that should require dbl (upvoty), e.g. ``{"help":true, "vol":true}``
 
-### Poradnik do yourls:
-Wszystkie informacje na: [yourls.org](http://yourls.org/)
+### Guide to yourls:
+All information at: [yourls.org] (http://yourls.org/)
 
-## Licencja
-Na licencji Apache 2.0
+## License
+Under the Apache 2.0 license
 
-## Autor
+## Author
 Juby210 & hamster
