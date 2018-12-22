@@ -18,6 +18,7 @@
             </div>
             <div id="menu">
                 <ul>
+                    <li><select id="lmenu" name="Language"><option value="en">English</option><option value="pl">Polish</option></select></li>
                     <li class="menuitem" onclick="window.open('/invite', '_blank')">Invite</li>
                     <li class="menuitem lang" onclick="window.open('https://github.com/juby210-PL/bot.js', '_blank')" id="sourcecode">Kod źródłowy (GitHub)</li>
                 </ul>
@@ -41,7 +42,15 @@
                 }
             });
 
+            $('#lmenu').change(() => {
+                setcookie("lang", $('#lmenu').val(), 31);
+                load();
+            });
+
             function load() {
+                if(getcookie("lang")) {
+                    $("#lmenu").val(getcookie("lang"));
+                }
                 Array.from(document.getElementsByClassName("lang")).forEach(el => {
                     dstring(el.id).then(res => {
                         el.innerText = res.msg;
@@ -88,6 +97,13 @@
                     }
                 }
                 return "";
+            }
+
+            function setcookie(cname, cvalue, exdays) {
+                var d = new Date();
+                d.setTime(d.getTime() + (exdays*24*60*60*1000));
+                var expires = "expires="+ d.toUTCString();
+                document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
             }
         </script>
     </body>

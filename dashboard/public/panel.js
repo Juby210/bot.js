@@ -3,16 +3,22 @@ let stringsToLoad = ["manageguild", "edit", "off", "on", "hidedetails", "ownerpe
 let strings = new Map();
 
 function load() {
+    $('#lmenu').change(() => {
+        setcookie("lang", $('#lmenu').val(), 31);
+        window.location.reload();
+    });
+
+    if(getcookie("lang")) {
+        $("#lmenu").val(getcookie("lang"));
+    }
     Array.from(document.getElementsByClassName("lang")).forEach(el => {
         dstring(el.id).then(res => {
             el.innerText = res.msg;
-            //console.log("String loaded: " + el.id);
         });
     });
     stringsToLoad.forEach(s => {
         dstring(s).then(res => {
             strings.set(s, res.msg);
-            //console.log("String loaded: " + s);
         });
     });
 
@@ -525,4 +531,11 @@ function getcookie(cname) {
         }
     }
     return "";
+}
+
+function setcookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
