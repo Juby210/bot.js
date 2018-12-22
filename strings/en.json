@@ -66,13 +66,13 @@
         "invalidrole": "This role is invalid! Give valid role by id or mention!",
         "ban_by": "Banned by:",
         "reason": "with reason:",
-        "ban_user": "Banned user:",
+        "ban_user": "Banned user",
         "ban_perm": "Bot don't have permission to ban that user!",
         "user_null": "Give user!",
         "nullreason": "none",
         "noperm": "Don't have permissions",
         "kick_by": "Kicked by:",
-        "kick_user": "Kicked user:",
+        "kick_user": "Kicked user",
         "kick_perm": "Bot don't have permissions to kick that user!",
         "prefix_null": "Give valid prefix which is supposed to be used here!",
         "prefix_done": "Updated prefix in:",
@@ -274,12 +274,17 @@
             "perms": "Manage guild"
         },
         "ban": {
-            "usage": "ban <mention>",
+            "usage": "ban <mention/name>",
             "desc": "Ban the named person",
             "perms": "Ban members"
         },
+        "hackban":{
+            "usage": "hackban <id>",
+            "desc": "Bans user using ID, even if they have never joined.",
+            "perms": "Ban members"
+        },
         "kick": {
-            "usage": "kick <mention>",
+            "usage": "kick <mention/name>",
             "desc": "Kick the named person",
             "perms": "Kick members"
         },
@@ -465,7 +470,8 @@
         },
         "lang":{
             "usage":"lang [lang]",
-            "desc":"Changes the language of bot on server"
+            "desc":"Changes the language of bot on server",
+            "perms":"Manage guild"
         }
     },
     "categories": {

@@ -64,13 +64,13 @@
         "invalidrole": "Ta rola jest nieprawidłowa! Podaj prawidłową rolę przez ID lub wzmiankę!",
         "ban_by": "Zbanowano przez:",
         "reason": "z powodem:",
-        "ban_user": "Zbanowano użytkownika:",
+        "ban_user": "Zbanowano użytkownika",
         "ban_perm": "Bot nie ma uprawnień do zbanowania tego użytkownika!",
         "user_null": "Podaj użytkownika!",
         "nullreason": "brak",
         "noperm": "Brak permisji",
         "kick_by": "Wyrzucono przez:",
-        "kick_user": "Wyrzucono użytkownika:",
+        "kick_user": "Wyrzucono użytkownika",
         "kick_perm": "Bot nie ma uprawnień do wyrzucenia tego użytkownika!",
         "prefix_null": "Podaj prawidłowy prefix który ma być tutaj używany!",
         "prefix_done": "Zaktualizowany prefix to:",
@@ -272,12 +272,17 @@
             "perms": "Zarządzanie serwerem"
         },
         "ban":{
-            "usage":"ban <mention>",
+            "usage":"ban <mention/nazwa użytkownika>",
             "desc":"Banuje wzmienioną osobę",
             "perms":"Banowanie członków"
         },
+        "hackban":{
+            "usage": "hackban <id>",
+            "desc": "Banuje użytkownika przez ID, nawet jeśli nigdy nie wszedł na serwer.",
+            "perms": "Banowanie członków"
+        },
         "kick":{
-            "usage":"kick <mention>",
+            "usage":"kick <mention/nazwa użytkownika>",
             "desc":"Kickuje wzmienioną osobę",
             "perms":"Wyrzucanie członków"
         },
@@ -463,7 +468,8 @@
         },
         "lang":{
             "usage":"lang [lang]",
-            "desc":"Zmienia język bota na serwerze"
+            "desc":"Zmienia język bota na serwerze",
+            "perms":"Zarządzanie serwerem"
         }
     },
     "categories":{

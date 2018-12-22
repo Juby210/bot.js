@@ -28,7 +28,7 @@ module.exports.run = async (client, message, args) => {
   });
   embed.addField(strings.getMsg("commandinfo"), `\`${prefix}info <${strings.getMsg("command")}>\``);
   embed.addBlankField();
-  embed.addField(`🔗 ${strings.getMsg("links")}:`, `[[Dashboard]](${strona}) | [[Github]](${github}) | [[Support Server]](https://discord.gg/6bfpCCt)\nNote: Dashboard with English will be added to 20.12.2018`);
+  embed.addField(`🔗 ${strings.getMsg("links")}:`, `[[Dashboard]](${strona}) | [[Github]](${github}) | [[Support Server]](https://discord.gg/6bfpCCt)`);
   embed.setDescription(`<:mlist:488406259230310440> | ${strings.getMsg("commandlist")} [${allc}]`);
   message.channel.send(embed);
 }
