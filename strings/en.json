@@ -482,5 +482,8 @@
         "images": "Images",
         "web": "Web",
         "games": "Games"
+    },
+    "perms":{
+        "BAN_MEMBERS": "Ban members"
     }
 }

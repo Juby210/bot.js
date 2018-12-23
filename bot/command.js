@@ -3,8 +3,9 @@ module.exports = class Command {
     constructor (opts = {}) {
         Object.assign(this, opts);
         if(!this.aliases) this.aliases = [];
+        if(!this.perms) this.perms = [];
     }
-    async run(client, message, args, strings, prefix) {}
+    async run(a = {}) {}
     static msg(message, prefix, title = "", desc = "", color = (Math.random() * 0xFFFFFF << 0).toString(16)) {
         const e = new Discord.RichEmbed();
         e.setTitle(title);

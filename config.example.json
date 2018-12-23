@@ -1,28 +1,33 @@
 {
 	"settings": {
-		"ownerid": "twoje id z discorda",
-		"devid": "id developera",
+		"ownerid": "your id",
+		"devid": "dev id",
 		"status": "online",
 		"prefix": "^",
-		"lang": "pl"
+		"lang": "en",
+		"emojis":{
+			"guild":"488293188247879680",
+			"error": "489081457973919744",
+			"ban": "526355216635789312"
+		}
 	},
 	"logs":{
 		"enabled":false,
-		"webhookid":"id webhooka",
-		"webhooktoken":"token webhooka",
+		"webhookid":"webhook id",
+		"webhooktoken":"webhook token",
 		"commands":["avatar", "olduserinfo", "userinfo", "changemymind", "trump", "wanted", "wasted"]
 	},
 	"tokens": {
-		"token": "twój token bota",
-		"dbl": "token z dicsordbots.org",
-		"yourls": "klucz do api",
-		"badosz": "token z api.badosz.com"
+		"token": "bot token",
+		"dbl": "token from dicsordbots.org",
+		"yourls": "api key",
+		"badosz": "token from api.badosz.com"
 	},
 	"dashboard": {
 		"port": 80,
 		"callback_uri": "http://localhost/api/dashboard/callback",
-		"client_id": "id bota",
-		"client_secret": "sekret bota"
+		"client_id": "bot id",
+		"client_secret": "bot secret"
 	},
 	"lavalink": {
 		"host": "localhost",
@@ -43,7 +48,7 @@
     },
 	"yourls": {
 		"useyourls": false,
-		"apiurl":"url do api yourls"
+		"apiurl":"yourls api url"
 	},
 	"radiolist": [
 		{"id": 1, "name":"OpenFM Impreza", "url":"http://stream.open.fm/2"},

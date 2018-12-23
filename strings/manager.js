@@ -31,4 +31,8 @@ module.exports = class StringManager {
         let m = require(`./${this.lang}.json`).categories[category];
         return m ? m : require(`./${config.settings.lang}.json`).categories[category];
     }
+    getPerm(perm) {
+        let m = require(`./${this.lang}.json`).perms[perm];
+        return m ? m : require(`./${config.settings.lang}.json`).perms[perm];
+    }
 }

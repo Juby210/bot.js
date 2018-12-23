@@ -480,5 +480,8 @@
         "images": "Obrazki",
         "web": "Web",
         "games": "Gry"
+    },
+    "perms":{
+        "BAN_MEMBERS": "Banowanie członków"
     }
 }

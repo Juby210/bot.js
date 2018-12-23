@@ -94,7 +94,7 @@ const searchUser = function searchUser(message, string, returnAuthor = true) {
             });
             if(!zn) if(returnAuthor) resolve(message.author); else reject(message.author);
         } else resolve(message.mentions.users.first());
-    }).catch(err => console.log(err));
+    }).catch(err => {});
 }
 
 const polskieliterytoblad = function polskieliterytoblad(string) {

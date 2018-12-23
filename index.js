@@ -26,7 +26,8 @@ fs.readdirSync('./bot/commands/').forEach(category => {
     for (const file of commandFile) {
         const cmd = require(`./bot/commands/${category}/${file}`);
         console.log(clc.yellow(`[${category}] `) + clc.green(`./bot/commands/${category}/${file}`));
-        let obj = {category, name: cmd.name, aliases: cmd.aliases, run: cmd.run};
+        let obj = {category};
+        Object.assign(obj, cmd);
         client.commands.set(cmd.name, obj);
         try{
             cmd.aliases.forEach(alias => client.commands.set(alias, obj));
