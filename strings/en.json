@@ -46,7 +46,7 @@
         "commandinfo": "Information about command",
         "command": "command",
         "userwiththistagnotfound": "Can't find user with this tag",
-        "userwithtagnotfound": "Can't find users with tag #",
+        "userwithtagnotfound": "Can't find users with tag",
         "mostpopulartags": "Popular tags:",
         "authors": "Authors",
         "servers": "Servers",

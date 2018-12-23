@@ -18,18 +18,19 @@ client.commands = new Discord.Collection();
 var fs = require("fs");
 const config = require("./config.json");
 var clc = require("cli-colors");
-require('./events/eventLoader')(client);
+require('./bot/events/eventLoader')(client);
 
 module.exports.client = client;
-fs.readdirSync('./commands/').forEach(category => {
-    const commandFile = fs.readdirSync(`./commands/${category}`).filter(file => file.endsWith('.js'));
+fs.readdirSync('./bot/commands/').forEach(category => {
+    const commandFile = fs.readdirSync(`./bot/commands/${category}`).filter(file => file.endsWith('.js'));
     for (const file of commandFile) {
-        const props = require(`./commands/${category}/${file}`);
-        console.log(clc.yellow(`[${category}] `) + clc.green(`./commands/${category}/${file}`));
-        client.commands.set(props.help.name, {category: category, run: props.run, help: props.help});
-        if(props.help.aliases != undefined) {
-            try{props.help.aliases.forEach(alias => client.commands.set(alias, {category: category, run: props.run, help: props.help}));} catch(e) {}
-        }
+        const cmd = require(`./bot/commands/${category}/${file}`);
+        console.log(clc.yellow(`[${category}] `) + clc.green(`./bot/commands/${category}/${file}`));
+        let obj = {category, name: cmd.name, aliases: cmd.aliases, run: cmd.run};
+        client.commands.set(cmd.name, obj);
+        try{
+            cmd.aliases.forEach(alias => client.commands.set(alias, obj));
+        } catch(e) {}
     }
 });
 
