@@ -14,7 +14,7 @@ module.exports = new cmd({
             mem = mem + "```";
             a.message.channel.send(mem);
         } else {
-            if(a.args[0].includes("`")) return cmd.msg(a.message, a.prefix, ``, `${a.emoji.get(a.emojis.error)} | Error\n${a.strings.getMsg("userwiththistagnotfound")}`, "#ff0000");
+            if(a.args[0].includes("`")) return cmd.error(a, a.strings.getMsg("userwiththistagnotfound"));
             let mem = "```";
             a.client.guilds.forEach(g => {
                 g.members.forEach(m => {
@@ -26,7 +26,7 @@ module.exports = new cmd({
             });
             mem = mem + "```";
             if(a.args[0] == "0000") mem = "```Clyde#0000\nDeleted User#0000```";
-            if(mem == "``````") return cmd.msg(a.message, a.prefix, "", `${a.emoji.get(a.emojis.error)} | Error\n${a.strings.getMsg("userwithtagnotfound")} \`#${a.args[0]}\``, "#ff0000");
+            if(mem == "``````") return cmd.error(a, `${a.strings.getMsg("userwithtagnotfound")} \`#${a.args[0]}\``);
             a.message.channel.send(mem);
         }
     }

@@ -1,5 +1,4 @@
-const Discord = require('discord.js');
-const rqEvent = (event) => require(`./${event}`);
+const rqEvent = (event) => require(`./events/${event}`);
 module.exports = client => {
   client.on('ready', () => rqEvent('ready')(client));
   client.on('guildCreate', guild => rqEvent('guildCreate')(guild));

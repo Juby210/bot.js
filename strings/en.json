@@ -484,6 +484,10 @@
         "games": "Games"
     },
     "perms":{
-        "BAN_MEMBERS": "Ban members"
+        "BAN_MEMBERS": "Ban members",
+        "KICK_MEMBERS": "Kick members",
+        "MANAGE_MESSAGES": "Manage messages",
+        "MANAGE_GUILD": "Manage guild",
+        "MANAGE_NICKNAMES": "Manage nicknames"
     }
 }

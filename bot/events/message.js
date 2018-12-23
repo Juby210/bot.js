@@ -30,19 +30,27 @@ module.exports = async (message, client) => {
     const command = args.shift().toLowerCase();
     let cmod = messageArray[0];
     let commandfile = client.commands.get(cmod.slice(prefix.length));
+    if(!commandfile) return;
 
+    if(commandfile.category == "owner") if(message.author.id != config.settings.ownerid && message.author.id != config.settings.devid) return;
     let p = [];
     commandfile.perms.forEach(perm => {
         if(!message.member.hasPermission(perm)) p.push(strings.getPerm(perm));
     });
-    if(p.length != 0) return require("../command.js").msg(message, prefix, "", `<:merror:489081457973919744> | Error\n${strings.getMsg("reqperm")} \`${p.join("`, `")}\``, "#ff0000");
+    if(p.length != 0) return require("../command.js").error({emoji: client.guilds.get(config.settings.emojis.guild).emojis, emojis: config.settings.emojis, message, prefix}, `${strings.getMsg("reqperm")} \`${p.join("`, `")}\``);
+    let bp = [];
+    commandfile.botperms.forEach(perm => {
+        if(!message.guild.member(client.user).hasPermission(perm)) bp.push(strings.getPerm(perm));
+    });
+    if(bp.length != 0) return require("../command.js").error({emoji: client.guilds.get(config.settings.emojis.guild).emojis, emojis: config.settings.emojis, message, prefix}, `${strings.getMsg("reqbotperm")} \`${bp.join("`, `")}\``);
     runcmd(command, commandfile, args, message, client, strings, prefix);
-    if(config.logs.enabled) if(commandfile) logger.log(commandfile.name, args, message);
+    if(config.logs.enabled) logger.log(commandfile.name, args, message);
 }
 
 function runcmd(command, commandfile, args, message, client, strings, prefix) {
     const dbl = new DBL(config.tokens.dbl, client);
     const arg = {client, message, args, strings, prefix, emoji: client.guilds.get(config.settings.emojis.guild).emojis, config, emojis: config.settings.emojis};
+    const util = require("../../util/util");
 
     if(config.dbl.usedbl && reqV[command] && message.author.id != config.settings.ownerid) {
         dbl.hasVoted(message.author.id).then(v => {
@@ -54,13 +62,9 @@ function runcmd(command, commandfile, args, message, client, strings, prefix) {
                 embed.setFooter(strings.getMsg("cmdlocked_footer"));
                 message.channel.send(embed);
                 return;
-            } else {
-                if(commandfile) commandfile.run(arg);
-            }
+            } else commandfile.run(arg).catch(e => {util.crash(message.channel, e)});
         }).catch(err => {
-            if(commandfile) commandfile.run(arg);
+            commandfile.run(arg).catch(e => {util.crash(message.channel, e)});
         });
-    } else {
-        if(commandfile) commandfile.run(arg);
-    }
+    } else commandfile.run(arg).catch(e => {util.crash(message.channel, e)});
 }

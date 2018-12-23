@@ -79,7 +79,6 @@
         "prune_success": "Pomyślnie usunięto:",
         "managenicknames": "Zarządzanie nickami",
         "rename_error": "Błąd przy ustawianiu pseudonimu, prawdopodobnie bot jest niżej od użytkownika któremu chcesz ustawić pseudonim",
-        "rename_botperm": "Bot nie posiada permisji do zarządzania nickami!",
         "rename_working": "Rozpoczęto akcję zmieniania nicków!",
         "rename_reset": "Rozpoczęto akcję resetowanie nicków!",
         "managechannel": "Zarządzanie kanałami",
@@ -181,7 +180,8 @@
         "lang_title": "Języki",
         "lang_footer": "Aby wybrać język wpisz: #PREFIX#lang <lang>",
         "lang_notfound": "Bot nie został przetłumaczony na dany język. Sprawdź listę języków `#PREFIX#lang`",
-        "lang_done": "Język zmieniono na `#LANG#`"
+        "lang_done": "Język zmieniono na `#LANG#`",
+        "reqbotperm": "Bot do tej komendy wymaga uprawnienia"
     },
     "dashboard":{
         "noperms": "Nie masz uprawnień",
@@ -482,6 +482,10 @@
         "games": "Gry"
     },
     "perms":{
-        "BAN_MEMBERS": "Banowanie członków"
+        "BAN_MEMBERS": "Banowanie członków",
+        "KICK_MEMBERS": "Wyrzuć członków",
+        "MANAGE_MESSAGES": "Zarządzanie wiadomościami",
+        "MANAGE_GUILD": "Zarządzanie serwerem",
+        "MANAGE_NICKNAMES": "Zarządzanie pseudonimami"
     }
 }
