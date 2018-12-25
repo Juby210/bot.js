@@ -1,7 +1,12 @@
 const cmd = require("../../command.js");
-module.exports = new cmd({
-    name: "off",
-    run: async (a = {}) => {
+module.exports = class command extends cmd {
+    constructor() {
+        super({
+            name: "off"
+        });
+        this.run = this.r;
+    }
+    async r(a = {}) {
         a.message.delete();
         a.message.channel.send("*Shutting down in 30 s*").then(mes => {
             a.client.user.setActivity("Shutting down in 30 s!");
@@ -35,4 +40,4 @@ module.exports = new cmd({
             }, 10000);
         });
     }
-});
+}

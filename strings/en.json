@@ -137,7 +137,7 @@
         "urls_title": "Your shorts url's:",
         "urls_nothing": "You don't have short links",
         "urls_fulllink": "Full link:",
-        "invalidargscount": "Incorrect number of arguments. Check the correct usage: `#PREFIX#info #CMD#`",
+        "invalidargscount": "Incorrect number of arguments. Check the correct usage: `#PREFIX#help #CMD#`",
         "notfound": "Not found",
         "dbl_name": "Name",
         "desc": "Description",
@@ -183,7 +183,9 @@
         "lang_title": "Languages",
         "lang_footer": "To choose a language, type: #PREFIX#lang <lang>",
         "lang_notfound": "Bot has not been translated into this language. Check the list of languages `#PREFIX#lang`",
-        "lang_done": "Language changed to `#LANG#`"
+        "lang_done": "Language changed to `#LANG#`",
+        "reqbotperm": "Bot for this command requires permission",
+        "voiceban": "#USER1# zbanował #USER2# z kanałów głosowych."
     },
     "dashboard": {
         "noperms": "You don't have permissions",
@@ -488,6 +490,8 @@
         "KICK_MEMBERS": "Kick members",
         "MANAGE_MESSAGES": "Manage messages",
         "MANAGE_GUILD": "Manage guild",
-        "MANAGE_NICKNAMES": "Manage nicknames"
+        "MANAGE_NICKNAMES": "Manage nicknames",
+        "MANAGE_CHANNELS": "Manage channels",
+        "MOVE_MEMBERS": "Move members"
     }
 }

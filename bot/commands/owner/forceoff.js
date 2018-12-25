@@ -1,7 +1,12 @@
 const cmd = require("../../command.js");
-module.exports = new cmd({
-    name: "forceoff",
-    run: async (a = {}) => {
+module.exports = class command extends cmd {
+    constructor() {
+        super({
+            name: "forceoff"
+        });
+        this.run = this.r;
+    }
+    async r(a = {}) {
         a.message.channel.send("Shutting down...");
         a.client.user.setStatus('invisible');
         setTimeout(() => {
@@ -11,4 +16,4 @@ module.exports = new cmd({
             }, 100)
         }, 100);
     }
-});
+}

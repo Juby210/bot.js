@@ -2,10 +2,15 @@ const Discord = require("discord.js");
 let site = "https://botjs.juby.cf/";
 let github = "https://github.com/Juby210-PL/bot.js";
 const cmd = require("../../command.js");
-module.exports = new cmd({
-    name: "help",
-    aliases: ["?", "h"],
-    run: async (a = {}) => {
+module.exports = class command extends cmd {
+    constructor() {
+        super({
+            name: "help",
+            aliases: ["?", "h"]
+        });
+        this.run = this.r;
+    }
+    async r(a = {}) {
         if(!a.args[0]) {
             let embed = new Discord.RichEmbed();
             embed.setAuthor(`${a.strings.getMsg("hi")} ${a.client.user.username} - Prefix: ${a.prefix}`, a.client.user.avatarURL);
@@ -30,6 +35,7 @@ module.exports = new cmd({
             embed.addBlankField();
             embed.addField(`🔗 | ${a.strings.getMsg("links")}:`, `[[Dashboard]](${site}) | [[Github]](${github}) | [[Support Server]](https://discord.gg/6bfpCCt)`);
             embed.setDescription(`${a.emoji.get(a.emojis.list)} | ${a.strings.getMsg("commandlist")} [${allc}]`);
+            embed.setFooter(require("../../../config.json").settings.footer.replace("#PREFIX#", a.prefix));
             a.message.channel.send(embed);
         } else {
             let embed = new Discord.RichEmbed();
@@ -39,6 +45,7 @@ module.exports = new cmd({
             if(!c) {
                 embed.setTitle(a.strings.getMsg("cmdnotfound").replace("#PREFIX#", a.prefix));
             } else {
+                embed.setFooter(require("../../../config.json").settings.footer.replace("#PREFIX#", a.prefix));
                 embed.addField(a.prefix + a.strings.getCommandInfo(c.name).usage, a.strings.getCommandInfo(c.name).desc);
                 if(c.aliases.length != 0) {
                     embed.addField(`${a.strings.getMsg("aliases")}:`, `\`${c.aliases.join("`, `")}\``);
@@ -54,4 +61,4 @@ module.exports = new cmd({
             a.message.channel.send(embed);
         }
     }
-});
+}

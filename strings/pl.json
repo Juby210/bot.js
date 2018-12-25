@@ -134,7 +134,7 @@
         "urls_title": "Twoje krótkie linki:",
         "urls_nothing": "Nie posiadasz krótkich linków",
         "urls_fulllink": "Pełny link:",
-        "invalidargscount": "Nieprawidłowa ilość argumentów. Sprawdź poprawne użycie: `#PREFIX#info #CMD#`",
+        "invalidargscount": "Nieprawidłowa ilość argumentów. Sprawdź poprawne użycie: `#PREFIX#help #CMD#`",
         "notfound": "Nie znaleziono",
         "dbl_name": "Nazwa",
         "desc": "Opis",
@@ -181,7 +181,8 @@
         "lang_footer": "Aby wybrać język wpisz: #PREFIX#lang <lang>",
         "lang_notfound": "Bot nie został przetłumaczony na dany język. Sprawdź listę języków `#PREFIX#lang`",
         "lang_done": "Język zmieniono na `#LANG#`",
-        "reqbotperm": "Bot do tej komendy wymaga uprawnienia"
+        "reqbotperm": "Bot do tej komendy wymaga uprawnienia",
+        "voiceban": "#USER1# zbanował #USER2# z kanałów głosowych."
     },
     "dashboard":{
         "noperms": "Nie masz uprawnień",
@@ -486,6 +487,8 @@
         "KICK_MEMBERS": "Wyrzuć członków",
         "MANAGE_MESSAGES": "Zarządzanie wiadomościami",
         "MANAGE_GUILD": "Zarządzanie serwerem",
-        "MANAGE_NICKNAMES": "Zarządzanie pseudonimami"
+        "MANAGE_NICKNAMES": "Zarządzanie pseudonimami",
+        "MANAGE_CHANNELS": "Zarządzanie kanałami",
+        "MOVE_MEMBERS": "Przenoszenie członków"
     }
 }

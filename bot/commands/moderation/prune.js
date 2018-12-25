@@ -1,10 +1,15 @@
 const cmd = require("../../command.js");
-module.exports = new cmd({
-    name: "prune",
-    aliases: ["clear"],
-    perms: ["MANAGE_MESSAGES"],
-    botperms: ["MANAGE_MESSAGES"],
-    run: async (a = {}) => {
+module.exports = class command extends cmd {
+    constructor() {
+        super({
+            name: "prune",
+            aliases: ["clear"],
+            perms: ["MANAGE_MESSAGES"],
+            botperms: ["MANAGE_MESSAGES"]
+        });
+        this.run = this.r;
+    }
+    async r(a = {}) {
         if(!a.args[0]) return cmd.error(a, a.strings.getMsg("prune_value"));
         const c = Number(a.args[0]);
         if (c >= 101) {
@@ -16,4 +21,4 @@ module.exports = new cmd({
             }).catch(e => require("../../../util/util").crash(a.message.channel, e, false));
         }
     }
-});
+}

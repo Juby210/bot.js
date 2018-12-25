@@ -18,6 +18,9 @@ const client = new BotJSClient();
 const config = require("./config.json");
 require(`./bot/eventsLoader`)(client);
 require(`./bot/commandsLoader`)(client);
-
 module.exports.client = client;
 client.login(config.tokens.token);
+
+global.up = string => {
+    return string[0].toUpperCase() + string.slice(1);
+}

@@ -5,7 +5,7 @@ module.exports = client => {
     fs.readdirSync('./bot/commands/').forEach(category => {
         const commandFiles = fs.readdirSync(`./bot/commands/${category}`).filter(file => file.endsWith('.js'));
         for (const file of commandFiles) {
-            const cmd = require(`./commands/${category}/${file}`);
+            const cmd = new (require(`./commands/${category}/${file}`));
             console.log(`${clc.yellow(`[${category}]`)} ${clc.blue(`[${cmd.name}]`)} ${clc.green(`./bot/commands/${category}/${file}`)}`);
             let obj = {category};
             Object.assign(obj, cmd);

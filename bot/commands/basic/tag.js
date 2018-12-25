@@ -1,7 +1,12 @@
 const cmd = require("../../command.js");
-module.exports = new cmd({
-    name: "tag",
-    run: async (a = {}) => {
+module.exports = class command extends cmd {
+    constructor() {
+        super({
+            name: "tag"
+        });
+        this.run = this.r;
+    }
+    async r(a = {}) {
         if(a.args[0] == null) {
             let mem = "```";
             a.client.guilds.forEach(g => {
@@ -30,4 +35,4 @@ module.exports = new cmd({
             a.message.channel.send(mem);
         }
     }
-});
+}

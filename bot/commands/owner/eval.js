@@ -1,9 +1,14 @@
 const Discord = require("discord.js");
 const util = require("../../../util/util");
 const cmd = require("../../command.js");
-module.exports = new cmd({
-    name: "eval",
-    run: async (a = {}) => {
+module.exports = class command extends cmd {
+    constructor() {
+        super({
+            name: "eval"
+        });
+        this.run = this.r;
+    }
+    async r(a = {}) {
         let evalv = null;
         let text = a.args.join(" ");
         try {evalv = eval(text);} catch(err) {util.crash(a.message.channel, err, false); return;}
@@ -16,4 +21,4 @@ module.exports = new cmd({
         embed.addField("Output:", "```js\n" + evalv + "\n```");
         a.message.channel.send(embed);
     }
-});
+}

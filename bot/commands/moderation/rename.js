@@ -1,11 +1,16 @@
 const util = require("../../../util/util");
 const cmd = require("../../command.js");
-module.exports = new cmd({
-    name: "rename",
-    perms: ["MANAGE_NICKNAMES"],
-    botperms: ["MANAGE_NICKNAMES"],
-    run: async (a = {}) => {
-        if(!a.args[0]) return cmd.error(a, a.strings.getMsg("invalidargscount").replace("#PREFIX#", a.prefix).replace("#CMD#", "rename"));
+module.exports = class command extends cmd {
+    constructor() {
+        super({
+            name: "rename",
+            perms: ["MANAGE_NICKNAMES"],
+            botperms: ["MANAGE_NICKNAMES"]
+        });
+        this.run = this.r;
+    }
+    async r(a = {}) {
+        if(!a.args[0]) return cmd.error(a, a.strings.getMsg("invalidargscount").replace("#PREFIX#", a.prefix).replace("#CMD#", this.name));
         let nick = a.args.slice(1).join(" ");
         util.searchUser(a.message, a.args[0], false).then(user => {
             const member = a.message.guild.member(user);
@@ -16,4 +21,4 @@ module.exports = new cmd({
             cmd.error(a, a.strings.getMsg("user_null"));
         });
     }
-});
+}
