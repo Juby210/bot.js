@@ -26,7 +26,7 @@ token - token from discordbots.org/bot/(id)/edit
 requireVote - setting commands that should require dbl (upvoty), e.g. ``{"help":true, "vol":true}``
 
 ### Guide to yourls:
-All information at: [yourls.org] (http://yourls.org/)
+All information at: [yourls.org](http://yourls.org/)
 
 ## License
 Under the Apache 2.0 license
