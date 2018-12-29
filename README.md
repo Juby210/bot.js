@@ -9,6 +9,7 @@
 [Add bot to your server!](https://discordapp.com/oauth2/authorize?&client_id=479612191767789573&scope=bot&permissions=8)
 
 [![widget](https://discordbots.org/api/widget/479612191767789573.svg)](https://discordbots.org/bot/479612191767789573)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjuby210-PL%2Fbot.js.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjuby210-PL%2Fbot.js?ref=badge_shield)
 
 ## Installation
 1. Install nodejs
@@ -30,6 +31,9 @@ All information at: [yourls.org](http://yourls.org/)
 
 ## License
 Under the Apache 2.0 license
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjuby210-PL%2Fbot.js.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjuby210-PL%2Fbot.js?ref=badge_large)
 
 ## Author
 Juby210 & hamster
