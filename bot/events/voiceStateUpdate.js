@@ -1,6 +1,4 @@
 const db = require("../../util/db.js");
-const index = require("../../index.js");
-//var queuefile = require("../commands/music/f/queue.js");
 
 module.exports = async (oldMem, newMem) => {
     await db.getVoiceBans(newMem.guild.id).then(async bans => {
@@ -17,20 +15,16 @@ module.exports = async (oldMem, newMem) => {
         }).catch(err => require("../../util/util").crash(null, err));
     });
 
-    /*var vChann = oldMem.voiceChannelID;
-    var player = await index.client.player.get(oldMem.guild.id);
-    if (player != undefined) {
-        if (vChann == player.channel) {
-            if (index.client.channels.get(player.channel).members.size == 1) {
-                setTimeout(async () => {
-                    if (index.client.channels.get(player.channel).members.size == 1) {
-                        let queue = queuefile.getqueue;
-                        queue[oldMem.guild.id].playing = false;
-                        queue[oldMem.guild.id].songs = [];
-                        await index.client.player.leave(oldMem.guild.id);
-                    }
-                }, 2 * 60 * 1000);
+    let vC = oldMem.voiceChannelID;
+    let player = await global.client.player.get(oldMem.guild.id);
+    if(!player || vC != player.channel) return;
+    if(global.client.channels.get(player.channel).members.size == 1) {
+        setTimeout(async () => {
+            if (global.client.channels.get(player.channel).members.size == 1) {
+                let queue = global.client.queue[oldMem.guild.id];
+                if(queue) queue.songs = [];
+                await global.client.player.leave(oldMem.guild.id);
             }
-        }
-    }*/
+        }, 30 * 1000);
+    }
 }

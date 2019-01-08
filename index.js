@@ -5,6 +5,7 @@ class BotJSClient extends Discord.Client {
         super(options);
         this.player = null;
         this.commands = new Discord.Collection();
+        this.queue = {};
         this.once("ready", this._ready.bind(this));
     }
     _ready() {
@@ -18,7 +19,7 @@ const client = new BotJSClient();
 const config = require("./config.json");
 require(`./bot/eventsLoader`)(client);
 require(`./bot/commandsLoader`)(client);
-module.exports.client = client;
+global.client = client;
 client.login(config.tokens.token);
 
 global.up = string => {

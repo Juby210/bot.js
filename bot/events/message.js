@@ -43,6 +43,8 @@ module.exports = async (message, client) => {
         if(!message.guild.member(client.user).hasPermission(perm)) bp.push(strings.getPerm(perm));
     });
     if(bp.length != 0) return require("../command.js").error({emoji: client.guilds.get(config.settings.emojis.guild).emojis, emojis: config.settings.emojis, message, prefix}, `${strings.getMsg("reqbotperm")} \`${bp.join("`, `")}\``);
+    if(commandfile.reqVC) if(!message.member.voiceChannel) return require("../command.js").error({emoji: client.guilds.get(config.settings.emojis.guild).emojis, emojis: config.settings.emojis, message, prefix}, strings.getMsg("music_join"));
+    
     runcmd(command, commandfile, args, message, client, strings, prefix);
     if(config.logs.enabled) logger.log(commandfile.name, args, message);
 }

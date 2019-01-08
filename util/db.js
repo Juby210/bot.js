@@ -6,18 +6,14 @@ let connection;
 const load = async function load() {
     try {
         connection = await r.connect(database);
-        console.log('Tworzenie tabeli.');
         await Promise.all([
             r.tableCreate("users").run(connection),
             r.tableCreate("guilds").run(connection)
         ]);
         console.log('Tabele zostaly stworzone.');
     } catch(error) {
-        if (error.message.includes('tabele juz sa')) {
-            console.log('Tabele juz sa w bazie.');
-        } else {
-            console.error(error);
-        }
+        if(error.message.includes("already exists")) return;
+        console.log(error);
     }
 };
 

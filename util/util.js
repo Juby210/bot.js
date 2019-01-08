@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const config = require("../config.json");
-var index = require("../index.js");
 const prefix = config.settings.prefix;
 const request = require("request");
 const fs = require("fs");
@@ -12,11 +11,11 @@ const crash = function AntiCrash(chan, err, sendToOwner = true) {
     embed.setColor("#FF0000");
     getUsername("324622488644616195").then(juby => {
         getUsername("321665259842830336").then(hamster => {
-            embed.setDescription(`${index.client.guilds.get(config.settings.emojis.guild).emojis.get(config.settings.emojis.error)} | AntiCrash\n\`${err}\`\n\nPlease report this on [support server](https://discord.gg/6bfpCCt) or dm to ${juby}, ${hamster}`);
+            embed.setDescription(`${global.client.guilds.get(config.settings.emojis.guild).emojis.get(config.settings.emojis.error)} | AntiCrash\n\`${err}\`\n\nPlease report this on [support server](https://discord.gg/6bfpCCt) or dm to ${juby}, ${hamster}`);
             if(chan) chan.send(embed);
             if(!sendToOwner) return;
-            embed.setDescription(`${index.client.guilds.get(config.settings.emojis.guild).emojis.get(config.settings.emojis.error)} | AntiCrash\n\`${err}\``);
-            var owner = index.client.users.get(config.settings.ownerid);
+            embed.setDescription(`${global.client.guilds.get(config.settings.emojis.guild).emojis.get(config.settings.emojis.error)} | AntiCrash\n\`${err}\``);
+            var owner = global.client.users.get(config.settings.ownerid);
             if(owner == undefined) return;
             embed.addField(err.path, err.method);
             owner.send(embed);
@@ -24,7 +23,7 @@ const crash = function AntiCrash(chan, err, sendToOwner = true) {
     });
 }
 
-const ustawstatus = function ustawstatus(client = new Discord.Client()) {
+const ustawstatus = function ustawstatus(client = global.client) {
     try{
         if (client.guilds.size == 1) {
             client.user.setPresence({ game: {name: `${prefix}help | 1 server | ${prefix}lang`, type: 'LISTENING' }});
@@ -48,8 +47,8 @@ const req = function req(method, url) {
 
 const getUsername = function getUsername(id) {
     return new Promise((resolve, reject) => {
-        if(index.client.users.get(id)) {
-            resolve(index.client.users.get(id).tag);
+        if(global.client.users.get(id)) {
+            resolve(global.client.users.get(id).tag);
         } else {
             if (id == "324622488644616195") {
                 resolve("Juby210#2100");
