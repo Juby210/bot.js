@@ -22,7 +22,10 @@ module.exports = async (oldMem, newMem) => {
         setTimeout(async () => {
             if (global.client.channels.get(player.channel).members.size == 1) {
                 let queue = global.client.queue[oldMem.guild.id];
-                if(queue) queue.songs = [];
+                if(queue) {
+                    queue.songs = [];
+                    queue.loop = false;
+                }
                 await global.client.player.leave(oldMem.guild.id);
             }
         }, 30 * 1000);

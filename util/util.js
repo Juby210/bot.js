@@ -113,8 +113,11 @@ const getLangs = function getLangs() {
     return new Promise((resolve, reject) => {
         let obj = {table: []};
         fs.readdirSync(`./strings`).filter(file => file.endsWith('.json')).forEach(fn => {
-            obj[fn.replace(".json", "")] = require(`../strings/${fn}`).info;
-            obj.table.push(require(`../strings/${fn}`).info);
+            let o = require(`../strings/${fn}`).info;
+            let id = fn.replace(".json", "");
+            Object.assign(o, {id});
+            obj[id] = o;
+            obj.table.push(o);
         });
         resolve(obj);
     });

@@ -7,6 +7,8 @@
 		"lang": "en",
 		"emojis":{
 			"guild":"488293188247879680",
+			"_com":"Guild is guild not emoji!",
+
 			"error": "489081457973919744",
 			"ban": "526355216635789312",
 			"list": "488406259230310440",
@@ -81,7 +83,8 @@
 		{"name":"ZET Party", "url":"http://zetpar-02.cdn.eurozet.pl:8444/"},
 		{"name":"ZET Hits", "url":"http://zethit-01.cdn.eurozet.pl:8428/"},
 		{"name":"ZET Hot", "url":"http://zet.cdn.eurozet.pl/ZETHOT.mp3"},
-		{"name":"ZET Gold", "url":"http://zgl.cdn.eurozet.pl/ZGLHIT.mp3"}
+		{"name":"ZET Gold", "url":"http://zgl.cdn.eurozet.pl/ZGLHIT.mp3"},
+		{"name":"Radio Złote Przeboje", "url":"http://www.radio.pionier.net.pl/stream.pls?radio=radio88"}
 	],
 	"globalbans":["id"]
 }

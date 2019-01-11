@@ -1,39 +1,42 @@
-# bot.js - rewrite
-- Polish opensource multifunctional bot in discord.js library.
-  - Lib: **discord.js**.
-  - Music: **[lavalink'a](https://github.com/Frederikam/Lavalink/)**.
-  - Database: **[RethinkDB](https://rethinkdb.com)**.
+# bot.js
+Polish opensource multifunctional bot in [discord.js](discord.js.org) library.
 
-[Website](https://botjs.juby.cf)
+### Self Hosting
+- Install node.js and download project with ``git clone``
 
-[Add bot to your server!](https://discordapp.com/oauth2/authorize?&client_id=479612191767789573&scope=bot&permissions=8)
+- Run ``npm install`` / it installs all the necessary libraries
 
-[![widget](https://discordbots.org/api/widget/479612191767789573.svg)](https://discordbots.org/bot/479612191767789573)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjuby210-PL%2Fbot.js.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjuby210-PL%2Fbot.js?ref=badge_shield)
+- Configure config.json from config.example.json.
 
-## Installation
-1. Install nodejs
-2. Run `npm install` - it installs all the necessary libraries
-3. Configure bot in config.json
-4. Run - I recommend using forever because crashs - `forever index.js`
+- Run index.js / We recomended using ``forever index.js`` because sometimes crashs.
 
-### Guide to dbl:
-You need to add a bot to dbl at discordbots.org!
+### Guides
+***DBL***
+- Bot must be on discordbots.org
 
-usedbl - using commands for upvot's
+***CONFIG***
+- usedbl - using upvote to use command.
+- token - bot token from DBL
+- requireVote - commands to be should require dbl (upvotes) e.g ``{"avatar": true, "play":true}``
 
-token - token from discordbots.org/bot/(id)/edit
+***YOURLS - Own links***
+- All informations at http://yourls.org
 
-requireVote - setting commands that should require dbl (upvoty), e.g. ``{"help":true, "vol":true}``
+### Using
+[LavaLink](https://github.com/Frederikam/Lavalink)
 
-### Guide to yourls:
-All information at: [yourls.org](http://yourls.org/)
+[discord.js-lavalink](https://github.com/MrJacz/discord.js-lavalink/)
 
-## License
-Under the Apache 2.0 license
+[RethinkDB](https://rethinkdb.com)
+### Links
+[Website (Dashboard)](https://botjs.juby.cf)
 
+[Invite link](https://discordapp.com/oauth2/authorize?&client_id=479612191767789573&scope=bot&permissions=8)
+
+[Support Server](https://discord.gg/6bfpCCt)
+
+### License
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjuby210-PL%2Fbot.js.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjuby210-PL%2Fbot.js?ref=badge_large)
 
-## Author
-Juby210 & hamster
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjuby210-PL%2Fbot.js.svg?type=small)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjuby210-PL%2Fbot.js?ref=badge_small)

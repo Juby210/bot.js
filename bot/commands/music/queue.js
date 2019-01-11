@@ -25,13 +25,16 @@ module.exports = class command extends cmd {
         embed.setDescription(a.strings.getMsg("music_queue_playing").replace("#SONG#", `**${queue.np.title}**`))
         if (!player.playing) embed.setDescription(a.strings.getMsg("music_queue_playingnull"));
     
-        let nzm = 0;
+        let c = 0;
+        let time = 0;
         queue.songs.forEach((song, i) => {
-            if(i >= 10) return nzm++;
+            c++;
+            time += song.length;
+            if(i >= 10) return;
             let length = util.formatLength(song.length);
             embed.addField(`${i+1}. ${song.title}`, `${a.strings.getMsg("music_queue_list").replace("#TIME#", length).replace("#REQUESTER#", song.requester)}`);
         });
-        if(nzm != 0) embed.setFooter(a.stings.getMsg("music_queue_footer").replace("#NUM#", nzm));
+        if(c != 0) embed.setFooter(a.strings.getMsg("music_queue_footer").replace("#NUM#", c).replace("#TIME#", util.formatLength(time)));
     
         a.message.channel.send(embed);
     }

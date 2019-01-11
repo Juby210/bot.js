@@ -14,6 +14,7 @@ module.exports = class command extends cmd {
             return cmd.error(a, a.strings.getMsg("music_playernull"));
         }
         if(isNaN(a.args[0])) return cmd.error(a, a.strings.getMsg("music_volume_number"));
+        if(Number(a.args[0]) >= 251) return cmd.error(a, a.strings.getMsg("music_vol_max"));
         player.volume(a.args[0]);
         cmd.msg(a.message, a.prefix, "", `:sound: | ${global.up(this.name)}\n${a.strings.getMsg("music_volume").replace("#VOL#", a.args[0])}`);
     }
