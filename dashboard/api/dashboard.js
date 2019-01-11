@@ -30,7 +30,7 @@ function getuser(token) {
 }
 
 function getperms(gid, userid) {
-    if(bot.client.guilds.get(gid).member(userid).hasPermission("ADMINISTRATOR") || bot.client.guilds.get(gid).member(userid).hasPermission("MANAGE_GUILD")) {
+    if(global.client.guilds.get(gid).member(userid).hasPermission("ADMINISTRATOR") || global.client.guilds.get(gid).member(userid).hasPermission("MANAGE_GUILD")) {
         return true;
     } else {
         return false;
@@ -69,7 +69,7 @@ router.get('/guilds', async (req, res) => {
             var zr = 0;
             let objg = [];
             resp.forEach(async (srvv) => {
-                if(bot.client.guilds.get(srvv.id)){
+                if(global.client.guilds.get(srvv.id)){
                     await db.getPrefix(srvv.id).then(prefix => {
                         getuser(req.cookies.token).then(user => {
                             if(prefix == false) prefix = config.settings.prefix;
@@ -101,7 +101,7 @@ router.get('/user', (req, res) => {
 router.get('/guild', async (req, res) => {
     if(!util.isUndefined(req.cookies)) {
         if(util.isUndefined(req.cookies.token)) return notlogged(res);
-        if(bot.client.guilds.get(req.query.id)) {
+        if(global.client.guilds.get(req.query.id)) {
             await db.getPrefix(req.query.id).then(async prefix => {
                 if(prefix == false) prefix = config.settings.prefix;
                 await db.getWelcome(req.query.id).then(async welcome => {
@@ -115,7 +115,7 @@ router.get('/guild', async (req, res) => {
                                 rp("https://discordapp.com/api/guilds/" + req.query.id, {
                                     method: 'GET',
                                     headers: {
-                                        Authorization: `Bot ${bot.client.token}`,
+                                        Authorization: `Bot ${global.client.token}`,
                                     },
                                     json: true
                                 }).then(resp => {
@@ -136,8 +136,8 @@ router.get('/guild', async (req, res) => {
 router.get('/channel', async (req, res) => {
     if(!util.isUndefined(req.cookies)) {
         if(util.isUndefined(req.cookies.token)) return notlogged(res);
-        if(bot.client.channels.get(req.query.id)) {
-            res.send(stringify(bot.client.channels.get(req.query.id)));
+        if(global.client.channels.get(req.query.id)) {
+            res.send(stringify(global.client.channels.get(req.query.id)));
         } else {
             res.status(404).send({status:"ERROR", message:"Channel not found"});
         }
@@ -148,7 +148,7 @@ router.get('/channel', async (req, res) => {
 router.get('/prefix', async (req, res) => {
     if(!util.isUndefined(req.cookies)) {
         if(util.isUndefined(req.cookies.token)) return notlogged(res);
-        if(bot.client.guilds.get(req.query.id)) {
+        if(global.client.guilds.get(req.query.id)) {
             if(req.query.prefix == undefined) {
                 res.status(404).send({status:"ERROR", message:"Prefix"})
             } else {
@@ -191,7 +191,7 @@ router.get('/welcomechannel', async (req, res) => {
                 res.send({status:"ERROR", message:getString("noperms", req)});
             } else {
                 var zn = false;
-                bot.client.guilds.get(req.query.id).channels.forEach(async ch => {
+                global.client.guilds.get(req.query.id).channels.forEach(async ch => {
                     if(zn) return;
                     if(ch.name.toLowerCase().includes(req.query.channel.toLowerCase())) {
                         zn = true;
@@ -235,7 +235,7 @@ router.get('/goodbyechannel', async (req, res) => {
                 res.send({status:"ERROR", message:getString("noperms", req)});
             } else {
                 var zn = false;
-                bot.client.guilds.get(req.query.id).channels.forEach(async ch => {
+                global.client.guilds.get(req.query.id).channels.forEach(async ch => {
                     if(zn) return;
                     if(ch.name.toLowerCase().includes(req.query.channel.toLowerCase())) {
                         zn = true;
@@ -265,7 +265,7 @@ router.get('/autorole', async (req, res) => {
             } else {
                 if(strToBool(req.query.enabled)) {
                     var zn = false;
-                    bot.client.guilds.get(req.query.id).roles.forEach(async r => {
+                    global.client.guilds.get(req.query.id).roles.forEach(async r => {
                         if(zn) return;
                         if(r.name.toLowerCase().includes(req.query.role.toLowerCase())) {
                             zn = true;

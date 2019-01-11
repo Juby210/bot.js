@@ -18,16 +18,16 @@ module.exports = () => {
   app.get('/botstats', (req, res) => {
     usage(process.pid, (err, data) => {
       var ram = Math.floor(data.memory / 1024 / 1024);
-      var totalSec = bot.client.uptime / 1000;
+      var totalSec = global.client.uptime / 1000;
       var hours = Math.floor(totalSec / 3600);
       totalSec %= 3600;
       var mins = Math.floor(totalSec / 60);
       var secs = Math.floor(totalSec % 60);
-      res.send({ping: Math.floor(bot.client.ping), ram: ram, cpu: Math.floor(data.cpu) + "%", users: bot.client.users.size, guilds: bot.client.guilds.size, channels: bot.client.channels.size, uptime:`${hours}h ${mins}m ${secs}s`, status: bot.client.user.presence.status});
+      res.send({ping: Math.floor(global.client.ping), ram: ram, cpu: Math.floor(data.cpu) + "%", users: global.client.users.size, guilds: global.client.guilds.size, channels: global.client.channels.size, uptime:`${hours}h ${mins}m ${secs}s`, status: global.client.user.presence.status});
     });
   });
 
-  app.get('/invite', (req, res) => res.redirect('https://discordapp.com/oauth2/authorize?client_id=' + bot.client.user.id + '&scope=bot&permissions=493937759'));
+  app.get('/invite', (req, res) => res.redirect('https://discordapp.com/oauth2/authorize?client_id=' + global.client.user.id + '&scope=bot&permissions=493937759'));
 
   app.use('/api/dashboard', require('./api/dashboard'));
   app.use('/api/strings', require('./api/strings'));
