@@ -182,7 +182,7 @@
         "reqbotperm": "Bot for this command requires permission",
         "voiceban": "#USER1# zbanował #USER2# z kanałów głosowych.",
         "welcome_on": "Welcome on this server is included:\nChannel: #CHANNEL#\nMessage:`#msg#`\nInformation about this command:`#prefix#info welcome`",
-        "welcome_off": "Welcome on this server is turned off to enable check` #prefix# info welcome`\n",
+        "welcome_off": "Welcome on this server is turned off to enable check `#prefix#info welcome`\n",
         "welcome_set": "Channel <## channel #> (# channel #) has been correctly set!",
         "welcome_msg": "Message:` `# msg #` `has been set correctly!",
         "welcome_msg_on": "You have correctly enabled WELCOME!",
