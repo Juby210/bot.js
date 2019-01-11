@@ -22,7 +22,7 @@ module.exports = class command extends cmd {
         const embed = new Discord.RichEmbed();
         embed.setColor("#0099FF");
         embed.setTitle(`${a.emoji.get(a.emojis.list)} | ${a.strings.getMsg("music_queue_title").replace("#GUILD#", a.message.channel.guild)}`);
-        embed.setDescription(a.strings.getMsg("music_queue_playing").replace("#SONG#", queue.np.title))
+        embed.setDescription(a.strings.getMsg("music_queue_playing").replace("#SONG#", `**${queue.np.title}**`))
         if (!player.playing) embed.setDescription(a.strings.getMsg("music_queue_playingnull"));
     
         let nzm = 0;

@@ -21,15 +21,13 @@ module.exports = class command extends cmd {
         await player.getSong(track).then(async s => {
             if(ok) return;
             if(s.loadType == "NO_MATCHES") {
-                let zn = false;
                 await player.getSong(`ytsearch:${track}`).then(async songs => {
-                    songs.tracks.forEach(async e => {
-                        if(zn) return;
-                        zn = true;
-                        await this.play(e, a);
-                    });
+                    if(songs.loadType == "NO_MATCHES") {
+                        return cmd.error(a, a.strings.getMsg("music_nofound"));
+                    } else {
+                        await this.play(songs.tracks[0], a);
+                    }
                 });
-                if(!zn) return cmd.error(a, a.strings.getMsg("music_nofound"));
             } else if (s.loadType == "PLAYLIST_LOADED") {
                 if(!a.client.queue[a.message.guild.id]) new qc(a.message.guild.id, a.client);
                 let queue = a.client.queue[a.message.guild.id];
@@ -59,9 +57,7 @@ module.exports = class command extends cmd {
                     }
                 }, 300);
             } else {
-                s.tracks.forEach(async song => {
-                    await this.play(song, a);
-                });
+                await this.play(s.tracks[0], a);
             }
             ok = true;
         });

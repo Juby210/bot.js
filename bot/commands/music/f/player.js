@@ -25,7 +25,7 @@ const play = async (song, client, message) => {
 
         player.once("end", data => {
             if(queue.loop) {
-                let song = queue[message.guild.id].np;
+                let song = queue.np;
                 song.date = Date.now();
                 song.requester = "Loop";
                 play(song, client, message);

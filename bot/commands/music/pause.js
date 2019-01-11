@@ -13,7 +13,7 @@ module.exports = class command extends cmd {
 
         if(!a.client.queue[a.message.guild.id]) new qc(a.message.guild.id, a.client);
         let queue = a.client.queue[a.message.guild.id];
-        if(queue.np.paused) queue.pause();
+        if(!queue.np.paused) queue.pause();
         await player.pause(true);
         a.message.react(a.emoji.get(a.emojis.pause));
     }
