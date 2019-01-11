@@ -1,7 +1,7 @@
 # bot.js - rewrite
 - Polish opensource multifunctional bot in discord.js library.
   - Lib: **discord.js**.
-  - Music: **[lavalink'a](https://github.com/Frederikam/Lavalink/)**.
+  - Music: **[lavalink](https://github.com/Frederikam/Lavalink/)**.
   - Database: **[RethinkDB](https://rethinkdb.com)**.
 
 [Website](https://botjs.juby.cf)
