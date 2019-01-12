@@ -23,7 +23,7 @@
         "v_crazy": "Crazy (Registered on discord for 10+ minutes)",
         "v_extreme": "Extreme (verified phone number)",
         "users": "Users",
-        "s_dnd": "Do not disturb:",
+        "s_dnd": "Do not disturb",
         "s_offline": "Offline",
         "bots": "Bots",
         "channels": "Channels",
@@ -191,7 +191,8 @@
         "goodbye_msg_on": "You have correctly turned on goodbye messages!",
         "goodbye_msg_off": "You have correctly turned off goodbye messages!",
         "goodbye_off": "Goodbye on this server is disabled to enable check`#prefix# info goodbye`\n",
-        "goodbye_on": "Goodbye on this server is included:\nChannel: #CHANNEL#\nMessage:`#msg#`\nInformation about this command:`#prefix#info goodbye`"
+        "goodbye_on": "Goodbye on this server is included:\nChannel: #CHANNEL#\nMessage:`#msg#`\nInformation about this command:`#prefix#info goodbye`",
+        "serverinfo_roles": "If you want to see all the roles on this server, check #prefix#serverinfo roles"
     },
     "dashboard": {
         "noperms": "You don't have permissions",

@@ -186,7 +186,8 @@
         "goodbye_msg_on": "Poprawnie włączyłeś wiadomości goodbye!",
         "goodbye_msg_off": "Poprawnie wyłączyłeś wiadomości goodbye!",
         "goodbye_off": "Goodbye na tym serwerze jest wyłączone, aby włączyć sprawdź `#prefix#info goodbye`\n",
-        "goodbye_on": "Goodbye na tym serwerze jest włączone:\nKanał: #CHANNEL#\nWiadomość: `#msg#`\nInformacje o tej komendzie: `#prefix#info goodbye`"
+        "goodbye_on": "Goodbye na tym serwerze jest włączone:\nKanał: #CHANNEL#\nWiadomość: `#msg#`\nInformacje o tej komendzie: `#prefix#info goodbye`",
+        "serverinfo_roles": "Jeśli chcesz zobaczyć wszystkie role na tym serwerze sprawdź #prefix#serverinfo roles"
     },
     "dashboard":{
         "noperms": "Nie masz uprawnień",
