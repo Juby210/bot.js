@@ -46,7 +46,9 @@ module.exports = class command extends cmd {
                 embed.setTitle(a.strings.getMsg("cmdnotfound").replace("#PREFIX#", a.prefix));
             } else {
                 embed.setFooter(require("../../../config.json").settings.footer.replace("#PREFIX#", a.prefix));
-                embed.addField(a.prefix + a.strings.getCommandInfo(c.name).usage, a.strings.getCommandInfo(c.name).desc);
+                let desc = a.strings.getCommandInfo(c.name).desc;
+                if(c.type == "img") desc = a.strings.getMsg("img_desc");
+                embed.addField(a.prefix + a.strings.getCommandInfo(c.name).usage, desc);
                 if(c.aliases.length != 0) {
                     embed.addField(`${a.strings.getMsg("aliases")}:`, `\`${c.aliases.join("`, `")}\``);
                 }

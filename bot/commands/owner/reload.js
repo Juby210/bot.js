@@ -37,7 +37,7 @@ module.exports = class command extends cmd {
             } catch(e) {util.crash(a.message.channel, e, false);}*/
         } else if (a.args[1] == "-f") {
             try{
-                delete require.cache[require.resolve(args[0])];
+                delete require.cache[require.resolve(a.args[0])];
                 cmd.msg(a.message, a.prefix, "", `${a.emoji.get(a.emojis["done_green"])} | ${global.up(this.name)}\nUsunięto cache pliku **${a.args[0]}**`, "#00ff00");
             } catch(e) {util.crash(a.message.channel, e, false);}
         } else if (a.args[1] == "-c") {

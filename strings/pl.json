@@ -187,7 +187,10 @@
         "goodbye_msg_off": "Poprawnie wyłączyłeś wiadomości goodbye!",
         "goodbye_off": "Goodbye na tym serwerze jest wyłączone, aby włączyć sprawdź `#prefix#info goodbye`\n",
         "goodbye_on": "Goodbye na tym serwerze jest włączone:\nKanał: #CHANNEL#\nWiadomość: `#msg#`\nInformacje o tej komendzie: `#prefix#info goodbye`",
-        "serverinfo_roles": "Jeśli chcesz zobaczyć wszystkie role na tym serwerze sprawdź #prefix#serverinfo roles"
+        "serverinfo_roles": "Jeśli chcesz zobaczyć wszystkie role na tym serwerze sprawdź **#prefix#serverinfo roles**",
+        "img_desc": "Komenda obrazkowa",
+        "msg_all": "Wiadomości przeczytane (Wszystkie)",
+        "msg_ses": "Wiadomości przeczytane (Ta sesja)"
     },
     "dashboard":{
         "noperms": "Nie masz uprawnień",
@@ -228,10 +231,6 @@
         "cookies": "Ta strona używa cookies do poprawnego funkcjonowania"
     },
     "commands":{
-        "info":{
-            "usage": "info <komenda>",
-            "desc": "Pokazuje informacje o komendzie, którą wpiszesz."
-        },
         "avatar":{
             "usage": "avatar [mention/nazwa użytkownika]",
             "desc": "Wyświetla oraz daje link do avatara wybranej osoby/twojego"
@@ -260,10 +259,6 @@
             "usage":"tags",
             "desc":"Najpopularniejsze tagi"
         },
-        "bot":{
-            "usage": "bot <info/invite/uptime>",
-            "desc": "Komenda o bocie\nbot info: Informacje o użyciu zasobów przez bota oraz liczba serwerów/kanałów/użytkowników\nbot invite: Link do zaproszenia bota\nbot uptime: Pokazuje ile bot jest aktywny od ostatniego restartu"   
-        },
         "github":{
             "usage": "github",
             "desc": "Link do kodu bota na githubie"
@@ -274,73 +269,59 @@
         },
         "autorole":{
             "usage": "autorole <argument>",
-            "desc": "Argumenty: id/mention roli, disable",
-            "perms": "Zarządzanie serwerem"
+            "desc": "Argumenty: id/mention roli, disable"
         },
         "ban":{
             "usage":"ban <mention/nazwa użytkownika>",
-            "desc":"Banuje wzmienioną osobę",
-            "perms":"Banowanie członków"
+            "desc":"Banuje wzmienioną osobę"
         },
         "hackban":{
             "usage": "hackban <id>",
-            "desc": "Banuje użytkownika przez ID, nawet jeśli nigdy nie wszedł na serwer.",
-            "perms": "Banowanie członków"
+            "desc": "Banuje użytkownika przez ID, nawet jeśli nigdy nie wszedł na serwer."
         },
         "kick":{
             "usage":"kick <mention/nazwa użytkownika>",
-            "desc":"Kickuje wzmienioną osobę",
-            "perms":"Wyrzucanie członków"
+            "desc":"Kickuje wzmienioną osobę"
         },
         "prefix":{
             "usage":"prefix <nowy prefix>",
-            "desc":"Ustawia nowy prefix dla bota na danym serwerze.",
-            "perms":"Zarządzanie serwerem"
+            "desc":"Ustawia nowy prefix dla bota na danym serwerze."
         },
         "prune":{
             "usage": "prune [ilość wiadomości]",
-            "desc":"Kasuje daną ilość wiadomości z kanału. Maksymalna wartość: 100",
-            "perms":"Zarządzanie wiadomościami"
+            "desc":"Kasuje daną ilość wiadomości z kanału. Maksymalna wartość: 100"
         },
         "rename":{
             "usage":"rename <mention/nazwa użytkownika> <pseudnim>",
-            "desc":"Zmienia pseudonim",
-            "perms":"Zarządzanie pseudonimami"
+            "desc":"Zmienia pseudonim"
         },
         "renameall":{
             "usage":"renameall <pseudonim>",
-            "desc":"Zmienia wszystkim pseudonimy na wpisany przez ciebie",
-            "perms":"Zarządzanie pseudonimami"
+            "desc":"Zmienia wszystkim pseudonimy na wpisany przez ciebie"
         },
         "resetall":{
             "usage":"resetall",
-            "desc":"Resetuje wszystkim pseudonimy",
-            "perms":"Zarządzanie pseudonimami"
+            "desc":"Resetuje wszystkim pseudonimy"
         },
         "slowmode":{
             "usage":"slowmode <sekundy>",
-            "desc":"Ustawia slowmode na kanał, 0 resetuje",
-            "perms":"Zarządzanie kanałami"
+            "desc":"Ustawia slowmode na kanał, 0 resetuje"
         },
         "voiceban":{
             "usage":"voiceban <mention/nazwa użytkownika>",
-            "desc":"Blokuje możliwość wejścia na kanały głosowe wskazanej osobie na zawsze",
-            "perms":"Przenieś członków"
+            "desc":"Blokuje możliwość wejścia na kanały głosowe wskazanej osobie na zawsze"
         },
         "voicekick":{
             "usage":"voicekick <mention/nazwa użytkownika>",
-            "desc":"Kickuje z kanału głosowego wybraną osobę",
-            "perms":"Przenieś członków"
+            "desc":"Kickuje z kanału głosowego wybraną osobę"
         },
         "voiceunban":{
             "usage":"voiceunban <mention>",
-            "desc":"Odblokuje możliwość wejścia na kanały głosowe osobie która dostała bana",
-            "perms":"Przenieś członków"
+            "desc":"Odblokuje możliwość wejścia na kanały głosowe osobie która dostała bana"
         },
         "warn":{
             "usage":"warn <użytkownik> <powód>",
-            "desc":"Nadaje ostrzeżenie użytkownikowi z powodem.",
-            "perms":"Zarządzanie serwerem"
+            "desc":"Nadaje ostrzeżenie użytkownikowi z powodem."
         },
         "clearqueue":{
             "usage":"clearqueue",
@@ -394,6 +375,10 @@
             "usage":"volume <głośność>",
             "desc":"Zmienia głośność"
         },
+        "shuffle":{
+            "usage":"shuffle",
+            "desc":"Miesza queue"
+        },
         "humblebundle":{
             "usage":"humblebundle",
             "desc":"Pokazuje dostępne konkursy z humblebundle"
@@ -408,65 +393,53 @@
         },
         "welcome":{
             "usage":"welcome <typ> [argument]",
-            "desc":"Typy: channel, msg, enable, disable\nDo wiadomości można dodać:\n#USER# - zamieniane jest na nazwę użytkownika\n#MENTION# - zamieniane jest na wzmiankę użytkownika\n#TAG# - zamieniane jest na tag użytkownika np. #1234\n#GUILD# - zamieniane jest na nazwę serwera",
-            "perms":"Zarządzanie serwerem"
+            "desc":"Typy: channel, msg, enable, disable\nDo wiadomości można dodać:\n#USER# - zamieniane jest na nazwę użytkownika\n#MENTION# - zamieniane jest na wzmiankę użytkownika\n#TAG# - zamieniane jest na tag użytkownika np. #1234\n#GUILD# - zamieniane jest na nazwę serwera"
         },
         "goodbye":{
             "usage":"goodbye <typ> [argument]",
-            "desc":"Typy: channel, msg, enable, disable\nDo wiadomości można dodać:\n#USER# - zamieniane jest na nazwę użytkownika\n#MENTION# - zamieniane jest na wzmiankę użytkownika\n#TAG# - zamieniane jest na tag użytkownika np. #1234\n#GUILD# - zamieniane jest na nazwę serwera",
-            "perms":"Zarządzanie serwerem"
+            "desc":"Typy: channel, msg, enable, disable\nDo wiadomości można dodać:\n#USER# - zamieniane jest na nazwę użytkownika\n#MENTION# - zamieniane jest na wzmiankę użytkownika\n#TAG# - zamieniane jest na tag użytkownika np. #1234\n#GUILD# - zamieniane jest na nazwę serwera"
         },
         "blurple":{
-            "usage":"blurple [mention/nazwa użytkownika]",
-            "desc":"Komenda obrazkowa"
+            "usage":"blurple [mention/nazwa użytkownika]"
         },
         "cat":{
-            "usage":"cat",
-            "desc":"Komenda obrazkowa"
+            "usage":"cat"
         },
         "changemymind":{
-            "usage":"changemymind [text]",
-            "desc":"Komenda obrazkowa"
-        },
-        "coala":{
-            "usage":"coala",
-            "desc":"Komenda obrazkowa"
+            "usage":"changemymind [text]"
         },
         "dog":{
-            "usage":"dog",
-            "desc":"Komenda obrazkowa"
+            "usage":"dog"
         },
         "invert":{
-            "usage":"invert [mention/nazwa użytkownika]",
-            "desc":"Komenda obrazkowa"
+            "usage":"invert [mention/nazwa użytkownika]"
         },
         "note":{
-            "usage":"note [text]",
-            "desc":"Komenda obrazkowa"
+            "usage":"note [text]"
         },
         "orangly":{
-            "usage":"orangly [mention/nazwa użytkownika]",
-            "desc":"Komenda obrazkowa"
-        },
-        "pizza":{
-            "usage":"pizza",
-            "desc":"Komenda obrazkowa"
+            "usage":"orangly [mention/nazwa użytkownika]"
         },
         "shibe":{
-            "usage":"shibe",
-            "desc":"Komenda obrazkowa"
+            "usage":"shibe"
         },
         "trump":{
-            "usage":"note [text]",
-            "desc":"Komenda obrazkowa"
+            "usage":"trump [text]"
         },
         "wanted":{
-            "usage":"wanted [mention/nazwa użytkownika]",
-            "desc":"Komenda obrazkowa"
+            "usage":"wanted [mention/nazwa użytkownika]"
         },
         "wasted":{
-            "usage":"wasted [mention/nazwa użytkownika]",
-            "desc":"Komenda obrazkowa"
+            "usage":"wasted [mention/nazwa użytkownika]"
+        },
+        "bird":{
+            "usage":"bird"
+        },
+        "excuseme":{
+            "usage":"excuseme [text]"
+        },
+        "fox":{
+            "usage":"fox"
         },
         "truckersmp":{
             "usage":"truckersmp <arg>",
@@ -474,8 +447,11 @@
         },
         "lang":{
             "usage":"lang [lang]",
-            "desc":"Zmienia język bota na serwerze",
-            "perms":"Zarządzanie serwerem"
+            "desc":"Zmienia język bota na serwerze"
+        },
+        "stats":{
+            "usage":"stats",
+            "desc":"Pokazuje statystyki bota"
         }
     },
     "categories":{

@@ -6,6 +6,8 @@ class BotJSClient extends Discord.Client {
         this.player = null;
         this.commands = new Discord.Collection();
         this.queue = {};
+        this.stats = {};
+        this.stats.msg = 0;
         this.once("ready", this._ready.bind(this));
     }
     _ready() {

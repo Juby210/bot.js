@@ -6,6 +6,7 @@ const db = require('../../util/db.js');
 var logger = require("../../util/logger.js");
 
 module.exports = async (message, client) => {
+    client.stats.msg += 1;
     let guildID;
     if(!message.guild) {
         return;

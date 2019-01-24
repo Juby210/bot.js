@@ -54,7 +54,7 @@
         "invalidarg": "Invalid argument",
         "check": "check",
         "botinvite": "Link to invite the bot",
-        "botcode": "This is code for this ***very g00d*** bot",
+        "botcode": "This is code for this **very good** bot",
         "holdon": "Hold on",
         "reqperm": "This command requires permission",
         "manageguild": "Manage guild",
@@ -192,7 +192,10 @@
         "goodbye_msg_off": "You have correctly turned off goodbye messages!",
         "goodbye_off": "Goodbye on this server is disabled to enable check`#prefix# info goodbye`\n",
         "goodbye_on": "Goodbye on this server is included:\nChannel: #CHANNEL#\nMessage:`#msg#`\nInformation about this command:`#prefix#info goodbye`",
-        "serverinfo_roles": "If you want to see all the roles on this server, check #prefix#serverinfo roles"
+        "serverinfo_roles": "If you want to see all the roles on this server, check **#prefix#serverinfo roles**",
+        "img_desc": "Image command",
+        "msg_all": "Messages read (All)",
+        "msg_ses": "Messages read (This session)"
     },
     "dashboard": {
         "noperms": "You don't have permissions",
@@ -233,10 +236,6 @@
         "cookies": "This site uses cookies to work correctly"
     },
     "commands": {
-        "info":{
-            "usage": "info <command>",
-            "desc": "Shows the information about the command you enter."
-        },
         "avatar": {
             "usage": "avatar [mention/name]",
             "desc": "Displays and gives a link to the avatar of the selected person"
@@ -265,10 +264,6 @@
             "usage": "tags",
             "desc": "Most popular tags"
         },
-        "bot": {
-            "usage": "bot <info/invite/uptime>",
-            "desc": "Command about bot\nbot info: Information about resource usage by bot and number of servers/channels /users\nbot invite: Link to the bot invitation\nbot uptime: Shows how much the bot has been active since the last restart"
-        },
         "github": {
             "usage": "github",
             "desc": "Link to the github bot code"
@@ -279,73 +274,59 @@
         },
         "autorole": {
             "usage": "autorole <argument>",
-            "desc": "Arguments: id/role mention, disable",
-            "perms": "Manage guild"
+            "desc": "Arguments: id/role mention, disable"
         },
         "ban": {
             "usage": "ban <mention/name>",
-            "desc": "Ban the named person",
-            "perms": "Ban members"
+            "desc": "Ban the named person"
         },
         "hackban":{
             "usage": "hackban <id>",
-            "desc": "Bans user using ID, even if they have never joined.",
-            "perms": "Ban members"
+            "desc": "Bans user using ID, even if they have never joined."
         },
         "kick": {
             "usage": "kick <mention/name>",
-            "desc": "Kick the named person",
-            "perms": "Kick members"
+            "desc": "Kick the named person"
         },
         "prefix": {
             "usage": "prefix <new prefix>",
-            "desc": "Sets a new prefix for the bot on the given server.",
-            "perms": "Manage guild"
+            "desc": "Sets a new prefix for the bot on the given server."
         },
         "prune": {
             "usage": "prune [number of messages]",
-            "desc": "Deletes the given number of messages from the channel. Maximum value: 100",
-            "perms": "Manage messages"
+            "desc": "Deletes the given number of messages from the channel. Maximum value: 100"
         },
         "rename": {
             "usage": "rename <mention/username> <alias>",
-            "desc": "Changes the nickname",
-            "perms": "Change nicknames"
+            "desc": "Changes the nickname"
         },
         "renameall": {
             "usage": "renameall <text>",
-            "desc": "It changes all nicknames to the one entered by you",
-            "perms": "Change nicknames"
+            "desc": "It changes all nicknames to the one entered by you"
         },
         "resetall": {
             "usage": "resetall",
-            "desc": "Resets all nicknames",
-            "perms": "Change nicknames"
+            "desc": "Resets all nicknames"
         },
         "slowmode": {
             "usage": "slowmode <seconds>",
-            "desc": "Sets slowmode to channel, 0 resets",
-            "perms": "Manage channels"
+            "desc": "Sets slowmode to channel, 0 resets"
         },
         "voiceban": {
             "usage": "voiceban <mention/username>",
-            "desc": "It blocks the possibility of entering the voice channels of the indicated person forever",
-            "perms": "Move members"
+            "desc": "It blocks the possibility of entering the voice channels of the indicated person forever"
         },
         "voicekick": {
             "usage": "voicekick <mention/username>",
-            "desc": "Kicks the selected person from the voice channel",
-            "perms": "Move members"
+            "desc": "Kicks the selected person from the voice channel"
         },
         "voiceunban": {
             "usage": "voiceunban <mention>",
-            "desc": "Unblocks the possibility of entering the voice channels of the person who got the ban",
-            "perms": "Move members"
+            "desc": "Unblocks the possibility of entering the voice channels of the person who got the ban"
         },
         "warn": {
             "usage": "warn <user> <reason>",
-            "desc": "Gives a warning to the user with the reason.",
-            "perms": "Manage guild"
+            "desc": "Gives a warning to the user with the reason."
         },
         "clearqueue": {
             "usage": "clearqueue",
@@ -399,6 +380,10 @@
             "usage": "volume <volume>",
             "desc": "It changes the volume"
         },
+        "shuffle":{
+            "usage":"shuffle",
+            "desc":"Shuffle queue"
+        },
         "humblebundle": {
             "usage": "humblebundle",
             "desc": "Shows available competitions of humblebundle"
@@ -413,65 +398,56 @@
         },
         "welcome": {
             "usage": "welcome <type> [argument]",
-            "desc": "Types: channel, msg, enable, disable\nYou can add to the message:\n#USER# - username\n#MENTION# - mention\n#TAG# - user tag, e. g. #1234\n#GUILD# - guild name",
-            "perms": "Manage guild"
+            "desc": "Types: channel, msg, enable, disable\nYou can add to the message:\n#USER# - username\n#MENTION# - mention\n#TAG# - user tag, e. g. #1234\n#GUILD# - guild name"
         },
         "goodbye": {
             "usage": "goodbye <type> [argument]",
-            "desc": "Types: channel, msg, enable, disable\nYou can add to the message:\n#USER# - username\n#MENTION# - mention\n#TAG# - user tag, e. g. #1234\n#GUILD# - guild name",
-            "perms": "Manage guild"
+            "desc": "Types: channel, msg, enable, disable\nYou can add to the message:\n#USER# - username\n#MENTION# - mention\n#TAG# - user tag, e. g. #1234\n#GUILD# - guild name"
         },
         "blurple": {
-            "usage": "blurple [mention/name]",
-            "desc": "Picture command"
+            "usage": "blurple [mention/name]"
         },
         "cat": {
-            "usage": "cat",
-            "desc": "Picture command"
+            "usage": "cat"
         },
         "changemymind": {
-            "usage": "changemymind [text]",
-            "desc": "Picture command"
+            "usage": "changemymind [text]"
         },
         "coala": {
-            "usage": "coala",
-            "desc": "Picture command"
+            "usage": "coala"
         },
         "dog": {
-            "usage": "dog",
-            "desc": "Picture command"
+            "usage": "dog"
         },
         "invert": {
-            "usage": "invert [mention/name]",
-            "desc": "Picture command"
+            "usage": "invert [mention/name]"
         },
         "note": {
-            "usage": "note [text]",
-            "desc": "Picture command"
+            "usage": "note [text]"
         },
         "orangly": {
-            "usage": "orangly [mention/name]",
-            "desc": "Picture command"
-        },
-        "pizza": {
-            "usage": "pizza",
-            "desc": "Picture command"
+            "usage": "orangly [mention/name]"
         },
         "shibe": {
-            "usage": "shibe",
-            "desc": "Picture command"
+            "usage": "shibe"
         },
         "trump": {
-            "usage": "note [text]",
-            "desc": "Picture command"
+            "usage": "note [text]"
         },
         "wanted": {
-            "usage": "wanted [mention/name]",
-            "desc": "Picture command"
+            "usage": "wanted [mention/name]"
         },
-        "wasted": {
-            "usage": "wasted [mention/name]",
-            "desc": "Picture command"
+        "wasted":{
+            "usage":"wasted [mention/nazwa użytkownika]"
+        },
+        "bird":{
+            "usage":"bird"
+        },
+        "excuseme":{
+            "usage":"excuseme [text]"
+        },
+        "fox":{
+            "usage":"fox"
         },
         "truckersmp": {
             "usage": "truckersmp <arg>",
@@ -479,8 +455,11 @@
         },
         "lang":{
             "usage":"lang [lang]",
-            "desc":"Changes the language of bot on server",
-            "perms":"Manage guild"
+            "desc":"Changes the language of bot on server"
+        },
+        "stats":{
+            "usage":"stats",
+            "desc":"Shows bot stats"
         }
     },
     "categories": {
