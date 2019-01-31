@@ -195,7 +195,8 @@
         "serverinfo_roles": "If you want to see all the roles on this server, check **#prefix#serverinfo roles**",
         "img_desc": "Image command",
         "msg_all": "Messages read (All)",
-        "msg_ses": "Messages read (This session)"
+        "msg_ses": "Messages read (This session)",
+        "color_type": "Type color in HEX e.g. #fffffff"
     },
     "dashboard": {
         "noperms": "You don't have permissions",

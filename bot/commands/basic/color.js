@@ -14,11 +14,11 @@ module.exports = class command extends cmd {
         this.run = this.r;
     }
     async r(a = {}) {
-        if (a.args[0] == null) return a.message.channel.send("Podaj kolor");  
+        if (a.args[0] == null) return cmd.error(a, `${a.strings.getMsg("color_type")}`);
         let co = a.args.join(" ").slice("#");
         let c = a.args.join(" ");
-        if (c[0]!="#") return message.channel.send("Kolor musi być w formacie Hex np: #ffffff");
-        if (!/^#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/.test(a.args[0])) return a.message.channel.send("Kolor musi być w formacie Hex np: #ffffff");
+        if (c[0]!="#") return cmd.error(a, `${a.strings.getMsg("color_type")}`);
+        if (!/^#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/.test(a.args[0])) return cmd.error(a, `${a.strings.getMsg("color_type")}`);
         hex = c;
         colo = co.replace(new RegExp("#", "g"), "");
         var color = Color(hex);

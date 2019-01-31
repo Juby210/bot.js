@@ -190,7 +190,8 @@
         "serverinfo_roles": "Jeśli chcesz zobaczyć wszystkie role na tym serwerze sprawdź **#prefix#serverinfo roles**",
         "img_desc": "Komenda obrazkowa",
         "msg_all": "Wiadomości przeczytane (Wszystkie)",
-        "msg_ses": "Wiadomości przeczytane (Ta sesja)"
+        "msg_ses": "Wiadomości przeczytane (Ta sesja)",
+        "color_type": "Musisz podać kolor w HEX np. #fffffff"
     },
     "dashboard":{
         "noperms": "Nie masz uprawnień",
