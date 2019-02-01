@@ -1,5 +1,5 @@
-# bot.js
-Polish opensource multifunctional bot in [discord.js](discord.js.org) library.
+# bot.js - eris edition
+Polish opensource multifunctional bot in [eris](https://github.com/abalabahaha/eris) library.
 
 ### Self Hosting
 - Install node.js and download project with ``git clone``
