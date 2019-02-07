@@ -196,7 +196,20 @@
         "img_desc": "Image command",
         "msg_all": "Messages read (All)",
         "msg_ses": "Messages read (This session)",
-        "color_type": "Type color in HEX e.g. #fffffff"
+        "color_type": "Type color in HEX e.g. #fffffff",
+        "settings_lang": "Language",
+        "settings_enabled": "Enabled",
+        "settings_role": "Role",
+        "settings_channel": "Channel",
+        "settings_message": "Message",
+        "settings_none": "none",
+        "settings_null": "Incorrect number of arguments, check #prefix#settings edit",
+        "settings_edit": "To use these commands use #prefix#settings <values>\n**Welcome**\nwelcome channel <channel> - sets the channel\nwelcome msg <message> - sets the message\nwelcome disable/enable - enable/disable welcome\n**Goodbye**\ngoodbye channel <channel> - sets channel\ngoodbye msg <message> - sets message\ngoodbye disable/enable - enable/disable goodbye\n**Autorole**\nautorole role <role> - sets role\nautorole disable - disable autorole\n**Prefix**\nprefix <new prefix> - sets prefix on this server\n**LVLUp**\nlvlup enable/disable - enable/disable lvlup messages",
+        "lvlup": "#author# promoted to lvl #lvl!",
+        "lvlup_enable": "The LvLUp messages have been successfully enabled!",
+        "lvlup_disable": "The LvLUp messages have been successfully disabled!",
+        "lvlupmessage": "Lvlup messages",
+        "settings_check": "If you want to change the value, check"
     },
     "dashboard": {
         "noperms": "You don't have permissions",

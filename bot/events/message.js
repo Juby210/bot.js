@@ -14,6 +14,11 @@ module.exports = async (message, client) => {
         guildID = message.guild.id;
     }
     await db.check(guildID);
+    
+    if(message.guild) {
+    await db.addXP(message.author.id, guildID, message);
+    }
+
     const prefix = await db.getPrefix(guildID);
     const SManager = require("../../strings/manager");
     const strings = await SManager.create(message.guild.id);

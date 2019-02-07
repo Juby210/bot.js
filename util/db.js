@@ -29,6 +29,7 @@ const check = async function check(gid) {
                 voiceBans: [],
                 welcome: {enabled: false, channel: "", msg: ""},
                 autorole: {enabled: false, role: ""},
+                lvlToggle: {enabled: false},
                 lang: config.settings.lang
             }).run(connection);
             return true;
@@ -69,45 +70,6 @@ const getPrefix = async function getPrefix(id) {
         return false;
     }
 };
-
-const warn = async function warn(user, guildID, pkt, reason) {
-    if(user && guildID && pkt && reason) {
-        try {
-            if (!reason) {
-                reason = 'Nie podano powodu.';
-            }
-            const gi = await r.table('guilds').get(guildID).toJSON().run(connection);
-            
-            const json = await JSON.parse(gi);
-            if (json.users) {
-                const users = json.users;   
-                    if(users[user]) {                
-                        let us = users[user];
-
-                        let warns = us.warns;
-                        let warnReasons = us.warnreasons + ' | ' + reason;
-
-                        let warnBlock = false;
-                        await r.table('guilds').get(guildID).update({
-                            users: r.object(user, r.object('warns', 'warnreasons', warnReasons, 'warnblock', warnBlock))
-                        }).run(connection);
-                    } else {
-                        await r.table('guilds').get(guildID).update({
-                            users: r.object(user, r.object('warns', 'warnreasons', warnReasons, 'warnblock', warnBlock))
-                        }).run(connection);
-                    }
-            } else {
-                await r.table('guilds').get(guildID).update({users: { }}).run(connection);
-                await r.table('guilds').get(guildID).update({
-                    users: r.object(user, r.object('warns', 'warnreasons', warnReasons, 'warnblock', warnBlock))
-                }).run(connection);
-            }
-        } catch (e) {
-            console.error(e);
-            return false;
-        }
-    }
-}
 
 const getUrls = async function getUrls(userid) {
     if(userid) {
@@ -226,11 +188,96 @@ const getLang = async function getLang(gid) {
     }
 }
 
+const getLvlToggle = async function getLvlToggle(gid) {
+    if(gid) {
+        try {
+            var guild = await r.table('guilds').get(gid).toJSON().run(connection);
+            if(guild == null) return false;
+            return JSON.parse(guild).lvlToggle;
+        } catch(e) {
+            console.log(e);
+            return false; 
+        }
+    } else {
+        return false;
+    }
+}
+
+const addXP = async function addXP(user, guild, message) {
+    const SManager = require("../strings/manager");
+    const strings = await SManager.create(message.guild.id);
+    if(user && guild) {
+        try { 
+            let msg = message.content.trim().split(/\s/).join('');
+            if (msg.length < 6) return;
+            if(message.author.bot) return;
+
+            const g = await r.table('guilds').get(guild).toJSON().run(connection);
+            const json = await JSON.parse(g);
+            if (json.users) {
+                const users = json.users;   
+                    if(users[user]) {                
+                        let us = users[user];
+
+                        let xp = us.xp;
+                        let lvl = us.lvl;
+                        let lvlProm = us.lvlProm;
+
+                        let newXP = Math.floor(Math.random() * Math.ceil(msg.length / 2)+3); 
+                        let totalXP = xp + newXP;
+
+                        if(totalXP >= lvlProm) {
+                            totalXP = 0;
+                            lvl++;
+                            lvlProm = Math.floor(((lvlProm+newXP)*2)-(lvlProm-newXP)*0.70);
+                            const lvltoggleget = await getLvlToggle(guild);
+                            if (lvltoggleget.enabled == true) {
+                                let embed = strings.getMsg("lvlup")
+                                embed = embed.replace('#author#', `<@${message.author.id}>`)
+                                        .replace('#lvl#', lvl);
+                                await message.channel.send(embed);
+                            }
+                        }
+                        await r.table('guilds').get(guild).update({
+                            users: r.object(user, r.object('lvl', lvl, 'xp', totalXP, 'lvlProm', lvlProm))
+                        }).run(connection);
+                    } else {
+                        await r.table('guilds').get(guild).update({
+                            users: r.object(user, r.object('lvl', 1, 'xp', 0, 'lvlProm', 65))
+                        }).run(connection);
+                    }
+            } else {
+                await r.table('guilds').get(guild).update({users: { }}).run(connection);
+                await r.table('guilds').get(guild).update({
+                    users: r.object(user, r.object('lvl', 1, 'xp', 0, 'lvlProm', 65))
+                }).run(connection);
+            }
+        } catch (e) {
+            console.error(e);
+            return false;
+        }
+    }
+}
+
+const getTop = async function getTop(gid) {
+    if(gid) {
+        try {
+            var guild = await r.table('guilds').get(gid).toJSON().run(connection);
+            if(guild == null) return false;
+            return JSON.parse(guild).users;
+        } catch(e) {
+            console.log(e);
+            return false; 
+        }
+    } else {
+        return false;
+    }
+}
+
 exports.check = check;
 exports.load = load;
 exports.update = update;
 exports.getPrefix = getPrefix;
-exports.warn = warn;
 exports.getUrls = getUrls;
 exports.addUrl = addUrl;
 exports.getVoiceBans = getVoiceBans;
@@ -238,3 +285,6 @@ exports.getWelcome = getWelcome;
 exports.getGoodbye = getGoodbye;
 exports.getAutorole = getAutorole;
 exports.getLang = getLang;
+exports.addXP = addXP;
+exports.getLvlToggle = getLvlToggle;
+exports.getTop = getTop;

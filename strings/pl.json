@@ -191,7 +191,20 @@
         "img_desc": "Komenda obrazkowa",
         "msg_all": "Wiadomości przeczytane (Wszystkie)",
         "msg_ses": "Wiadomości przeczytane (Ta sesja)",
-        "color_type": "Musisz podać kolor w HEX np. #fffffff"
+        "color_type": "Musisz podać kolor w HEX np. #fffffff",
+        "settings_lang": "Język",
+        "settings_enabled": "Włączone",
+        "settings_role": "Rola",
+        "settings_channel": "Kanał",
+        "settings_message": "Wiadomość",
+        "settings_none": "brak",
+        "settings_null": "Niepoprawna ilość argumentów, sprawdź #prefix#settings edit",
+        "settings_edit": "Aby użyć tych komend użyj #prefix#settings <wartości>\n**Welcome**\nwelcome channel <kanał> - ustawia kanał\nsettings welcome msg <wiadomość> - ustawia wiadomość\nsettings welcome disable/enable - włącza/wyłącza welcome\n**Goodbye**\ngoodbye channel <kanał> - ustawia kanał\ngoodbye msg <wiadomość> - ustawia wiadomość\ngoodbye disable/enable - włącza/wyłącza goodbye\n**Autorole**\nautorole role <rola> - ustawia role\nautorole disable - wyłącza autorole\n**Prefix**\nprefix <nowy prefix> - ustawia prefix\n**LVLUp**\nlvlup enable/disable - włącza/wyłącza wiadomości lvlup",
+        "lvlup": "#author# awansował do #lvl#lvlu!",
+        "lvlup_enable": "Poprawnie włączono wiadomości LvLUp!",
+        "lvlup_disable": "Poprawnie wyłączono wiadomości LvLUp!",
+        "lvlupmessage": "Wiadomości lvlup",
+        "settings_check": "Jeżeli chcesz zmienić wartość sprawdź"
     },
     "dashboard":{
         "noperms": "Nie masz uprawnień",
