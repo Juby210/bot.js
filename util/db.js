@@ -193,7 +193,8 @@ const getLvlToggle = async function getLvlToggle(gid) {
         try {
             var guild = await r.table('guilds').get(gid).toJSON().run(connection);
             if(guild == null) return false;
-            return JSON.parse(guild).lvlToggle;
+            let tr = JSON.parse(guild).lvlToggle;
+            return tr == undefined ? {enabled: false} : tr;
         } catch(e) {
             console.log(e);
             return false; 

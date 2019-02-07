@@ -199,10 +199,10 @@
         "settings_message": "Wiadomość",
         "settings_none": "brak",
         "settings_null": "Niepoprawna ilość argumentów, sprawdź #prefix#settings edit",
-        "settings_edit": "Aby użyć tych komend użyj #prefix#settings <wartości>\n**Welcome**\nwelcome channel <kanał> - ustawia kanał\nsettings welcome msg <wiadomość> - ustawia wiadomość\nsettings welcome disable/enable - włącza/wyłącza welcome\n**Goodbye**\ngoodbye channel <kanał> - ustawia kanał\ngoodbye msg <wiadomość> - ustawia wiadomość\ngoodbye disable/enable - włącza/wyłącza goodbye\n**Autorole**\nautorole role <rola> - ustawia role\nautorole disable - wyłącza autorole\n**Prefix**\nprefix <nowy prefix> - ustawia prefix\n**LVLUp**\nlvlup enable/disable - włącza/wyłącza wiadomości lvlup",
-        "lvlup": "#author# awansował do #lvl#lvlu!",
-        "lvlup_enable": "Poprawnie włączono wiadomości LvLUp!",
-        "lvlup_disable": "Poprawnie wyłączono wiadomości LvLUp!",
+        "settings_edit": "Aby użyć tych komend użyj #prefix#settings <wartości>\n**Welcome**:\nwelcome channel <kanał> - ustawia kanał\nsettings welcome msg <wiadomość> - ustawia wiadomość\nsettings welcome disable/enable - włącza/wyłącza welcome\n**Goodbye**:\ngoodbye channel <kanał> - ustawia kanał\ngoodbye msg <wiadomość> - ustawia wiadomość\ngoodbye disable/enable - włącza/wyłącza goodbye\n**Autorole**:\nautorole role <rola> - ustawia role\nautorole disable - wyłącza autorole\n**Prefix**:\nprefix <nowy prefix> - ustawia prefix\n**Lvlup**:\nlvlup enable/disable - włącza/wyłącza wiadomości lvlup\n\nDo wiadomości welcome i goodbye można dodać:\n#USER# - zamieniane jest na nazwę użytkownika\n#MENTION# - zamieniane jest na wzmiankę użytkownika\n#TAG# - zamieniane jest na tag użytkownika np. #1234\n#GUILD# - zamieniane jest na nazwę serwera",
+        "lvlup": "#author# awansował do **#lvl#** poziomu!",
+        "lvlup_enable": "Poprawnie włączono wiadomości Lvlup!",
+        "lvlup_disable": "Poprawnie wyłączono wiadomości Lvlup!",
         "lvlupmessage": "Wiadomości lvlup",
         "settings_check": "Jeżeli chcesz zmienić wartość sprawdź"
     },
@@ -413,6 +413,10 @@
             "usage":"goodbye <typ> [argument]",
             "desc":"Typy: channel, msg, enable, disable\nDo wiadomości można dodać:\n#USER# - zamieniane jest na nazwę użytkownika\n#MENTION# - zamieniane jest na wzmiankę użytkownika\n#TAG# - zamieniane jest na tag użytkownika np. #1234\n#GUILD# - zamieniane jest na nazwę serwera"
         },
+        "settings": {
+            "usage": "settings [edit]",
+            "desc": "Sprawdź ustawienia lub edytuj"
+        },
         "blurple":{
             "usage":"blurple [mention/nazwa użytkownika]"
         },
@@ -458,6 +462,10 @@
         "truckersmp":{
             "usage":"truckersmp <arg>",
             "desc":"Komenda do truckersmp.com\nArgumenty: stats, playernick, playerid"
+        },
+        "minesweeper": {
+            "usage": "mines [x: 5-13] [y: 5-13] [miny w %: 10-90] [--reveal/--copy]",
+            "desc": "Tworzy plansze do gry w sapera"
         },
         "lang":{
             "usage":"lang [lang]",
