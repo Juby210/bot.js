@@ -212,42 +212,7 @@
         "settings_check": "If you want to change the value, check"
     },
     "dashboard": {
-        "noperms": "You don't have permissions",
-        "channelnotfound": "Can't find channel",
-        "rolenotfound": "Can't find that role"
-    },
-    "dashboard_web": {
-        "hello": "Hello",
-        "sourcecode": "Source code (Github)",
-        "logout": "Logout",
-        "serversl": "Servers",
-        "channelsl": "Channels",
-        "usersl": "Users",
-        "manageguild": "Manage server",
-        "edit": "Edit",
-        "off": "Turn off",
-        "on": "Turn on",
-        "hidedetails": "Hide details",
-        "ownerperms": "You are owner, you can manage this server",
-        "adminperms": "You have permissions to manage this server",
-        "noperms": "You can't manage this server",
-        "role": "Role",
-        "user-nick": "loading...",
-        "wait": "Please wait...",
-        "channel": "Channel",
-        "message": "Message",
-        "soff": "Turned off",
-        "son": "Turned on",
-        "blankmsg": "Message can't be empty",
-        "editmsg": "Edit message: \n#USER# - will be changed to user's name\n#MENTION# - will be changed to user's mention\n#TAG# - will be changed to user's tag (for example #1234)\n#GUILD# - will be changed to server's name",
-        "typechannelname": "Type channel name:",
-        "blankchannel": "Channel name can't be empty",
-        "typerole": "Type role:",
-        "blankrole": "Role can't be empty",
-        "typenewprefix": "Type new prefix:",
-        "blankprefix": "Prefix can't be empty",
-        "login": "Login to panel",
-        "cookies": "This site uses cookies to work correctly"
+        "_com":"multilang is not ready yet"
     },
     "commands": {
         "avatar": {
@@ -472,7 +437,7 @@
             "desc": "Command for truckersmp.com\nArguments: stats, playernick, playerid"
         },
         "minesweeper": {
-            "usage": "mines [x: 5-13] [y: 5-13] [mines in %: 10-90] [--reveal/--copy]",
+            "usage": "minesweeper [x: 5-13] [y: 5-13] [mines in %: 10-90] [--reveal/--copy]",
             "desc": "Creates minesweeper board"
         },
         "lang":{

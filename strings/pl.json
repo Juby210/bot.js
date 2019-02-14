@@ -207,42 +207,7 @@
         "settings_check": "Jeżeli chcesz zmienić wartość sprawdź"
     },
     "dashboard":{
-        "noperms": "Nie masz uprawnień",
-        "channelnotfound": "Nie znaleziono takiego kanału",
-        "rolenotfound": "Nie znaleziono takiej roli"
-    },
-    "dashboard_web": {
-        "hello": "Witaj",
-        "sourcecode": "Kod źródłowy (Github)",
-        "logout": "Wyloguj",
-        "serversl": "Serwery",
-        "channelsl": "Kanały",
-        "usersl": "Użytkownicy",
-        "manageguild": "Zarządzaj serwerem",
-        "edit": "Edytuj",
-        "off": "Wyłącz",
-        "on": "Włącz",
-        "hidedetails": "Ukryj szczegóły",
-        "ownerperms": "Jesteś właścicielem, Możesz zarządzać tym serwerem",
-        "adminperms": "Masz uprawnienia do zarządzania tym serwerem",
-        "noperms": "Nie możesz zarządzać tym serwerem",
-        "role": "Rola",
-        "user-nick": "ładowanie...",
-        "wait": "Czekaj...",
-        "channel": "Kanał",
-        "message": "Wiadomość",
-        "soff": "Wyłączone",
-        "son": "Włączone",
-        "blankmsg": "Wiadomość nie może być pusta",
-        "editmsg": "Edytuj wiadomość: \n#USER# - zamieniane jest na nazwę użytkownika\n#MENTION# - zamieniane jest na wzmiankę użytkownika\n#TAG# - zamieniane jest na tag użytkownika np. #1234\n#GUILD# - zamieniane jest na nazwę serwera",
-        "typechannelname": "Wpisz nazwę kanału:",
-        "blankchannel": "Nazwa kanału nie może być pusta",
-        "typerole": "Wpisz rolę:",
-        "blankrole": "Rola nie może być pusta",
-        "typenewprefix": "Wpisz nowy prefix:",
-        "blankprefix": "Prefix nie może być pusty",
-        "login": "Zaloguj się do panelu",
-        "cookies": "Ta strona używa cookies do poprawnego funkcjonowania"
+        "_com":"multilang is not ready yet"
     },
     "commands":{
         "avatar":{
@@ -464,7 +429,7 @@
             "desc":"Komenda do truckersmp.com\nArgumenty: stats, playernick, playerid"
         },
         "minesweeper": {
-            "usage": "mines [x: 5-13] [y: 5-13] [miny w %: 10-90] [--reveal/--copy]",
+            "usage": "minesweeper [x: 5-13] [y: 5-13] [miny w %: 10-90] [--reveal/--copy]",
             "desc": "Tworzy plansze do gry w sapera"
         },
         "lang":{

@@ -1,0 +1,27 @@
+<% var pgtitle = 'Commands -' %>
+<% include ./blocks/header %>
+    <center class="content" id="cmds">
+        <table style="width:100%">
+            <tbody>
+                <tr>
+                    <th>Command</th>
+                    <th>Usage</th>
+                    <th>Description</th>
+                    <th>Aliases</th>
+                </tr>
+                <% let cp = []; %>
+                <% client.commands.forEach(c => { %>
+                    <% if(cp.includes(c.name)) return; %>
+                    <% if(c.category == "owner") return; %>
+                    <% cp.push(c.name); %>
+                    <tr>
+                        <td><%= c.name %></td>
+                        <td><%= strings.getCommandInfo(c.name) ? strings.getCommandInfo(c.name).usage : c.name %></td>
+                        <td><%= strings.getCommandInfo(c.name) ? (c.type == 'img') ? strings.getMsg('img_desc') : strings.getCommandInfo(c.name).desc : (c.type == 'img') ? strings.getMsg('img_desc') : '' %></td>
+                        <td><%= c.aliases.join(', ') %></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </center>
+<% include ./blocks/footer %>

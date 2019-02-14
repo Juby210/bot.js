@@ -1,0 +1,45 @@
+<% include ./head %>
+    <body>
+        <header>
+            <div id="menu">
+                <table width="100%">
+                    <tr style="vertical-align:middle;">
+                        <td><h3>bot.js dashboard</h3></td>
+                        <td align="right">
+                            <ul>
+                                <li>
+                                    <a href="/" class="btn">Home</a>
+                                </li>
+                                <li>
+                                    <a href="/invite" class="btn">Add bot to your server</a>
+                                </li>
+                                <li>
+                                    <a href="/server" class="btn">Support server</a>
+                                </li>
+                                <li>
+                                    <a href="/commands" class="btn">Commands</a>
+                                </li>
+                                <li>
+                                    <a href="/devs" class="btn">Devs</a>
+                                </li>
+                                <% if(user) { %>
+                                    <li>
+                                        <a href="/panel" class="btn">Panel</a>
+                                    </li>
+                                    <li>
+                                        <%= user.username + '#' + user.discriminator %>
+                                    </li>
+                                    <li>
+                                        <a href="/logout" class="btn">Logout</a>
+                                    </li>
+                                <% } else { %>
+                                    <li>
+                                        <a href="/login" class="btn">Login</a>
+                                    </li>
+                                <% } %>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </header>

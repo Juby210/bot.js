@@ -1,0 +1,19 @@
+<% var pgtitle = 'Admin panel - ' %>
+<% include ./blocks/header %>
+    <div class="content" id="panel">
+        <center>
+            <img src="<%= user.avatar ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}` : '/public/defaultav.png' %>">
+            <h2><%= user.username %></h2>
+            <h3>Select server to manage:</h3>
+            <div id="servers">
+                <% client.guilds.forEach(g => { %>
+                    <div class="server" onclick="window.location = '/server/<%= g.id %>'">
+                        <img src="<%= g.iconURL ? g.iconURL : '/public/defaultav.png' %>">
+                        <span class="server-name"><%= g.name %></span>
+                        <p class="server-role"><%= g.ownerID == user.id ? 'Owner' : g.member(user.id) ? g.member(user.id).hasPermission("MANAGE_GUILD") ? 'Admin' : 'Member' : '' %></p>
+                    </div>
+                <% }); %>
+            </div>
+        </center>
+    </div>
+<% include ./blocks/footer %>
