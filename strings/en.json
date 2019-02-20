@@ -482,6 +482,10 @@
         "stats":{
             "usage":"stats",
             "desc":"Shows bot stats"
+        },
+        "status":{
+            "usage":"status",
+            "desc":"Show discord status from status.discordapp.com"
         }
     },
     "categories": {

@@ -474,6 +474,10 @@
         "stats":{
             "usage":"stats",
             "desc":"Pokazuje statystyki bota"
+        },
+        "status":{
+            "usage":"status",
+            "desc":"Pokazuje status discorda z status.discordapp.com"
         }
     },
     "categories":{
