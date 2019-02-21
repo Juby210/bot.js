@@ -13,7 +13,7 @@ module.exports = class command extends cmd {
         if(user.bot) return cmd.error(a, `${a.strings.getMsg("bot_notallowed")}`);
         let userMoney = await db.getMoney(user.id);
         let userlvl = await db.getLVL(user.id, a.message.guild.id)
-        cmd.msg(a.message, a.prefix, `${user.tag}`, `Money: ${userMoney['totalMoney']}\nXP: ${userlvl['xp']}/${userlvl['lvlProm']}\nLVL: ${userlvl['lvl']}`);
+        cmd.msg(a.message, a.prefix, `${user.tag}`, `Money: ${userMoney['money']}\nXP: ${userlvl['xp']}/${userlvl['lvlProm']}\nLVL: ${userlvl['lvl']}`);
         });
     }
 }

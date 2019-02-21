@@ -283,17 +283,17 @@ const addMoney = async function addMoney(user, guild, message) {
 
                         let daily = Date.now()
                         await r.table('users').get('money').update({
-                            users: r.object(user, r.object('money', money, 'totalMoney', totalMoney, 'newMoney', newMoney, 'daily', daily))
+                            users: r.object(user, r.object('money', totalMoney,'newMoney', newMoney, 'daily', daily))
                         }).run(connection);
                     } else {
                         await r.table('users').get('money').update({
-                            users: r.object(user, r.object('money', 0, 'totalMoney', 0, 'newMoney', 0, 'daily', 0))
+                            users: r.object(user, r.object('money', 0, 'newMoney', 0, 'daily', 0))
                         }).run(connection);
                     }
             } else {
                 await r.table('users').get('money').update({users: { }}).run(connection);
                 await r.table('users').get('money').update({
-                    users: r.object(user, r.object('money', 0, 'totalMoney', 0, 'newMoney', 0, 'daily', 0))
+                    users: r.object(user, r.object('money', 0, 'newMoney', 0, 'daily', 0))
                 }).run(connection);
             }
         } catch (e) {
@@ -311,25 +311,25 @@ const getMoney = async function getMoney(user) {
             if(users[user]) {
                 let us = users[user];
 
-                let totalMoney = us.totalMoney
+                let money = us.money
                 let newMoney = us.newMoney
                 let daily = us.daily
 
-                return {totalMoney,newMoney,daily};
+                return {money,newMoney,daily};
             } else {
                 await r.table('users').get('money').update({
-                    users: r.object(user, r.object('money', 0, 'totalMoney', 0, 'newMoney', 0, 'daily', 0))
+                    users: r.object(user, r.object('money', 0, 'newMoney', 0, 'daily', 0))
                 }).run(connection);
             }
     } else {
         await r.table('users').get('money').update({users: { }}).run(connection);
         await r.table('users').get('money').update({
-            users: r.object(user, r.object('money', 0, 'totalMoney', 0, 'newMoney', 0, 'daily', 0))
+            users: r.object(user, r.object('money', 0, 'newMoney', 0, 'daily', 0))
         }).run(connection);
-        let totalMoney = 0;
+        let money = 0;
         let newMoney = 0;
         let daily = 0;
-        return {totalMoney,newMoney,daily};
+        return {money,newMoney,daily};
     }
 }
 
