@@ -498,7 +498,8 @@
         "music": "Music",
         "images": "Images",
         "web": "Web",
-        "games": "Games"
+        "games": "Games",
+        "economy": "Economy"
     },
     "perms":{
         "BAN_MEMBERS": "Ban members",
