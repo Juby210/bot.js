@@ -24,10 +24,14 @@
 	},
 	"logs":{
 		"enabled":false,
-		"webhookid":"webhook id",
-		"webhooktoken":"webhook token",
-		"commands":["avatar", "olduserinfo", "userinfo", "changemymind", "trump", "wanted", "wasted"],
-		"_com":"actually all commands are logged!"
+		"commands":{
+			"webhookid":"webhook id",
+			"webhooktoken":"webhook token"
+		},
+		"servers":{
+			"webhookid":"webhook id",
+			"webhooktoken":"webhook token"
+		}
 	},
 	"tokens": {
 		"token": "bot token",
