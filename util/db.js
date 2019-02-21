@@ -375,11 +375,18 @@ const addUser = async function addUser(user, guild) {
                         await r.table('users').get('money').update({
                             users: r.object(user, r.object('money', 0, 'newMoney', 0, 'daily', 0))
                         }).run(connection);
+                        await r.table('guilds').get(guild).update({
+                            users: r.object(user, r.object('lvl', 0, 'xp', 0, 'lvlProm', 0))
+                        }).run(connection);
                     }
             } else {
                 await r.table('users').get('money').update({users: { }}).run(connection);
                 await r.table('users').get('money').update({
                     users: r.object(user, r.object('money', 0, 'newMoney', 0, 'daily', 0))
+                }).run(connection);
+                await r.table('guilds').get(guild).update({users: { }}).run(connection);
+                await r.table('guilds').get(guild).update({
+                    users: r.object(user, r.object('lvl', 1, 'xp', 0, 'lvlProm', 65))
                 }).run(connection);
             }
         } catch (e) {
