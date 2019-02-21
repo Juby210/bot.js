@@ -364,14 +364,30 @@ const getLVL = async function getLVL(user, guild) {
 }
 
 const addUser = async function addUser(user, guild) {
-    const g = await r.table('users').get('money').toJSON().run(connection);
-    const json = await JSON.parse(g);
-    if (json.users) {
+    if(user && guild) {
+        try { 
+            const g = await r.table('users').get('money').toJSON().run(connection);
+            const json = await JSON.parse(g);
+            if (json.users) {
+                const users = json.users;   
+                    if(users[user]) {
+                    } else {
+                        await r.table('users').get('money').update({
+                            users: r.object(user, r.object('money', 0, 'newMoney', 0, 'daily', 0))
+                        }).run(connection);
+                    }
+            } else {
+                await r.table('users').get('money').update({users: { }}).run(connection);
                 await r.table('users').get('money').update({
                     users: r.object(user, r.object('money', 0, 'newMoney', 0, 'daily', 0))
                 }).run(connection);
             }
+        } catch (e) {
+            console.error(e);
+            return false;
+        }
     }
+}
 
 exports.check = check;
 exports.load = load;
