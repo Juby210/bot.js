@@ -487,7 +487,8 @@
         "music": "Muzyka",
         "images": "Obrazki",
         "web": "Web",
-        "games": "Gry"
+        "games": "Gry",
+        "economy": "Ekonomia"
     },
     "perms":{
         "BAN_MEMBERS": "Banowanie członków",
