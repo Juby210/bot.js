@@ -8,7 +8,7 @@ const load = async function load() {
         connection = await r.connect(database);
         await Promise.all([
             r.tableCreate("users").run(connection),
-            r.tableCreate("guilds").run(connection)
+            r.tableCreate("guilds").run(connection),
         ]);
         console.log('Tabele zostaly stworzone.');
     } catch(error) {
@@ -31,6 +31,10 @@ const check = async function check(gid) {
                 autorole: {enabled: false, role: ""},
                 lvlToggle: {enabled: false},
                 lang: config.settings.lang
+            }).run(connection);
+            await r.table("users").insert({
+                id: 'money',
+                users: []
             }).run(connection);
             return true;
         } catch (e) {
@@ -260,18 +264,102 @@ const addXP = async function addXP(user, guild, message) {
     }
 }
 
-const getTop = async function getTop(gid) {
-    if(gid) {
-        try {
-            var guild = await r.table('guilds').get(gid).toJSON().run(connection);
-            if(guild == null) return false;
-            return JSON.parse(guild).users;
-        } catch(e) {
-            console.log(e);
-            return false; 
+const addMoney = async function addMoney(user, guild, message) {
+    if(user && guild) {
+        try { 
+            if(message.author.bot) return;
+
+            const g = await r.table('users').get('money').toJSON().run(connection);
+            const json = await JSON.parse(g);
+            if (json.users) {
+                const users = json.users;   
+                    if(users[user]) {                
+                        let us = users[user];
+
+                        let money = us.money;
+
+                        let newMoney = Math.floor(Math.random() * Math.ceil(230 / 2)+3); 
+                        let totalMoney = money + newMoney;
+
+                        let daily = Date.now()
+                        await r.table('users').get('money').update({
+                            users: r.object(user, r.object('money', money, 'totalMoney', totalMoney, 'newMoney', newMoney, 'daily', daily))
+                        }).run(connection);
+                    } else {
+                        await r.table('users').get('money').update({
+                            users: r.object(user, r.object('money', 0, 'totalMoney', 0, 'newMoney', 0, 'daily', 0))
+                        }).run(connection);
+                    }
+            } else {
+                await r.table('users').get('money').update({users: { }}).run(connection);
+                await r.table('users').get('money').update({
+                    users: r.object(user, r.object('money', 0, 'totalMoney', 0, 'newMoney', 0, 'daily', 0))
+                }).run(connection);
+            }
+        } catch (e) {
+            console.error(e);
+            return false;
         }
+    }
+}
+
+const getMoney = async function getMoney(user) {
+    const users = await r.table('users').get('money').toJSON().run(connection);
+    const json = await JSON.parse(users);
+    if (json.users) {
+        const users = json.users;
+            if(users[user]) {
+                let us = users[user];
+
+                let totalMoney = us.totalMoney
+                let newMoney = us.newMoney
+                let daily = us.daily
+
+                return {totalMoney,newMoney,daily};
+            } else {
+                await r.table('users').get('money').update({
+                    users: r.object(user, r.object('money', 0, 'totalMoney', 0, 'newMoney', 0, 'daily', 0))
+                }).run(connection);
+            }
     } else {
-        return false;
+        await r.table('users').get('money').update({users: { }}).run(connection);
+        await r.table('users').get('money').update({
+            users: r.object(user, r.object('money', 0, 'totalMoney', 0, 'newMoney', 0, 'daily', 0))
+        }).run(connection);
+        let totalMoney = 0;
+        let newMoney = 0;
+        let daily = 0;
+        return {totalMoney,newMoney,daily};
+    }
+}
+
+const getLVL = async function getLVL(user, guild) {
+    const g = await r.table('guilds').get(guild).toJSON().run(connection);
+    const json = await JSON.parse(g);
+    if (json.users) {
+        const users = json.users;   
+            if(users[user]) {
+                let us = users[user];
+
+                let xp = us.xp;
+                let lvl = us.lvl;
+                let lvlProm = us.lvlProm;
+
+                return {xp,lvl,lvlProm};
+            } else {
+                await r.table('guilds').get(guild).update({
+                    users: r.object(user, r.object('lvl', 0, 'xp', 0, 'lvlProm', 65))
+                }).run(connection);
+            }
+    } else {
+        await r.table('guilds').get(guild).update({users: { }}).run(connection);
+        await r.table('guilds').get(guild).update({
+            users: r.object(user, r.object('lvl', 0, 'xp', 0, 'lvlProm', 65))
+        }).run(connection);
+        let xp = 0;
+        let lvl = 0;
+        let lvlProm = 65;
+        return {xp,lvl,lvlProm};
     }
 }
 
@@ -288,4 +376,6 @@ exports.getAutorole = getAutorole;
 exports.getLang = getLang;
 exports.addXP = addXP;
 exports.getLvlToggle = getLvlToggle;
-exports.getTop = getTop;
+exports.addMoney = addMoney;
+exports.getMoney = getMoney;
+exports.getLVL = getLVL;

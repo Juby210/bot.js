@@ -209,7 +209,10 @@
         "lvlup_enable": "The lvlup messages have been successfully enabled!",
         "lvlup_disable": "The lvlup messages have been successfully disabled!",
         "lvlupmessage": "Lvlup messages",
-        "settings_check": "If you want to change the value, check"
+        "settings_check": "If you want to change the value, check",
+        "bot_notallowed": "Bots can't own money",
+        "daily_added": "You have successfully received #cash#$",
+        "daily_hours": "You must wait, ``#hours# hours #min# minutes and #sec# seconds``."
     },
     "dashboard": {
         "noperms": "You don't have permissions",

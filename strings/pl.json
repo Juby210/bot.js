@@ -204,7 +204,10 @@
         "lvlup_enable": "Poprawnie włączono wiadomości Lvlup!",
         "lvlup_disable": "Poprawnie wyłączono wiadomości Lvlup!",
         "lvlupmessage": "Wiadomości lvlup",
-        "settings_check": "Jeżeli chcesz zmienić wartość sprawdź"
+        "settings_check": "Jeżeli chcesz zmienić wartość sprawdź",
+        "bot_notallowed": "Boty nie mogą posiadać pieniędzy",
+        "daily_added": "Pomyślnie otrzymałeś #cash#$",
+        "daily_hours": "Musisz poczekać, ``#hours# godzin #min# minut i #sec# sekund``."
     },
     "dashboard":{
         "noperms": "Nie masz uprawnień",
