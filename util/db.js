@@ -363,6 +363,16 @@ const getLVL = async function getLVL(user, guild) {
     }
 }
 
+const addUser = async function addUser(user, guild) {
+    const g = await r.table('users').get('money').toJSON().run(connection);
+    const json = await JSON.parse(g);
+    if (json.users) {
+                await r.table('users').get('money').update({
+                    users: r.object(user, r.object('money', 0, 'newMoney', 0, 'daily', 0))
+                }).run(connection);
+            }
+    }
+
 exports.check = check;
 exports.load = load;
 exports.update = update;
@@ -379,3 +389,4 @@ exports.getLvlToggle = getLvlToggle;
 exports.addMoney = addMoney;
 exports.getMoney = getMoney;
 exports.getLVL = getLVL;
+exports.addUser = addUser;

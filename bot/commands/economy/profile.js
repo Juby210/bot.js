@@ -9,6 +9,7 @@ module.exports = class command extends cmd {
         this.run = this.r;
     }
     async r(a = {}) {
+        await db.addUser(a.message.author.id, a.message.guild.id);
         util.searchUser(a.message, a.args[0]).then(async user => {
         if(user.bot) return cmd.error(a, `${a.strings.getMsg("bot_notallowed")}`);
         let userMoney = await db.getMoney(user.id);

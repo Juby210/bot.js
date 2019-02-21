@@ -9,6 +9,7 @@ module.exports = class command extends cmd {
         this.run = this.r;
     }
     async r(a = {}) {
+        await db.addUser(a.message.author.id, a.message.guild.id);
         let userMoney = await db.getMoney(a.message.author.id, a.message.guild.id, a.message);
         let cooldown = 8.64e+7;
         let d = cooldown - (Date.now() - userMoney['daily']);
