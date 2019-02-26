@@ -63,6 +63,7 @@ module.exports = class command extends cmd {
         });
     }
     async play(song, a) {
+        if(!song) return cmd.error(a, a.strings.getMsg("music_nofound"));
         let s = {title: song.info.title.replace(/`/g, "'"), channel: song.info.author, length: song.info.length, requester: a.message.author.tag, url: song.info.uri, track: song.track};
         player.play(s, a.client, a.message).then(t => {
             if(t == "play") {

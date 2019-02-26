@@ -23,7 +23,6 @@ module.exports = class command extends cmd {
             embed.setFooter(a.strings.getMsg("music_radio_footer"));
             a.message.channel.send(embed);
         } else {
-            const vChannel = a.message.member.voiceChannel;
             let radio = config.radiolist[a.args[0]-1];
             if(!radio) return cmd.error(a, a.strings.getMsg("music_radio_notfound").replace("#PREFIX#", a.prefix));
             await player.getSong(radio.url).then(async r => {
@@ -34,6 +33,7 @@ module.exports = class command extends cmd {
         }
     }
     async play(song, radio, a) {
+        if(!song) return cmd.error(a, a.strings.getMsg("music_nofound"));
         let s = {title: `Radio: ${radio.name}`, channel: song.info.author, length: song.info.length, requester: a.message.author.tag, url: song.info.uri, track: song.track};
         player.play(s, a.client, a.message).then(t => {
             if(t == "play") {
