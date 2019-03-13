@@ -2,7 +2,7 @@ const cmd = require("../../command.js");
 module.exports = class command extends cmd {
     constructor() {
         super({
-            name: "seek",
+            name: "replay",
         });
         this.run = this.r;
     }
