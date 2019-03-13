@@ -8,7 +8,7 @@ Polish opensource multifunctional bot in [discord.js](https://discord.js.org) li
 
 - Configure config.json from config.example.json.
 
-- Run index.js / We recomended using ``forever index.js`` because sometimes crashs.
+- Run index.js wit ``node``
 
 ### Guides
 ***DBL***
