@@ -207,7 +207,8 @@
         "settings_check": "Jeżeli chcesz zmienić wartość sprawdź",
         "bot_notallowed": "Boty nie mogą posiadać pieniędzy",
         "daily_added": "Pomyślnie otrzymałeś #cash#$",
-        "daily_hours": "Musisz poczekać, ``#hours# godzin #min# minut i #sec# sekund``."
+        "daily_hours": "Musisz poczekać, ``#hours# godzin #min# minut i #sec# sekund``.",
+        "seek_success": "Pomyślnie przewinięto piosenke do 00:00!"
     },
     "dashboard":{
         "noperms": "Nie masz uprawnień",
