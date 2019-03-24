@@ -27,15 +27,30 @@ const play = async (song, client, message) => {
             if(queue.loop) {
                 let song = queue.np;
                 song.date = Date.now();
-                song.requester = "Loop";
-                play(song, client, message);
+                if(!song.requester.includes(`Loop`)) song.requester = `Loop (${song.requester})`;
+                setTimeout(() => {
+                    play(song, client, message);
+                }, 100);
                 return;
             }
             let next = queue.songs.shift();
             if(next == null) {
+                if(queue.loopqueue) {
+                    let song = queue.np;
+                    song.date = Date.now();
+                    if(!song.requester.includes(`Loop`)) song.requester = `Loop (${song.requester})`;
+                    setTimeout(() => {
+                        play(song, client, message);
+                    }, 100);
+                }
                 return;
             } else {
                 setTimeout(() => {
+                    if(queue.loopqueue) {
+                        let song = queue.np;
+                        if(!song.requester.includes(`Loop`)) song.requester = `Loop (${song.requester})`;
+                        queue.songs.push(song);
+                    }
                     play(next, client, message);
                 }, 400);
             }

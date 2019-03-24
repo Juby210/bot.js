@@ -357,6 +357,14 @@
             "usage":"loop",
             "desc":"Zapętla aktualną piosenkę"
         },
+        "loopqueue": {
+            "usage": "loopqueue",
+            "desc": "Zapętla kolejkę"
+        },
+        "replay": {
+            "usage": "replay",
+            "desc": "Przesuwa aktualną piosenkę do 0:00"
+        },
         "np":{
             "usage":"np",
             "desc":"Pokazuje co aktualnie jest odtwarzane"

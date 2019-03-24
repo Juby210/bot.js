@@ -13,7 +13,7 @@ module.exports = class command extends cmd {
         if(!a.args[0]) return cmd.error(a, a.strings.getMsg("prune_value"));
         const c = Number(a.args[0]);
         if (c >= 101) {
-            cmd.error(a, strings.getMsg("prune_error"));
+            cmd.error(a, a.strings.getMsg("prune_error"));
         } else {
             a.message.delete();
             a.message.channel.bulkDelete(c).then(msgs => {

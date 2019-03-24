@@ -13,6 +13,7 @@ module.exports = class command extends cmd {
             return cmd.error(a, a.strings.getMsg("music_playernull"));
         }
         await player.seek(0);
+        a.client.queue[a.message.guild.id].np.date = Date.now();
         cmd.msg(a.message, a.prefix, `${a.strings.getMsg("seek_success")}`);
     }
 }
