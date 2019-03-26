@@ -10,7 +10,6 @@ const crash = function AntiCrash(chan, err, sendToOwner = true) {
     var embed = new Discord.RichEmbed();
     embed.setColor("#FF0000");
     getUsername("324622488644616195").then(juby => {
-        getUsername("321665259842830336").then(hamster => {
             embed.setDescription(`${global.client.guilds.get(config.settings.emojis.guild).emojis.get(config.settings.emojis.error)} | AntiCrash\n\`${err}\`\n\nPlease report this on [support server](https://discord.gg/6bfpCCt) or dm to ${juby}, ${hamster}`);
             if(chan) chan.send(embed);
             if(!sendToOwner) return;
@@ -52,8 +51,6 @@ const getUsername = function getUsername(id) {
         } else {
             if (id == "324622488644616195") {
                 resolve("Juby210#2100");
-            } else if (id == "321665259842830336") {
-                resolve("hamster#0001");
             } else {
                 reject("Nie znaleziono użytkownika");
             }
