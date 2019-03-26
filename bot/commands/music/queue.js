@@ -34,7 +34,7 @@ module.exports = class command extends cmd {
             let length = util.formatLength(song.length);
             embed.addField(`${i+1}. ${song.title}`, `${a.strings.getMsg("music_queue_list").replace("#TIME#", length).replace("#REQUESTER#", song.requester)}`);
         });
-        if(c != 0) embed.setFooter(a.strings.getMsg("music_queue_footer").replace("#NUM#", c).replace("#TIME#", util.formatLength(time)));
+        if(c != 0) embed.setFooter(a.strings.getMsg("music_queue_footer").replace("#NUM#", c).replace("#TIME#", util.formatLength(time)) + ` | Loop: ${queue.loop} | Loopqueue: ${queue.loopqueue}`);
     
         a.message.channel.send(embed);
     }

@@ -362,6 +362,10 @@
             "usage": "loop",
             "desc": "Loops the current song"
         },
+        "loopqueue": {
+            "usage": "loopqueue",
+            "desc": "Loops queue"
+        },
         "np": {
             "usage": "np",
             "desc": "It shows what is currently playing"
