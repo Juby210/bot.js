@@ -2,7 +2,8 @@ const cmd = require("../../command.js");
 module.exports = class command extends cmd {
     constructor() {
         super({
-            name: "minesweeper"
+            name: "minesweeper",
+            aliases: ["ms", "mines"]
         });
         this.run = this.r;
     }
