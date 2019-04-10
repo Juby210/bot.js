@@ -2,12 +2,12 @@ const Discord = require("discord.js");
 const player = require("./f/player");
 const config = require("../../../config.json");
 const rp = require("request-promise");
+const rm = require("discord.js-reaction-menu");
 const cmd = require("../../command.js");
 module.exports = class command extends cmd {
     constructor() {
         super({
-            name: "radio",
-            reqVC: true
+            name: "radio"
         });
         this.run = this.r;
         this.play = this.play;
@@ -24,33 +24,26 @@ module.exports = class command extends cmd {
             a.message.channel.send(embed);
         } else if (a.args[0] == "eska") {
             const stations = JSON.parse(await rp('https://juby.tk/stacje.json'));
-            let embed = new Discord.RichEmbed();
-            embed.setColor("#ffd700");
-            embed.setTitle(a.strings.getMsg("music_radio_title"));
+            let pages = [];
             let desc = "";
-            let pg = 0;
+            let pg = 1;
+            let ii = 25;
             stations.forEach((s, i) => {
-                if(!a.args[1] || a.args[1] == '1') {
-                    if(i >= 25) return;
-                    pg = 1;
-                    desc += `${i+config.radiolist.length+1}. ${s.name}\n`;
-                } else if (a.args[1] == '2') {
-                    if(i <= 24 || i >= 50) return;
-                    pg = 2;
-                    desc += `${i+config.radiolist.length+1}. ${s.name}\n`;
-                } else if (a.args[1] == '3') {
-                    if(i <= 49 || i >= 75) return;
-                    pg = 3;
-                    desc += `${i+config.radiolist.length+1}. ${s.name}\n`;
-                } else {
-                    if(i <= 74) return;
-                    pg = 4;
-                    desc += `${i+config.radiolist.length+1}. ${s.name}\n`;
+                desc += `${i+config.radiolist.length+1}. ${s.name}\n`;
+                if(i >= ii) {
+                    ii += 25;
+                    pg += 1;
+                    desc += '\n' + a.strings.getMsg("music_radio_desc").replace(/#PREFIX#/g, a.prefix).split('\n')[1];
+                    pages.push(new Discord.RichEmbed({color: parseInt("ffd700", 16), title: a.strings.getMsg("music_radio_title"), description: desc, footer: {text: `${pg-1}/${Math.ceil(stations.length/25)}`}}));
+                    desc = '';
                 }
             });
-            embed.setDescription(desc + '\n' + a.strings.getMsg("music_radio_desc").replace(/#PREFIX#/g, a.prefix).split('\n')[1]);
-            embed.setFooter(`${pg}/4 | ${a.prefix}radio eska 1/2/3/4`);
-            a.message.channel.send(embed);
+            if(desc != '') {
+                pg += 1;
+                desc += '\n' + a.strings.getMsg("music_radio_desc").replace(/#PREFIX#/g, a.prefix).split('\n')[1];
+                pages.push(new Discord.RichEmbed({color: parseInt("ffd700", 16), title: a.strings.getMsg("music_radio_title"), description: desc, footer: {text: `${pg-1}/${Math.ceil(stations.length/25)}`}}));
+            }
+            new rm.menu(a.message.channel, a.message.author.id, pages);
         } else {
             let stations = config.radiolist;
             if(a.args[0] >= config.radiolist.length) stations = JSON.parse(await rp('https://juby.tk/stacje.json'));
