@@ -7,7 +7,8 @@ const cmd = require("../../command.js");
 module.exports = class command extends cmd {
     constructor() {
         super({
-            name: "radio"
+            name: "radio",
+            reqVC: true
         });
         this.run = this.r;
         this.play = this.play;
