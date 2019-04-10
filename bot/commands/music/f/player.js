@@ -7,6 +7,7 @@ const play = async (song, client, message) => {
         if(!client.queue[message.guild.id]) new qc(message.guild.id, client);
         let queue = client.queue[message.guild.id];
         let player = await client.player.get(message.guild.id);
+        if(!player && !message.member.voiceChannel.joinable) return resolve("permerror");
         if (!player) player = await client.player.join({
             guild: message.guild.id,
             channel: message.member.voiceChannel.id,

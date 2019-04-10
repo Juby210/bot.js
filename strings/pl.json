@@ -131,6 +131,7 @@
         "music_radio_play": "Odtwarzanie: `#RADIO#`",
         "music_shuffle": "Pomieszano",
         "music_earrape": "Włączono earrape",
+        "music_permerror": "Bot nie ma uprawnień do wejścia na twój kanał głosowy",
         "hb_desc": "Lista konkursów:",
         "shorten_noconfig": "Właściciel bota nie skonfigurował skracacza linków.",
         "shorten_errorkeyword": "Ten skrót jest już zajęty, użyj innego.",

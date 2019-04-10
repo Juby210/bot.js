@@ -38,8 +38,10 @@ module.exports = class command extends cmd {
         player.play(s, a.client, a.message).then(t => {
             if(t == "play") {
                 cmd.msg(a.message, a.prefix, "", `${a.emoji.get(a.emojis["play"])} | ${global.up(this.name)}\n${a.strings.getMsg("music_playing_play").replace("#SONG#", s.title).replace("#CHANNEL#", s.channel)}`);
-            } else {
+            } else if (t == "queue") {
                 cmd.msg(a.message, a.prefix, "", `${a.emoji.get(a.emojis["plus"])} | ${global.up(this.name)}\n${a.strings.getMsg("music_added").replace("#SONG#", s.title).replace("#CHANNEL#", s.channel)}`);
+            } else {
+                cmd.error(a, a.strings.getMsg("music_permerror"))
             }
         });
     }
