@@ -10,15 +10,14 @@ const crash = function AntiCrash(chan, err, sendToOwner = true) {
     var embed = new Discord.RichEmbed();
     embed.setColor("#FF0000");
     getUsername("324622488644616195").then(juby => {
-            embed.setDescription(`${global.client.guilds.get(config.settings.emojis.guild).emojis.get(config.settings.emojis.error)} | AntiCrash\n\`${err}\`\n\nPlease report this on [support server](https://discord.gg/6bfpCCt) or dm to ${juby}, ${hamster}`);
-            if(chan) chan.send(embed);
-            if(!sendToOwner) return;
-            embed.setDescription(`${global.client.guilds.get(config.settings.emojis.guild).emojis.get(config.settings.emojis.error)} | AntiCrash\n\`${err}\``);
-            var owner = global.client.users.get(config.settings.ownerid);
-            if(owner == undefined) return;
-            embed.addField(err.path, err.method);
-            owner.send(embed);
-        });
+        embed.setDescription(`${global.client.guilds.get(config.settings.emojis.guild).emojis.get(config.settings.emojis.error)} | AntiCrash\n\`${err}\`\n\nPlease report this on [support server](https://discord.gg/6bfpCCt) or dm to ${juby}`);
+        if(chan) chan.send(embed);
+        if(!sendToOwner) return;
+        embed.setDescription(`${global.client.guilds.get(config.settings.emojis.guild).emojis.get(config.settings.emojis.error)} | AntiCrash\n\`${err}\``);
+        var owner = global.client.users.get(config.settings.ownerid);
+        if(owner == undefined) return;
+        embed.addField(err.path, err.method);
+        owner.send(embed);
     });
 }
 

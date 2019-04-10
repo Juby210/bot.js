@@ -128,7 +128,7 @@
         "music_queue_list": "Length: #TIME# | Requested by: #REQUESTER#",
         "music_queue_footer": "Total: #NUM# | Total time: #TIME#",
         "music_radio_title": "List of radio stations:",
-        "music_radio_desc": "\n#PREFIX#radio <number> - play radio\nWARNING! Eska and Vox can sometimes not work!",
+        "music_radio_desc": "\n#PREFIX#radio <number> - play radio\n#PREFIX#radio eska - stations from eskago.pl",
         "music_radio_footer": "Radio stations are missing? Write to Juby210#2100",
         "music_radio_notfound": "No radio number found, enter `#PREFIX#radio` for the station list.",
         "music_radio_play": "Playing: `#RADIO#`",

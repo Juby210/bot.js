@@ -125,7 +125,7 @@
         "music_queue_list": "Długość: #TIME# | Dodano przez: #REQUESTER#",
         "music_queue_footer": "Razem: #NUM# | Cały czas: #TIME#",
         "music_radio_title": "Lista stacji radiowych:",
-        "music_radio_desc": "\n#PREFIX#radio <numer> - odtwórz radio\nUWAGA! Eska i Vox mogą czasem nie działać!",
+        "music_radio_desc": "\n#PREFIX#radio <numer> - odtwórz radio\n#PREFIX#radio eska - stacje z eskago.pl",
         "music_radio_footer": "Brakuje stacji radiowych? Napisz do Juby210#2100",
         "music_radio_notfound": "Nie znaleziono takiego numeru radia, wpisz `#PREFIX#radio` po listę stacji.",
         "music_radio_play": "Odtwarzanie: `#RADIO#`",
