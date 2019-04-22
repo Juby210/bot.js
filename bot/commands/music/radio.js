@@ -39,7 +39,7 @@ module.exports = class command extends cmd {
                     desc = '';
                 }
             });
-            if(desc != '') {
+            if (desc != '') {
                 pg += 1;
                 desc += '\n' + a.strings.getMsg("music_radio_desc").replace(/#PREFIX#/g, a.prefix).split('\n')[1];
                 pages.push(new Discord.RichEmbed({color: parseInt("ffd700", 16), title: a.strings.getMsg("music_radio_title"), description: desc, footer: {text: `${pg-1}/${Math.ceil(stations.length/25)}`}}));
@@ -48,7 +48,8 @@ module.exports = class command extends cmd {
         } else {
             let stations = config.radiolist;
             if(a.args[0] >= config.radiolist.length) stations = JSON.parse(await rp('https://juby.tk/stacje.json'));
-            let radio = stations[a.args[0]-config.radiolist.length-1];
+            let radio = stations[a.args[0]-1];
+            if(a.args[0] >= config.radiolist.length) radio = stations[a.args[0]-config.radiolist.length-1];
             if(!radio) return cmd.error(a, a.strings.getMsg("music_radio_notfound").replace("#PREFIX#", a.prefix));
             await player.getSong(radio.url).then(async r => {
                 r.tracks.forEach(async song => {
