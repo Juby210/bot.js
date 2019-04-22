@@ -44,7 +44,7 @@ module.exports = class command extends cmd {
                     }
                 });
             });
-            collector.on("stop", () => {
+            collector.on("end", () => {
                 msearch.delete();
             });
         });
