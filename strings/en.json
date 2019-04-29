@@ -2,7 +2,7 @@
     "info": {
         "lang": "English",
         "translators": [
-            "null#3621", "hamster#0001", "kpvsky#9145"
+            "nothing here#0017", "jessica#1337"
         ]
     },
     "bot": {
@@ -112,7 +112,7 @@
         "music_added": "Added to queue: `#SONG#` from **#CHANNEL#**",
         "music_volume_number": "Invalid number",
         "music_volume": "Volume has been changed to: **#VOL#%**",
-        "music_vol_max": "Maximum value is 250",
+        "music_vol_max": "Maximum value is 1000",
         "music_search_null": "No phrase is given",
         "music_search_notfound": "No result found",
         "music_search_title": "Select the search result by entering `1`-`10` or` cancel` to cancel",
@@ -134,6 +134,9 @@
         "music_radio_play": "Playing: `#RADIO#`",
         "music_shuffle": "Shuffled",
         "music_earrape": "Earrape enabled",
+        "music_earrape_off": "Earrape disabled",
+        "music_bassboost": "Bassboost enabled",
+        "music_bassboost_off": "Bassboost disabled",
         "music_permerror": "Bot does not have permission to join your voice channel",
         "hb_desc": "List of competitions:",
         "shorten_noconfig": "The owner of the bot hasn't configured urls.",
