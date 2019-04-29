@@ -5,6 +5,7 @@
 		"status": "online",
 		"prefix": "^",
 		"lang": "en",
+		"poststats": false,
 		"emojis":{
 			"guild":"488293188247879680",
 			"_com":"Guild is guild not emoji!",
@@ -35,9 +36,17 @@
 	},
 	"tokens": {
 		"token": "bot token",
-		"dbl": "token from dicsordbots.org",
 		"yourls": "api key",
-		"badosz": "token from api.badosz.com"
+		"badosz": "token from api.badosz.com",
+		"stats": {
+			"discordbots": "token from dicsordbots.org",
+			"botsfordiscord": "botsfordiscord.com",
+			"discordapps": "discordapps.dev",
+			"discordbotreviews": "discordbotreviews.xyz",
+			"discordbotworld": "discordbot.world",
+			"discordbotsgroup": "discordbots.group",
+			"discordsbestbots": "discordsbestbots.xyz"
+		}
 	},
 	"dashboard": {
 		"port": 80,
@@ -59,8 +68,8 @@
 		"password": "pass"
     },
     "dbl": {
-		"usedbl": false, 
-		"requireVote":{"voicekick":true, "voiceban":true, "voiceunban":true}
+			"usedbl": false, 
+			"requireVote":{"voicekick":true, "voiceban":true, "voiceunban":true}
     },
 	"yourls": {
 		"useyourls": false,
