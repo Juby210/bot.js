@@ -149,7 +149,7 @@ module.exports = class command extends cmd {
         } else if(a.args[0] == "prefix") {
             if(!a.args[1]) return cmd.error(a, a.strings.getMsg("prefix_null"));
             await db.update('guilds', a.message.guild.id, 'prefix', a.args[1]);
-            cmd.msg(a.message, a.prefix, "", `${a.emoji.get(a.emojis["done_green"])} | ${global.up(this.name)}\n${a.strings.getMsg("prefix_done")} \`${a.args[1]}\``);
+            return cmd.msg(a.message, a.prefix, "", `${a.emoji.get(a.emojis["done_green"])} | ${global.up(this.name)}\n${a.strings.getMsg("prefix_done")} \`${a.args[1]}\``);
         } else if(a.args[0] == "edit") {
             return cmd.msg(a.message, a.prefix, "", `${a.strings.getMsg("settings_edit").replace("#prefix#", a.prefix)}`);
         } else if(a.args[0] == "lvlup") {
