@@ -396,7 +396,19 @@
         },
         "search": {
             "usage": "search <search>",
-            "desc": "Searches for a given phrase and displays a selection of 10 results"
+            "desc": "Searches for a given phrase on youtube and displays a selection of 10 results"
+        },
+        "soundcloud": {
+            "usage": "soundcloud <search>",
+            "desc": "Searches for a given phrase on soundcloud and displays a selection of 10 results"
+        },
+        "bassboost": {
+            "usage": "bassboost",
+            "desc": "Enable or disable bassboost"
+        },
+        "earrape": {
+            "usage": "earrape",
+            "desc": "Enable or disable earrape"
         },
         "skip": {
             "usage": "skip",
