@@ -20,21 +20,21 @@ module.exports = class command extends cmd {
                     let invite = $(".votebutton").parent().attr("href");
                     let site = $("#websitelink").attr("href");
                     let github = $("#github").attr("href");
-                    let prefix = $("#prefix").first().text();
+                    let prefix = $("#prefix").first().text().replace(/	/g, '').replace(new RegExp("\n", "g"), "");
                     let owners = [];
                     $("#createdby").find("span").each((i, name) => {
-                        owners.push($(name).text());
+                        owners.push($(name).text().replace(/	/g, '').replace(new RegExp("\n", "g"), ""));
                     });
-                    let votes = $("#points").text();
+                    let votes = $("#points").text().replace(/	/g, '').replace(new RegExp("\n", "g"), "");
                     let tags = [];
                     $(".atag").each((i, name) => {
-                        tags.push($(name).text().replace(new RegExp("\n", "g"), ""));
+                        tags.push($(name).text().replace(/	/g, '').replace(new RegExp("\n", "g"), ""));
                     });
-                    let lib = $("#libclick").text();
+                    let lib = $("#libclick").text().replace(/	/g, '').replace(new RegExp("\n", "g"), "");
     
                     let embed = new Discord.RichEmbed();
                     embed.setColor("#283593");
-                    embed.setDescription(`${a.strings.getMsg("dbl_name")}: **${user.tag}**\nID: **${user.id}**\n${a.strings.getMsg("desc")}: **${desc}**\n[Invite](${invite})\n${a.strings.getMsg("dbl_website")}: **${site}**\nGithub: **${github}**\nPrefix: **${prefix}**\n${a.strings.getMsg("lib")}: **${lib}**\n${a.strings.getMsg("dbl_creator")}: **${owners.join("**, **")}**\n${a.strings.getMsg("dbl_tags")}: **${tags.join("**, **")}**\n${a.strings.getMsg("dbl_votes")}: **${votes}**\n[${a.strings.getMsg("dbl_link")}](https://discordbots.org/bot/${user.id})`);
+                    embed.setDescription(`${a.strings.getMsg("dbl_name")}: **${user.tag}**\nID: **${user.id}**\n${a.strings.getMsg("desc")}: **${desc}**\n[Invite](${invite})\n${a.strings.getMsg("dbl_website")}: **${site ? site : '-'}**\nGithub: **${github ? github : '-'}**\nPrefix: **${prefix}**\n${a.strings.getMsg("lib")}: **${lib}**\n${a.strings.getMsg("dbl_creator")}: **${owners.join("**, **")}**\n${a.strings.getMsg("dbl_tags")}: **${tags.join("**, **")}**\n${a.strings.getMsg("dbl_votes")}: **${votes}**\n[${a.strings.getMsg("dbl_link")}](https://discordbots.org/bot/${user.id})`);
                     embed.setThumbnail(user.avatarURL);
                     a.message.channel.send(embed);
                 }).catch(() => a.message.channel.send(a.strings.getMsg("notfound")));
@@ -54,7 +54,7 @@ module.exports = class command extends cmd {
                     let embed = new Discord.RichEmbed();
                     embed.setColor("#283593");
                     embed.setThumbnail($(".profilepic").attr("src"));
-                    embed.setDescription(`${a.strings.getMsg("user")}: **${user.tag}**\nID: **${user.id}**\nBio: ${bio}\n${badges.join(", ")}`);
+                    embed.setDescription(`${a.strings.getMsg("user")}: **${user.tag}**\nID: **${user.id}**\nBio: **${bio == '' ? '-' : bio}**${badges.length == 0 ? '' : `\n\nBadges: **${badges.join("**, **")}**`}`);
                     if(bots.length != 0) {
                         embed.addField(`${a.strings.getMsg("bots")}:`, bots.join("\n"));
                     }
