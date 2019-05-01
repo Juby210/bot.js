@@ -23,7 +23,7 @@ module.exports = class command extends cmd {
                     let prefix = $("#prefix").first().text().replace(/	/g, '').replace(new RegExp("\n", "g"), "");
                     let owners = [];
                     $("#createdby").find("span").each((i, name) => {
-                        owners.push($(name).text().replace(/	/g, '').replace(new RegExp("\n", "g"), ""));
+                        owners.push(`[`+$(name).text().replace(/	/g, '').replace(new RegExp("\n", "g"), "")+`](https://discordbots.org${$(name).parent().attr('href')})`);
                     });
                     let votes = $("#points").text().replace(/	/g, '').replace(new RegExp("\n", "g"), "");
                     let tags = [];
@@ -44,7 +44,7 @@ module.exports = class command extends cmd {
                     let bio = $(".bio-inner").text();
                     let bots = [];
                     $('.bot-name').each((i, name) => {
-                        bots.push(`${$(name).text()} <@${$(name).attr('id').replace("bot-", "")}>`);
+                        bots.push(`[${$(name).text()}](https://discordbots.org${$(name).attr('href')}) <@${$(name).attr('id').replace("bot-", "")}>`);
                     });
                     let badges = [];
                     $(".badgecase").find("img").each((i, name) => {
@@ -54,7 +54,7 @@ module.exports = class command extends cmd {
                     let embed = new Discord.RichEmbed();
                     embed.setColor("#283593");
                     embed.setThumbnail($(".profilepic").attr("src"));
-                    embed.setDescription(`${a.strings.getMsg("user")}: **${user.tag}**\nID: **${user.id}**\nBio: **${bio == '' ? '-' : bio}**${badges.length == 0 ? '' : `\n\nBadges: **${badges.join("**, **")}**`}`);
+                    embed.setDescription(`${a.strings.getMsg("user")}: **${user.tag}**\nID: **${user.id}**${badges.length == 0 ? '' : `\nBadges: **${badges.join("**, **")}**`}\nBio: **${bio == '' ? '-' : bio}**\n[${a.strings.getMsg("dbl_link")}](https://discordbots.org/user/${user.id})`);
                     if(bots.length != 0) {
                         embed.addField(`${a.strings.getMsg("bots")}:`, bots.join("\n"));
                     }
