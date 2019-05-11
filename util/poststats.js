@@ -1,7 +1,7 @@
 const config = require("../config.json");
 const rp = require('request-promise');
 
-module.exports = (id, server_count) => {
+module.exports = (id, server_count, user_count) => {
     if(!config.settings.poststats) return;
     const tokens = config.tokens.stats;
     console.log("Posting stats..");
@@ -30,4 +30,6 @@ module.exports = (id, server_count) => {
         let res = JSON.parse(body);
         console.log(`Posted stats to: discordbots.org, ${Object.keys(res.success).join(', ')} | Fail: ${Object.keys(res.failure).join(', ')}`);
     }).catch(() => {});
+    rp({url: `https://space-bot-list.tk/api?key=${tokens.spacebotlist}?postServers?${id}/${server_count}`, method: 'GET', headers: {'Content-Type': 'application/json'}});
+    rp({url: `https://space-bot-list.tk/api?key=${tokens.spacebotlist}?postUsers?${id}/${user_count}`, method: 'GET', headers: {'Content-Type': 'application/json'}});
 };

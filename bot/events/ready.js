@@ -11,5 +11,5 @@ module.exports = (client) => {
     util.ustawstatus();
     db.load();
     require("../../dashboard/server")();
-    require("../../util/poststats")(client.user.id, client.guilds.size);
+    require("../../util/poststats")(client.user.id, client.guilds.size, client.users.size);
 }
