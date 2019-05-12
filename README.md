@@ -39,5 +39,3 @@ Polish opensource multifunctional bot in [discord.js](https://discord.js.org) li
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjuby210-PL%2Fbot.js.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjuby210-PL%2Fbot.js?ref=badge_large)
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjuby210-PL%2Fbot.js.svg?type=small)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjuby210-PL%2Fbot.js?ref=badge_small)
-
-test
