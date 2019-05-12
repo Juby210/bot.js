@@ -1,0 +1,168 @@
+body {
+    background-color: #2C2F33;
+    color: #ffffff;
+    margin: 0;
+    font-family: Arial, Verdana, Tahoma;
+}
+.content {
+    margin-bottom: 40px;
+}
+footer {
+    position: fixed;
+    height: 30px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+    text-align: center;
+    font-family: 'Prompt', sans-serif;
+}
+header {
+    font-family: Arial, Verdana, Tahoma;
+}
+header h3 {
+    margin-left: 5px;
+}
+header form {
+    text-align: center;
+    padding-bottom: 10px;
+}
+header ul {
+    list-style-type: none;
+    display: inline-block;
+}
+header ul > li {
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+}
+.btn {
+    border: none;
+    border-radius: 6px;
+    color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+.btn-c {
+    background-color: #2196f3;
+}
+.btn:hover {
+    background-color: #0c7edc;
+}
+
+.status {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    border: 1px solid #000;
+    position: relative;
+    display: inline-block;
+}
+.s-online {
+    background-color: #00d742;
+    border-color: #049931;
+}
+.s-idle {
+    background-color: #ffbf00;
+    border-color: #9d802c;
+}
+.s-dnd {
+    background-color: #f02828;
+    border-color: #da1414;
+}
+.s-offline {
+    background-color: #747e77;
+    border-color: #373837;
+}
+
+#devs {
+    display: block;
+    flex-wrap: wrap;
+    float: left;
+    position: absolute;
+    width: 99%;
+    top: 48%;
+}
+.dev {
+    background-color: #1c1e20;
+    height: 110px;
+    width: 400px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+.dev img {
+    width: 100px;
+    margin: auto;
+    height: 100px;
+    display: block;
+    border-radius: 100px;
+    margin: 5px;
+    float: left;
+}
+.dev .name {
+    font-size: 25px;
+}
+.dev p {
+    display: inline;
+    font-size: 15px;
+}
+
+#cmds table {
+    max-width: 95%;
+    border: 2px solid #1c1e20;
+}
+#cmds th {
+    background-color: #1c1e20;
+}
+#cmds td {
+    padding: 5px;
+}
+
+#home img {
+    width: 180px;
+    margin: auto;
+    height: 180px;
+    display: block;
+    border-radius: 999px;
+}
+#home {
+    display: block;
+    flex-wrap: wrap;
+    float: left;
+    position: absolute;
+    width: 99%;
+    top: 35%;
+}
+
+#panel img {
+    width: 130px;
+    margin: auto;
+    height: 130px;
+    display: block;
+    border-radius: 999px;
+}
+#servers {
+    display: flex;
+    flex-wrap: wrap;
+}
+.server {
+    background-color: #1c1e20;
+    display: inline-block;
+    width: 250px;
+    height: 180px;
+    cursor: pointer;
+    padding: 10px;
+    margin: 3px;
+}
+.server img {
+    width: 100px !important;
+    height: 100px !important;
+}
