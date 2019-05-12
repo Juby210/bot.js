@@ -2,7 +2,7 @@
     "info": {
         "lang": "English",
         "translators": [
-            "null#3621", "hamster#0001", "kpvsky#9145"
+            "nothing here#0017", "jessica#1337"
         ]
     },
     "bot": {
@@ -112,7 +112,7 @@
         "music_added": "Added to queue: `#SONG#` from **#CHANNEL#**",
         "music_volume_number": "Invalid number",
         "music_volume": "Volume has been changed to: **#VOL#%**",
-        "music_vol_max": "Maximum value is 250",
+        "music_vol_max": "Maximum value is 1000",
         "music_search_null": "No phrase is given",
         "music_search_notfound": "No result found",
         "music_search_title": "Select the search result by entering `1`-`10` or` cancel` to cancel",
@@ -128,12 +128,16 @@
         "music_queue_list": "Length: #TIME# | Requested by: #REQUESTER#",
         "music_queue_footer": "Total: #NUM# | Total time: #TIME#",
         "music_radio_title": "List of radio stations:",
-        "music_radio_desc": "\n#PREFIX#radio <number> - play radio\nWARNING! Eska and Vox can sometimes not work!",
+        "music_radio_desc": "\n#PREFIX#radio <number> - play radio\n#PREFIX#radio eska - stations from eskago.pl",
         "music_radio_footer": "Radio stations are missing? Write to Juby210#2100",
-        "music_radio_notfound": "No radio number found, enter `# PREFIX#radio` for the station list.",
+        "music_radio_notfound": "No radio number found, enter `#PREFIX#radio` for the station list.",
         "music_radio_play": "Playing: `#RADIO#`",
         "music_shuffle": "Shuffled",
         "music_earrape": "Earrape enabled",
+        "music_earrape_off": "Earrape disabled",
+        "music_bassboost": "Bassboost enabled",
+        "music_bassboost_off": "Bassboost disabled",
+        "music_permerror": "Bot does not have permission to join your voice channel",
         "hb_desc": "List of competitions:",
         "shorten_noconfig": "The owner of the bot hasn't configured urls.",
         "shorten_errorkeyword": "This shortcut is already taken, use a different.",
@@ -209,7 +213,11 @@
         "lvlup_enable": "The lvlup messages have been successfully enabled!",
         "lvlup_disable": "The lvlup messages have been successfully disabled!",
         "lvlupmessage": "Lvlup messages",
-        "settings_check": "If you want to change the value, check"
+        "settings_check": "If you want to change the value, check",
+        "bot_notallowed": "Bots can't own money",
+        "daily_added": "You have successfully received #cash#$",
+        "daily_hours": "You must wait, ``#hours# hours #min# minutes and #sec# seconds``.",
+        "seek_success": "Successfully skipped to 0:00!"
     },
     "dashboard": {
         "_com":"multilang is not ready yet"
@@ -323,6 +331,10 @@
             "usage": "loop",
             "desc": "Loops the current song"
         },
+        "loopqueue": {
+            "usage": "loopqueue",
+            "desc": "Loops queue"
+        },
         "np": {
             "usage": "np",
             "desc": "It shows what is currently playing"
@@ -349,7 +361,19 @@
         },
         "search": {
             "usage": "search <search>",
-            "desc": "Searches for a given phrase and displays a selection of 10 results"
+            "desc": "Searches for a given phrase on youtube and displays a selection of 10 results"
+        },
+        "soundcloud": {
+            "usage": "soundcloud <search>",
+            "desc": "Searches for a given phrase on soundcloud and displays a selection of 10 results"
+        },
+        "bassboost": {
+            "usage": "bassboost",
+            "desc": "Enable or disable bassboost"
+        },
+        "earrape": {
+            "usage": "earrape",
+            "desc": "Enable or disable earrape"
         },
         "skip": {
             "usage": "skip",
@@ -447,6 +471,10 @@
         "stats":{
             "usage":"stats",
             "desc":"Shows bot stats"
+        },
+        "status":{
+            "usage":"status",
+            "desc":"Show discord status from status.discordapp.com"
         }
     },
     "categories": {
@@ -456,7 +484,8 @@
         "music": "Music",
         "images": "Images",
         "web": "Web",
-        "games": "Games"
+        "games": "Games",
+        "economy": "Economy"
     },
     "perms":{
         "BAN_MEMBERS": "Ban members",

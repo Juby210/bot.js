@@ -5,6 +5,7 @@
 		"status": "online",
 		"prefix": "^",
 		"lang": "en",
+		"poststats": false,
 		"emojis":{
 			"guild":"488293188247879680",
 			"_com":"Guild is guild not emoji!",
@@ -20,19 +21,33 @@
 			"play_pause": "488399581948936212",
 			"skip": "488399581965451265"
 		},
-		"footer": "© Juby210 & hamster | #PREFIX#help"
+		"footer": "© Juby210 | #PREFIX#help"
 	},
 	"logs":{
 		"enabled":false,
-		"webhookid":"webhook id",
-		"webhooktoken":"webhook token",
-		"commands":["avatar", "olduserinfo", "userinfo", "changemymind", "trump", "wanted", "wasted"]
+		"commands":{
+			"webhookid":"webhook id",
+			"webhooktoken":"webhook token"
+		},
+		"servers":{
+			"webhookid":"webhook id",
+			"webhooktoken":"webhook token"
+		}
 	},
 	"tokens": {
 		"token": "bot token",
-		"dbl": "token from dicsordbots.org",
 		"yourls": "api key",
-		"badosz": "token from api.badosz.com"
+		"badosz": "token from api.badosz.com",
+		"stats": {
+			"discordbots": "token from dicsordbots.org",
+			"botsfordiscord": "botsfordiscord.com",
+			"discordapps": "discordapps.dev",
+			"discordbotreviews": "discordbotreviews.xyz",
+			"discordbotworld": "discordbot.world",
+			"discordbotsgroup": "discordbots.group",
+			"discordsbestbots": "discordsbestbots.xyz",
+			"spacebotlist": "space-bot-list.tk"
+		}
 	},
 	"dashboard": {
 		"port": 80,
@@ -54,8 +69,8 @@
 		"password": "pass"
     },
     "dbl": {
-		"usedbl": false, 
-		"requireVote":{"voicekick":true, "voiceban":true, "voiceunban":true}
+			"usedbl": false, 
+			"requireVote":{"voicekick":true, "voiceban":true, "voiceunban":true}
     },
 	"yourls": {
 		"useyourls": false,
@@ -67,24 +82,17 @@
 		{"name":"OpenFM Fun!", "url":"http://stream.open.fm/51"},
 		{"name":"OpenFM Top20 PL", "url":"http://stream.open.fm/97"},
 		{"name":"OpenFM PrzemsoN", "url":"http://stream.open.fm/197"},
+		{"name":"OpenFM 100% Queen", "url":"http://stream.open.fm/185"},
 		{"name":"Radio Grodno", "url":"http://178.124.203.233:8000/ogg"},
-		{"name":"RMFFM", "url":"http://31.192.216.10:8000/rmf_fm"},
-		{"name":"RMFMaxxx", "url":"http://217.74.72.4:8000/rmf_maxxx"},
-		{"name":"Vox FM", "url":"http://radyjko.ga/stacja.url?id=40"},
-		{"name":"Vox Best Lista", "url":"http://pldm.ml/radio?url=https://www.eskago.pl/radio/vox-bestlista"},
-		{"name":"Vox Impreza", "url":"http://radyjko.ga/stacja.url?id=44"},
-		{"name":"Vox Lata 90", "url":"http://radyjko.ga/stacja.url?id=42"},
-		{"name":"ESKA", "url":"http://radyjko.ga/stacja.url?id=61"},
-		{"name":"ESKA Lublin", "url":"http://radyjko.ga/stacja.url?id=14"},
-		{"name":"ESKA Bełchatów", "url":"http://radyjko.ga/stacja.url?id=2"},
-		{"name":"ESKA Białystok", "url":"http://radyjko.ga/stacja.url?id=3"},
-		{"name":"Radio Plus (ESKA)", "url":"http://radyjko.ga/stacja.url?id=50"},
+		{"name":"RMF FM", "url":"http://31.192.216.10:8000/rmf_fm"},
+		{"name":"RMF Maxxx", "url":"http://217.74.72.4:8000/rmf_maxxx"},
 		{"name":"Radio ZET", "url":"http://zetpl1-01.cdn.eurozet.pl:8446/"},
 		{"name":"ZET Party", "url":"http://zetpar-02.cdn.eurozet.pl:8444/"},
 		{"name":"ZET Hits", "url":"http://zethit-01.cdn.eurozet.pl:8428/"},
 		{"name":"ZET Hot", "url":"http://zet.cdn.eurozet.pl/ZETHOT.mp3"},
 		{"name":"ZET Gold", "url":"http://zgl.cdn.eurozet.pl/ZGLHIT.mp3"},
-		{"name":"Radio Złote Przeboje", "url":"http://www.radio.pionier.net.pl/stream.pls?radio=radio88"}
+		{"name":"Radio Złote Przeboje", "url":"http://www.radio.pionier.net.pl/stream.pls?radio=radio88"},
+		{"name":"Radio Maryja", "url":"https://radiomaryja.fastcast4u.com/tunein/radiomaryja.pls"}
 	],
 	"globalbans":["id"]
 }

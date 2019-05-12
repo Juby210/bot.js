@@ -108,7 +108,7 @@
         "music_playing_play": "Odtwarzanie: `#SONG#` z **#CHANNEL#**",
         "music_added": "Dodano do kolejki: `#SONG#` z **#CHANNEL#**",
         "music_volume_number": "Niepoprawna liczba",
-        "music_vol_max": "Maxymalna wartość to 250",
+        "music_vol_max": "Maxymalna wartość to 1000",
         "music_volume": "Głośność została zmieniona na: **#VOL#%**",
         "music_search_null": "Nie podano frazy",
         "music_search_notfound": "Nie znaleziono żadnego wyniku",
@@ -125,12 +125,16 @@
         "music_queue_list": "Długość: #TIME# | Dodano przez: #REQUESTER#",
         "music_queue_footer": "Razem: #NUM# | Cały czas: #TIME#",
         "music_radio_title": "Lista stacji radiowych:",
-        "music_radio_desc": "\n#PREFIX#radio <numer> - odtwórz radio\nUWAGA! Eska i Vox mogą czasem nie działać!",
+        "music_radio_desc": "\n#PREFIX#radio <numer> - odtwórz radio\n#PREFIX#radio eska - stacje z eskago.pl",
         "music_radio_footer": "Brakuje stacji radiowych? Napisz do Juby210#2100",
         "music_radio_notfound": "Nie znaleziono takiego numeru radia, wpisz `#PREFIX#radio` po listę stacji.",
         "music_radio_play": "Odtwarzanie: `#RADIO#`",
         "music_shuffle": "Pomieszano",
         "music_earrape": "Włączono earrape",
+        "music_earrape_off": "Wyłączono earrape",
+        "music_bassboost": "Włączono bassboost",
+        "music_bassboost_off": "Wyłączono bassboost",
+        "music_permerror": "Bot nie ma uprawnień do wejścia na twój kanał głosowy",
         "hb_desc": "Lista konkursów:",
         "shorten_noconfig": "Właściciel bota nie skonfigurował skracacza linków.",
         "shorten_errorkeyword": "Ten skrót jest już zajęty, użyj innego.",
@@ -204,7 +208,11 @@
         "lvlup_enable": "Poprawnie włączono wiadomości Lvlup!",
         "lvlup_disable": "Poprawnie wyłączono wiadomości Lvlup!",
         "lvlupmessage": "Wiadomości lvlup",
-        "settings_check": "Jeżeli chcesz zmienić wartość sprawdź"
+        "settings_check": "Jeżeli chcesz zmienić wartość sprawdź",
+        "bot_notallowed": "Boty nie mogą posiadać pieniędzy",
+        "daily_added": "Pomyślnie otrzymałeś #cash#$",
+        "daily_hours": "Musisz poczekać, ``#hours# godzin #min# minut i #sec# sekund``.",
+        "seek_success": "Pomyślnie przewinięto piosenke do 00:00!"
     },
     "dashboard":{
         "_com":"multilang is not ready yet"
@@ -318,6 +326,14 @@
             "usage":"loop",
             "desc":"Zapętla aktualną piosenkę"
         },
+        "loopqueue": {
+            "usage": "loopqueue",
+            "desc": "Zapętla kolejkę"
+        },
+        "replay": {
+            "usage": "replay",
+            "desc": "Przesuwa aktualną piosenkę do 0:00"
+        },
         "np":{
             "usage":"np",
             "desc":"Pokazuje co aktualnie jest odtwarzane"
@@ -344,7 +360,19 @@
         },
         "search":{
             "usage":"search <wyszukiwanie>",
-            "desc":"Wyszukuje podaną frazę oraz wyświetla wybór 10 wyników"
+            "desc":"Wyszukuje podaną frazę na youtube oraz wyświetla wybór 10 wyników"
+        },
+        "soundcloud":{
+            "usage":"soundcloud <wyszukiwanie>",
+            "desc":"Wyszukuje podaną frazę na soundcloud oraz wyświetla wybór 10 wyników"
+        },
+        "bassboost":{
+            "usage":"bassboost",
+            "desc":"Włącza i wyłącza bassboost"
+        },
+        "earrape":{
+            "usage":"earrape",
+            "desc":"Włącza i wyłącza earrape"
         },
         "skip":{
             "usage":"skip",
@@ -439,6 +467,10 @@
         "stats":{
             "usage":"stats",
             "desc":"Pokazuje statystyki bota"
+        },
+        "status":{
+            "usage":"status",
+            "desc":"Pokazuje status discorda z status.discordapp.com"
         }
     },
     "categories":{
@@ -448,7 +480,8 @@
         "music": "Muzyka",
         "images": "Obrazki",
         "web": "Web",
-        "games": "Gry"
+        "games": "Gry",
+        "economy": "Ekonomia"
     },
     "perms":{
         "BAN_MEMBERS": "Banowanie członków",

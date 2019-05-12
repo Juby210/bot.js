@@ -3,7 +3,8 @@ const cmd = require("../../command.js");
 module.exports = class command extends cmd {
     constructor() {
         super({
-            name: "pause"
+            name: "pause",
+            reqVC: true
         });
         this.run = this.r;
     }

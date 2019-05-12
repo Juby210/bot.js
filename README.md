@@ -8,13 +8,12 @@ Polish opensource multifunctional bot in [discord.js](https://discord.js.org) li
 
 - Configure config.json from config.example.json.
 
-- Run index.js / We recomended using ``forever index.js`` because sometimes crashs.
+- Run index.js with ``node``
 
 ### Guides
-***DBL***
+***DBL Configuration***
 - Bot must be on discordbots.org
 
-***CONFIG***
 - usedbl - using upvote to use command.
 - token - bot token from DBL
 - requireVote - commands to be should require dbl (upvotes) e.g ``{"avatar": true, "play":true}``

@@ -56,7 +56,7 @@ module.exports = async (message, client) => {
 }
 
 function runcmd(command, commandfile, args, message, client, strings, prefix) {
-    const dbl = new DBL(config.tokens.dbl, client);
+    const dbl = new DBL(config.tokens.stats.discordbots, client);
     const arg = {client, message, args, strings, prefix, emoji: client.guilds.get(config.settings.emojis.guild).emojis, config, emojis: config.settings.emojis};
     const util = require("../../util/util");
 

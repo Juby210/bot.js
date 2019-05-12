@@ -3,7 +3,8 @@ const cmd = require("../../command.js");
 module.exports = class command extends cmd {
     constructor() {
         super({
-            name: "shuffle"
+            name: "shuffle",
+            reqVC: true
         });
         this.run = this.r;
         this.shuffle = this.shuffle;

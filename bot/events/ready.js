@@ -3,7 +3,6 @@ const clc = require("cli-colors");
 const config = require("../../config.json");
 const util = require("../../util/util");
 const db = require('../../util/db.js');
-const DBL = require("dblapi.js");
 
 module.exports = (client) => {
     console.log(clc.cyan(`${client.user.tag} ready`));
@@ -12,8 +11,5 @@ module.exports = (client) => {
     util.ustawstatus();
     db.load();
     require("../../dashboard/server")();
-    if(config.dbl.usedbl) {
-        const dbl = new DBL(config.tokens.dbl, client);
-        dbl.postStats(client.guilds.size);
-    }
+    require("../../util/poststats")(client.user.id, client.guilds.size, client.users.size);
 }

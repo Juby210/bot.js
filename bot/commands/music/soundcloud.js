@@ -4,7 +4,8 @@ const cmd = require("../../command.js");
 module.exports = class command extends cmd {
     constructor() {
         super({
-            name: "search",
+            name: "soundcloud",
+            aliases: ["sc"],
             reqVC: true
         });
         this.run = this.r;
@@ -14,7 +15,7 @@ module.exports = class command extends cmd {
         if(!a.args[0]) return cmd.error(a, a.strings.getMsg("music_search_null"));
 
         let text = a.args.join(" ");
-        await player.getSong(`ytsearch:${text}`).then(async songs => {
+        await player.getSong(`scsearch:${text}`).then(async songs => {
             if(songs.loadType == "NO_MATCHES") return cmd.error(a, a.strings.getMsg("music_search_notfound"));
 
             let eb = new Discord.RichEmbed();
