@@ -1,20 +1,18 @@
 <% var pgtitle = '' %>
 <% include ./blocks/header %>
     <div class="content" id="panel">
-        <center>
-            <img src="<%= user.avatar ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}` : '/public/defaultav.png' %>">
-            <h2><%= user.username %></h2>
-            <h3>Select server to manage:</h3>
-            <div id="servers">
-                <% client.guilds.filter(g=>g.member(user.id)).forEach(g => { %>
-                    <div class="server" onclick="<%= g.member(user.id).hasPermission("MANAGE_GUILD") %> ? window.location = '/server/<%= g.id %>' : ''">
-                        <img src="<%= g.iconURL ? g.iconURL : '/public/defaultav.png' %>">
-                        <span class="server-name"><%= g.name %></span>
-                        <p class="server-role"><%= g.ownerID == user.id ? 'Owner' : g.member(user.id).hasPermission("MANAGE_GUILD") ? 'Admin' : 'Member' %></p>
-                    </div>
-                <% }); %>
-            </div>
-            <p><%= client.guilds.filter(g=>g.member(user.id)).size == 0 ? 'No servers :/' : '' %></p>
-        </center>
+        <img src="<%= user.avatar ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}` : '/public/defaultav.png' %>">
+        <h2><%= user.username %></h2>
+        <h3>Select server to manage:</h3>
+        <div id="servers">
+            <% client.guilds.filter(g=>g.member(user.id)).forEach(g => { %>
+                <div class="server" onclick="<%= g.member(user.id).hasPermission("MANAGE_GUILD") %> ? window.location = '/server/<%= g.id %>' : ''">
+                    <img src="<%= g.iconURL ? g.iconURL : '/public/defaultav.png' %>">
+                    <span class="server-name"><%= g.name %></span>
+                    <p class="server-role"><%= g.ownerID == user.id ? 'Owner' : g.member(user.id).hasPermission("MANAGE_GUILD") ? 'Admin' : 'Member' %></p>
+                </div>
+            <% }); %>
+        </div>
+        <p><%= client.guilds.filter(g=>g.member(user.id)).size == 0 ? 'No servers :/' : '' %></p>
     </div>
 <% include ./blocks/footer %>

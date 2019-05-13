@@ -6,6 +6,7 @@ body {
 }
 .content {
     margin-bottom: 40px;
+    text-align: center;
 }
 footer {
     position: fixed;
@@ -89,7 +90,7 @@ header ul > li {
     float: left;
     position: absolute;
     width: 99%;
-    top: 48%;
+    top: 45%;
 }
 .dev {
     background-color: #1c1e20;
@@ -117,6 +118,7 @@ header ul > li {
 
 #cmds table {
     max-width: 95%;
+    margin-left: 2.5%;
     border: 2px solid #1c1e20;
 }
 #cmds th {
@@ -152,6 +154,8 @@ header ul > li {
 #servers {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 .server {
     background-color: #1c1e20;
@@ -165,4 +169,19 @@ header ul > li {
 .server img {
     width: 100px !important;
     height: 100px !important;
+}
+input, select, textarea {
+    background-color: #2C2F33;
+    padding: 10px;
+    border: 1px solid white;
+    color: white;
+    margin-top: 10px;
+    max-width: 90%;
+}
+label {
+    padding: 10px 0 10px 0;
+    font-weight: bold;
+}
+.ltitle {
+    font-size: 23px;
 }

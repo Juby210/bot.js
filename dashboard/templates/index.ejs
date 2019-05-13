@@ -1,10 +1,8 @@
 <% var pgtitle = '' %>
 <% include ./blocks/header %>
     <div class="content" id="home">
-        <center>
-            <img src="<%= client.user.avatarURL ? client.user.avatarURL : '/public/defaultav.png' %>">
-            <h1><%= client.user.username %></h1>
-            <a href="/panel" class="btn btn-c">Go to panel</a>
-        </center>
+        <img src="<%= client.user.avatarURL ? client.user.avatarURL : '/public/defaultav.png' %>">
+        <h1><%= client.user.username %></h1>
+        <a href="/panel" class="btn btn-c">Go to panel</a>
     </div>
 <% include ./blocks/footer %>

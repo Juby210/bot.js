@@ -3,6 +3,7 @@ const url = require("url");
 const express = require('express');
 const path = require('path');
 const config = require("../config.json");
+const db = require('../util/db');
 const app = express();
 
 const passport = require("passport");
@@ -59,7 +60,8 @@ const renderTemplate = (res, req, template, data = {}) => {
     client,
     path: req.path,
     user: req.isAuthenticated() ? req.user : null,
-    strings: new (require("../strings/manager"))('en')
+    strings: new (require("../strings/manager"))('en'),
+    db
   };
   res.render(path.join(__dirname, "templates", template), Object.assign(baseData, data));
 };
@@ -126,12 +128,12 @@ app.get('/admin', checkAuth, (req, res) => {
   renderTemplate(res, req, "admin.ejs");
 });
 
-app.get('/server/:sid', checkAuth, (req, res) => {
+app.get('/server/:sid', checkAuth, async (req, res) => {
   const g = client.guilds.get(req.params.sid);
-  if(!g) return res.status(404);
+  if(!g) return res.redirect('/panel');
   const perms = g.member(req.user.id) ? g.member(req.user.id).hasPermission("MANAGE_GUILD") : false;
   if(!perms && !req.session.isAdmin) res.redirect('/');
-  renderTemplate(res, req, 'server/server.ejs', {g});
+  renderTemplate(res, req, 'server/server.ejs', {g, prefix: await db.getPrefix(g.id), welcome: await db.getWelcome(g.id), goodbye: await db.getGoodbye(g.id), autorole: await db.getAutorole(g.id)});
 });
 
 module.exports = () => {

@@ -2,15 +2,15 @@
 <% include ./blocks/header %>
     <div class="content" id="devs">
         <center>
-            <% var devs = [{id:'324622488644616195',name:'Juby210',role:'Developer'}, {id:'321665259842830336',name:'hamster',role:'Developer'}, {id:'214858075650260992',name:'Badosz',role:'Image Api Dev'}, {id:'289479495444987904',name:'Roki',role:'Helper'}] %>
+            <% var devs = [{id:'324622488644616195',name:'Juby210',role:'Developer'}, {id:'321665259842830336',name:'hamster',role:'Contributor'}, {id:'214858075650260992',name:'Badosz',role:'Image Api Dev'}, {id:'289479495444987904',name:'Roki',role:'Helper'}] %>
             <% devs.forEach(dev => { %>
                 <% var devuser = client.users.get(dev.id) %>
                 <div class="dev">
-                    <img src="<%= devuser.avatarURL %>">
+                    <img src="<%= devuser ? devuser.avatarURL : '/public/defaultav.png' %>">
                     <p class="name"><%= dev.name %></p><br><br>
-                    <p><%= devuser.tag %></p><br>
+                    <p><%= devuser ? devuser.tag : '' %></p><br>
                     <p><%= dev.role %></p><br>
-                    <div class="status s-<%= devuser.presence.status %>" style="left: -150px;top: 5px"></div>
+                    <div class="status s-<%= devuser ? devuser.presence.status : 'offline' %>" style="left: -150px;top: 5px"></div>
                 </div>
             <% }) %>
         </center>

@@ -1,4 +1,50 @@
 <% var pgtitle = `Manage ${g.name} - ` %>
 <% include ../blocks/header %>
-
+    <div class="content" id="server-panel">
+        <label>Prefix:</label>
+        <input type="text" id="prefix" value="<%= prefix %>"><br><br>
+        <label class="ltitle">Welcome:</label><br>
+        <input id="wen" type="checkbox" <%= welcome.enabled ? 'checked' : '' %>> Enabled?<br>
+        <label>Channel:</label>
+        <select id="wchannel" value="<%= g.channels.get(welcome.channel) ? '#'+g.channels.get(welcome.channel).name : 'Select channel' %>">
+            <option>Select channel</option>
+            <option disabled></option>
+            <% var catlist = g.channels.filter(ch => ch.type == "category" && ch.children.filter(s => s.type == 'text').size != 0) %>
+            <% catlist.forEach(cat => { %>
+                <option disabled><%= cat.name %></option>
+                <% cat.children.forEach(ch => { %>
+                    <option id="<%= ch.id %>">#<%= ch.name %></option>
+                <% }) %>
+            <% }) %>
+        </select><br>
+        <label>Message:</label><br>
+        <textarea id="wmsg" rows="3" cols="50" maxlength="1950"><%= welcome.msg %></textarea><br><br>
+        <label class="ltitle">Goodbye:</label><br>
+        <input id="gen" type="checkbox" <%= goodbye.enabled ? 'checked' : '' %>> Enabled?<br>
+        <label>Channel:</label>
+        <select id="gchannel" value="<%= g.channels.get(goodbye.channel) ? '#'+g.channels.get(goodbye.channel).name : 'Select channel' %>">
+            <option>Select channel</option>
+            <option disabled></option>
+            <% var catlist = g.channels.filter(ch => ch.type == "category" && ch.children.filter(s => s.type == 'text').size != 0) %>
+            <% catlist.forEach(cat => { %>
+                <option disabled><%= cat.name %></option>
+                <% cat.children.forEach(ch => { %>
+                    <option id="<%= ch.id %>">#<%= ch.name %></option>
+                <% }) %>
+            <% }) %>
+        </select><br>
+        <label>Message:</label><br>
+        <textarea id="gmsg" rows="3" cols="50" maxlength="1950"><%= goodbye.msg %></textarea><br><br>
+        <label class="ltitle">Autorole:</label>
+        <select id="arole" value="<%= autorole.enabled ? g.roles.get(autorole.role) ? g.roles.get(autorole.role).name : 'Select role' : 'Select role' %>">
+            <option>Select role</option>
+            <option disabled></option>
+            <% var cm = g.member(client.user) %>
+            <% g.roles.forEach(r => { %>
+                <% if(r.position >= cm.highestRole.position || r.id == g.id || r.managed) return; %>
+                <option style="color:<%= r.hexColor != '#000000' ? r.hexColor : '' %>">@<%= r.name %></option>
+            <% }) %>
+        </select>
+        <p style="color:gray">If your role is not showing, check role positions in settings</p>
+    </div>
 <% include ../blocks/footer %>

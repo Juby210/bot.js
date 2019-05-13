@@ -137,7 +137,7 @@ const getWelcome = async function getWelcome(gid) {
         try {
             var guild = await r.table('guilds').get(gid).toJSON().run(connection);
             if(guild == null) return false;
-            return JSON.parse(guild).welcome;
+            return JSON.parse(guild).welcome ? JSON.parse(guild).welcome : {enabled: false, channel: "", msg: ""};;
         } catch(e) {
             console.log(e);
             return false; 
@@ -152,7 +152,7 @@ const getGoodbye = async function getGoodbye(gid) {
         try {
             var guild = await r.table('guilds').get(gid).toJSON().run(connection);
             if(guild == null) return false;
-            return JSON.parse(guild).goodbye;
+            return JSON.parse(guild).goodbye ? JSON.parse(guild).goodbye : {enabled: false, channel: "", msg: ""};
         } catch(e) {
             console.log(e);
             return false; 
