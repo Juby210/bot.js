@@ -11,6 +11,7 @@ module.exports = class command extends cmd {
     }
     async r(a = {}) {
         if(!a.args[0]) return cmd.error(a, a.strings.getMsg("prune_value"));
+        if(isNaN(a.args[0])) return cmd.error(a, a.strings.getMsg("prune_value"));
         const c = Number(a.args[0]);
         if (c >= 101) {
             cmd.error(a, a.strings.getMsg("prune_error"));
