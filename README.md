@@ -1,3 +1,5 @@
+# THIS PROJECT IS UNMAINTAINED. WE DO NOT ACCEPT ANY PULL REQUESTS.
+
 # bot.js
 Polish opensource multifunctional bot in [discord.js](https://discord.js.org) library.
 
